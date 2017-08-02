@@ -8,7 +8,7 @@ import axios from 'axios'
 import store from './store/store'
 import $ from 'jquery'
 
-// import utils from './common/js/utils.js'
+import utils from './common/js/utils.js'
 import 'element-ui/lib/theme-default/index.css'
 import './common/js/bootstrap/css/bootstrap.min.css'
 import './common/js/bootstrap/js/bootstrap.min.js'
@@ -17,12 +17,13 @@ import  './common/css/sprite.css'
 Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
-// Vue.use(utils)
+Vue.use(utils)
 Vue.prototype.$ajax = axios
 
 
 
 var router = new VueRouter({
+	
     routes: routerConfig
 })
 new Vue({

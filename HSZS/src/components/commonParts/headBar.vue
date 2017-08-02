@@ -5,7 +5,7 @@
          </div>
         <ul class="top-bar">
             <li class="active">
-                <router-link to="/intelligence">
+                <router-link to="/intelligence" active-class="active">
                    <i class="i1"></i>招商情报
                 </router-link>
             </li>
@@ -33,11 +33,12 @@
  
 			}
 		},
+        methods:{
+         
+        },
 		mounted(){
-                 //头部导航切换   
-    $(".top-bar li a").on("click",function(){
-          $(this).parent("li").addClass("active").siblings().removeClass("active");
-    });
+                 
+           
 		},
 	}
 </script>

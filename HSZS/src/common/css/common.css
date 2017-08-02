@@ -75,7 +75,7 @@ button.btn:focus {
   padding-left: 28px;
   font-size: 16px;
 }
-.left-bar-menu ol li.active a {
+.left-bar-menu ol li a.active {
   background-color: #35b8ff;
 }
 .left-bar-menu ol li a:hover {
@@ -127,7 +127,7 @@ header i {
   font-size: 16px;
   color: #ffffff;
 }
-.top-bar li.active a {
+.top-bar li a.active {
   color: #00a5ff;
   border-bottom: 2px solid #00a5ff;
 }
@@ -517,12 +517,15 @@ button.btn-zs:focus {
   color: #666666;
   margin-top: 10px;
 }
-#park-list .sub-info {
+#park-list .sub-info,#focusPark .sub-info {
   margin-top: 10px;
 }
-#park-list .type-box {
+#park-list .type-box,#focusPark .type-box {
   margin: 0 -24px;
   background-color: #fafafa;
+}
+#park-list .search{
+  width:200px;
 }
 .park-l-menu li {
   display: -webkit-box;

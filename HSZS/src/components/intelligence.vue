@@ -30,26 +30,19 @@
 		mounted(){
                $(function(){
 
-    var min_height=$(window).height()-212+"px";
+			    var min_height=$(window).height()-212+"px";
 
-	$(".main-content").css({"min-height":min_height}); 
-	$(window).resize(function(){
-		    var min_height=$(window).height()-212+"px";
+				$(".main-content").css({"min-height":min_height}); 
+				$(window).resize(function(){
+					    var min_height=$(window).height()-212+"px";
 
-	$(".main-content").css({"min-height":min_height}); 
-   });
-   
-    //左侧导航切换
-	 $(".left-bar ol li a").on("click",function(){
-	 	      $(".left-bar li.active").removeClass("active");
-	          $(this).parent("li").addClass("active");
-	    });
+				$(".main-content").css({"min-height":min_height}); 
+			   });
+			   
+		
 
-      
-
-
-  
-   })
+   				});
+               
 
 
 		},
