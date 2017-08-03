@@ -6,7 +6,7 @@
                 <a href="javascript:void(0);" > <i class="icon-left1"></i>产业情报</a>
                <ol>
                    <li >
-                     <router-link :to="{path:'/intelligence'}" :class="{active:isActive}"> <i class="icon-left2"></i>产业头条</router-link>
+                     <router-link :to="{path:'/intelligence/'}" :class="{active:isActive}"> <i class="icon-left2"></i>产业头条</router-link>
                    </li>
                    <li>
                      <router-link to="/intelligence/policy" active-class="active"> <i class="icon-left3"></i>产业政策</router-link>
@@ -24,10 +24,10 @@
                      <i class="icon-left6"></i>园区情报</a>
                    <ol>  
                     <li>
-                     <router-link to="/intelligence/parkInfo" active-class="active"> <i class="icon-left7"></i>园区概览</router-link>
+                     <router-link to="/intelligence/parkInfo" active-class="active" :class="{active:isActive2}"> <i class="icon-left7"></i>园区概览</router-link>
                     </li>
                     <li>
-                     <router-link to="/intelligence/parkDetails" active-class="active"> <i class="icon-left8"></i>关注园区</router-link>
+                     <router-link to="/intelligence/focusPark" active-class="active"> <i class="icon-left8"></i>关注园区</router-link>
                     </li>
                    </ol>   
                </li>
@@ -38,23 +38,35 @@
 	export default{
         data(){
               return{
-                isActive: false
+                isActive: false,
+                isActive2: false
               }
         },
          watch:{
                     '$route'(to, from) {
-                        if(to.path!=="/intelligence"){
+                      
+                        if(to.path!=="/intelligence/"){
                           this.isActive=false;
                         }else{
                           this.isActive=true;
+                        };
+                        if(to.path=="/intelligence/parkDetails"){
+                          
+                          if(from.path=="/intelligence/parkInfo"){
+                           
+                            this.isActive2=true;
+                          }
+
+                        }else{
+                          this.isActive2=false;
                         }
                      }
             },
         mounted(){
-                if(this.$route.path=="/intelligence"){
+                if(this.$route.path=="/intelligence/"){
                   this.isActive=true;
-                };
-                console.log(this.$route.path);
+                }
+                console.log(this.$route);
             },
 	}
 </script>

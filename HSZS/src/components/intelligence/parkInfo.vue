@@ -66,7 +66,7 @@
                                 <span class="article-time">2017-07-07 00-00-00</span>
                                </div>
                                <p class="article-content">
-                                本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss <a class="blue" href="javascript:void(0);">[详情]</a>
+                                本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss <router-link class="blue" to="/intelligence/parkDetails">[详情]</router-link>
                                </p>
                                <div class="sub-info">
                                  <span>

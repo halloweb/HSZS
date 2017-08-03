@@ -70,10 +70,11 @@ button.btn:focus {
   display: inline-block;
   margin-right: 15px;
   vertical-align: middle;
+  margin-top: -3px;
 }
 .left-bar .left-bar-menu > li > a {
   padding-left: 28px;
-  font-size: 16px;
+  font-size: 18px;
 }
 .left-bar-menu ol li a.active {
   background-color: #35b8ff;
@@ -124,11 +125,11 @@ header i {
   height: 80px;
   line-height: 80px;
   padding: 0 5px;
-  font-size: 16px;
+  font-size: 18px;
   color: #ffffff;
 }
 .top-bar li a.active {
-  color: #00a5ff;
+  color: #5584ff;
   border-bottom: 2px solid #00a5ff;
 }
 .top-bar li .i1 {
@@ -137,19 +138,19 @@ header i {
   width: 17px;
   height: 16px;
 }
-.top-bar li.active .i1 {
+.top-bar li a.active .i1{
   background-image: url('../../assets/images/sprite.png');
   background-position: 0px -207px;
   width: 17px;
   height: 16px;
 }
-.top-bar li .i2 {
+.top-bar li a .i2 {
   background-image: url('../../assets/images/sprite.png');
   background-position: 0px -334px;
   width: 22px;
   height: 17px;
 }
-.top-bar li.active .i2 {
+.top-bar li a.active   .i2 {
   background-image: url('../../assets/images/sprite.png');
   background-position: 0px -238px;
   width: 22px;
@@ -161,7 +162,7 @@ header i {
   width: 19px;
   height: 22px;
 }
-.top-bar li.active .i3 {
+.top-bar li a.active .i3 {
   background-image: url('../../assets/images/sprite.png');
   background-position: 0px -436px;
   width: 19px;
@@ -570,4 +571,23 @@ button.btn-zs:focus {
   border: 1px solid #e8ebf2;
   height: 30px;
   line-height: 30px;
+}
+
+.left-nav>li{
+  text-align:center;
+}
+.left-nav>li>a{
+     display:inline-block;
+     color: #ffffff;
+    display: block;
+    height: 80px;
+    font-size:18px;
+    line-height: 80px;
+}
+.left-nav>li>a.active,.left-nav>li>a:hover{
+  background-color:#35b8ff;
+}
+.left-nav>li>a img{
+  margin-right:15px;
+  margin-top:-3px;
 }

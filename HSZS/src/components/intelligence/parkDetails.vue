@@ -1,10 +1,9 @@
 <template>
+
         <div class="content-block">
          <h4 class="text-center">中关村软件园<button class="pull-right btn btn-zs">关注</button></h4>
-         <div id="map">
-              
-         </div>
-          
+        
+          <bd-map></bd-map>
          <div class="company-sort">
               <a href="#leadCompany" class="fc" data-toggle="tab">龙头企业</a>
               <a href="#parkPolicy" data-toggle="tab">园区政策</a>
@@ -34,23 +33,26 @@
     </div>
 </template>
 <script>
-    import {MP} from '../../common/js/map.js'  
+     import bdMap from '../commonParts/bdMap.vue'
 	export default{
+    components:{
+         'bdMap': bdMap
+    },
 		data(){
 			return{
 
 			}
 		},
 		methods:{
-             init(BMap) {
-			    var map = new BMap.Map("map",{enableMapClick: false});            // 创建Map实例
-			    var point = new BMap.Point(116.404, 39.915); // 创建点坐标
-			    map.centerAndZoom(point,15);
-			    map.enableScrollWheelZoom();
-			    map.disableDoubleClickZoom();
-			    map.addControl(new BMap.ScaleControl());
+      //        init(BMap) {
+			   //  var map = new BMap.Map("map",{enableMapClick: false});            // 创建Map实例
+			   //  var point = new BMap.Point(116.404, 39.915); // 创建点坐标
+			   //  map.centerAndZoom(point,15);
+			   //  map.enableScrollWheelZoom();
+			   //  map.disableDoubleClickZoom();
+			   //  map.addControl(new BMap.ScaleControl());
           
-			   },
+			   // },
 		},
 		mounted(){
 			 $(function(){
@@ -59,17 +61,19 @@
 				})
 			});
 
-  this.$nextTick(function () {
+  // this.$nextTick(function () {
         
-              var vm=this;
-              MP().then(BMap => {  
-                console.log(BMap);
-                vm.init(BMap) 
+  //             var vm=this;
+  //             MP().then(BMap => {  
+  //               console.log(BMap);
+  //               vm.init(BMap) 
                   
-              });
+  //             });
 			  
 
-			});
+		// 	});
 		},
 	}
 </script>
+
+

@@ -12,10 +12,15 @@
  import  parkDetails from '../components/intelligence/parkDetails.vue'
  import  focusPark from '../components/intelligence/focusPark.vue'
 
+//精准招商
+ import merchants from '../components/merchants.vue'
+ import companySearch from '../components/merchants/companySearch.vue'
 
-export default [{
-	 path: '/intelligence',
-    
+ //园区监管
+ import supervision from '../components/supervision.vue'
+
+export default [
+     {path: '/intelligence',
      component: intelligence,
      children:[
        {path: '',name: 'headlines',component: headlines},
@@ -27,9 +32,21 @@ export default [{
            
        ]},
        {path: 'businessRank',name: 'businessRank',component: businessRank},
-       {path: 'parkInfo',name: 'parkInfo',component: parkInfo,},
+       {path: 'parkInfo',name: 'parkInfo',component: parkInfo},
        {path: 'parkDetails',name: 'parkDetails',component: parkDetails},
        {path: 'focusPark',name: 'focusPark',component: focusPark}
      ]
 
-}]
+     },{
+      path: '/merchants',
+      
+      component: merchants,
+      children:[
+         {path: '',name: 'companySearch',component: companySearch}
+      ]
+
+     },{
+       path: '/supervision',
+       component: supervision,
+     }
+]
