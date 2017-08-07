@@ -228,6 +228,7 @@ footer {
   padding: 20px 24px;
   background-color: #ffffff;
   margin-top: 15px;
+  border: 1px solid #e8ebf2;
 }
 .content-block .title {
   font-size: 18px;

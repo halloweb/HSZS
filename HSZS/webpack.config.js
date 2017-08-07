@@ -7,7 +7,7 @@ const publicPath = ''
 module.exports = (options = {}) => ({
     entry: {
         vendor: './src/vendor',
-        index: './src/main.js'
+        index: ["babel-polyfill", "./src/main.js"]
     },
     output: {
         path: resolve(__dirname, 'dist'),
@@ -57,15 +57,16 @@ module.exports = (options = {}) => ({
         compress: true,
         host: '127.0.0.1',
         port: 8000,
-        // proxy: {
-        //     '/api/': {
-        //         target: 'http://127.0.0.1:8080',
-        //         changeOrigin: true,
-        //         pathRewrite: {
-        //             '^/api': ''
-        //         }
-        //     }
-        // },
+        proxy: {
+            '/headlines': {
+                target: 'http://localhost:8092',
+                secure: false,
+                changeOrigin: true
+                // pathRewrite: {
+                //     '^/api': ''
+                // }
+            }
+        },
         historyApiFallback: {
             index: url.parse(options.dev ? '/assets/' : publicPath).pathname
         }

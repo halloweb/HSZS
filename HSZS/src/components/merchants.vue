@@ -10,18 +10,18 @@
 		                <img src="../assets/images/n1.png" height="20" width="17" alt="">企业搜索</router-link>
 		            </li>  
 		            <li>
-		               <router-link to="/intelligence/parkInfo" active-class="active" >
+		               <router-link to="/merchants/" active-class="active" >
 		                 <img src="../assets/images/n2.png" height="18" 
 		                 width="18" alt="">关系挖掘</router-link>
 
 		                  
 		            </li>   
 		            <li>
-		                <router-link to="/intelligence/parkInfo" active-class="active" >  
+		                <router-link to="/merchants/intelligent" active-class="active" >  
 		                <img src="../assets/images/n3.png" height="18" width="18" alt="">智能企业</router-link>
 		            </li>
 		            <li>
-		                <router-link to="/intelligence/parkInfo" active-class="active" > 
+		                <router-link to="/merchants/focusCompany" active-class="active" > 
 		                <img src="../assets/images/n4.png" height="21" width="22" alt="">关注企业</router-link>
 		            </li>       
 		       </ul>
