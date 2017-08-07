@@ -581,9 +581,9 @@ button.btn-zs:focus {
      display:inline-block;
      color: #ffffff;
     display: block;
-    height: 80px;
+    height: 40px;
     font-size:18px;
-    line-height: 80px;
+    line-height: 40px;
 }
 .left-nav>li>a.active,.left-nav>li>a:hover{
   background-color:#35b8ff;

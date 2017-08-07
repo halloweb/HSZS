@@ -18,7 +18,7 @@
                     <span v-for="(item,index) in typeTwo[oneCode]" :class="{active:index==twoCode}" @click="selectTwo(index)">{{item}}</span>
                     </p>
                 </li>   
-                 <li>
+                 <li  v-if="showTime">
                  <div class="head">
                  <img src="../../assets/images/time.png" alt="">时间
                  </div>
@@ -66,7 +66,7 @@
 </template>
 <script>
 	export default{
-
+        props: ['timeShow','timeList'],
 		data(){
 			return{
 				typeOne:["互联网","新能源"],
@@ -75,6 +75,7 @@
 				oneCode:0,
 				twoCode:0,
 				timeCode:0,
+				showTime: this.timeShow,
 				dialogVisible: false,
 				checkList1: [],
 				label1: ['网络游戏','大数据','电子商务','网络视听','移动阅读','智能硬件'],
@@ -92,18 +93,31 @@
 		methods:{
 			selectOne(index){
 				this.oneCode=index;
-				this.$emit('labelInfo',[this.oneCode,this.twoCode,this.timeCode]);
+				
+				if(this.timeShow==true){
+					
+					this.$emit('labelInfo',[this.typeOne[this.oneCode],this.typeTwo[this.oneCode][this.twoCode],this.time[this.timeCode]]);
+				}else{
+					
+					this.$emit('labelInfo',[this.typeOne[this.oneCode],this.typeTwo[this.oneCode][this.twoCode]]);
+				}
+				
                
                 
            
 			},
 			selectTwo(index){
 				this.twoCode=index;
-				this.$emit('labelInfo',[this.oneCode,this.twoCode,this.timeCode]);
+				if(this.showTime==true){
+					this.$emit('labelInfo',[this.typeOne[this.oneCode],this.typeTwo[this.oneCode][this.twoCode],this.time[this.timeCode]]);
+				}else if( this.showTime==false){
+					
+					this.$emit('labelInfo',[this.typeOne[this.oneCode],this.typeTwo[this.oneCode][this.twoCode]]);
+				}
 			},
 			selectTime(index){
 				this.timeCode=index;
-				this.$emit('labelInfo',[this.oneCode,this.twoCode,this.timeCode]);
+				this.$emit('labelInfo',[this.typeOne[this.oneCode],this.typeTwo[this.oneCode][this.twoCode],this.time[this.timeCode]]);
 			},
 			getLabel(){
                 this.$ajax.get(url,{}).then((res) => {
@@ -137,6 +151,13 @@
 
 				}).catch(err => console.log(err))
 			},
+		},
+		mounted(){
+			
+			if(this.timeList!=undefined){
+				this.time=this.timeList;
+			};
+			this.selectOne(0);
 		}
 		
 	}

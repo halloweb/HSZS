@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<label-list @labelInfo='labelInfo'></label-list>
+		<label-list @labelInfo='labelInfo' :time-show='false' ></label-list>
 		                <div class="content-block">
                        <div class="title policy-title">
                        <img src="../../assets/images/policy.png" alt="">政策解读
@@ -77,7 +77,7 @@
               'labelList':labelList
 		},
 		data(){
-			return{
+			return{        
                   explanation:[
                     {content:'22222222222'}
                   ],
@@ -109,7 +109,7 @@
 			}
 		},
 		methods:{
-            labelInfo(data){
+      labelInfo(data){
                  console.log(data);
 			},
 			getPolicy(){

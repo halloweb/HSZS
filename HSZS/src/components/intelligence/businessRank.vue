@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<label-list @labelInfo='labelInfo'></label-list>
+		<label-list @labelInfo='labelInfo' :time-list="time" :time-show="true"></label-list>
        <div class="content-block">
           <div class="title policy-title">
            <img src="../../assets/images/rank.png" alt="">企业排行
@@ -24,7 +24,7 @@
                        </span>
                        <span>
                        <img src="../../assets/images/time.png" alt="">
-                        {{item.time}}
+                        {{item.publishDateTime}}
                        </span>
                      </div>
                  </li>
@@ -43,19 +43,24 @@
 		},
 		data(){
 			return{
-           article:[
-               {
-                title:'大数据与分析创新峰会',
-                time:'2017-07-07 00-00-00',
-                content:'本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss'
-               }
-           ]
+           article:[],
+           time:["2017","2015","2016","2014"],
+           labels:[],
 			}
 		},
 		methods:{
 			labelInfo(data){
-                 console.log(data);
+                
+                // this.getList(data);
 			},
-		},
+      getList(data){
+        this.$ajax.post('/business/findCompaniesDesc.json',{'msg':['互联网','不限','2019']}).then(res =>{
+              this.article=res.data.data;
+        }).catch(err => console.log(err))
+      }
+		}, 
+    mounted(){
+               this.getList()
+      },
 	}
 </script>

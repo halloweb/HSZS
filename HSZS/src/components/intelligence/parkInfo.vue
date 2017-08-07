@@ -46,14 +46,14 @@
                           <span v-for="(item,index) in type" :class="{active:index==typeCode}" @click="select2(item,index)">{{item}}</span>
                           </p>
                      </li>
-                     <li class="search">
+                     <!-- <li class="search">
                          <el-input
                               
                               icon="search"
                               v-model="input2"
                               :on-icon-click="search">
                         </el-input>
-                     </li>     
+                     </li>      -->
                   </ul>
                   <ul class="park-l-menu">
                       <li>
@@ -350,7 +350,7 @@ var convertData = function (data) {
         orient: 'vertical',
         y: 'center',
         x:'right',
-        data:['动漫产业',"影视产业",'生态科技'],
+        data:['动漫产业',"影视产业",'生态科技','生物药业','信息技术'],
         textStyle: {
             color: '#fff'
         }
@@ -358,10 +358,10 @@ var convertData = function (data) {
     visualMap: {
         show: false,
         min: 0,
-        max: 3,
-        splitNumber:3,
+        max: 5,
+        splitNumber:5,
         inRange: {
-            color: ['#22b3ca', '#55bdff', '#ffcd55']
+            color: ['#22b3ca', '#55bdff', '#ffcd55','#f8427f','#5584ff']
         },
         textStyle: {
             color: '#fff'
@@ -458,7 +458,57 @@ var convertData = function (data) {
                     borderWidth: 1
                 }
             }
+        },{
+            name: '生物药业',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertData([
+               
+                {name: "南京", value: 4},
+
+            ]),
+            symbolSize: 12,
+            label: {
+                normal: {
+                    show: false
+                },
+                emphasis: {
+                    show: false
+                }
+            },
+            itemStyle: {
+                emphasis: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }
+            }
+        },
+        {
+            name: '信息技术',
+            type: 'scatter',
+            coordinateSystem: 'geo',
+            data: convertData([
+               
+                {name: "广州", value: 5},
+
+            ]),
+            symbolSize: 12,
+            label: {
+                normal: {
+                    show: false
+                },
+                emphasis: {
+                    show: false
+                }
+            },
+            itemStyle: {
+                emphasis: {
+                    borderColor: '#fff',
+                    borderWidth: 1
+                }
+            }
         }
+
     ]
 }
     // option.series[0].data=data1;

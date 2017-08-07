@@ -1,6 +1,6 @@
 <template>
 	<div>
-	            <label-list @labelInfo='labelInfo'></label-list>
+	            <label-list @labelInfo='labelInfo' :time-show='true'></label-list>
                 <div class="content-block">
                     <div class="row">
                         <div class="col-xs-6">

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<label-list @labelInfo='labelInfo'></label-list>
+		<label-list @labelInfo='labelInfo' :time-show='false'></label-list>
 		                <div class="content-block">
                        <div class="title policy-title">
                          <img src="../../assets/images/zj.png" alt="">专家说

@@ -25,6 +25,7 @@
 
  //园区监管
  import supervision from '../components/supervision.vue'
+ import parkMap from '../components/supervision/parkMap.vue'
 
 export default [
      {path: '/intelligence',
@@ -66,5 +67,8 @@ export default [
      },{
        path: '/supervision',
        component: supervision,
+       children:[
+          {path: '/',name: 'parkMap',component: parkMap}
+       ]
      }
 ]
