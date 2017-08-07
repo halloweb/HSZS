@@ -574,21 +574,30 @@ button.btn-zs:focus {
   line-height: 30px;
 }
 
-.left-nav>li{
-  text-align:center;
-}
-.left-nav>li>a{
+
+.left-nav li a{
      display:inline-block;
      color: #ffffff;
     display: block;
     height: 40px;
     font-size:18px;
     line-height: 40px;
+    padding-left:28px;
 }
-.left-nav>li>a.active,.left-nav>li>a:hover{
+.left-nav li a.active,.left-nav>li>a:hover{
   background-color:#35b8ff;
 }
-.left-nav>li>a img{
+.left-nav li a img{
   margin-right:15px;
   margin-top:-3px;
+}
+.left-nav ol li a{
+  font-size:14px;
+  padding-left:54px;
+}
+.left-nav ol li a.active {
+  background-color: #35b8ff;
+}
+.left-nav ol li a:hover {
+  background-color: #35b8ff;
 }

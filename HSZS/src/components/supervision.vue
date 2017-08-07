@@ -5,19 +5,42 @@
            <div class="left-bar">
 		         <ul class="left-nav">
 			     	<li>
-		                <router-link to="/merchants/" active-class="active" >
+		                <router-link to="/supervision/companys" active-class="active" >
 		                <img src="../assets/images/n5.png" height="18" width="18" alt="">
 		                园区企业</router-link>
 		            </li>  
 		            <li>
-		               <router-link to="/intelligence/parkInfo" active-class="active" >
-		                 <img src="../assets/images/n6.png" height="16" width="18" alt="">企业动态</router-link>
-
+		               <a href="javascript:void(0);"  >
+		                 <img src="../assets/images/n6.png" height="16" width="18" alt="">企业动态</a>
+                         <ol>
+                         	<li>
+                         	<router-link to="/supervision/goodNews" active-class="active" > 
+                         	<img src="../assets/images/n5.png" height="18" width="18" alt="">
+		                    企业捷报</router-link>
+		                    </li>
+		                    <li>
+                         	<router-link to="/supervision/badNews" active-class="active" > 
+                         	<img src="../assets/images/n5.png" height="18" width="18" alt="">
+		                    企业负面</router-link>
+		                    </li>
+                         </ol>
 		                  
 		            </li>   
 		            <li>
-		                <router-link to="/intelligence/parkInfo" active-class="active" >  
-		                <img src="../assets/images/n7.png" height="19" width="18" alt="">园区预警</router-link>
+		                <a href="javascript:void(0);">  
+		                <img src="../assets/images/n7.png" height="19" width="18" alt="">园区预警</a>
+		                 <ol>
+                         	<li>
+                         	<router-link to="/supervision/outflow" active-class="active" > 
+                         	<img src="../assets/images/n5.png" height="18" width="18" alt="">
+		                    企业疑似外流</router-link>
+		                    </li>
+		                    <li>
+                         	<router-link to="/supervision/infoChange" active-class="active" > 
+                         	<img src="../assets/images/n5.png" height="18" width="18" alt="">
+		                    信息变更预警</router-link>
+		                    </li>
+                         </ol>
 		            </li>
 		            
 		       </ul>

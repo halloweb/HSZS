@@ -26,6 +26,11 @@
  //园区监管
  import supervision from '../components/supervision.vue'
  import parkMap from '../components/supervision/parkMap.vue'
+ import companys from '../components/supervision/companys.vue'
+ import goodNews from '../components/supervision/goodNews.vue'
+ import badNews from '../components/supervision/badNews.vue'
+ import outflow from '../components/supervision/outflow.vue'
+ import infoChange from '../components/supervision/infoChange.vue'
 
 export default [
      {path: '/intelligence',
@@ -68,7 +73,12 @@ export default [
        path: '/supervision',
        component: supervision,
        children:[
-          {path: '/',name: 'parkMap',component: parkMap}
+          {path: '/',name: 'parkMap',component: parkMap},
+          {path: 'companys',name: 'companys',component: companys},
+          {path: 'goodNews',name: 'goodNews',component: goodNews},
+          {path: 'badNews',name: 'badNews',component: badNews},
+          {path: 'outflow',name: 'outflow',component: outflow},
+          {path: 'infoChange',name: 'infoChange',component: infoChange},
        ]
      }
 ]
