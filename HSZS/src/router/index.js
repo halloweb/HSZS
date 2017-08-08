@@ -31,7 +31,8 @@
  import badNews from '../components/supervision/badNews.vue'
  import outflow from '../components/supervision/outflow.vue'
  import infoChange from '../components/supervision/infoChange.vue'
-
+ import parkCompanys from '../components/supervision/parkCompanys.vue'
+ import companyDetail from '../components/supervision/companyDetail.vue'
 export default [
      {path: '/intelligence',
      component: intelligence,
@@ -74,7 +75,11 @@ export default [
        component: supervision,
        children:[
           {path: '/',name: 'parkMap',component: parkMap},
-          {path: 'companys',name: 'companys',component: companys},
+          {path: 'parkCompanys',name: 'parkCompanys',component: parkCompanys,children:[
+              {path: '',name: 'companys',component: companys},
+              {path: 'companyDetail',name: 'companyDetail',component: companyDetail},
+          ]},
+          // {path: 'companys',name: 'companys',component: companys},
           {path: 'goodNews',name: 'goodNews',component: goodNews},
           {path: 'badNews',name: 'badNews',component: badNews},
           {path: 'outflow',name: 'outflow',component: outflow},
