@@ -601,3 +601,35 @@ button.btn-zs:focus {
 .left-nav ol li a:hover {
   background-color: #35b8ff;
 }
+
+ .table-zs{ width:100%; }
+      
+ .table-zs  thead tr{
+  border-bottom:1px solid #e8ebf2; }
+       
+          
+.table-zs  th{
+            background-color:#def3ff;
+            color:#666666;
+            font-size:16px;
+            font-weight:normal;
+            height:50px;
+            text-align:center;
+          }
+        
+    
+     
+ .table-zs  tbody td{
+            text-align:center;
+            height:50px;
+            color:#666666;
+          }
+ .table-zs  tbody  tr{
+
+          border-bottom:1px solid #e8ebf2;
+        }
+ .table-zs  tbody  tr:nth-child(even){
+            background-color:#f7faff;
+          }
+          
+
