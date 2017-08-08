@@ -10,6 +10,10 @@
 
                 </div>
                 <p class="f-name">雷军</p>
+                <p class="f-color">他有<span class="f-blue">100</span>家企业，分布情况如下</p>
+                <p>北京<span class="f-blue f-right">58</span>北京小米科技有限公司</p>
+                <p>北京<span class="f-blue f-right">58</span>北京小米科技有限公司</p>
+                <p>北京<span class="f-blue f-right">58</span>北京小米科技有限公司</p>
             </div>
         </div>
        <div class="BasicInfo-warper">
@@ -42,7 +46,18 @@
         border: 1px solid #e4e4e4;
         text-align: center;
     }
-
+    .BasicInfo .f-color{
+        color: #999;
+    }
+    .f-right{
+        display: inline-block;
+        margin-left: 10px;
+        margin-right: 50px;
+    }
+    .BasicInfo p{
+        display: block;
+        margin-bottom: 20px;
+    }
     .BasicInfo-left{
         width: 450px;
         margin-right: 30px;
@@ -59,7 +74,10 @@
     }
     .f-name{
         font-size: 18px;
-        font-weight: 400;
+        font-weight: 500;
+    }
+    .f-blue{
+        color: #00a5ff;
     }
 
 </style>
