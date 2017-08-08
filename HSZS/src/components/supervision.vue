@@ -31,12 +31,12 @@
 		                <img src="../assets/images/n7.png" height="19" width="18" alt="">园区预警</a>
 		                 <ol>
                          	<li>
-                         	<router-link to="/supervision/outflow" active-class="active" > 
+                         	<router-link to="/supervision/companyOut" active-class="active" > 
                          	<img src="../assets/images/n5.png" height="18" width="18" alt="">
 		                    企业疑似外流</router-link>
 		                    </li>
 		                    <li>
-                         	<router-link to="/supervision/infoChange" active-class="active" > 
+                         	<router-link to="/supervision/infoWarning" active-class="active" > 
                          	<img src="../assets/images/n5.png" height="18" width="18" alt="">
 		                    信息变更预警</router-link>
 		                    </li>

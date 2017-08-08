@@ -29,10 +29,16 @@
  import companys from '../components/supervision/companys.vue'
  import goodNews from '../components/supervision/goodNews.vue'
  import badNews from '../components/supervision/badNews.vue'
+ import companyOut from '../components/supervision/companyOut.vue'
  import outflow from '../components/supervision/outflow.vue'
+ import outflowDetails from '../components/supervision/outflowDetails.vue'
+ import infoWarning from '../components/supervision/infoWarning.vue'
  import infoChange from '../components/supervision/infoChange.vue'
+
  import parkCompanys from '../components/supervision/parkCompanys.vue'
  import companyDetail from '../components/supervision/companyDetail.vue'
+ import warningDetails from '../components/supervision/warningDetails.vue'
+
 export default [
      {path: '/intelligence',
      component: intelligence,
@@ -82,8 +88,16 @@ export default [
           // {path: 'companys',name: 'companys',component: companys},
           {path: 'goodNews',name: 'goodNews',component: goodNews},
           {path: 'badNews',name: 'badNews',component: badNews},
-          {path: 'outflow',name: 'outflow',component: outflow},
-          {path: 'infoChange',name: 'infoChange',component: infoChange},
+          {path: 'companyOut',component: companyOut,children:[
+                {path: '',name: 'outflow',component: outflow},
+                {path: 'outflowDetails',name: 'outflowDetails',component: outflowDetails}
+          ]},
+          
+          {path: 'infoWarning',component: infoWarning,children:[
+            {path: '',name: 'infoChange',component: infoChange},
+            {path: 'warningDetails',name: 'warningDetails',component: warningDetails}
+          ]},
+          
        ]
      }
 ]
