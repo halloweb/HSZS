@@ -34,10 +34,15 @@
  import outflowDetails from '../components/supervision/outflowDetails.vue'
  import infoWarning from '../components/supervision/infoWarning.vue'
  import infoChange from '../components/supervision/infoChange.vue'
-
  import parkCompanys from '../components/supervision/parkCompanys.vue'
  import companyDetail from '../components/supervision/companyDetail.vue'
  import warningDetails from '../components/supervision/warningDetails.vue'
+ //模拟tab页的子路由跳转引入
+ import companyBasic from '../components/supervision/tabRouter/companyBasic.vue'
+ import companyBusiness from '../components/supervision/tabRouter/companyBusiness.vue'
+ import companyInformation from '../components/supervision/tabRouter/company Information.vue'
+ import companyFloor from '../components/supervision/tabRouter/companyFloor.vue'
+ import companyRelation from '../components/supervision/tabRouter/companyRelation.vue'
 
 export default [
      {path: '/intelligence',
@@ -83,9 +88,14 @@ export default [
           {path: '/',name: 'parkMap',component: parkMap},
           {path: 'parkCompanys',name: 'parkCompanys',component: parkCompanys,children:[
               {path: '',name: 'companys',component: companys},
-              {path: 'companyDetail',name: 'companyDetail',component: companyDetail},
+              {path: 'companyDetail',name: 'companyDetail',component: companyDetail,children:[
+                  {path: '',name: 'companyBasic',component: companyBasic},
+                  {path: 'companyBusiness',name: 'companyBusiness',component: companyBusiness},
+                  {path: 'companyInformation',name: 'companyInformation',component: companyInformation},
+                  {path: 'companyFloor',name: 'companyFloor',component: companyFloor},
+                  {path: 'companyRelation',name: 'companyRelation',component: companyRelation},
+              ]},
           ]},
-          // {path: 'companys',name: 'companys',component: companys},
           {path: 'goodNews',name: 'goodNews',component: goodNews},
           {path: 'badNews',name: 'badNews',component: badNews},
           {path: 'companyOut',component: companyOut,children:[
