@@ -270,7 +270,7 @@
         box-shadow: 0 0 20px #EAEAEA;
         position: relative;
         float: left;
-        margin-right: 30px;
+        margin-right: 2.6%;
     }
     .no-mg{
         margin-right: 0;
