@@ -86,9 +86,9 @@ export default [
        component: supervision,
        children:[
           {path: '/',name: 'parkMap',component: parkMap},
-          {path: 'parkCompanys',name: 'parkCompanys',component: parkCompanys,children:[
+          {path: 'parkCompanys',component: parkCompanys,children:[
               {path: '',name: 'companys',component: companys},
-              {path: 'companyDetail',name: 'companyDetail',component: companyDetail,children:[
+              {path: 'companyDetail',component: companyDetail,children:[
                   {path: '',name: 'companyBasic',component: companyBasic},
                   {path: 'companyBusiness',name: 'companyBusiness',component: companyBusiness},
                   {path: 'companyInformation',name: 'companyInformation',component: companyInformation},

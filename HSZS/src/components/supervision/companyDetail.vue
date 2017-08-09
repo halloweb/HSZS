@@ -15,7 +15,7 @@
             <li>邮箱:zhongkedianji@dianji.com</li>
             <li class="last-list">地址:北京市中关村软件园华胜天成大厦二层</li>
         </ul>
-        <ul class="company-list" @click="active()">
+        <ul class="company-list">
             <router-link to="/supervision/parkCompanys/companyDetail">
                 <li class="l1">企业基本画像</li>
             </router-link>
@@ -38,9 +38,6 @@
 </template>
 <script>
     export default{
-        methods:{
-
-        },
         mounted(){
             $(".company-list li").on("click",function(){
                 $(this).addClass("active-li").parent().siblings().children().removeClass("active-li");
@@ -52,7 +49,6 @@
 
     .company-list{
         height: 62px;
-        background-color: red;
         overflow: hidden;
     }
     .company-list li{

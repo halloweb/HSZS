@@ -57,7 +57,9 @@
                                   {{item.content}}
                                 </p>
                                 <div class="blue article-author"><span class="glyphicon glyphicon-user"></span> {{item.author}}</div>
+
                              </li>
+
   
                           </ul>
                         

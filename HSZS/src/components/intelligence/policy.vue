@@ -49,6 +49,12 @@
                                 <p class="article-content">
                                   {{item.content}}
                                 </p>
+                                 <div class="sub-info">
+                                              <span>
+                                                <img src="../../assets/images/company.png" alt="">
+                                                涉及公司：中科点击
+                                             </span>
+                                 </div>
                              </li>
                           </ul>
                           <ul class="tab-pane fade list-box" id="keY">
@@ -63,6 +69,12 @@
                                 <p class="article-content">
                                   {{item.content}}
                                 </p>
+                                 <div class="sub-info">
+                                              <span>
+                                                <img src="../../assets/images/company.png" alt="">
+                                                涉及公司：中科点击
+                                             </span>
+                                 </div>
                              </li>
                           </ul>
                          

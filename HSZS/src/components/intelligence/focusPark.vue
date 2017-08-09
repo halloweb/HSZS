@@ -39,7 +39,11 @@
                                  <img src="../../assets/images/location-h.png" alt="">
                                   地址：河北石家庄
                                  </span>
-                                 
+                                  <span>
+                                    <img src="../../assets/images/company.png" alt="">
+                                    涉及公司：中科点击
+                                 </span>
+
                                </div>
                            </div>
                       </li>
