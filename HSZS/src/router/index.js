@@ -40,7 +40,7 @@
  //模拟tab页的子路由跳转引入
  import companyBasic from '../components/supervision/tabRouter/companyBasic.vue'
  import companyBusiness from '../components/supervision/tabRouter/companyBusiness.vue'
- import companyInformation from '../components/supervision/tabRouter/company Information.vue'
+ import companyInformation from '../components/supervision/tabRouter/companyInformation.vue'
  import companyFloor from '../components/supervision/tabRouter/companyFloor.vue'
  import companyRelation from '../components/supervision/tabRouter/companyRelation.vue'
 

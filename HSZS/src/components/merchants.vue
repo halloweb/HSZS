@@ -38,6 +38,11 @@
 		</div>
 	</div>
 </template>
+<style scoped>
+	.left-nav>li{
+  margin-bottom:20px;
+}
+</style>
 <script>
   import headBar from './commonParts/headBar.vue'
    export default{

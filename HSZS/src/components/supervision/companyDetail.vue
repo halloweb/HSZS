@@ -2,20 +2,26 @@
     <div>
         <div class="company-head">
             <span class="comName">中科点击科技有限公司</span>
+           <div class="right-action">
             <div class="right-box">
                 <a href="#">添加企业分组</a>
             </div>
             <div class="right-box">
                 <a href="#">生成企业报告</a>
             </div>
+           </div> 
+            
         </div>
         <ul class="com-msg">
-            <li>电话:17801056798</li>
-            <li>网址:www.huishu.com</li>
-            <li>邮箱:zhongkedianji@dianji.com</li>
-            <li class="last-list">地址:北京市中关村软件园华胜天成大厦二层</li>
+            <li><img src="../../assets/images/tel.png" height="15" width="15" alt="">电话:17801056798</li>
+            <li><img src="../../assets/images/internet.png" height="17" width="16" alt="">网址:www.huishu.com</li>
+            <li><img src="../../assets/images/e-mail.png" height="11" width="18" alt="">邮箱:zhongkedianji@dianji.com</li>
+            <li class="last-list">
+            <img src="../../assets/images/location-h.png" height="11" width="9" alt="">地址:北京市中关村软件园华胜天成大厦二层</li>
         </ul>
-        <ul class="company-list">
+
+        <ul class="company-list" >
+
             <router-link to="/supervision/parkCompanys/companyDetail">
                 <li class="l1">企业基本画像</li>
             </router-link>
@@ -45,7 +51,7 @@
         }
     }
 </script>
-<style>
+<style scoped>
 
     .company-list{
         height: 62px;
@@ -84,12 +90,16 @@
     }
     .com-msg{
         overflow: hidden;
+
         margin-bottom: 60px;
     }
     .com-msg li{
         float: left;
-        margin: 0 60px;
+        margin: 0 30px;
         color: #9b9fa2;
+    }
+    .com-msg li img{
+        margin-right:6px;
     }
     .last-list{
         margin-right: 0;
@@ -99,16 +109,22 @@
         overflow: hidden;
         height: 80px;
         line-height: 40px;
+        position:relative;
     }
     .comName{
         font-size: 20px;
         color: #000;
     }
+    .right-action{
+        position:absolute;
+        right:0;
+        top:2px;
+    }
     .right-box{
         width: 120px;
         height: 32px;
         border: 1px solid #00a5ff;
-        float: right;
+        display:inline-block;
         margin-right: 20px;
         line-height: 32px;
         border-radius: 16px;
