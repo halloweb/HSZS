@@ -44,7 +44,7 @@
         },
          watch:{
                     '$route'(to, from) {
-                      
+                        console.log(from);
                         if(to.path!=="/intelligence/"){
                           this.isActive=false;
                         }else{

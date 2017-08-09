@@ -54,7 +54,12 @@ button.btn:focus {
   flex: none;
   width: 200px;
   min-height: 100%;
-  background-color: #0091e0;
+  background: #0091e0;
+   background: -webkit-linear-gradient(#0090df, #04ddff); /* Safari 5.1 - 6.0 */
+  background: -o-linear-gradient(#0090df, #04ddff); /* Opera 11.1 - 12.0 */
+  background: -moz-linear-gradient(#0090df, #04ddff); /* Firefox 3.6 - 15 */
+  background: linear-gradient(#0090df, #04ddff); /* 标准的语法 */
+ 
 }
 .left-bar .left-bar-menu {
   margin-top: 10px;
@@ -464,7 +469,7 @@ button.btn-zs:focus {
   color: #ffffff;
 }
 .sub-info {
-  margin: 30px 0;
+  margin: 15px 0;
   color: #999999;
 }
 .sub-info > span {
@@ -584,6 +589,7 @@ button.btn-zs:focus {
     line-height: 40px;
     padding-left:28px;
 }
+
 .left-nav li a.active,.left-nav>li>a:hover{
   background-color:#35b8ff;
 }
@@ -593,7 +599,7 @@ button.btn-zs:focus {
 }
 .left-nav ol li a{
   font-size:14px;
-  padding-left:54px;
+  padding-left:60px;
 }
 .left-nav ol li a.active {
   background-color: #35b8ff;
