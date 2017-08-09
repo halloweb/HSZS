@@ -102,7 +102,7 @@
         <div class="content-block clearFix">
             <p class="BasicInfo-msg">企业关系</p>
         </div>
-        <div class="content-block clearFix">
+        <div class="content-block clearFix big-left">
             <p class="BasicInfo-msg">主要人员 <span class="circle">5</span></p>
             <table class="table-zs">
                 <thead>
@@ -123,7 +123,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="content-block clearFix">
+        <div class="content-block clearFix big-left">
             <p class="BasicInfo-msg">控股信息 <span class="circle">5</span></p>
             <table class="table-zs">
                 <thead>
@@ -238,6 +238,9 @@
     #main{
         width:100%;
         height:90%;
+    }
+    .big-left .blue{
+        margin-left: 20px;
     }
     .nb-time{
         position: absolute;
