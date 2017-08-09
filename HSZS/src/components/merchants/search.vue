@@ -8,7 +8,7 @@
 		</div>
 		<div class="search-box">
 			<div class="search-type">
-                <a href="#byArea" data-toggle="tab" class="fc">按区域查询</a><a href="#byIndustry" data-toggle="tab">按行业查询</a><a href="#byCompany" data-toggle="tab">最近注册企业</a><a href="#byHot" data-toggle="tab">热门律所</a>         
+                <a href="#byArea" data-toggle="tab" class="fc">按区域查询</a><a href="#byIndustry" data-toggle="tab">按行业查询</a><a href="#byCompany" data-toggle="tab">最近注册企业</a><a href="#byHot" data-toggle="tab">热门律所</a>
             </div>
             <div class="tab-content type-details">
                 <div class="tab-pane fade in active" id="byArea">

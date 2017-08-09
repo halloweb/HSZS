@@ -44,6 +44,7 @@
                     <div class="BasicInfo-head">
                         股权结构图
                     </div>
+
                 </div>
             </div>
             <table class="table-zs">
@@ -239,6 +240,7 @@
         width:100%;
         height:90%;
     }
+
     .big-left .blue{
         margin-left: 20px;
     }
@@ -452,6 +454,7 @@
                     }
                 ]
             })
+
         }
     }
 </script>
