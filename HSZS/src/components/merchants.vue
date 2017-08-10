@@ -74,7 +74,6 @@
    	    },
        watch: {
            '$route'(to, from) {
-               console.log(from);
                if (to.path !== "/merchants/") {
                    this.isActive = false;
                } else {

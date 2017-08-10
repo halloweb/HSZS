@@ -20,7 +20,7 @@
         			<td>7月11日，北京市投资促进局与石景山区政府、首钢集团有限公司联合举办“驻京中外知名企业石景山·首钢行”活动。 图为签约现国酒店</td>
         		
         			<td>2017-01-02</td>
-        			<td><router-link class="blue" to="/supervision/companyOut/outflowDetails">查看详情</router-link></td>
+        			<td><router-link class="blue" to="/supervision/articleList/2">查看详情</router-link></td>
         		</tr>
         		</tbody>
         </table>	

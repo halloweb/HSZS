@@ -2,7 +2,7 @@
 	<div>
 	  	<head-bar></head-bar>
 	    <div class="wrapper">
-           <div class="left-bar">
+           <div class="left-bar" v-if="isShow">
 		         <ul class="left-nav">
 			     	<li>
 		                <router-link to="/supervision/parkCompanys/" active-class="active" >
@@ -65,7 +65,7 @@
    	    },
    	    data(){
    	    	return{
-
+                isShow : true
    	    	}
    	    },
    	    mounted(){
@@ -79,10 +79,16 @@
 
 				$(".main-content").css({"min-height":min_height}); 
 			   });
-			   
-		
-
    				});
    	    },
+       watch:{
+           '$route'(to, from,name) {
+               if(to.name=="articleList"){
+                   this.isShow=false;
+               }else{
+                   this.isShow=true;
+               };
+           }
+       },
    }
 </script>

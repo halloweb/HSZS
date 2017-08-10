@@ -1,5 +1,7 @@
 <template>
 	<div class="outflowDetails">
+        <a href="#" @click="back()" class="back">返回</a>
+
 		<div class="title"><span class="blue">[京城快讯] </span>4家企业入驻北京保险产业园 </div>
 		<div class="sub-info">
              <span>
@@ -32,9 +34,20 @@
 		}
 
 	}
+    .back{
+        display: block;
+        margin-top: 10px;
+        color: #00a5ff;
+        font-size: 20px;
+        float: right;
+    }
 </style>
 <script>
 	export default{
-
+        methods:{
+            back(){
+                this.$router.go(-1)
+            }
+        }
 	}
 </script>

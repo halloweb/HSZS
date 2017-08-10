@@ -7,18 +7,25 @@
          <div class="company-sort">
               <a href="javascript:void(0);">企业动态</a>
 
-             <button class="pull-right btn btn-zs" @click="more">更多</button>
+                 <button class="pull-right btn btn-zs" @click="more">
+                     更多
+                 </button>
          </div>
         
         <div class="clearfix dt">
-                  <div class=" col-xs-6">
-                     中科点击（北京）科技有限公司 
-                     <a href="javascript:void(0);" class="pull-right blue">详情</a>
-                  </div>
-                  <div class=" col-xs-6">
-                     中科点击（北京）科技有限公司 
-                     <a href="javascript:void(0);" class="pull-right blue">详情</a>
-                  </div>
+            <div class=" col-xs-6">
+                中科点击（北京）科技有限公司
+                <router-link to="/supervision/parkCompanys/companyDetail/" class="pull-right blue">
+                详情
+                </router-link>
+            </div>
+            <div class=" col-xs-6">
+                中科点击（北京）科技有限公司
+                <router-link to="/supervision/parkCompanys/companyDetail/" class="pull-right blue">
+                    详情
+                </router-link>
+            </div>
+
 
         </div>
             
