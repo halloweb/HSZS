@@ -9,9 +9,9 @@
               <ul class="list-box" id="rank">
                  <li v-for="(item,index) in article">
                     <div >
-                      <a class="article-title" href="javascript:void(0);">
-                        {{item.title}}
-                      </a>
+                      <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
+                      {{item.title}}
+                      </router-link> 
                      
                     </div>
                     <p class="article-content">

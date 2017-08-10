@@ -48,9 +48,7 @@
                           <ul class="list-box" id="lunT">
                              <li v-for="(item,index) in lunT">
                                 <div >
-                                  <a class="article-title" href="javascript:void(0);">
-                                    {{item.title}}
-                                  </a>
+                                  <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
                                   <span class="article-time">{{item.time}}</span>
                                 </div>
                                 <p class="article-content">
@@ -81,7 +79,7 @@
 			return{
 				experts:[
 				  {
-				  	id:"1",
+				  	id:1,
 				  	src:"",
 				  	name:"朱倩",
 				  	introduction:'资深产品研究员、分析师',
@@ -95,7 +93,8 @@
                      	title:'创新峰会大数据与分析',
                      	time:'2017-02-02',
                      	content:'创新峰会大数据与分析',
-                     	author:'张三'
+                     	author:'张三',
+                     	id:1
                      }
 				]
 
