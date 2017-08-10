@@ -63,7 +63,7 @@
 					<div class="main-body">
 						<img src="../../assets/images/gstp.png" height="100" width="162" alt="">
 						<div class="company-info">
-							<router-link to="/supervision/parkCompanys/companyDetail" class="blue">{{item.name}}</router-link>
+							<router-link to="/supervision/parkCompanys/companyDetail/" class="blue">{{item.name}}</router-link>
 							<div class="sub-list">
         				<span>
         				<img src="../../assets/images/person.png" height="15" width="13" alt="">

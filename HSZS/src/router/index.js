@@ -85,9 +85,9 @@ export default [
        children:[
           {path: '/',name: 'parkMap',component: parkMap},
           {path: 'parkCompanys',component: parkCompanys,children:[
-              {path: '',name: 'companys',component: companys},
+              {path: '/',name: 'companys',component: companys},
               {path: 'companyDetail',component: companyDetail,children:[
-                  {path: '',name: 'companyBasic',component: companyBasic},
+                  {path: '/',name: 'companyBasic',component: companyBasic},
                   {path: 'companyBusiness',name: 'companyBusiness',component: companyBusiness},
                   {path: 'companyInformation',name: 'companyInformation',component: companyInformation},
                   {path: 'companyFloor',name: 'companyFloor',component: companyFloor},

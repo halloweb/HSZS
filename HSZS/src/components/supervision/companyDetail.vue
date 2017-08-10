@@ -66,6 +66,9 @@
             $(".company-list a").on("click", function () {
                 $(this).addClass("active").parent().siblings().children().removeClass("active");
             })
+            if(this.$route.path=="/supervision/parkCompanys/companyDetail/"){
+                this.isActive=true;
+            }
         },
         watch: {
             '$route'(to, from) {
