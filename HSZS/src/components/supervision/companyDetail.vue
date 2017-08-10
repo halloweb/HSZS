@@ -22,32 +22,60 @@
 
         <ul class="company-list" >
 
-            <router-link to="/supervision/parkCompanys/companyDetail">
-                <li class="l1">企业基本画像</li>
-            </router-link>
-            <router-link to="/supervision/parkCompanys/companyDetail/companyBusiness">
-                <li class="l2">企业业务画像</li>
-            </router-link>
-            <router-link to="/supervision/parkCompanys/companyDetail/companyInformation">
-                <li class="l3">企业情报画像</li>
-            </router-link>
-            <router-link to="/supervision/parkCompanys/companyDetail/companyFloor">
-                <li class="l4">企业落地</li>
-            </router-link>
-            <router-link to="/supervision/parkCompanys/companyDetail/companyRelation">
-                <li class="l5">关系拓扑</li>
-            </router-link>
+
+                <li >
+                    <router-link to="/supervision/parkCompanys/companyDetail/" :class="{l1,active:isActive}" class="l1">
+                    企业基本画像
+                    </router-link>
+                </li>
+
+
+                <li >
+                    <router-link to="/supervision/parkCompanys/companyDetail/companyBusiness/" active-class="active" class="l2">
+                    企业业务画像
+                    </router-link>
+                </li>
+                <li >
+                    <router-link to="/supervision/parkCompanys/companyDetail/companyInformation/" active-class="active" class="l3">
+                        企业情报画像
+                    </router-link>
+                </li>
+            <li >
+                <router-link to="/supervision/parkCompanys/companyDetail/companyFloor/" active-class="active" class="l4">
+                    企业落地
+                </router-link>
+            </li>
+            <li >
+                <router-link to="/supervision/parkCompanys/companyDetail/companyRelation/" active-class="active" class="l5">
+                   关系拓扑
+                </router-link>
+            </li>
         </ul>
         <router-view></router-view>
     </div>
 
 </template>
 <script>
-    export default{
-        mounted(){
-            $(".company-list li").on("click",function(){
-                $(this).addClass("active-li").parent().siblings().children().removeClass("active-li");
+    export default {
+        data() {
+            return {
+                isActive: false
+            }
+        },
+        mounted() {
+            $(".company-list a").on("click", function () {
+                $(this).addClass("active").parent().siblings().children().removeClass("active");
             })
+        },
+        watch: {
+            '$route'(to, from) {
+                console.log(from);
+                if (to.path !== "/supervision/parkCompanys/companyDetail/") {
+                    this.isActive = false;
+                } else {
+                    this.isActive = true;
+                }
+            }
         }
     }
 </script>
@@ -65,26 +93,31 @@
         line-height: 62px;
     }
     .l1{
+        display: block;
         background-color: #72C3FC;
         color: #ffffff;
     }
     .l2{
+        display: block;
         background-color: #31b7ff;
         color: #ffffff;
     }
     .l3{
+        display: block;
         background-color: #07a8ff;
         color: #ffffff;
     }
     .l4{
+        display: block;
         background-color: #0096ea;
         color: #ffffff;
     }
     .l5{
+        display: block;
         background-color: #0080c4;
         color: #ffffff;
     }
-    .active-li{
+    .active{
         background-color: white;
         color: #0b1222;
     }

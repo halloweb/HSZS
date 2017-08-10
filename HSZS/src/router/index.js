@@ -22,8 +22,8 @@
 
  import intelligent from '../components/merchants/intelligent.vue'
  import  industryType from '../components/merchants/industryType.vue'
-
  import  focusCompany from '../components/merchants/focusCompany.vue'
+ import semantic from '../components/merchants/semantic.vue'
 
  //园区监管
  import supervision from '../components/supervision.vue'
@@ -74,14 +74,12 @@ export default [
       component: merchants,
       children:[
           {path: '/',component: companySearch,children:[
-           {path: '',name: 'search',component: search},
-           {path: 'result',name: 'result',component: result}
-
+               {path: '',name: 'search',component: search},
+               {path: 'result',name: 'result',component: result}
          ]},
+          {path: 'semantic',name: 'semantic',component: semantic},
           {path: 'intelligent',component: intelligent,children:[
-           {path: '',name: 'industryType',component: industryType},
-           
-
+               {path: '',name: 'industryType',component: industryType},
          ]},
          {path: 'focusCompany',name: 'focusCompany',component: focusCompany}
 

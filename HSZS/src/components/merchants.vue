@@ -6,23 +6,28 @@
            <div class="left-bar">
 		         <ul class="left-nav">
 			     	<li>
-		                <router-link to="/merchants/" active-class="active" >
-		                <img src="../assets/images/n1.png" height="20" width="17" alt="">企业搜索</router-link>
+		                <router-link to="/merchants/"  :class="{active:isActive}" >
+		                <img src="../assets/images/n1.png" height="20" width="17" alt="">
+							企业搜索
+						</router-link>
 		            </li>  
 		            <li>
-		               <router-link to="/merchants/" active-class="active" >
-		                 <img src="../assets/images/n2.png" height="18" 
-		                 width="18" alt="">关系挖掘</router-link>
-
-		                  
-		            </li>   
+		               <router-link to="/merchants/semantic" active-class="active" >
+		                 <img src="../assets/images/n2.png" height="18" width="18" alt="">
+						   关系挖掘
+					   </router-link>
+		            </li>
 		            <li>
 		                <router-link to="/merchants/intelligent" active-class="active" >  
-		                <img src="../assets/images/n3.png" height="18" width="18" alt="">智能企业</router-link>
+		                <img src="../assets/images/n3.png" height="18" width="18" alt="">
+							智能企业
+						</router-link>
 		            </li>
 		            <li>
 		                <router-link to="/merchants/focusCompany" active-class="active" > 
-		                <img src="../assets/images/n4.png" height="21" width="22" alt="">关注企业</router-link>
+		                <img src="../assets/images/n4.png" height="21" width="22" alt="">
+							关注企业
+						</router-link>
 		            </li>       
 		       </ul>
 		
@@ -51,7 +56,7 @@
    	    },
    	    data(){
    	    	return{
-
+                isActive : false
    	    	}
    	    },
    	    mounted(){
@@ -70,5 +75,15 @@
 
    				});
    	    },
+       watch: {
+           '$route'(to, from) {
+               console.log(from);
+               if (to.path !== "/merchants/") {
+                   this.isActive = false;
+               } else {
+                   this.isActive = true;
+               }
+           }
+       }
    }
 </script>
