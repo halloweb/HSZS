@@ -2,7 +2,7 @@
 	<div>
 	  	<head-bar></head-bar>
 	    <div class="wrapper">
-           <left-bar></left-bar>
+           <left-bar v-if="barShow"></left-bar>
 	       <div class="home">
             <div class="main-content">
 		     <router-view></router-view>
@@ -24,9 +24,19 @@
 		},
 		data(){
              return{
-
+                   barShow:true
              }
 		},
+		watch:{
+			   '$route'(to, from,name) {
+                      
+                        if(to.name=="article"){
+                            this.barShow=false;
+                        }else{
+                        	this.barShow=true;
+                        };
+                     }
+                 },         
 		mounted(){
                $(function(){
 
@@ -38,10 +48,11 @@
 
 				$(".main-content").css({"min-height":min_height}); 
 			   });
-			   
-		
-
+			  
    				});
+               if(this.$route.name=="article"){
+               	   this.barShow=false;
+               }
                
 
 

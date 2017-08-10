@@ -15,7 +15,7 @@
                                   <ul class="list-box" id="tody-headlines">
                                       <li v-for="(item,index) in media">
                                           <h4>
-                                          <a class="article-title" href="javascript:void(0);">{{item.title}}</a> 
+                                          <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
                                           <span class="article-time">{{item.time}}</span>
                                           </h4>
                                           <p class="article-content">
@@ -48,7 +48,7 @@
                                   <ul class="list-box" id="key-info">
                                        <li v-for="(item,index) in keyInfo">
                                           <h4>
-                                          <a class="article-title" href="javascript:void(0);">{{item.title}}</a> 
+                                          <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
                                           <span class="article-time">{{item.time}}</span>
                                           </h4>
                                           <p class="article-content">
@@ -113,13 +113,15 @@
                   media:[
                      {title:'东盟各国正深入对接“一带一路”倡议 广西打造重要节点 中国经济网',
                       content:'三是开展通关一体化，提升通关便利化水平；四是开展物流服务，构建智能物流体系；五是开展信息服务，推进跨境电子商 务、大数据、物联',
-                      time:'2017-02-13'
+                      time:'2017-02-13',
+                      id:1
                     }
                   ],
                   keyInfo:[
                      {title:'东盟各国正深入对接“一带一路”倡议 广西打造重要节点 中国经济网',
                       content:'三是开展通关一体化，提升通关便利化水平；四是开展物流服务，构建智能物流体系；五是开展信息服务，推进跨境电子商 务、大数据、物联',
-                      time:'2017-02-13'
+                      time:'2017-02-13',
+                      id:2
                     }
                   ],
                   activeWord:''

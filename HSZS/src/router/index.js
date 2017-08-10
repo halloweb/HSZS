@@ -6,11 +6,13 @@
  import  expertView from '../components/intelligence/expertView.vue'
  import  expert from '../components/intelligence/expert.vue'
  import  expertList from '../components/intelligence/expertList.vue'
- import  expertArticle from '../components/intelligence/expertArticle.vue'
+ import  article from '../components/intelligence/article.vue'
  import  businessRank from '../components/intelligence/businessRank.vue'
  import  parkInfo from '../components/intelligence/parkInfo.vue'
  import  parkDetails from '../components/intelligence/parkDetails.vue'
  import  focusPark from '../components/intelligence/focusPark.vue'
+ import  focus from '../components/intelligence/focus.vue'
+ import  dynamic from '../components/intelligence/dynamic.vue'
 
 //精准招商
  import merchants from '../components/merchants.vue'
@@ -53,13 +55,17 @@ export default [
        {path: 'expertView',component: expertView,children:[
             {path: '',name: 'expert',component: expert},
             {path: 'expertList',name: 'expertList',component: expertList,params: { expertId:1 }},
-            {path: 'expertArticle',name: 'expertArticle',component: expertArticle}
+            
            
        ]},
        {path: 'businessRank',name: 'businessRank',component: businessRank},
        {path: 'parkInfo',name: 'parkInfo',component: parkInfo},
-       {path: 'parkDetails',name: 'parkDetails',component: parkDetails},
-       {path: 'focusPark',name: 'focusPark',component: focusPark}
+       {path: 'focusPark',component:focusPark,children:[
+            {path: '',name: 'focus',component: focus},
+            {path: 'dynamic',name: 'dynamic',component: dynamic},
+            {path: 'parkDetails',name: 'parkDetails',component: parkDetails}
+       ]},
+       {path: 'article/:id',name: 'article',component: article}
      ]
 
      },{

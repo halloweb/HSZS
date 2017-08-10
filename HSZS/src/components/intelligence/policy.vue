@@ -40,10 +40,9 @@
                           <ul class="tab-pane fade in active list-box" id="lunT">
                              <li v-for="(item,index) in lunT">
                                 <div >
-                                  <a class="article-title" href="javascript:void(0);">
-                                    <span class="blue">【{{item.location}}】</span>
-                                    {{item.title}}
-                                  </a>
+                                   <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
+                                   <span class="blue">【{{item.location}}】</span>
+                                   {{item.title}}</router-link> 
                                   <span class="article-time">{{item.time}}</span>
                                 </div>
                                 <p class="article-content">
@@ -60,10 +59,9 @@
                           <ul class="tab-pane fade list-box" id="keY">
                              <li v-for="(item,index) in keY">
                                 <div >
-                                  <a class="article-title" href="javascript:void(0);">
-                                    <span class="blue">【{{item.location}}】</span>
-                                    {{item.title}}
-                                  </a>
+                                  <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
+                                   <span class="blue">【{{item.location}}】</span>
+                                   {{item.title}}</router-link> 
                                   <span class="article-time">{{item.time}}</span>
                                 </div>
                                 <p class="article-content">
@@ -98,7 +96,8 @@
                      	location:'北京',
                      	title:'创新峰会大数据与分析',
                      	time:'2017-02-02',
-                     	content:'创新峰会大数据与分析'
+                     	content:'创新峰会大数据与分析',
+                      id:3
                      }
                   ],
                   keY:[
@@ -106,7 +105,8 @@
 	                     	location:'北京',
 	                     	title:'创新峰会大数据与分析',
 	                     	time:'2017-02-02',
-	                     	content:'创新峰会大数据与分析'
+	                     	content:'创新峰会大数据与分析',
+                        id:4
 	                     }
                   ],
                   options: [{

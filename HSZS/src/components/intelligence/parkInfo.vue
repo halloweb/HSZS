@@ -16,16 +16,13 @@
                   <div class="park-movement">
                       <div class="p-title">关注园区动态</div>
                       <ul class="p-content">
-                          <li>
-                            <a href="javascript:void(0);" class="p-c-title">生态城全面推进中部片区建设</a>
-                            <p class="p-c-content">2017年生态城中部片区在建的重点项目包括：32#地块社 区服务中心正在进行施工前准备工作；新开住宅集团32#、 41#地块住</p>
+                          <li v-for="(item,index) in dynamic">
+                             <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
+                            <p class="p-c-content">{{item.content}}</p>
                           </li>
-                           <li>
-                            <a href="javascript:void(0);" class="p-c-title">生态城全面推进中部片区建设</a>
-                            <p class="p-c-content">2017年生态城中部片区在建的重点项目包括：32#地块社 区服务中心正在进行施工前准备工作；新开住宅集团32#、 41#地块住</p>
-                          </li>
+                           
                       </ul>
-                      <div class="text-center loadMore"><a href="javascript:void(0);" class="blue "  >查看更多</a></div>
+                      <div class="text-center loadMore"><router-link to="/intelligence/focusPark/dynamic" class="blue "  >查看更多</router-link></div>
                   </div>
               </div>   
               <div class="tab-pane fade" id="park-list">
@@ -60,13 +57,13 @@
                            <img src="../../assets/images/park-picture.png" alt="" class="park-picture">
                            <div class="right-content">
                               <div >
-                                <a class="article-title" href="javascript:void(0);">
+                                <router-link class="article-title" to="/intelligence/focusPark/parkDetails">
                                   大数据与分析创新峰会
-                                </a>
+                                </router-link>
                                 <span class="article-time">2017-07-07 00-00-00</span>
                                </div>
                                <p class="article-content">
-                                本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss <router-link class="blue" to="/intelligence/parkDetails">[详情]</router-link>
+                                本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss 
                                </p>
                                <div class="sub-info">
                                  <span>
@@ -93,13 +90,20 @@
 	 export default{
 	 	data(){
 	 		return{
-                 dynamic:[],
+                 dynamic:[
+                      {
+                        id:1,
+                        title:'你车上基础上基础上',
+                        content:'2017年生态城中部片区在建的重点项目包括：32#地块社 区服务中心正在进行施工前准备工作；新开住宅集团32#、 41#地块住',
+                      }
+                 ],
                  list:[],
                  area:["不限","北京","上海"],
                  type:["不限","动漫"],
                  areaCode:0,
                  typeCode:0,
                  input2: ''
+
 
 
 	 		}

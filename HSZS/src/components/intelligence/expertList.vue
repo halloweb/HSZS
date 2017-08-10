@@ -11,9 +11,9 @@
                           <ul class="list-box">
                              <li v-for="(item,index) in article">
                                 <div >
-                                  <a class="article-title" href="javascript:void(0);">
-                                    <span class="blue">【{{item.location}}】</span>{{item.title}}
-                                  </a>
+                                  <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
+                                   <span class="blue">【{{item.location}}】</span>
+                                   {{item.title}}</router-link> 
                                   <span class="article-time">{{item.time}}</span>
                                 </div>
                                 <p class="article-content">
@@ -43,7 +43,8 @@
                location:"北京",
                title:'大数据与分析创新峰会',
                content:"本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss",
-               time:'2017-07-07 00-00-00'
+               time:'2017-07-07 00-00-00',
+               id:1
              }
           ],
           number:0

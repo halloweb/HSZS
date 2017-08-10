@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<router-view></router-view>
+		关注园区动态
 	</div>
 </template>
 <script>

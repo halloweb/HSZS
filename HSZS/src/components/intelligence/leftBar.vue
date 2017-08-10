@@ -66,7 +66,7 @@
                 if(this.$route.path=="/intelligence/"){
                   this.isActive=true;
                 }
-                console.log(this.$route);
+               
             },
 	}
 </script>
