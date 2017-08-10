@@ -3,7 +3,7 @@
         <div class="content-block">
          <h4 class="text-center">中关村软件园<button class="pull-right btn btn-red">辖区预警</button></h4>
         
-          <bd-map></bd-map>
+          <bd-map :park-info="info"></bd-map>
          <div class="company-sort">
               <a href="javascript:void(0);">企业动态</a>
 
@@ -52,7 +52,9 @@
     },
 		data(){
 			return{
-
+          info:{
+            name:'中关村软件园'
+          }
 			}
 		},
 		methods:{

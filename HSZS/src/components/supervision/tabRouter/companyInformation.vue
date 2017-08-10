@@ -7,17 +7,24 @@
                          
                         </div >
                          <p class="type-list"> 
-                          <span v-for="(item,index) in wd" :class="{active:index==wdCode}"  @click="select(item,index)">{{item}}</span>
+                          <span v-for="(item,index) in wd" :class="{active:index==wdCode}"  @click="selectWd(item,index)">{{item}}</span>
                           </p>
                     </li>
                     <li>
-                        <div class="head">
+                        <div class="head timeSelect">
                         <img src="../../../assets/images/time.png" height="17" width="18" alt="">时间
                         
                         </div >
-                         <p class="type-list"> 
+<!--                          <p class="type-list"> 
                           <span v-for="(item,index) in time" :class="{active:index==timeCode}"  @click="selectTime(item,index)">{{item}}</span>
-                          </p>
+                          </p> -->
+                           <el-date-picker
+                            v-model="dataTime"
+                            type="daterange"
+                            align="left"
+                            placeholder="请选择日期范围"
+                            :picker-options="pickerOptions2">
+                          </el-date-picker>
                     </li>  
 
          </ul>   
@@ -60,6 +67,7 @@
        		wdCode:0,
        		time:["今天","昨天","近七天","近30天","自定义时间"],
        		timeCode:0,
+          dataTime:'',
        		checkedAll:false,
        		article:[
        		  {
@@ -77,18 +85,44 @@
                 wd:'媒体报道',
                 ly:'凤凰网'
        		  }
-       		]
+       		],
+          pickerOptions2: {
+          shortcuts: [{
+            text: '今天',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              picker.$emit('pick', [start, end]);
+            }
+          },{
+            text: '近7天',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 7);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '近30天',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date();
+              start.setTime(start.getTime() - 3600 * 1000 * 24 * 30);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
 
-       	}
+       	},
+       }
        },
        methods:{
        	selectWd(item,index){
-
+           this.wdCode=index;
        	},
        	selectTime(item,index){
-
+           this.timeCode=index;
        	}
-       }
+       },
     }
 </script>
 <style lang="less" scoped>
@@ -102,5 +136,12 @@
  	.sub-info{
  		margin-top:15px;
  	}
+ }
+.type-box .timeSelect{
+  margin-bottom:0;
+  vertical-align: middle;
+  img{
+        margin-top: -3px;
+  }
  }
 </style>

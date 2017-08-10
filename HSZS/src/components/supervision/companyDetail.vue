@@ -24,7 +24,7 @@
 
 
                 <li >
-                    <router-link to="/supervision/parkCompanys/companyDetail/" :class="{l1,active:isActive}" class="l1">
+                    <router-link to="/supervision/parkCompanys/companyDetail/" :class="{active:isActive}" class="l1">
                     企业基本画像
                     </router-link>
                 </li>

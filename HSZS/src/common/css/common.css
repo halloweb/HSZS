@@ -1,6 +1,11 @@
 a {
   color: #333;
 }
+a.article-title:hover{
+  text-decoration:underline;
+  color:#lalala;
+} 
+
 a:hover,
 a:focus {
   outline: none;
@@ -377,6 +382,7 @@ footer {
 .expert-container .expert-slider > div {
   cursor: pointer;
   border: 1px solid #e8ebf2;
+  height:100%;
 }
 .expert-container .expert-slider > div .expert-img {
   background-color: #fafafa;

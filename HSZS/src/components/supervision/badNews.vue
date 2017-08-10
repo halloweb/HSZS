@@ -33,9 +33,7 @@
 	</div>
 </template>
 <style scoped>
- .goodNews{
- 	background-color:#ffffff;
- }
+
 	.list-box{
         margin:0 -24px;
 	}

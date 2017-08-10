@@ -1,8 +1,7 @@
 <template>
 
-		            
-
        <div class="article-details">
+           <a href="javascript:void(0);" class="blue" @click="back">返回</a>
            <h4 class="text-center">余典范：把握新常态下的“变与不变” <button class="pull-right btn btn-zs">收藏</button></h4>
            <div class="sub-info">
              <span>
@@ -32,6 +31,10 @@
 </template>
 <script>
 	export default{
-
+      methods:{
+        back(){
+          this.$router.go(-1);
+        }
+      }
 	}
 </script>
