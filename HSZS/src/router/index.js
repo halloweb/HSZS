@@ -19,13 +19,20 @@
  import search from '../components/merchants/search.vue'
  import companySearch from '../components/merchants/companySearch.vue'
  import result from '../components/merchants/result.vue'
-
+ import merchantsDetail from '../components/merchants/merchantsDetail.vue'
  import intelligent from '../components/merchants/intelligent.vue'
  import  industryType from '../components/merchants/industryType.vue'
  import  focusCompany from '../components/merchants/focusCompany.vue'
  import semantic from '../components/merchants/semantic.vue'
+ import TypeDetail from '../components/merchants/TypeDetail.vue'
+//模拟tab页的子路由跳转引入
+ import merchBasic from '../components/merchants/tabRouter/merchBasic.vue'
+ import merchBusiness from '../components/merchants/tabRouter/merchBusiness.vue'
+ import merchFloor from '../components/merchants/tabRouter/merchFloor.vue'
+ import merchInformation from '../components/merchants/tabRouter/merchInformation.vue'
+ import merchRelation from '../components/merchants/tabRouter/merchRelation.vue'
 
- //园区监管
+//园区监管
  import supervision from '../components/supervision.vue'
  import parkMap from '../components/supervision/parkMap.vue'
  import companys from '../components/supervision/companys.vue'
@@ -33,7 +40,7 @@
  import badNews from '../components/supervision/badNews.vue'
  import companyOut from '../components/supervision/companyOut.vue'
  import outflow from '../components/supervision/outflow.vue'
- import outflowDetails from '../components/supervision/outflowDetails.vue'
+ import articleList from '../components/supervision/articleList.vue'
  import infoWarning from '../components/supervision/infoWarning.vue'
  import infoChange from '../components/supervision/infoChange.vue'
  import parkCompanys from '../components/supervision/parkCompanys.vue'
@@ -75,11 +82,19 @@ export default [
       children:[
           {path: '/',component: companySearch,children:[
                {path: '',name: 'search',component: search},
-               {path: 'result',name: 'result',component: result}
+               {path: 'result',name: 'result',component: result},
+               {path: 'merchantsDetail',component: merchantsDetail,children:[
+                    {path: '/',name: 'merchBasic',component: merchBasic},
+                    {path: 'merchBusiness',name: 'merchBusiness',component: merchBusiness},
+                    {path: 'merchInformation',name: 'merchInformation',component: merchInformation},
+                    {path: 'merchFloor',name: 'merchFloor',component: merchFloor},
+                    {path: 'merchRelation',name: 'merchRelation',component: merchRelation},
+                ]},
          ]},
           {path: 'semantic',name: 'semantic',component: semantic},
           {path: 'intelligent',component: intelligent,children:[
-               {path: '',name: 'industryType',component: industryType},
+               {path: '/',name: 'industryType',component: industryType},
+               {path: 'TypeDetail',name: 'TypeDetail',component: TypeDetail},
          ]},
          {path: 'focusCompany',name: 'focusCompany',component: focusCompany}
 
@@ -91,9 +106,9 @@ export default [
        children:[
           {path: '/',name: 'parkMap',component: parkMap},
           {path: 'parkCompanys',component: parkCompanys,children:[
-              {path: '',name: 'companys',component: companys},
+              {path: '/',name: 'companys',component: companys},
               {path: 'companyDetail',component: companyDetail,children:[
-                  {path: '',name: 'companyBasic',component: companyBasic},
+                  {path: '/',name: 'companyBasic',component: companyBasic},
                   {path: 'companyBusiness',name: 'companyBusiness',component: companyBusiness},
                   {path: 'companyInformation',name: 'companyInformation',component: companyInformation},
                   {path: 'companyFloor',name: 'companyFloor',component: companyFloor},
@@ -104,9 +119,9 @@ export default [
           {path: 'badNews',name: 'badNews',component: badNews},
           {path: 'companyOut',component: companyOut,children:[
                 {path: '',name: 'outflow',component: outflow},
-                {path: 'outflowDetails',name: 'outflowDetails',component: outflowDetails}
+
           ]},
-          
+          {path: 'articleList/:id',name: 'articleList',component: articleList},
           {path: 'infoWarning',component: infoWarning,children:[
             {path: '',name: 'infoChange',component: infoChange},
             {path: 'warningDetails',name: 'warningDetails',component: warningDetails}

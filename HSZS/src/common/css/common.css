@@ -383,6 +383,7 @@ footer {
   cursor: pointer;
   border: 1px solid #e8ebf2;
   height:100%;
+
 }
 .expert-container .expert-slider > div .expert-img {
   background-color: #fafafa;
@@ -419,6 +420,7 @@ footer {
 }
 .expert-container .expert-slider > div:hover {
   box-shadow: 0 0 15px #666666;
+  background-color:#fafafa ;
 }
 .expert-container .expert-slider > div:hover .expert-img {
   background-color: #00a5ff;

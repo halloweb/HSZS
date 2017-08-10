@@ -12,7 +12,7 @@
 						</router-link>
 		            </li>  
 		            <li>
-		               <router-link to="/merchants/semantic" active-class="active" >
+		               <router-link to="/merchants/semantic/" active-class="active" >
 		                 <img src="../assets/images/n2.png" height="18" width="18" alt="">
 						   关系挖掘
 					   </router-link>
@@ -61,23 +61,19 @@
    	    },
    	    mounted(){
                $(function(){
-
 			    var min_height=$(window).height()-212+"px";
-
-				$(".main-content").css({"min-height":min_height}); 
+				$(".main-content").css({"min-height":min_height});
 				$(window).resize(function(){
-					    var min_height=$(window).height()-212+"px";
-
-				$(".main-content").css({"min-height":min_height}); 
+					var min_height=$(window).height()-212+"px";
+					$(".main-content").css({"min-height":min_height});
 			   });
-			   
-		
-
-   				});
+			   });
+				if(this.$route.path=="/merchants/"){
+					this.isActive=true;
+				}
    	    },
        watch: {
            '$route'(to, from) {
-               console.log(from);
                if (to.path !== "/merchants/") {
                    this.isActive = false;
                } else {

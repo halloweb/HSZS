@@ -29,7 +29,6 @@
 		},
 		watch:{
 			   '$route'(to, from,name) {
-                      
                         if(to.name=="article"){
                             this.barShow=false;
                         }else{

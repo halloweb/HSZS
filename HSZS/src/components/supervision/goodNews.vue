@@ -4,24 +4,25 @@
            <img src="../../assets/images/good.png" alt="">企业捷报
         </div>
 		<ul class="list-box">
-                             <li v-for="(item,index) in article">
-                                <div >
-                                  <a class="article-title" href="javascript:void(0);">
-                                    <span class="blue">【{{item.location}}】</span>{{item.title}}
-                                  </a>
-                                  <span class="article-time">{{item.time}}</span>
-                                </div>
-                                <p class="article-content">
-                                  {{item.content}}
-                                </p>
-                                 <div class="sub-info">
+            <router-link to="/supervision/articleList/good">
+                <li v-for="(item,index) in article">
+                    <div >
+                        <a class="article-title" href="javascript:void(0);">
+                            <span class="blue">【{{item.location}}】</span>{{item.title}}
+                        </a>
+                        <span class="article-time">{{item.time}}</span>
+                    </div>
+                    <p class="article-content">
+                        {{item.content}}
+                    </p>
+                    <div class="sub-info">
                                       <span>
                                         <img src="../../assets/images/company.png" alt="">
                                         涉及公司：中科点击
                                      </span>
-                                 </div>
-                             </li>
-  
+                    </div>
+                </li>
+            </router-link>
         </ul>
          <div class="text-center">
         <el-pagination

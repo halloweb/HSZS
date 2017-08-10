@@ -411,7 +411,13 @@
                     trigger: 'axis'
                 },
                 legend: {
-                    data:[13, 56, 98, 45, 123, 76, 140]
+                    name:'评分',
+                    data:[
+                        {
+                            name:'评分'
+                        },
+                        [13, 56, 98, 45, 123, 76, 140]
+                    ]
                 },
                 toolbox: {
                     show : true,

@@ -37,20 +37,21 @@
                         </el-input>
                 </div>
                 <ul class="company-wrapper">
-                    <li  v-for="(item,index) in company" >
-                       <div class="company-box text-center">
-                    	<img src="" alt="" width="90" height="95">
-                    	<div class="name blue">{{item.name}}</div>
-                    	<p>经营范围：{{item.jj}}</p>
-                    	<p>成立时间：{{item.time}}</p>
-                        <p>总部地点：{{item.location}}</p>
-                        </div>
-                        <div class="bg" @click="select(item)">
-                        	<img src="../../assets/images/view.png" height="45" width="43" alt="">
-                        	<h4>查看详情</h4>
-                        </div>
-                    </li>
-    
+                    <router-link to="/merchants/merchantsDetail">
+                        <li  v-for="(item,index) in company" >
+                            <div class="company-box text-center">
+                                <img src="" alt="" width="90" height="95">
+                                <div class="name blue">{{item.name}}</div>
+                                <p>经营范围：{{item.jj}}</p>
+                                <p>成立时间：{{item.time}}</p>
+                                <p>总部地点：{{item.location}}</p>
+                            </div>
+                            <div class="bg" @click="select(item)">
+                                <img src="../../assets/images/view.png" height="45" width="43" alt="">
+                                <h4>查看详情</h4>
+                            </div>
+                        </li>
+                    </router-link>
                 </ul>
 	</div>
 </template>

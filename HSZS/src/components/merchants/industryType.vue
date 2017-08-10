@@ -1,9 +1,12 @@
 <template>
 	<ul class="industryType">
-		<li class="type-item text-center" >
-			<img src="../../assets/images/jinrong.png" alt="">
-			<p class="type-name ">金融</p>
-		</li>
+		<router-link to="/merchants/intelligent/TypeDetail">
+			<li class="type-item text-center" >
+				<img src="../../assets/images/jinrong.png" alt="">
+				<p class="type-name ">金融</p>
+			</li>
+		</router-link>
+
 		<li class="type-item text-center">
 			<img src="../../assets/images/add1.png"  alt="">
 			<p class="type-name ">更多</p>

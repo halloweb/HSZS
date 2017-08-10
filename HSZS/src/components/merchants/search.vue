@@ -3,7 +3,9 @@
 		<div class="content-block search">
 			<div class="search-btn">
 				<input type="text" placeholder="请输入公司名称"/>
+                <router-link to="/merchants/result">
                 <button class="btn">搜索</button>
+                </router-link>
 			</div>
 		</div>
 		<div class="search-box">

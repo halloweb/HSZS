@@ -6,7 +6,7 @@
                          产业描述
                         </div >
                          <p class="type-list"> 
-                             <el-select v-model="value1" >
+                             <el-select v-model="value1" size="small">
 							    <el-option
 							      v-for="item in option1"
 							      :key="item.value"
@@ -14,7 +14,7 @@
 							      :value="item.value">
 							    </el-option>
 							  </el-select>
-							  <el-select v-model="value2"  >
+							  <el-select v-model="value2"  size="small">
 							    <el-option
 							      v-for="item in option2"
 							      :key="item.value"
@@ -24,30 +24,28 @@
 							  </el-select>
                           </p>
                      </li>
-                     <li>
-                        <div class="head">
-                         产业分组
-                        </div >
-                         <p class="type-list"> 
-                            <span v-for="(item,index) in group" :class="{active:index==groupCode}" @click="select1(item,index)">{{item}}</span>
-                            
-                          
-                          </p>
-                        <el-button type="primary" class="pull-right" @click="addVisible = true">新建分组</el-button>
-                             <el-dialog
-			 
-							  :visible.sync="addVisible"
-							  size="tiny"
-							  class="text-center"
-							  >
-							  <el-input v-model="addGroup" placeholder="请输入组名"></el-input>
-							  <span slot="footer" class="dialog-footer">
-							    <el-button @click="addVisible = false">取 消</el-button>
-							    <el-button type="primary" @click="addVisible = false">确 定</el-button>
-							  </span>
-							</el-dialog>
-                     </li> 
-                     <li>
+					<li>
+				<div class="head">
+					产业分组
+				</div >
+				<p class="type-list"  >
+
+					<span  v-for="(item,index) in group">{{item}}</span>
+					<span class="type-item" @click="addVisible = true">添加企业分组</span>
+				</p>
+				<el-dialog
+						:visible.sync="addVisible"
+						size="tiny"
+						class="text-center"
+						title="添加企业分组">
+					<el-input v-model="addGroup" placeholder="龙头企业"></el-input>
+					<span slot="footer" class="dialog-footer">
+							    <el-button @click="cancelList()">取 消</el-button>
+							    <el-button type="primary" @click="addlist()">确 定</el-button>
+					</span>
+				</el-dialog>
+			</li>
+			        <li>
                         <div class="head">
                         收藏时间
                         </div >
@@ -80,38 +78,40 @@
 			</el-dialog>
         </div>
         <ul>
-        	<li class="content-box" v-for="(item,index) in company">
-        		<el-checkbox v-model="checked"></el-checkbox>
-        		<div class="main-body">
-        			<img src="../../assets/images/gstp.png" height="100" width="162" alt="">
-        			<div class="company-info">
-        				<router-link to="/" class="blue">{{item.name}}</router-link>
-        				<div class="sub-list">
+
+				<li class="content-box" v-for="(item,index) in company">
+					<el-checkbox v-model="checked"></el-checkbox>
+					<div class="main-body">
+						<img src="../../assets/images/gstp.png" height="100" width="162" alt="">
+						<div class="company-info">
+							<router-link to="/merchants/merchantsDetail" class="blue">{{item.name}}</router-link>
+							<div class="sub-list">
         				<span>
         				<img src="../../assets/images/person.png" height="15" width="13" alt="">
         				法定代表人：{{item.people}}
         				</span>
-        				<span>
+								<span>
         				<img src="../../assets/images/money.png" height="15" width="13" alt="">
         				注册资本：{{item.money}}
         				</span>
-        				<span>
+								<span>
         				<img src="../../assets/images/time-h.png" height="15" width="13" alt="">
         				注册时间：{{item.time}}
         				</span>
-        				<span>
+								<span>
         				<img src="../../assets/images/location-h.png" height="15" width="13" alt="">
         				位置：{{item.location}}
         				</span>
-        				</div>
+							</div>
 
-        			</div>
-        		</div>
-        		<div class="rate blue">
-        			<span class="circle"></span>
-        			评分：100
-        		</div>
-        	</li>
+						</div>
+					</div>
+					<div class="rate blue">
+						<span class="circle"></span>
+						评分：100
+					</div>
+				</li>
+
         </ul>
 	</div>
 </template>
@@ -119,15 +119,22 @@
 	.type-box{
 		margin: -24px -24px;
 		border:none;
+		li{
+			margin:20px 0;
+		}
 		.el-select{
 			width:150px;
 			margin-top:-20px;
 			margin-right:20px;
 		}
-		.el-button{
-			
-			
-
+		.type-item{
+			border-radius: 2px;
+			height: 24px;
+			color: #959595;
+			display: inline-block;
+			border: 1px solid #cdcdcd;
+			margin-left: 20px;
+			line-height: 24px;
 		}
 	}
 	.top-tool{
@@ -244,10 +251,25 @@
 
 			}
 		},
-		methods:{
+        methods:{
             search(){
 
             },
-		},
+            addlist(){
+                this.addVisible = false
+                if(!this.addGroup){
+                    return
+                }else{
+                    this.group.push(this.addGroup)
+                    this.addGroup = ""
+
+                }
+
+            },
+            cancelList(){
+                this.addVisible = false
+                this.addGroup = ""
+            }
+        },
 	}
 </script>

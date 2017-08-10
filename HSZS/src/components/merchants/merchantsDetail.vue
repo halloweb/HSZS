@@ -2,52 +2,50 @@
     <div>
         <div class="company-head">
             <span class="comName">中科点击科技有限公司</span>
-           <div class="right-action">
-            <div class="right-box">
-                <a href="#">添加企业分组</a>
+            <div class="right-action">
+                <div class="right-box">
+                    <a href="#">添加企业分组</a>
+                </div>
+                <div class="right-box">
+                    <a href="#">生成企业报告</a>
+                </div>
             </div>
-            <div class="right-box">
-                <a href="#">生成企业报告</a>
-            </div>
-           </div> 
-            
+
         </div>
         <ul class="com-msg">
             <li><img src="../../assets/images/tel.png" height="15" width="15" alt="">电话:17801056798</li>
             <li><img src="../../assets/images/internet.png" height="17" width="16" alt="">网址:www.huishu.com</li>
             <li><img src="../../assets/images/e-mail.png" height="11" width="18" alt="">邮箱:zhongkedianji@dianji.com</li>
             <li class="last-list">
-            <img src="../../assets/images/location-h.png" height="11" width="9" alt="">地址:北京市中关村软件园华胜天成大厦二层</li>
+                <img src="../../assets/images/location-h.png" height="11" width="9" alt="">地址:北京市中关村软件园华胜天成大厦二层</li>
         </ul>
 
         <ul class="company-list" >
 
 
-                <li >
-                    <router-link to="/supervision/parkCompanys/companyDetail/" :class="{active:isActive}" class="l1">
-                    企业基本画像
-                    </router-link>
-                </li>
-
-
-                <li >
-                    <router-link to="/supervision/parkCompanys/companyDetail/companyBusiness" active-class="active" class="l2">
-                    企业业务画像
-                    </router-link>
-                </li>
-                <li >
-                    <router-link to="/supervision/parkCompanys/companyDetail/companyInformation" active-class="active" class="l3">
-                        企业情报画像
-                    </router-link>
-                </li>
             <li >
-                <router-link to="/supervision/parkCompanys/companyDetail/companyFloor" active-class="active" class="l4">
+                <router-link to="/merchants/merchantsDetail" :class="{active:isActive}" class="l1">
+                    企业基本画像
+                </router-link>
+            </li>
+            <li >
+                <router-link to="/merchants/merchantsDetail/merchBusiness" active-class="active" class="l2">
+                    企业业务画像
+                </router-link>
+            </li>
+            <li >
+                <router-link to="/merchants/merchantsDetail/merchInformation" active-class="active" class="l3">
+                    企业情报画像
+                </router-link>
+            </li>
+            <li >
+                <router-link to="/merchants/merchantsDetail/merchFloor" active-class="active" class="l4">
                     企业落地
                 </router-link>
             </li>
             <li >
-                <router-link to="/supervision/parkCompanys/companyDetail/companyRelation" active-class="active" class="l5">
-                   关系拓扑
+                <router-link to="/merchants/merchantsDetail/merchRelation" active-class="active" class="l5">
+                    关系拓扑
                 </router-link>
             </li>
         </ul>
@@ -65,14 +63,13 @@
             $(".company-list a").on("click", function () {
                 $(this).addClass("active").parent().siblings().children().removeClass("active");
             })
-            if(this.$route.path=="/supervision/parkCompanys/companyDetail/"){
+            if(this.$route.path=="/merchants/merchantsDetail"){
                 this.isActive=true;
             }
         },
         watch: {
             '$route'(to, from) {
-                console.log(from);
-                if (to.path !== "/supervision/parkCompanys/companyDetail/") {
+                if (to.path !== "/merchants/merchantsDetail") {
                     this.isActive = false;
                 } else {
                     this.isActive = true;
