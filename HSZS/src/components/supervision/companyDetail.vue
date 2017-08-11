@@ -58,7 +58,7 @@
     export default {
         data() {
             return {
-                isActive: false
+//                isActive: false
             }
         },
         mounted() {
@@ -70,6 +70,7 @@
             }
         },
         watch: {
+
             '$route'(to, from) {
                 console.log(from);
                 if (to.path !== "/supervision/parkCompanys/companyDetail/") {

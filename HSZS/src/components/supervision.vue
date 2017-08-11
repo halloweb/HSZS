@@ -2,7 +2,7 @@
 	<div>
 	  	<head-bar></head-bar>
 	    <div class="wrapper">
-           <div class="left-bar" v-if="isShow">
+           <div class="left-bar">
 		         <ul class="left-nav">
 			     	<li>
 		                <router-link to="/supervision/parkCompanys/" active-class="active" >

@@ -16,10 +16,10 @@
                         {{item.content}}
                     </p>
                     <div class="sub-info">
-                                      <span>
-                                        <img src="../../assets/images/company.png" alt="">
-                                        涉及公司：中科点击
-                                     </span>
+                      <span>
+                        <img src="../../assets/images/company.png" alt="">
+                        涉及公司：中科点击
+                      </span>
                     </div>
                 </li>
             </router-link>
@@ -27,8 +27,8 @@
          <div class="text-center">
         <el-pagination
 		   @current-change="change"
-		  layout="prev, pager, next"
-		  :total="50">
+           layout="prev, pager, next"
+           :total="50">
 		</el-pagination>
 		</div>
 	</div>
@@ -63,14 +63,39 @@
                title:'大数据与分析创新峰会',
                content:"本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss",
                time:'2017-07-07 00-00-00'
-             }
+             },
+            {
+                location:"信息科技-中科点击",
+                title:'大数据与分析创新峰会',
+                content:"本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss",
+                time:'2017-07-07 00-00-00'
+            },
+            {
+                location:"信息科技-中科点击",
+                title:'大数据与分析创新峰会',
+                content:"本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss",
+                time:'2017-07-07 00-00-00'
+            },
+            {
+                location:"信息科技-中科点击",
+                title:'大数据与分析创新峰会',
+                content:"本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss",
+                time:'2017-07-07 00-00-00'
+            },
+            {
+                location:"信息科技-中科点击",
+                title:'大数据与分析创新峰会',
+                content:"本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss",
+                time:'2017-07-07 00-00-00'
+            }
           ],
 			}
 		},
-		methods:{
-			change(val){
 
-			},
-		},
+        methods:{
+           change(val){
+
+           }
+        }
 	}
 </script>
