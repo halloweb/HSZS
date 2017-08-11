@@ -57,6 +57,11 @@
 		</div>
 	</div>
 </template>
+<style scoped>
+	.left-nav{
+		padding-top:15px;
+	}
+</style>
 <script>
   import headBar from './commonParts/headBar.vue'
    export default{

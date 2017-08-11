@@ -63,11 +63,16 @@ module.exports = (options = {}) => ({
                 target: 'http://localhost:8092',
                 secure: false,
                 changeOrigin: true
-                // pathRewrite: {
-                //     '^/api': ''
-                // }
+               
             }
         },
+        // proxy: [
+        //   {
+        //     context: ['/api-v1/**', '/api-v2/**'],
+        //     target: 'https://other-server.example.com',
+        //     secure: false
+        //   }
+        //      ]
         historyApiFallback: {
             index: url.parse(options.dev ? '/assets/' : publicPath).pathname
         }

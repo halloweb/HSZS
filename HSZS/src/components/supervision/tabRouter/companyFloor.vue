@@ -1,5 +1,6 @@
 <template>
     <div class="floor">
+         <bd-map :park-info="info"></bd-map>
         <div class="details-list">
         	<div class="title">列表详情</div>
         	<ul class="d-list-box">
@@ -15,21 +16,28 @@
     </div>
 </template>
 <script>
+     import bdMap from '../../commonParts/bdMap.vue'
     export default{
+          components:{
+              "bdMap":bdMap
+          },
            data(){
            	 return{
            	 	companys:[
                     {
 
                     }
-           	 	]
+           	 	],
+                info:{
+                   name:'中关村软件园'
+                 }
            	 }
            }
     }
 </script>
 <style lang="less" scoped>
 	.floor{
-		height:600px;
+		height:400px;
 		margin-top:15px;
 		background-color:#ffffff;
 		position:relative;
@@ -37,7 +45,7 @@
 			width:400px;
 			 position:absolute;
 	         left:30px;
-	         top:60px;
+	         top:20px;
 			.title{
 				height:40px;
 				line-height:40px;

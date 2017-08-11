@@ -347,7 +347,7 @@ footer {
   color: #000000;
 }
 .policy-title a.fc {
-  border-bottom: 1px solid #00a5ff;
+  border-bottom: 2px solid #00a5ff;
 }
 .area-policy {
   margin-top: 14px;
@@ -402,6 +402,7 @@ footer {
 }
 .expert-container .expert-slider > div .article-box {
   padding: 10px;
+  height:164px;
 }
 .expert-container .expert-slider > div .article-box .title {
   font-size: 16px;
@@ -420,13 +421,14 @@ footer {
 }
 .expert-container .expert-slider > div:hover {
   box-shadow: 0 0 15px #666666;
-  background-color:#fafafa ;
+ 
 }
-.expert-container .expert-slider > div:hover .expert-img {
+
+.expert-container .expert-slider .expert-img:hover  {
   background-color: #00a5ff;
   color: #ffffff;
 }
-.expert-container .expert-slider > div:hover .article-box {
+.expert-container .expert-slider .article-box:hover  {
   background-color: #fafafa;
 }
 .expert-info {

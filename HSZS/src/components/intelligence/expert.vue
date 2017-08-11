@@ -8,15 +8,15 @@
                        <div class="swiper-container expert-container">
                         <div class="swiper-wrapper">
   
-	                          <div class="swiper-slide expert-slider" v-for="(item,index) in experts" @click="select(item)">
+	                          <div class="swiper-slide expert-slider" v-for="(item,index) in experts">
 	                            <div>
-	                              <div class="expert-img">
+	                              <div class="expert-img"  @click="select(item)">
 	                                   <img src="../../assets/images/people.png" alt="">
 	                                   <p class="name">{{item.name}}</p>
 	                                   <p class="Introduction">{{item.introduction}}</p>
 	                              </div>
 	                              <div class="article-box">
-	                                  <p class="title">{{item.title}}</p>
+	                                   <router-link class="title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
 	                                  <p class="content">{{item.content}}</p>
 	                              </div>
 	                              </div>

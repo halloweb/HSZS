@@ -44,8 +44,9 @@
 	</div>
 </template>
 <style scoped>
-	.left-nav>li{
-  margin-bottom:20px;
+	.left-nav>li>a{
+  height:60px;
+  line-height:60px;
 }
 </style>
 <script>

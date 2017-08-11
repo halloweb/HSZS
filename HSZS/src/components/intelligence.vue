@@ -2,7 +2,7 @@
 	<div>
 	  	<head-bar></head-bar>
 	    <div class="wrapper">
-           <left-bar v-if="barShow"></left-bar>
+           <left-bar ></left-bar>
 	       <div class="home">
             <div class="main-content">
 		     <router-view></router-view>
@@ -24,7 +24,7 @@
 		},
 		data(){
              return{
-                   barShow:true
+                   
              }
 		},
 		watch:{
@@ -49,9 +49,7 @@
 			   });
 			  
    				});
-               if(this.$route.name=="article"){
-               	   this.barShow=false;
-               }
+              
                
 
 
