@@ -81,15 +81,15 @@ export default [
       component: merchants,
       children:[
           {path: '/',component: companySearch,children:[
-               {path: '',name: 'search',component: search},
-               {path: 'result',name: 'result',component: result},
-               {path: 'merchantsDetail',component: merchantsDetail,children:[
-                    {path: '/',name: 'merchBasic',component: merchBasic},
-                    {path: 'merchBusiness',name: 'merchBusiness',component: merchBusiness},
-                    {path: 'merchInformation',name: 'merchInformation',component: merchInformation},
-                    {path: 'merchFloor',name: 'merchFloor',component: merchFloor},
-                    {path: 'merchRelation',name: 'merchRelation',component: merchRelation},
-                ]},
+              {path: '',component: search},
+              {path: 'result',name: 'result',component: result},
+              {path: 'merchantsDetail',component: merchantsDetail,children:[
+                  {path: '/',name: 'merchBasic',component: merchBasic},
+                  {path: 'merchBusiness',name: 'merchBusiness',component: merchBusiness},
+                  {path: 'merchInformation',name: 'merchInformation',component: merchInformation},
+                  {path: 'merchFloor',name: 'merchFloor',component: merchFloor},
+                  {path: 'merchRelation',name: 'merchRelation',component: merchRelation},
+              ]},
          ]},
           {path: 'semantic',name: 'semantic',component: semantic},
           {path: 'intelligent',component: intelligent,children:[

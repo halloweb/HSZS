@@ -21,6 +21,10 @@
              <img src="../../assets/images/internet.png" alt="">
               情报原址：www.ss.com
              </span>
+             <span>
+             <img src="../../assets/images/company.png" alt="">
+             涉及公司：中科点击
+             </span>
         </div>
 	</div>
 </template>
