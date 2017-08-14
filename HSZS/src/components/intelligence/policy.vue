@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<label-list @labelInfo='labelInfo' :time-show='false' ></label-list>
+		<label-list @labelInfo='labelInfo' :time-show='true' ></label-list>
 		                <div class="content-block">
                        <div class="title policy-title">
                        <img src="../../assets/images/policy.png" alt="">政策解读
@@ -121,11 +121,16 @@
 			}
 		},
 		methods:{
-      labelInfo(data){
-                 console.log(data);
-			},
-			getPolicy(){
+            labelInfo(data){
 
+			},
+			getPolicy(data){
+                this.$ajax.post('/apis/industry/getIndustrialPolicyList.json',{"labels":data
+                })
+                    .then(res =>{
+                        console.log(res)
+                    })
+                    .catch(err => console.log(err))
 			},
 			getArticle(){
                
@@ -134,10 +139,10 @@
 		mounted(){
 			 $(".policy-title a").on("click",function(){
   	           $(this).addClass("fc").siblings().removeClass("fc");
-  	  
               });
 
-			 console.log("aaa");
+
+            this.getPolicy(["互联网","大数据","不限","不限"])
 
 		},
 	}

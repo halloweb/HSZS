@@ -59,7 +59,7 @@ module.exports = (options = {}) => ({
         host: '0.0.0.0',
         port: 8000,
         proxy: {
-            '/business': {
+            '/apis': {
                 target: 'http://localhost:8092',
                 secure: false,
                 changeOrigin: true

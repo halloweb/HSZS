@@ -37,6 +37,7 @@
 </template>
 <script>
 	import labelList from './label.vue'
+    import axios from "axios"
 	export default{
 		components:{
            'labelList': labelList
@@ -54,9 +55,19 @@
                 // this.getList(data);
 			},
       getList(data){
-        this.$ajax.post('/business/findCompaniesDesc.json',{'msg':['互联网','不限','2019']}).then(res =>{
-              this.article=res.data.data;
-        }).catch(err => console.log(err))
+        this.$ajax.post('/apis/business/findCompaniesDesc.json',{'msg':['互联网','不限','2019']})
+            .then(res =>{
+            console.log(res.data)
+            this.article=res.data.data;
+            })
+            .catch(err => console.log(err))
+//          axios.post('/business/findCompaniesDesc.json',{'msg':['互联网','不限','2019']})
+//              .then(function(response){
+//                  console.log(response);
+//              })
+//              .catch(function(error){
+//                  console.log(error);
+//              });
       }
 		}, 
     mounted(){
