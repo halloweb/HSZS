@@ -16,7 +16,7 @@
                   <div class="park-movement">
                       <div class="p-title">关注园区动态</div>
                       <ul class="p-content">
-                          <li v-for="(item,index) in dynamic">
+                          <li v-for="(item,index) in dynamic" >
                              <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
                             <p class="p-c-content">{{item.content}}</p>
                           </li>
@@ -91,11 +91,7 @@
 	 	data(){
 	 		return{
                  dynamic:[
-                      {
-                        id:1,
-                        title:'你车上基础上基础上',
-                        content:'2017年生态城中部片区在建的重点项目包括：32#地块社 区服务中心正在进行施工前准备工作；新开住宅集团32#、 41#地块住',
-                      }
+
                  ],
                  list:[],
                  area:["不限","北京","上海"],
@@ -114,7 +110,8 @@
          },
          getDynamic(){
               this.$ajax.post('/apis/area/findGardensCondition.json',{}).then(res => {
-                        this.dynamic=res.data.data;
+                  this.dynamic = res.data.data.slice(0, 3)
+                  console.log(this.dynamic)
               }).catch(err => console.log(err))
          },
          getList(){
@@ -524,10 +521,10 @@ var convertData = function (data) {
     // option.series[0].data=data1;
     //  option.series[1].data=data2;
     //   option.series[2].data=data3;
-    park.setOption(option);
+     park.setOption(option);
      park.on('click', function (params) {
-                                console.log(params.name);              
-                    });
+         console.log(params.name);
+     });
 
  },
 	 	},
@@ -538,6 +535,7 @@ var convertData = function (data) {
                 });
               this.parkMap();
               this.getDynamic();
+
 	 	},
 	 }
 </script>

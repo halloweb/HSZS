@@ -51,11 +51,9 @@
 		},
 		methods:{
 			labelInfo(data){
-                
-                // this.getList(data);
+			    this.getList(data);
 			},
       getList(data){
-
         this.$ajax.post('/apis/business/findCompaniesDesc.json',{'msg':data}).then(res =>{
               this.article=res.data.data;
         }).catch(err => console.log(err))

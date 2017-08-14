@@ -647,5 +647,9 @@ button.btn-zs:focus {
  .table-zs  tbody  tr:nth-child(even){
             background-color:#f7faff;
           }
+
+.m-left{
+  margin-left: -9px;
+}
           
 
