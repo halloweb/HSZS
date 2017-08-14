@@ -102,7 +102,9 @@
 		},
 		methods:{
 			labelInfo(data){
+
                 // this.getArticle(data);
+
 			},
 			getExpert(){
                this.$ajax.get('/apis/expert/getSpecialist.json').then(res => {

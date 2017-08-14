@@ -129,7 +129,7 @@
 		},
 			methods:{
 			labelInfo(data){
-                 console.log(data);
+
 			},	
 		    getMedia(){
 

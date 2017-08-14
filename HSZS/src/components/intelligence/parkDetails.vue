@@ -13,11 +13,15 @@
               <div class="tab-pane fade in active clearfix" id="leadCompany">
                   <div class=" col-xs-6">
                      中科点击（北京）科技有限公司 
-                     <a href="javascript:void(0);" class="pull-right blue">详情</a>
+                      <router-link to="/merchants/merchantsDetail" class="pull-right blue">
+                          详情
+                      </router-link>
                   </div>
                   <div class=" col-xs-6">
                      中科点击（北京）科技有限公司 
-                     <a href="javascript:void(0);" class="pull-right blue">详情</a>
+                      <router-link to="/merchants/merchantsDetail" class="pull-right blue">
+                          详情
+                      </router-link>
                   </div>
 
               </div>
