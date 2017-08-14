@@ -70,7 +70,7 @@ export default [
        {path: 'focusPark',component:focusPark,children:[
             {path: '',name: 'focus',component: focus},
             {path: 'dynamic',name: 'dynamic',component: dynamic},
-            {path: 'parkDetails',name: 'parkDetails',component: parkDetails}
+            {path: 'parkDetails/:id',name: 'parkDetails',component: parkDetails}
        ]},
        {path: 'article/:id',name: 'article',component: article}
      ]

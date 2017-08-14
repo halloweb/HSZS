@@ -113,7 +113,9 @@
              
          },
          getDynamic(){
-
+              this.$ajax.post('/apis/area/findGardensCondition.json',{}).then(res => {
+                        this.dynamic=res.data.data;
+              }).catch(err => console.log(err))
          },
          getList(){
 
@@ -535,6 +537,7 @@ var convertData = function (data) {
   	
                 });
               this.parkMap();
+              this.getDynamic();
 	 	},
 	 }
 </script>

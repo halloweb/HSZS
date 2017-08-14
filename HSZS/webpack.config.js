@@ -59,20 +59,14 @@ module.exports = (options = {}) => ({
         host: '0.0.0.0',
         port: 8000,
         proxy: {
-            '/business': {
+            '/apis': {
                 target: 'http://localhost:8092',
                 secure: false,
                 changeOrigin: true
                
             }
         },
-        // proxy: [
-        //   {
-        //     context: ['/api-v1/**', '/api-v2/**'],
-        //     target: 'https://other-server.example.com',
-        //     secure: false
-        //   }
-        //      ]
+    
         historyApiFallback: {
             index: url.parse(options.dev ? '/assets/' : publicPath).pathname
         }

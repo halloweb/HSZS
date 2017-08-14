@@ -14,7 +14,7 @@
                                   <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
                                    <span class="blue">【{{item.location}}】</span>
                                    {{item.title}}</router-link> 
-                                  <span class="article-time">{{item.time}}</span>
+                                  <span class="article-time">{{item.publishDate}}</span>
                                 </div>
                                 <p class="article-content">
                                   {{item.content}}
@@ -52,7 +52,9 @@
 		},
 		methods:{
       getList(){
-        
+        this.$ajax.post('/apis/expert/findExpertOpinionByAuthor.json',{'author':this.$route.params.author.name}).then(res => {
+              this.article=res.data.data;
+        }).catch(err => console.log(err));
 
       },
       viewMore(){
@@ -61,7 +63,7 @@
 
 		},
 		mounted(){
-          console.log(this.$route.params);
+          console.log(this.$route.params.author);
 		},
 	}
 </script>

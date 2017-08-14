@@ -54,7 +54,7 @@
 					$(this).addClass("fc").siblings().removeClass("fc");
 				})
 			});
-
+         console.log($route.params.id);
 
 		},
 	}

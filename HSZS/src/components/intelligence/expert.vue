@@ -13,10 +13,10 @@
 	                              <div class="expert-img"  @click="select(item)">
 	                                   <img src="../../assets/images/people.png" alt="">
 	                                   <p class="name">{{item.name}}</p>
-	                                   <p class="Introduction">{{item.introduction}}</p>
+	                                   <p class="Introduction">{{item.position}}</p>
 	                              </div>
 	                              <div class="article-box">
-	                                   <router-link class="title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
+	                                   <router-link class="title" :to="{ path:'/intelligence/article/'+item.id}">{{item.professionalTitle}}</router-link> 
 	                                  <p class="content">{{item.content}}</p>
 	                              </div>
 	                              </div>
@@ -102,22 +102,29 @@
 		},
 		methods:{
 			labelInfo(data){
-                 console.log(data);
+                // this.getArticle(data);
 			},
 			getExpert(){
-
+               this.$ajax.get('/apis/expert/getSpecialist.json').then(res => {
+                    this.experts=res.data.data;
+               }).catch(err => console.log(err))
 			},
-			getArticle(){
-
+			getArticle(data){
+               this.$ajax.post('/apis/expert/findaExpertOpinion.json',{'msg':data}).then(res => {
+                    this.lunT=res.data.data;
+               }).catch(err => console.log(err))
 			},
 			select(item){               
-               this.$router.push({ name: 'expertList', params: { userId: item.id }})
+               this.$router.push({ name: 'expertList', params: { 'author':{'name':item.name,'decoration':item.position}  }})
 			},	
 			loadMore(){
                  this.getExpert();
 			},
 		},
 		mounted(){
+                  this.getExpert();
+                  this.getArticle(['互联网','不限']);
+
 			let mySwiper = new Swiper('.swiper-container', {
 			      slidesPerView : 'auto',
 			      // spaceBetween : 58,

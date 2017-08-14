@@ -9,7 +9,7 @@
                          区域
                         </div >
                          <p class="type-list"> 
-                          <span v-for="(item,index) in area" :class="{active:index==areaCode}"  @click="select(item,index)">{{item}}</span>
+                          <span v-for="(item,index) in area" :class="{active:index==areaCode}"  @click="select(index)">{{item}}</span>
                           </p>
                      </li> 
                      <li>
@@ -17,27 +17,27 @@
                         产业类型
                         </div >
                          <p class="type-list"> 
-                          <span v-for="(item,index) in type" :class="{active:index==typeCode}" @click="select2(item,index)">{{item}}</span>
+                          <span v-for="(item,index) in industryType" :class="{active:index==typeCode}" @click="select2(index)">{{item}}</span>
                           </p>
                      </li>     
                   </ul>
                   <ul class="park-l-menu">
-                      <li>
+                      <li  v-for="(item,index) in list">
                            <img src="../../assets/images/park-picture.png" alt="" class="park-picture">
                            <div class="right-content">
                               <div >
-                                 <router-link class="article-title" to="/intelligence/focusPark/parkDetails">
-                                  大数据与分析创新峰会
+                                 <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails/'+item.id}">
+                                  {{item.name}}
                                 </router-link>
-                                <span class="article-time">2017-07-07 00-00-00</span>
+                                
                                </div>
                                <p class="article-content">
-                                本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss
+                                {{item.description}}
                                </p>
                                <div class="sub-info">
                                  <span>
                                  <img src="../../assets/images/location-h.png" alt="">
-                                  地址：河北石家庄
+                                  地址：{{item.address}}
                                  </span>
                                   
 
@@ -51,25 +51,33 @@
 	export default{
 		data(){
 			return{
-				list:[],
+				         list:[],
                  area:["不限","北京","上海"],
-                 type:["不限","动漫"],
+                 industryType:["不限","动漫"],
                  areaCode:0,
                  typeCode:0
 			}
 		},
 		methods:{
-         getList(){
+         getList(data){
+            this.$ajax.post('/apis/area/findGardensList.json',{'msg':data}).then(res => {
+                this.list=res.data.data[0].content;
+            }).catch(err => console.log(err))
+         },
+         select(index){
+             this.areaCode=index;
+            
+             this.getList([this.area[this.areaCode],this.industryType[this.typeCode]]);
 
          },
-         select(item,index){
-             this.areaCode=index;
-         },
-         select2(item,index){
+         select2(index){
             this.typeCode=index;
+            this.getList([this.area[this.areaCode],this.industryType[this.typeCode]]);
+
          },
          }, 
          mounted(){
+             this.select(0);
 
          },  
 	}

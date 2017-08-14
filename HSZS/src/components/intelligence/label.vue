@@ -125,18 +125,7 @@
 
 				}).catch(err => console.log(err))
 			},
-			getList1(oneCode,twoCode,timeCode){
-				this.$ajax.post(url,{}).then((res) => {
 
-
-				}).catch(err => console.log(err))
-			},
-			getList2(oneCode,twoCode,timeCode){
-				this.$ajax.post(url,{}).then((res) => {
-
-
-				}).catch(err => console.log(err))
-			},
 			upDate(){
 				let parameter={"互联网":this.checkList1,"高科技":this.checkList2,"文化创意":this.checkList3,"精英配套":this.checkList4}
 				this.$ajax.post(url,{}).then((res) => {

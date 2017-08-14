@@ -19,12 +19,12 @@
                     </p>
                     <div class="sub-info">
                        <span>
-                       <img src="../../assets/images/chat-h.png" alt="">
-                        微信公众号
+                       <img src="../../assets/images/laiyuan.png" alt="">
+                        {{item.vector}}
                        </span>
-                       <span>
+                       <span v-if="item.publishDate">
                        <img src="../../assets/images/time.png" alt="">
-                        {{item.publishDateTime}}
+                        {{item.publishDate}}
                        </span>
                      </div>
                  </li>
@@ -54,13 +54,13 @@
                 // this.getList(data);
 			},
       getList(data){
-        this.$ajax.post('/business/findCompaniesDesc.json',{'msg':['互联网','不限','2019']}).then(res =>{
+        this.$ajax.post('/apis/business/findCompaniesDesc.json',{'msg':data}).then(res =>{
               this.article=res.data.data;
         }).catch(err => console.log(err))
       }
 		}, 
     mounted(){
-               this.getList()
+               this.getList(['互联网','不限','2019'])
       },
 	}
 </script>
