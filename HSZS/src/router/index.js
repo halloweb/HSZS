@@ -61,7 +61,7 @@ export default [
        {path: 'policy',name: 'policy',component: policy},
        {path: 'expertView',component: expertView,children:[
             {path: '',name: 'expert',component: expert},
-            {path: 'expertList',name: 'expertList',component: expertList,params: { expertId:1 }},
+            {path: 'expertList',name: 'expertList',component: expertList},
             
            
        ]},
@@ -72,7 +72,7 @@ export default [
             {path: 'dynamic',name: 'dynamic',component: dynamic},
             {path: 'parkDetails/:id',name: 'parkDetails',component: parkDetails}
        ]},
-       {path: 'article/:id',name: 'article',component: article}
+       {path: 'article/:id',name: 'article',component: article,}
      ]
 
      },{

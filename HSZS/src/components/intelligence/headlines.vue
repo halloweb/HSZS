@@ -129,7 +129,9 @@
 		},
 			methods:{
 			labelInfo(data){
-
+                // this.$ajax.post('',{'msg':["互联网","不限","今日"]}).then( res =>{
+                //     console.log(res);
+                // }).catch( err => console.log(err));
 			},	
 		    getMedia(){
 

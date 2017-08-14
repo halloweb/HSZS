@@ -103,7 +103,7 @@
 		methods:{
 			labelInfo(data){
 
-                // this.getArticle(data);
+                this.getArticle(data);
 
 			},
 			getExpert(){
@@ -117,7 +117,7 @@
                }).catch(err => console.log(err))
 			},
 			select(item){               
-               this.$router.push({ name: 'expertList', params: { 'author':{'name':item.name,'decoration':item.position}  }})
+               this.$router.push({ path:'/intelligence/expertView/expertList',query:{id:1}})
 			},	
 			loadMore(){
                  this.getExpert();

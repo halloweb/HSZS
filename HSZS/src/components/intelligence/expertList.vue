@@ -3,8 +3,8 @@
 		                 <div class="content-block">
                       <div class="expert-info clearfix">
                        <img src="../../assets/images/people.png" alt="" >
-                       <div>朱倩</div>
-                       <p class="blue">资深产品研究员</p>
+                       <div>{{author}}</div>
+                       <p class="blue">员</p>
 
                       </div>
                        
@@ -38,23 +38,19 @@
 	export default{
 		data(){
 			return{
-          article:[
-             {
-               location:"北京",
-               title:'大数据与分析创新峰会',
-               content:"本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss",
-               time:'2017-07-07 00-00-00',
-               id:1
-             }
-          ],
-          number:0
+          article:[],
+          number:0,
+          author:''
 			}
 		},
 		methods:{
-      getList(){
-        this.$ajax.post('/apis/expert/findExpertOpinionByAuthor.json',{'author':this.$route.params.author.name}).then(res => {
+      getList(data){
+        this.$ajax.post('/apis/expert/findExpertOpinionByAuthor.json',{'author':data}).then(res => {
               this.article=res.data.data;
         }).catch(err => console.log(err));
+
+      },
+      getInfo(){
 
       },
       viewMore(){
@@ -63,7 +59,10 @@
 
 		},
 		mounted(){
-          console.log(this.$route.params.author);
-		},
+        console.log(this.$route.query.id)
+        
+        this.getList(this.$route.query.id);
+      },
+         
 	}
 </script>
