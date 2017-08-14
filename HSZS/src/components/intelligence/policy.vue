@@ -41,7 +41,7 @@
                              <li v-for="(item,index) in lunT">
                                 <div >
                                    <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
-                                   <span class="blue">【{{item.location}}】</span>
+                                   <span class="blue m-left">【{{item.area}}】</span>
                                    {{item.title}}</router-link> 
                                   <span class="article-time">{{item.time}}</span>
                                 </div>
@@ -58,9 +58,9 @@
                           </ul>
                           <ul class="tab-pane fade list-box" id="keY">
                              <li v-for="(item,index) in keY">
-                                <div >
+                                <div>
                                   <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
-                                   <span class="blue">【{{item.location}}】</span>
+                                   <span class="blue m-left">【{{item.area}}】</span>
                                    {{item.title}}</router-link> 
                                   <span class="article-time">{{item.time}}</span>
                                 </div>
@@ -80,6 +80,9 @@
                 </div>
 	</div>
 </template>
+<style scoped>
+
+</style>
 <script>
     import labelList from './label.vue'
 	export default{
@@ -97,7 +100,7 @@
                      	title:'创新峰会大数据与分析',
                      	time:'2017-02-02',
                      	content:'创新峰会大数据与分析',
-                      id:3
+                        id:3
                      }
                   ],
                   keY:[
@@ -110,11 +113,9 @@
 	                     }
                   ],
                   options: [{
-			          value: '选项1',
-			          label: '黄金糕'
+			          value: '天津',
 			        }, {
-			          value: '选项2',
-			          label: '双皮奶'
+			          value: '南京',
 			        }],
 			        area:'北京'
 
@@ -122,13 +123,32 @@
 		},
 		methods:{
             labelInfo(data){
-
+                data.push(this.area)
+                console.log(data)
+                this.$ajax.post('/apis/industry/getIndustrialPolicyList.json',{"labels":data
+                })
+                    .then(res =>{
+                        var data = res.data.data
+                        for(var i = 0;i<data.length; i++){
+                            console.log(data[i].policy)
+                            this.lunT = data[i].forun.content
+                            this.keY = data[i].research.content
+                            this.explanation = data[i].policy.content
+                        }
+                    })
+                    .catch(err => console.log(err))
 			},
 			getPolicy(data){
                 this.$ajax.post('/apis/industry/getIndustrialPolicyList.json',{"labels":data
                 })
                     .then(res =>{
-                        console.log(res)
+                        var data = res.data.data
+                        for(var i = 0;i<data.length; i++){
+                            console.log(data[i].policy)
+                            this.lunT = data[i].forun.content
+                            this.keY = data[i].research.content
+                            this.explanation = data[i].policy.content
+                        }
                     })
                     .catch(err => console.log(err))
 			},
@@ -140,9 +160,7 @@
 			 $(".policy-title a").on("click",function(){
   	           $(this).addClass("fc").siblings().removeClass("fc");
               });
-
-
-            this.getPolicy(["互联网","大数据","不限","不限"])
+                this.getPolicy(["互联网","大数据","北京","不限"])
 
 		},
 	}

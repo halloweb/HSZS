@@ -31,10 +31,25 @@
 </template>
 <script>
 	export default{
-      methods:{
-        back(){
-          this.$router.go(-1);
+    data(){
+        return {
+            id:null
         }
-      }
+    },
+    methods:{
+    back(){
+      this.$router.go(-1);
+    }
+    },
+    mounted(){
+        this.id = this.$route.params.id
+        this.$ajax.get('/apis/industry/getIndustrialPolicyDetailById.json',{params:{"id":this.id
+        }})
+            .then(res =>{
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+    }
+
 	}
 </script>

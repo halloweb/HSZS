@@ -62,8 +62,7 @@ export default [
        {path: 'expertView',component: expertView,children:[
             {path: '',name: 'expert',component: expert},
             {path: 'expertList',name: 'expertList',component: expertList},
-            
-           
+
        ]},
        {path: 'businessRank',name: 'businessRank',component: businessRank},
        {path: 'parkInfo',name: 'parkInfo',component: parkInfo},
