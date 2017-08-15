@@ -1,10 +1,10 @@
 <template>
-	<div>
-		                 <div class="content-block">
+	<div class="expert-wz">
+		                 
                       <div class="expert-info clearfix">
-                       <img src="../../assets/images/people.png" alt="" >
-                       <div>{{author}}</div>
-                       <p class="blue">员</p>
+                       <img src="../../assets/images/people.png" alt="" width="85" height="85">
+                       <div>{{personInfo.name}}</div>
+                       <p class="blue">{{personInfo.professionalTitle}}</p>
 
                       </div>
                        
@@ -12,7 +12,7 @@
                              <li v-for="(item,index) in article">
                                 <div >
                                   <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
-                                   <span class="blue">【{{item.location}}】</span>
+                                   <span class="blue">【{{item.dimension}}】</span>
                                    {{item.title}}</router-link> 
                                   <span class="article-time">{{item.publishDate}}</span>
                                 </div>
@@ -30,14 +30,24 @@
                           </ul>
                         
                          <div class="text-center loadMore"><a href="javascript:void(0);" class="blue " @click="viewMore">查看更多</a></div>
-                      </div> 
-                </div>
+                      
+                
 	</div>
 </template>
+<style scoped>
+  .expert-wz{
+    background-color:#ffffff;
+    
+  }
+  .article-title{
+    margin-left:-8px;
+  }
+</style>
 <script>
 	export default{
 		data(){
 			return{
+          personInfo:{},
           article:[],
           number:0,
           author:''
@@ -46,22 +56,22 @@
 		methods:{
       getList(data){
         this.$ajax.post('/apis/expert/findExpertOpinionByAuthor.json',{'author':data}).then(res => {
-              this.article=res.data.data;
+              let list=res.data.data;
+              for(let y in list){
+                this.article.push(list[y]);
+              }
         }).catch(err => console.log(err));
 
       },
-      getInfo(){
-
-      },
       viewMore(){
-        this.getList();
+        this.getList(this.personInfo.name);
       },
 
 		},
 		mounted(){
-        console.log(this.$route.query.id)
+        this.personInfo=JSON.parse(this.$route.query.query);
         
-        this.getList(this.$route.query.id);
+        this.getList(this.personInfo.name);
       },
          
 	}

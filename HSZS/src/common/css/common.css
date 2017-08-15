@@ -35,6 +35,8 @@ li {
   margin: 0;
   list-style: none;
 }
+.balance{margin:0 -24px;}
+ul.balance li{padding: 10px 28px;}
 button.btn:focus {
   outline: none !important;
 }
@@ -433,9 +435,9 @@ footer {
 }
 .expert-info {
   border-bottom: 1px solid #e8ebf2;
-  margin: 0 -24px;
-  padding: 0 44px;
-  padding-bottom: 20px;
+  
+  padding: 20px 24px;
+ 
 }
 .expert-info img {
   float: left;
@@ -467,6 +469,7 @@ footer {
 }
 h4 .btn-zs {
   border-radius: 20px;
+  margin-top:-8px;
 }
 button.btn-zs {
   background-color: #00a5ff;

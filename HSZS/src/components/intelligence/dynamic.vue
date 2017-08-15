@@ -6,9 +6,10 @@
 		<ul class="list-box">
              <li v-for="(item,index) in article">
                 <div >
-                  <a class="article-title" href="javascript:void(0);">
-                    <span class="blue m-left">【{{item.park}}】</span>{{item.title}}
-                  </a>
+                <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
+                 <span class="blue m-left">【{{item.park}}】</span>{{item.title}}
+                </router-link>
+                  
                   <span class="article-time">{{item.time}}</span>
                 </div>
                 <p class="article-content">

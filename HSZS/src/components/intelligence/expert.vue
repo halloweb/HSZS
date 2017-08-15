@@ -13,10 +13,10 @@
 	                              <div class="expert-img"  @click="select(item)">
 	                                   <img src="../../assets/images/people.png" alt="">
 	                                   <p class="name">{{item.name}}</p>
-	                                   <p class="Introduction">{{item.position}}</p>
+	                                   <p class="Introduction">{{item.professionalTitle}}</p>
 	                              </div>
 	                              <div class="article-box">
-	                                   <router-link class="title" :to="{ path:'/intelligence/article/'+item.id}">{{item.professionalTitle}}</router-link> 
+	                                   <router-link class="title" :to="{ path:'/intelligence/article/'+item.articleId}">{{item.title}}</router-link> 
 	                                  <p class="content">{{item.content}}</p>
 	                              </div>
 	                              </div>
@@ -45,7 +45,7 @@
                        <img src="../../assets/images/bj.png" alt="">百家论
                       </div>
                        
-                          <ul class="list-box" id="lunT">
+                          <ul class="list-box balance" id="lunT">
                              <li v-for="(item,index) in lunT">
                                 <div >
                                   <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
@@ -77,16 +77,8 @@
 		},
 		data(){
 			return{
-				experts:[
-				  {
-				  	id:1,
-				  	src:"",
-				  	name:"朱倩",
-				  	introduction:'资深产品研究员、分析师',
-				  	title:'世界石墨烯创新大会召开，我国石墨烯从 优化级到引领级还有多远',
-				  	content:'2017年第一季度，中国石墨烯产业经期调查指数为130.41， 处于较为经期区间，产品市场应用程度从生产级迈向优化级.....'
-				  }
-				],
+				experts:[],
+				
 				lunT:[
 				   {   
                      	
@@ -107,21 +99,26 @@
 
 			},
 			getExpert(){
-               this.$ajax.get('/apis/expert/getSpecialist.json').then(res => {
-                    this.experts=res.data.data;
+                 let vm=this;
+                 vm.$ajax.get('/apis/expert/getSpecialist.json').then(res => {
+                    vm.experts=res.data.data;
+                   
                }).catch(err => console.log(err))
 			},
+			
 			getArticle(data){
                this.$ajax.post('/apis/expert/findaExpertOpinion.json',{'msg':data}).then(res => {
                     this.lunT=res.data.data;
                }).catch(err => console.log(err))
 			},
-			select(item){               
-               this.$router.push({ path:'/intelligence/expertView/expertList',query:{id:1}})
+			select(item){    
+                var item=JSON.stringify(item);           
+               this.$router.push({ path:'/intelligence/expertView/expertList',query:{query:item}});
 			},	
 			loadMore(){
                  this.getExpert();
 			},
+
 		},
 		mounted(){
                   this.getExpert();

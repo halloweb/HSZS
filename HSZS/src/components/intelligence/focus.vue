@@ -26,8 +26,8 @@
                            <img src="../../assets/images/park-picture.png" alt="" class="park-picture">
                            <div class="right-content">
                               <div >
-                                 <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails/'+item.id}">
-                                  {{item.name}}
+                                 <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails/',query:{query:item.gardenName,id:item.id}}">
+                                  {{item.gardenName}}
                                 </router-link>
                                 
                                </div>
@@ -60,8 +60,8 @@
 		},
 		methods:{
          getList(data){
-            this.$ajax.post('/apis/area/findGardensList.json',{'msg':data}).then(res => {
-                this.list=res.data.data[0].content;
+            this.$ajax.post('/apis/area/getAttentionGardenList.json',{'msg':data}).then(res => {
+                this.list=res.data.data.content;
             }).catch(err => console.log(err))
          },
          select(index){

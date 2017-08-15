@@ -32,7 +32,7 @@
                          区域
                         </div >
                          <p class="type-list"> 
-                          <span v-for="(item,index) in area" :class="{active:index==areaCode}"  @click="select(item,index)">{{item}}</span>
+                          <span v-for="(item,index) in area" :class="{active:index==areaCode}"  @click="select(index)">{{item}}</span>
                           </p>
                      </li> 
                      <li>
@@ -40,7 +40,7 @@
                         产业类型
                         </div >
                          <p class="type-list"> 
-                          <span v-for="(item,index) in type" :class="{active:index==typeCode}" @click="select2(item,index)">{{item}}</span>
+                          <span v-for="(item,index) in industryType" :class="{active:index==typeCode}" @click="select2(index)">{{item}}</span>
                           </p>
                      </li>
                      <!-- <li class="search">
@@ -53,28 +53,24 @@
                      </li>      -->
                   </ul>
                   <ul class="park-l-menu">
-                      <li>
+                      <li v-for="(item,index) in list">
                            <img src="../../assets/images/park-picture.png" alt="" class="park-picture">
                            <div class="right-content">
                               <div >
-                                <router-link class="article-title" to="/intelligence/focusPark/parkDetails">
-                                  大数据与分析创新峰会
+                               <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails/',query:{query:item.name,id:item.id}}">
+                                  {{item.name}}
                                 </router-link>
-                                <span class="article-time">2017-07-07 00-00-00</span>
+                                
                                </div>
                                <p class="article-content">
-                                本次会议将涵盖大数据相关的最新行业内应用实践和前沿研究成果，我们将关注于以下主题： 20+ 主题演讲，Workshop和Panss 
+                               {{item.description}}
                                </p>
                                <div class="sub-info">
                                  <span>
                                  <img src="../../assets/images/location-h.png" alt="">
-                                  地址：河北石家庄
+                                  地址：{{item.address}}
                                  </span>
-                                  <span>
-                                    <img src="../../assets/images/company.png" alt="">
-                                    涉及公司：中科点击
-                                 </span>
-
+                                 
                                </div>
                            </div>
                       </li>
@@ -95,7 +91,7 @@
                  ],
                  list:[],
                  area:["不限","北京","上海"],
-                 type:["不限","动漫"],
+                 industryType:["不限","动漫"],
                  areaCode:0,
                  typeCode:0,
                  input2: ''
@@ -106,27 +102,37 @@
 	 	},
 	 	methods:{
          mapData(){
-             
+             this.$ajax.get('/apis//area/findGardensAll.json').then(res => {
+                 
+               
+              }).catch(err => console.log(err))
          },
          getDynamic(){
               this.$ajax.post('/apis/area/findGardensCondition.json',{}).then(res => {
                   this.dynamic = res.data.data.slice(0, 3)
-                  console.log(this.dynamic)
+               
               }).catch(err => console.log(err))
          },
-         getList(){
+         getList(data){
 
+            this.$ajax.post('/apis/area/findGardensList.json',{'msg':data}).then(res => {
+                this.list=res.data.data[0].content;
+            }).catch(err => console.log(err))
          },
-         select(item,index){
+         select(index){
+        
              this.areaCode=index;
+
+             this.getList([this.area[this.areaCode],this.industryType[this.typeCode]]);
          },
-         select2(item,index){
+         select2(index){
             this.typeCode=index;
+            this.getList([this.area[this.areaCode],this.industryType[this.typeCode]]);
          },
          search(){
 
          },   
-      parkMap(data1,data2,data3){
+      parkMap(data1,data2,data3,data4,data5){
    	 var geoCoordMap = {
     "海门":[121.15,31.89],
     "鄂尔多斯":[109.781327,39.608266],
@@ -396,11 +402,7 @@ var convertData = function (data) {
             name: '动漫产业',
             type: 'scatter',
             coordinateSystem: 'geo',
-            data: convertData([
-                {name: "海门", value: 0}
-                
-
-            ]),
+            data: convertData(data1),
             symbolSize: 12,
             label: {
                 normal: {
@@ -420,12 +422,7 @@ var convertData = function (data) {
             name: '影视产业',
             type: 'scatter',
             coordinateSystem: 'geo',
-            data: convertData([
-               
-                {name: "沧州", value: 2}
-              
-
-            ]),
+            data: convertData(data2),
             symbolSize: 12,
             label: {
                 normal: {
@@ -445,11 +442,7 @@ var convertData = function (data) {
             name: '生态科技',
             type: 'scatter',
             coordinateSystem: 'geo',
-            data: convertData([
-               
-                {name: "招远", value: 3},
-
-            ]),
+            data: convertData(data3),
             symbolSize: 12,
             label: {
                 normal: {
@@ -469,11 +462,7 @@ var convertData = function (data) {
             name: '生物药业',
             type: 'scatter',
             coordinateSystem: 'geo',
-            data: convertData([
-               
-                {name: "南京", value: 4},
-
-            ]),
+            data: convertData(data4),
             symbolSize: 12,
             label: {
                 normal: {
@@ -494,11 +483,7 @@ var convertData = function (data) {
             name: '信息技术',
             type: 'scatter',
             coordinateSystem: 'geo',
-            data: convertData([
-               
-                {name: "广州", value: 5},
-
-            ]),
+            data: convertData(data5),
             symbolSize: 12,
             label: {
                 normal: {
@@ -518,9 +503,7 @@ var convertData = function (data) {
 
     ]
 }
-    // option.series[0].data=data1;
-    //  option.series[1].data=data2;
-    //   option.series[2].data=data3;
+    
      park.setOption(option);
      park.on('click', function (params) {
          console.log(params.name);
@@ -533,8 +516,10 @@ var convertData = function (data) {
   	         $(this).addClass("fc").siblings().removeClass("fc");
   	
                 });
-              this.parkMap();
+              this.parkMap([{name:"武汉", value: 0}],[{name:"南京", value: 1}],[{name:"南京", value: 1}],[{name:"南京", value: 1}],[{name:"南京", value: 1}]);
               this.getDynamic();
+              this.select(0);
+              this.mapData();
 
 	 	},
 	 }

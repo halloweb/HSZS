@@ -1,18 +1,18 @@
 <template>
 	<div>
-		<label-list @labelInfo='labelInfo' :time-show='true' ></label-list>
+		<label-list @labelInfo='labelInfo' :time-show='false' ></label-list>
 		                <div class="content-block">
                        <div class="title policy-title">
                        <img src="../../assets/images/policy.png" alt="">政策解读
                        <div class="pull-right area">
                          地域
-                         <el-select v-model="area">
+                         <el-select v-model="area"  @change='areaChange'>
 							    <el-option  
 							      v-for="item in options"
 							      :key="item.value"
 							      :label="item.label"
 							      :value="item.value"
-
+                   
 							      >
 							    </el-option>
 							 </el-select>
@@ -37,13 +37,13 @@
                        </a>
                        </div>
                        <div class="tab-content">
-                          <ul class="tab-pane fade in active list-box" id="lunT">
+                          <ul class="tab-pane fade in active list-box balance" id="lunT">
                              <li v-for="(item,index) in lunT">
                                 <div >
                                    <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
                                    <span class="blue m-left">【{{item.area}}】</span>
                                    {{item.title}}</router-link> 
-                                  <span class="article-time">{{item.time}}</span>
+                                  <span class="article-time">{{item.publishDate}}</span>
                                 </div>
                                 <p class="article-content">
                                   {{item.content}}
@@ -56,13 +56,13 @@
                                  </div>
                              </li>
                           </ul>
-                          <ul class="tab-pane fade list-box" id="keY">
+                          <ul class="tab-pane fade list-box balance" id="keY">
                              <li v-for="(item,index) in keY">
                                 <div>
                                   <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
                                    <span class="blue m-left">【{{item.area}}】</span>
                                    {{item.title}}</router-link> 
-                                  <span class="article-time">{{item.time}}</span>
+                                  <span class="article-time">{{item.publishDate}}</span>
                                 </div>
                                 <p class="article-content">
                                   {{item.content}}
@@ -112,7 +112,8 @@
                         id:4
 	                     }
                   ],
-                  options: [{
+                  params:[],
+               options: [{
 			          value: '天津',
 			        }, {
 			          value: '南京',
@@ -122,46 +123,32 @@
 			}
 		},
 		methods:{
-            labelInfo(data){
-                data.push(this.area)
-                console.log(data)
-                this.$ajax.post('/apis/industry/getIndustrialPolicyList.json',{"labels":data
-                })
-                    .then(res =>{
-                        var data = res.data.data
-                        for(var i = 0;i<data.length; i++){
-                            console.log(data[i].policy)
-                            this.lunT = data[i].forun.content
-                            this.keY = data[i].research.content
-                            this.explanation = data[i].policy.content
-                        }
-                    })
-                    .catch(err => console.log(err))
+       labelInfo(data){
+                
+                this.params=data;
+                this.params.push(this.area);
+                this.getPolicy(this.params);
+               
 			},
 			getPolicy(data){
-                this.$ajax.post('/apis/industry/getIndustrialPolicyList.json',{"labels":data
-                })
-                    .then(res =>{
-                        var data = res.data.data
-                        for(var i = 0;i<data.length; i++){
-                            console.log(data[i].policy)
-                            this.lunT = data[i].forun.content
-                            this.keY = data[i].research.content
-                            this.explanation = data[i].policy.content
-                        }
-                    })
-                    .catch(err => console.log(err))
+                this.$ajax.post('/apis/industry/getIndustrialPolicyList.json',{"msg":data
+                }).then(res =>{
+                             this.lunT =  res.data.data[0].forum.content;
+                            this.keY =  res.data.data[0].research.content;
+                            this.explanation =  res.data.data[0].policy.content;
+                     
+                    }).catch(err => console.log(err))
 			},
-			getArticle(){
-               
-			}	  
+      areaChange(){
+           this.params.splice(2,1,this.area);
+           this.getPolicy(this.params);
+      },
+		
 		},
 		mounted(){
 			 $(".policy-title a").on("click",function(){
   	           $(this).addClass("fc").siblings().removeClass("fc");
               });
-                this.getPolicy(["互联网","大数据","北京","不限"])
-
 		},
 	}
 </script>

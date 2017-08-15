@@ -6,7 +6,7 @@
            <img src="../../assets/images/rank.png" alt="">企业排行
           </div>
            
-              <ul class="list-box" id="rank">
+              <ul class="list-box balance" id="rank">
                  <li v-for="(item,index) in article">
                     <div >
                       <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">

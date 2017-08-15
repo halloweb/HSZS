@@ -69,7 +69,7 @@ export default [
        {path: 'focusPark',component:focusPark,children:[
             {path: '',name: 'focus',component: focus},
             {path: 'dynamic',name: 'dynamic',component: dynamic},
-            {path: 'parkDetails/:id',name: 'parkDetails',component: parkDetails}
+            {path: 'parkDetails',name: 'parkDetails',component: parkDetails}
        ]},
        {path: 'article/:id',name: 'article',component: article,}
      ]
@@ -82,7 +82,7 @@ export default [
           {path: '/',component: companySearch,children:[
               {path: '',component: search},
               {path: 'result',name: 'result',component: result},
-              {path: 'merchantsDetail',component: merchantsDetail,children:[
+              {path: 'merchantsDetail/:id',component: merchantsDetail,children:[
                   {path: '/',name: 'merchBasic',component: merchBasic},
                   {path: 'merchBusiness',name: 'merchBusiness',component: merchBusiness},
                   {path: 'merchInformation',name: 'merchInformation',component: merchInformation},
