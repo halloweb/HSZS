@@ -1,7 +1,7 @@
 <template>
 
         <div class="content-block">
-         <h4 class="text-center">中关村软件园<button class="pull-right btn btn-red">辖区预警</button></h4>
+         <h4 class="text-center">{{info.name}}<button class="pull-right btn btn-red">辖区预警</button></h4>
         
           <bd-map :park-info="info"></bd-map>
          <div class="company-sort">
@@ -13,18 +13,12 @@
          </div>
         
         <div class="clearfix dt">
-            <div class=" col-xs-6">
-                中科点击（北京）科技有限公司
-                <router-link to="/supervision/parkCompanys/companyDetail/" class="pull-right blue">
-                详情
+            <div class=" col-xs-6" v-for="(item,index) in list">
+                <router-link :to="{path:'/supervision/articleList/'+item.id}">
+                 {{item.title}}
                 </router-link>
             </div>
-            <div class=" col-xs-6">
-                中科点击（北京）科技有限公司
-                <router-link to="/supervision/parkCompanys/companyDetail/" class="pull-right blue">
-                    详情
-                </router-link>
-            </div>
+            
 
 
         </div>
@@ -61,17 +55,31 @@
 			return{
           info:{
             name:'中关村软件园'
-          }
+          },
+          list:[],
+          park:[]
 			}
 		},
 		methods:{
            more(){
             
-           }
+           },
+           getList(){
+             this.$ajax.post('/apis/business/getParkBehaviours.json',{'msg':[this.info.name]}).then(res => {
+                     this.list=res.data.data.page;
+             }).catch(err => console.log(err))
+           },
+           getInfo(){
+                this.$ajax.get('/apis/supervise/getGardenInfo.json').then(res => {
+                   this.info.name=res.data.data.park;
+                   this.park=res.data.data;
+                }).catch(err => console.log(err))
+           },
 		},
 		mounted(){
-
-
+            this.getInfo();
+            this.getList();
+           
 
 		},
 	}

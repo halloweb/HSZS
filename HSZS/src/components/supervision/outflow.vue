@@ -15,12 +15,12 @@
         		</tr>
         	</thead>
         	<tbody>
-        		<tr>
-        			<td>爱心人寿保险股份有限公司</td>
-        			<td>7月11日，北京市投资促进局与石景山区政府、首钢集团有限公司联合举办“驻京中外知名企业石景山·首钢行”活动。 图为签约现国酒店</td>
+        		<tr v-for="(item,index) in list">
+        			<td>{{item.business}}</td>
+        			<td>{{item.content}}</td>
         		
         			<td>2017-01-02</td>
-        			<td><router-link class="blue" to="/supervision/articleList/2">查看详情</router-link></td>
+        			<td><router-link class="blue" :to="{path:'/supervision/articleList/'+item.id}">查看详情</router-link></td>
         		</tr>
         		</tbody>
         </table>	
@@ -40,18 +40,37 @@
     .table-zs tbody tr td:nth-child(2){
     	max-width:400px;
     }
+     td a:visited{
+       color:#999;
+    }
 </style>
 <script> 
 	export default{
 		data(){
 			return{
-
+                 pageNumber:1,
+                 pageSize:8,
+                 list:[]
 			}
 		},
 		methods:{
+            getList(){
+              this.$ajax.post('/apis/warning/getBusinessOutflowList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
+                 
+                   res.data.data.list.forEach(val => {
+                    val.content=val.content.slice(0,70)+'...';
+                    this.list.push(val);
+                   });
+                   
+              }).catch(err => console.log(err))
+            },
 			loadMore(){
 
 			},
 		},
+        created(){
+            this.pageNumber++;
+            this.getList();
+        },
 	}
 </script>

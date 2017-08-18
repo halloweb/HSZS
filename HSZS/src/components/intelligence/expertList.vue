@@ -47,15 +47,18 @@
 	export default{
 		data(){
 			return{
+          pageNumber:1,
+          pageSize:8,
           personInfo:{},
           article:[],
           number:0,
           author:''
+
 			}
 		},
 		methods:{
       getList(data){
-        this.$ajax.post('/apis/expert/findExpertOpinionByAuthor.json',{'author':data}).then(res => {
+        this.$ajax.post('/apis/expert/findExpertOpinionByAuthor.json',{'author':data,pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
               let list=res.data.data;
               for(let y in list){
                 this.article.push(list[y]);
@@ -64,6 +67,7 @@
 
       },
       viewMore(){
+        this.pageNumber++;
         this.getList(this.personInfo.name);
       },
 

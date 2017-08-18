@@ -11,7 +11,7 @@
                         </div>
                          <div class="col-xs-6">
                               <div class="tody-headlines">
-                                  <div class="list-title">今日头条</div>
+                                  <div class="list-title">{{activeMedia}}</div>
                                   <ul class="list-box" id="tody-headlines">
                                       <li v-for="(item,index) in media">
                                           <h4>
@@ -86,17 +86,11 @@
                     {value:150,name:'微博'},
                     
                   ],
+                  activeMedia:'',
                   wordData:[{
 			            name: 'Sam S Club',
 			            value: 10000,
-			            // textStyle: {
-			            //     normal: {
-			            //         color: 'black'
-			            //     },
-			            //     emphasis: {
-			            //         color: 'red'
-			            //     }
-			            // }
+			           
 			        }, {
 			            name: 'Macys',
 			            value: 6181
@@ -124,23 +118,43 @@
                       id:2
                     }
                   ],
-                  activeWord:''
+                  activeWord:'',
+                  mediaParams:[],
+                  mediapie:''
 			}
 		},
 			methods:{
 			labelInfo(data){
-                // this.$ajax.post('',{'msg':["互联网","不限","今日"]}).then( res =>{
-                //     console.log(res);
-                // }).catch( err => console.log(err));
+				    
+                    this.getMedia(data);
+                   
 			},	
-		    getMedia(){
-
+		    getMedia(data){
+                this.$ajax.post('/apis/Headlines/getClondChartList.json',{'msg':data}).then(res => {
+                	this.mediaData=res.data.data;
+                	
+                    this.mediaFocus(this.mediaData);
+                    this.activeMedia=this.mediaData[0].name;
+                  
+                    data.push(this.activeMedia);
+                    this.mediaParams=data;
+                   
+                     this.mediaList(this.mediaParams);
+                }).catch(err => console.log(err))
+		    },
+		    mediaList(data){
+                this.$ajax.post('/apis/Headlines/getArticleByVectorList.json',{'msg':data}).then(res => {
+                    
+                }).catch(err => console.log(err))
 		    },
 		    getKey(){
 
 		    },		
             mediaFocus(data){
-			 let mediapie= echarts.init(document.getElementById('media-pie'));
+
+            	let vm=this;
+
+			    
 
 			    let option = {
 			        tooltip: {
@@ -193,9 +207,12 @@
 			        ]
 			    };
 				    option.series[0].data=data;
-				    mediapie.setOption(option);
-				     mediapie.on('click', function (params) {
-								console.log(params.name);		       
+				   vm.mediapie.setOption(option);
+				     vm.mediapie.on('click', function (params) {
+								
+								vm.activeMedia=params.name;
+								vm.mediaParams.splice(3,1,vm.activeMedia);
+								 vm.mediaList(vm.mediaParams);		       
 					});
 
 			     },
@@ -241,9 +258,8 @@
 			},
 			mounted(){
 				     
-                    this.mediaFocus(this.mediaData);
-                    this.keyCloud(this.wordData);
-                    this.activeWord=this.wordData[0].name;
+                this.mediapie= echarts.init(document.getElementById('media-pie'));
+                   
                      
                    
 			},

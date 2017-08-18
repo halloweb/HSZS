@@ -1,55 +1,56 @@
 <template>
-
-       <div class="article-details">
-           <a href="javascript:void(0);" class="blue" @click="back">返回</a>
-           <h4 class="text-center">余典范：把握新常态下的“变与不变” <button class="pull-right btn btn-zs">收藏</button></h4>
-           <div class="sub-info">
-             <span>
+    <div class="article-details">
+        <a href="javascript:void(0);" class="blue" @click="back">返回</a>
+        <h4 class="text-center">{{article.title}}<button class="pull-right btn btn-zs" @click="collect" v-if="isShow">收藏</button></h4>
+        <div class="sub-info">
+            <span>
              <img src="../../assets/images/company.png" alt="">
-              涉及公司：中科点击
+              涉及公司：{{article.business}}
              </span>
-             <span>
+            <span>
              <img src="../../assets/images/time.png" alt="">
-              发布时间：2017-02-02 01:00:00
+              发布时间：{{article.publishDateTime}}
              </span>
-           </div>
-           <p>创新是经济发展不变的动力，对于新常态下产业的转型升级具有重要的意义。从创新资源的投入来看，近几年我们取得了长足的发展。2013 拷贝</p>
-
-            <div class="sub-info">
-             <span>
+        </div>
+        <p>{{article.content}}</p>
+        <div class="sub-info">
+            <span>
              <img src="../../assets/images/pencil.png" alt="">
-              情报采集：中科点击
+              情报采集：{{article.source}}
              </span>
-             <span>
+            <span>
              <img src="../../assets/images/internet.png" alt="">
-              情报原址：www.ss.com
+              情报原址：{{article.sourceLink}}
              </span>
-           </div>
-       </div>
-   
-
+        </div>
+    </div>
 </template>
 <script>
-	export default{
-    data(){
+export default {
+    data() {
         return {
-            id:null
+            article: {},
+            isShow:false
         }
     },
-    methods:{
-    back(){
-      this.$router.go(-1);
-    }
+    methods: {
+        back() {
+            this.$router.go(-1);
+        },
+        collect() {
+
+        },
     },
-    mounted(){
-        this.id = this.$route.params.id
-        this.$ajax.get('/apis/industry/getIndustrialPolicyDetailById.json',{params:{"id":this.id
-        }})
-            .then(res =>{
-                console.log(res)
-            })
-            .catch(err => console.log(err))
+    mounted() {
+
+        this.$ajax.get('/apis/industry/getIndustrialPolicyDetailById.json', {
+            params: {
+                "id": this.$route.params.id
+            }
+        }).then(res => {
+            this.article = res.data.data;
+        }).catch(err => console.log(err))
     }
 
-	}
+}
 </script>

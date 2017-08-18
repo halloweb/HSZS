@@ -5,17 +5,17 @@
          </div>
         <ul class="top-bar">
             <li >
-                <router-link to="/intelligence/" active-class="active">
+                <router-link to="/intelligence" active-class="active">
                    <i class="i1"></i>招商情报
                 </router-link>
             </li>
             <li>
-                <router-link to="/supervision/"  active-class="active">
+                <router-link to="/supervision"  active-class="active">
                    <i class="i2"></i>园区监管
                 </router-link>
             </li>
             <li>
-                <router-link to="/merchants/" active-class="active">
+                <router-link to="/merchants" active-class="active">
                    <i class="i3"></i>精准招商
                 </router-link>
             </li>

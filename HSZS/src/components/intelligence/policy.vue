@@ -20,7 +20,7 @@
                        </div>
                        <ul class="area-policy clearfix">
                           <li class="col-xs-6" v-for="(item,index) in explanation">
-                             <div>{{item.content}}</div>
+                             <div><router-link  :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> </div>
                           </li>
                         
                        </ul>
@@ -113,11 +113,7 @@
 	                     }
                   ],
                   params:[],
-               options: [{
-			          value: '天津',
-			        }, {
-			          value: '南京',
-			        }],
+               options: [{value: '北京'}, {value: '上海'},{value: '广州'},{value: '深圳'},{value: '杭州'},{value: '苏州'},{value: '南京'},{value: '天津'},{value: '青岛'},{value: '大连'}],
 			        area:'北京'
 
 			}

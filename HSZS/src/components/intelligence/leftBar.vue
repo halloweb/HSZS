@@ -6,7 +6,7 @@
                 <a href="javascript:void(0);" > <i class="icon-left1"></i>产业情报</a>
                <ol>
                    <li >
-                     <router-link :to="{path:'/intelligence/'}" :class="{active:isActive}"> <i class="icon-left2"></i>产业头条</router-link>
+                     <router-link :to="{path:'/intelligence'}" :class="{active:isActive}"> <i class="icon-left2"></i>产业头条</router-link>
                    </li>
                    <li>
                      <router-link to="/intelligence/policy" active-class="active"> <i class="icon-left3"></i>产业政策</router-link>
@@ -44,7 +44,7 @@
         },
          watch:{
                     '$route'(to, from) {
-                        if(to.path!=="/intelligence/"){
+                        if(to.path!=="/intelligence"){
                           this.isActive=false;
                         }else{
                           this.isActive=true;
@@ -62,7 +62,7 @@
                      }
             },
         mounted(){
-                if(this.$route.path=="/intelligence/"){
+                if(this.$route.path=="/intelligence"){
                   this.isActive=true;
                 }
                

@@ -9,10 +9,12 @@
  import  article from '../components/intelligence/article.vue'
  import  businessRank from '../components/intelligence/businessRank.vue'
  import  parkInfo from '../components/intelligence/parkInfo.vue'
+ import  infos from '../components/intelligence/infos.vue'
  import  parkDetails from '../components/intelligence/parkDetails.vue'
  import  focusPark from '../components/intelligence/focusPark.vue'
  import  focus from '../components/intelligence/focus.vue'
  import  dynamic from '../components/intelligence/dynamic.vue'
+ import  cityPark from '../components/intelligence/cityPark.vue'
 
 //精准招商
  import merchants from '../components/merchants.vue'
@@ -54,10 +56,11 @@
  import companyRelation from '../components/supervision/tabRouter/companyRelation.vue'
 
 export default [
+     {path: '',redirect: '/intelligence',component: intelligence},
      {path: '/intelligence',
      component: intelligence,
      children:[
-       {path: '/',name: 'headlines',component: headlines},
+       {path: '',name: 'headlines',component: headlines},
        {path: 'policy',name: 'policy',component: policy},
        {path: 'expertView',component: expertView,children:[
             {path: '',name: 'expert',component: expert},
@@ -65,10 +68,14 @@ export default [
 
        ]},
        {path: 'businessRank',name: 'businessRank',component: businessRank},
-       {path: 'parkInfo',name: 'parkInfo',component: parkInfo},
+       {path: 'parkInfo',component: parkInfo,children:[
+           {path: '',name: 'infos',component: infos}, 
+           {path:'cityPark',name: 'cityPark',component:cityPark},
+           {path: 'dynamic',name: 'dynamic',component: dynamic},
+
+       ]},
        {path: 'focusPark',component:focusPark,children:[
             {path: '',name: 'focus',component: focus},
-            {path: 'dynamic',name: 'dynamic',component: dynamic},
             {path: 'parkDetails',name: 'parkDetails',component: parkDetails}
        ]},
        {path: 'article/:id',name: 'article',component: article,}
@@ -79,11 +86,11 @@ export default [
       
       component: merchants,
       children:[
-          {path: '/',component: companySearch,children:[
+          {path: '',component: companySearch,children:[
               {path: '',component: search},
               {path: 'result',name: 'result',component: result},
               {path: 'merchantsDetail/:id',component: merchantsDetail,children:[
-                  {path: '/',name: 'merchBasic',component: merchBasic},
+                  {path: '',name: 'merchBasic',component: merchBasic},
                   {path: 'merchBusiness',name: 'merchBusiness',component: merchBusiness},
                   {path: 'merchInformation',name: 'merchInformation',component: merchInformation},
                   {path: 'merchFloor',name: 'merchFloor',component: merchFloor},
@@ -92,7 +99,7 @@ export default [
          ]},
           {path: 'semantic',name: 'semantic',component: semantic},
           {path: 'intelligent',component: intelligent,children:[
-               {path: '/',name: 'industryType',component: industryType},
+               {path: '',name: 'industryType',component: industryType},
                {path: 'TypeDetail',name: 'TypeDetail',component: TypeDetail},
          ]},
          {path: 'focusCompany',name: 'focusCompany',component: focusCompany}
@@ -103,11 +110,11 @@ export default [
        path: '/supervision',
        component: supervision,
        children:[
-          {path: '/',name: 'parkMap',component: parkMap},
+          {path: '',name: 'parkMap',component: parkMap},
           {path: 'parkCompanys',component: parkCompanys,children:[
-              {path: '/',name: 'companys',component: companys},
+              {path: '',name: 'companys',component: companys},
               {path: 'companyDetail',component: companyDetail,children:[
-                  {path: '/',name: 'companyBasic',component: companyBasic},
+                  {path: '',name: 'companyBasic',component: companyBasic},
                   {path: 'companyBusiness',name: 'companyBusiness',component: companyBusiness},
                   {path: 'companyInformation',name: 'companyInformation',component: companyInformation},
                   {path: 'companyFloor',name: 'companyFloor',component: companyFloor},

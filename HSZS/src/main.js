@@ -23,7 +23,7 @@ Vue.prototype.$ajax = axios
 
 
 var router = new VueRouter({
-	
+	mode: 'history',
     routes: routerConfig
 })
 new Vue({

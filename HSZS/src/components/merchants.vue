@@ -6,13 +6,13 @@
            <div class="left-bar">
 		         <ul class="left-nav">
 			     	<li>
-		                <router-link to="/merchants/"  :class="{active:isActive}" >
+		                <router-link to="/merchants"  :class="{active:isActive}" >
 		                <img src="../assets/images/n1.png" height="20" width="17" alt="">
 							企业搜索
 						</router-link>
 		            </li>  
 		            <li>
-		               <router-link to="/merchants/semantic/" active-class="active" >
+		               <router-link to="/merchants/semantic" active-class="active" >
 		                 <img src="../assets/images/n2.png" height="18" width="18" alt="">
 						   关系挖掘
 					   </router-link>
@@ -69,13 +69,13 @@
 					$(".main-content").css({"min-height":min_height});
 			   });
 			   });
-				if(this.$route.path=="/merchants/" || this.$route.path=="/merchants/result" || this.$route.path=="/merchants/merchantsDetail"){
+				if(this.$route.path=="/merchants" || this.$route.path=="/merchants/result" || this.$route.path=="/merchants/merchantsDetail"){
 					this.isActive=true;
 				}
    	    },
        watch: {
            '$route'(to, from) {
-               if (to.path !== "/merchants/" && to.path !== "/merchants/result" && to.path !== "/merchants/merchantsDetail") {
+               if (to.path !== "/merchants" && to.path !== "/merchants/result" && to.path !== "/merchants/merchantsDetail") {
                    this.isActive = false;
                } else {
                    this.isActive = true;

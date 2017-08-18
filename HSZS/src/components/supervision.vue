@@ -5,7 +5,7 @@
            <div class="left-bar">
 		         <ul class="left-nav">
 			     	<li>
-		                <router-link to="/supervision/parkCompanys/" active-class="active" >
+		                <router-link to="/supervision/parkCompanys" active-class="active" >
 		                <img src="../assets/images/n5.png" height="18" width="18" alt="">
 		                园区企业</router-link>
 		            </li>  

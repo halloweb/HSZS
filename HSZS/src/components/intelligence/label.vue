@@ -93,6 +93,7 @@
 		methods:{
 			selectOne(index){
 				this.oneCode=index;
+				this.twoCode=0;
 				localStorage.setItem("oneCode",index);
 				if(this.timeShow==true){
 					
@@ -127,6 +128,7 @@
                 	let type=res.data.data;
                     for (let key in  type){
                      	this.typeOne.push(key);
+                     	type[key].unshift('不限');
                      	this.typeTwo.push(type[key])
                      	if(key=="互联网"){
                            this.checkList1=type[key]
@@ -137,7 +139,8 @@
                      	}else if(key=="精英配套"){
                      		this.checkList4=type[key]
                      	}
-                     }
+                     };
+                     this.selectOne(this.oneCode);
 				}).catch(err => console.log(err))
 			},
 
@@ -176,7 +179,7 @@
 			if(localStorage.getItem("twoCode")){
 				this.twoCode=localStorage.getItem("twoCode")-0;
 			};
-			selectOne(this.oneCode);
+			
 			
 			
 		}

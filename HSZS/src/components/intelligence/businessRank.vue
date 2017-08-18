@@ -62,7 +62,7 @@
       }
 		}, 
     mounted(){
-               this.getList(['互联网','不限','2019'])
+             
       },
 	}
 </script>
