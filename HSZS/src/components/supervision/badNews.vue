@@ -6,7 +6,7 @@
 		<ul class="list-box">
             <li v-for="(item,index) in article">
                     <div >
-                        <router-link :to="{path:'/supervision/articleList/'+item.id}">
+                        <router-link class="article-title" :to="{path:'/supervision/articleList/'+item.id}">
                             <span class="blue">【{{item.business}}】</span>{{item.title}}
                         </router-link>
                         <span class="article-time">{{item.publishDate}}</span>
@@ -36,6 +36,9 @@
 		
 		margin-top:60px
 	}
+  .article-title{
+    margin-left:-8px;
+  }
 </style>
 
 <script> 

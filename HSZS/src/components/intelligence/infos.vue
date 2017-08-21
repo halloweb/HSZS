@@ -79,6 +79,11 @@
             </div>
     </div>
 </template>
+<style scoped>
+  .article-title{
+    width:100%;
+  }
+</style>
 <script>
      import echarts from 'echarts/lib/echarts';
      import 'echarts/lib/chart/map';
@@ -110,7 +115,9 @@
          getDynamic(){
               this.$ajax.post('/apis/area/findGardensCondition.json',{}).then(res => {
                   this.dynamic = res.data.data.slice(0, 3)
-               
+                  this.dynamic.forEach(val =>{
+                    val.content=val.content.slice(0,40)+"..."
+                  })
               }).catch(err => console.log(err))
          },
          getList(data){

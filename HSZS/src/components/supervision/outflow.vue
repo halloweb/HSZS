@@ -37,8 +37,8 @@
 	 .load-more{
     	margin-top:60px;
     }
-    .table-zs tbody tr td:nth-child(2){
-    	max-width:400px;
+    .table-zs tbody tr td{
+    	max-width:300px;
     }
      td a:visited{
        color:#999;
@@ -65,11 +65,11 @@
               }).catch(err => console.log(err))
             },
 			loadMore(){
-
+            this.pageNumber++;
+            this.getList();
 			},
 		},
         created(){
-            this.pageNumber++;
             this.getList();
         },
 	}

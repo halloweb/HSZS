@@ -1,4 +1,6 @@
 
+//登录
+ import  login from '../components/login.vue'
 //招商情报
  import  intelligence from '../components/intelligence.vue'
  import  headlines from '../components/intelligence/headlines.vue'
@@ -26,7 +28,7 @@
  import  industryType from '../components/merchants/industryType.vue'
  import  focusCompany from '../components/merchants/focusCompany.vue'
  import semantic from '../components/merchants/semantic.vue'
- import TypeDetail from '../components/merchants/TypeDetail.vue'
+ import recommendCompanys from '../components/merchants/recommendCompanys.vue'
 //模拟tab页的子路由跳转引入
  import merchBasic from '../components/merchants/tabRouter/merchBasic.vue'
  import merchBusiness from '../components/merchants/tabRouter/merchBusiness.vue'
@@ -56,7 +58,7 @@
  import companyRelation from '../components/supervision/tabRouter/companyRelation.vue'
 
 export default [
-     {path: '',redirect: '/intelligence',component: intelligence},
+     {path: '/',name: 'login',component: login},
      {path: '/intelligence',
      component: intelligence,
      children:[
@@ -100,7 +102,7 @@ export default [
           {path: 'semantic',name: 'semantic',component: semantic},
           {path: 'intelligent',component: intelligent,children:[
                {path: '',name: 'industryType',component: industryType},
-               {path: 'TypeDetail',name: 'TypeDetail',component: TypeDetail},
+               {path: 'recommendCompanys',name: 'recommendCompanys',component: recommendCompanys},
          ]},
          {path: 'focusCompany',name: 'focusCompany',component: focusCompany}
 

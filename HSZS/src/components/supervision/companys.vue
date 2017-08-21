@@ -55,21 +55,21 @@
         <ul>
             <li class="content-box" v-for="(item,index) in company">
                 <div class="main-body">
-                    <img src="../../assets/images/gstp.png" height="100" width="162" alt="">
+                    <img :src="item.logo" height="100" width="162" alt="">
                     <div class="company-info">
-                        <router-link to="/supervision/parkCompanys/companyDetail/" class="blue">{{item.business}}</router-link>
+                        <router-link to="/supervision/parkCompanys/companyDetail/" class="blue">{{item.companyName}}</router-link>
                         <div class="sub-list">
                             <span>
         				<img src="../../assets/images/person.png" height="15" width="13" alt="">
-        				法定代表人：{{item.legalPersonName}}
+        				法定代表人：{{item.businessLegal}}
         				</span>
                             <span>
         				<img src="../../assets/images/money.png" height="15" width="13" alt="">
-        				注册资本：{{item.regCapital}}
+        				注册资本：{{item.registerCapital}}万
         				</span>
                             <span>
         				<img src="../../assets/images/time-h.png" height="15" width="13" alt="">
-        				注册时间：{{item.regTime}}
+        				注册时间：{{item.registerDate}}
         				</span>
                             <span>
         				<img src="../../assets/images/location-h.png" height="15" width="13" alt="">
@@ -78,7 +78,7 @@
                         </div>
                     </div>
                 </div>
-                <el-button @click="collect()">收藏企业</el-button>
+                <el-button @click="collect(item)">收藏企业</el-button>
             </li>
             <el-dialog :visible.sync="selectVisible" size="tiny" class="text-center" title="选择组名">
                 <el-select v-model="selectGroup" placeholder="请选择">
@@ -87,12 +87,12 @@
                 </el-select>
                 <span slot="footer" class="dialog-footer">
 							    <el-button @click="selectVisible=false">取 消</el-button>
-							    <el-button type="primary" @click="confirmCollect()">确 定</el-button>
+							    <el-button type="primary" @click="confirmCollect">确 定</el-button>
 					</span>
             </el-dialog>
         </ul>
-        <div class="text-center">
-            <el-pagination @current-change="change" layout="prev, pager, next" :total="50">
+        <div class="text-center" v-if="total!=0">
+            <el-pagination @current-change="change" layout="prev, pager, next" :total="total">
             </el-pagination>
         </div>
     </div>
@@ -116,10 +116,11 @@ export default {
             ],
             industry: "互联网",
             option2: [
+                 { value: '全部' },
                 { value: '0-100万' },
-                { value: '100万-200万' },
-                { value: '200万-500万' },
-                { value: '500万-1000万' },
+                { value: '100-200万' },
+                { value: '200-500万' },
+                { value: '500-1000万' },
                 { value: '1000万以上' },
             ],
             regCapital: "全部",
@@ -135,7 +136,8 @@ export default {
             selectGroup: '',
             activeIndex: 0,
             activeGroup: '',
-            collectInfo: {}
+            collectID:'',
+            total:0
 
         }
     },
@@ -144,9 +146,12 @@ export default {
             this.getcompany();
         },
         getcompany() {
-            this.$ajax.post('/apis/supervise/searchCompanyFromGardenForPage.json', { Industry: this.industry, regCapital: this.regCapital, keyword: this.keyWord, pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
-
-                this.company = res.data.data;
+            this.$ajax.post('/apis/supervise/searchCompanyFromGardenForPage.json', { industry: this.industry, regCapital: this.regCapital,pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
+                 if(res.data.data!=null){
+                     this.company = res.data.data[0].content;
+                     this.total=res.data.data[0].totalElements;
+                 }
+               
             }).catch(err => console.log(err))
         },
         select() {
@@ -219,12 +224,26 @@ export default {
         },
         collect(item) {
             this.selectVisible = true;
-            this.collectInfo = item;
+            this.collectID= item.cid;
         },
         confirmCollect() {
-            this.$ajax.post('', {}).then(res => {
-
+           if(this.selectGroup==''){
+             this.$message.error('请选择组名');
+             return;
+           };
+            this.$ajax.post('/apis/supervise/saveCompanyByGroupId.json', {companyId:this.collectID,groupname:this.selectGroup}).then(res => {
+                if(res.data.data==true){
+                    this.$message({
+                        message: '分组成功',
+                        type: 'success'
+                    });
+                    this.selectVisible=false;
+                }else{
+                    alert("操作失败")
+                }
+                  
             }).catch(err => console.log(err))
+               
         },
         change(val) {
             this.pageNumber = val;

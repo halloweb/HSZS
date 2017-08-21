@@ -28,6 +28,9 @@ body {
   font-family: 'Microsoft YaHei', "Helvetica Neue", Helvetica, Arial, sans-serif, Glyphicons Halflings;
   height: 100%;
 }
+#app{
+  height:100%;
+}
 ul,
 ol,
 li {
