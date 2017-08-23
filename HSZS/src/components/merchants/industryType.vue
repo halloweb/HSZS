@@ -75,10 +75,17 @@
 	export default{
         data(){
         	return{
-                type:[{
-                	name:'金融',
-                }]
+               
+               activeType:''
         	}
-        }
+        },
+        mounted(){
+        	let vm=this;
+               $(".industryType li").on("click",function(){
+               	  vm.activeType=$(this).find("p").text();
+               	  vm.$router.push({path:'/merchants/intelligent/recommendCompanys',query:{query:vm.activeType}});
+               })
+
+        },
 	}
 </script>

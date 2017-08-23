@@ -82,7 +82,8 @@
                  typeCode:0,
                  input2: '',
                  city:{
-                        name:''
+                        name:'',
+                        park:[]
                  }
 
 
@@ -94,6 +95,12 @@
 
             this.$ajax.post('/apis/area/findGardensList.json',{'msg':data}).then(res => {
                 this.list=res.data.data[0].content;
+            }).catch(err => console.log(err))
+         },
+         parkList(data){
+             this.$ajax.get('/apis/area/findGardensByArea.json',{params:{area:data}}).then(res => {
+                 this.city.park=res.data.data;
+                 console.log(res.data.data.length)
             }).catch(err => console.log(err))
          },
          select(index){
@@ -116,11 +123,15 @@
   	         $(this).addClass("fc").siblings().removeClass("fc");
   	
                 });
-             
+               
+               
               
               this.city.name=this.$route.query.query;
+              this.parkList(this.$route.query.query);
+
               let index=this.area.indexOf(this.city.name)
               this.select(index);
+
           
 
 	 	},

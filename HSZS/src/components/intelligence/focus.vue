@@ -23,7 +23,7 @@
                   </ul>
                   <ul class="park-l-menu">
                       <li  v-for="(item,index) in list">
-                           <img src="../../assets/images/park-picture.png" alt="" class="park-picture">
+                           <img :src="item.gardenPicture" alt="" class="park-picture" width="145" height="115">
                            <div class="right-content">
                               <div >
                                  <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails/',query:{query:item.gardenName,id:item.id}}">

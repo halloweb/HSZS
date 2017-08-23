@@ -3,12 +3,12 @@
 		<div class="content-block search">
 			<div class="search-btn">
 				<input type="text" placeholder="请输入公司名称"/>
-                <router-link to="/merchants/result">
+                <a href="https://std.tianyancha.com/#/main" target="_blank">
                     <button class="btn">搜索</button>
-                </router-link>
+                </a>
 			</div>
 		</div>
-		<div class="search-box">
+<!-- 		<div class="search-box">
 			<div class="search-type">
                 <a href="#byArea" data-toggle="tab" class="fc">按区域查询</a><a href="#byIndustry" data-toggle="tab">按行业查询</a><a href="#byCompany" data-toggle="tab">最近注册企业</a><a href="#byHot" data-toggle="tab">热门律所</a>
             </div>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </div>
-		</div>
+		</div> -->
 	</div>
 </template>
 <style lang="less" scoped>

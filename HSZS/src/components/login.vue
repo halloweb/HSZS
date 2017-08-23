@@ -3,7 +3,7 @@
         <div class="logo">
             <img src="../assets/images/logo.png" height="49" width="171" alt="logo">
         </div>
-        <div class="login-box">
+        <div class="login-box clearfix">
             <el-row>
                 <el-col :span="12" class="left">
                     <img src="../assets/images/login-left.png" alt=""></el-col>
@@ -49,14 +49,16 @@
     /* 标准的语法 */
     .logo {
         width: 90%;
+
         margin: 0 auto;
+
     }
 }
 
 .login-box {
     -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
+    -ms-flex: 1;
+    flex: 1;
     width: 80%;
     margin: 0 auto;
     margin-top: 90px;
@@ -129,7 +131,8 @@ export default {
               if(this.uName==''||this.pWord==''){
                      this.open("账号或密码不能为空");
                      return;
-                 }    
+                 } 
+                  // this.$router.push('/intelligence');   
                  this.$ajax.get('/apis/security/generateKey.do').then(res => {
                  	  console.log(res.data.success);
                       if(res.data.success==true){
@@ -145,8 +148,18 @@ export default {
                  }).catch(err => console.log(err))
               },
             login(data){
-               this.$ajax.post('/apis/login.do',{username:this.uName,password:data,type: 'user'}).then(res => {
-                        this.$router.push('/intelligence');
+               this.$ajax({url:'/apis/login.do',method:'post',data:{username:this.uName,password:data,type: 'user'},transformRequest: [function (data) {
+               
+                let ret = ''
+                for (let it in data) {
+                  ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                }
+                return ret
+              }],
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+              }}).then(res => {
+                       
                }).catch(err => console.log(err))
             },
 

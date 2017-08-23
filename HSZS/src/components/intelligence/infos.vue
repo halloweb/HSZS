@@ -107,7 +107,7 @@
 	 	},
 	 	methods:{
          mapData(){
-             this.$ajax.get('/apis//area/findGardensAll.json').then(res => {
+             this.$ajax.get('/apis/area/findGardensAll.json').then(res => {
                  
                
               }).catch(err => console.log(err))
@@ -548,7 +548,7 @@
               this.parkMap([{name:"武汉", value: 0}],[{name:"南京", value: 2}],[{name:"北京", value: 3}],[{name:"上海", value: 4}],[{name:"广州", value: 5}],[{name:"深圳", value: 6}]);
               this.getDynamic();
               this.select(0);
-              this.mapData();
+             
 
 	 	},
 	 }

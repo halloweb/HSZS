@@ -17,7 +17,7 @@
               发布时间：{{article.publishDateTime}}
              </span>
         </div>
-        <p>{{article.content}}</p>
+        <div v-html="article.content"></div>
         <div class="sub-info">
             <span>
              <img src="../../assets/images/pencil.png" alt="">
@@ -68,11 +68,11 @@ export default {
                 "id": this.$route.params.id
             }
         }).then(res => {
-            this.article = res.data.data[0];
-            if (res.data.data[0].dimension == "专家论" || res.data.data[0].dimension == "政策解读") {
+            this.article = res.data.data;
+            if (res.data.data.dimension == "专家论" || res.data.data.dimension == "政策解读") {
                 this.isShow = true;
             };
-            if (res.data.data[0].isCollect == "true") {
+            if (res.data.data.isCollect == "true") {
                 this.isCollect = false;
             } else {
                 this.isCollect = true;

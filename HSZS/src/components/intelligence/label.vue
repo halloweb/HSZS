@@ -94,7 +94,7 @@
 			selectOne(index){
 				this.oneCode=index;
 				this.twoCode=0;
-				localStorage.setItem("oneCode",index);
+				sessionStorage.setItem("oneCode",index);
 				if(this.timeShow==true){
 					
 					this.$emit('labelInfo',[this.typeOne[this.oneCode],this.typeTwo[this.oneCode][this.twoCode],this.time[this.timeCode]]);
@@ -109,7 +109,7 @@
 			},
 			selectTwo(index){
 				this.twoCode=index;
-				localStorage.setItem("twoCode",index);
+				sessionStorage.setItem("twoCode",index);
 				if(this.showTime==true){
 					this.$emit('labelInfo',[this.typeOne[this.oneCode],this.typeTwo[this.oneCode][this.twoCode],this.time[this.timeCode]]);
 				}else if( this.showTime==false){
@@ -171,13 +171,13 @@
 			};
 
 			this.getLabel();
-			if(localStorage.getItem("oneCode")){
+			if(sessionStorage.getItem("oneCode")){
 				
-				this.oneCode=localStorage.getItem("oneCode")-0;
+				this.oneCode=sessionStorage.getItem("oneCode")-0;
 				
 			};
-			if(localStorage.getItem("twoCode")){
-				this.twoCode=localStorage.getItem("twoCode")-0;
+			if(sessionStorage.getItem("twoCode")){
+				this.twoCode=sessionStorage.getItem("twoCode")-0;
 			};
 			
 			

@@ -18,6 +18,7 @@ Vue.use(ElementUI)
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(utils)
+
 Vue.prototype.$ajax = axios
 
 

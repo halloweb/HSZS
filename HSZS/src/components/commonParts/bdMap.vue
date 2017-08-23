@@ -4,6 +4,7 @@
               
      </div>
 </template>
+
 <script>
 	 import {MP} from '../../common/js/map.js'
 	 export default{
@@ -23,7 +24,7 @@
 			    map.addControl(new BMap.ScaleControl());
                  // 创建地址解析器实例
 					var myGeo = new BMap.Geocoder();
-			    if(this.parkInfo!==undefined){
+			    if(this.parkInfo!=undefined){
                      
 					// 将地址解析结果显示在地图上,并调整地图视野
 					myGeo.getPoint(this.parkInfo.name, function(point){
@@ -35,7 +36,7 @@
 										}
 	                              });
 	                };
-	             if(this.cityInfo!==undefined){
+	             if(this.cityInfo!=undefined){
                      
 					// 将地址解析结果显示在地图上,并调整地图视野
 					myGeo.getPoint(this.cityInfo.name, function(point){
@@ -47,30 +48,30 @@
 										}
 	                              });
 					//解析并标注园区
-							var adds = [
-								"包河区金寨路1号（金寨路与望江西路交叉口）",
-								"庐阳区凤台路209号（凤台路与蒙城北路交叉口）",
-								"蜀山区金寨路217号(近安医附院公交车站)",
-								"蜀山区梅山路10号(近安徽饭店) ",
-								"蜀山区 长丰南路159号铜锣湾广场312室",
-								"合肥市寿春路93号钱柜星乐町KTV（逍遥津公园对面）",
-								"庐阳区长江中路177号",
-								"新站区胜利路89"
-							];
+							var adds = this.cityInfo.park;
+							var index=0;
+							geocodeSearch();
+
 							function bdGEO(){
-								var add = adds[index];
-								geocodeSearch(add);
+								var add = adds[index].address;
+								var name = adds[index].name;
+								
 								index++;
-							}
-							function geocodeSearch(add){
+								geocodeSearch(add,name);
+								
+								
+							};
+							function geocodeSearch(add,name){
+                                 
 								if(index < adds.length){
-									setTimeout(window.bdGEO,100);
+									setTimeout(bdGEO(),100);
 								} 
 								myGeo.getPoint(add, function(point){
 									if (point) {
-
+                                           var label=new BMap.Label(name,{offset:new BMap.Size(20,-10)})
+                                           label.setStyle({borderColor:"#fff"})
 										var address = new BMap.Point(point.lng, point.lat);
-										addMarker(address,new BMap.Label(index+":"+add,{offset:new BMap.Size(20,-10)}));
+										addMarker(address,label);
 									}
 								});
 							}
@@ -89,7 +90,7 @@
 		},
 		mounted(){
 			 
-              console.log(this.parkInfo);
+              console.log(this.cityInfo);
              this.$nextTick(function () {
         
               var vm=this;

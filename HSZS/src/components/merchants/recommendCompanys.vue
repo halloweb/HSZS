@@ -1,62 +1,45 @@
 <template>
     <div class="recommend clearfix">
       <ul class="list-wrapper">
-        <li class="item">
+        <li class="item" v-for="(item,index) in companys" @click="select(item)">
          <div>
-        	<span>中科点击</span>
+        	<span>{{item.companyName}}</span>
         </div>
-        </li> <li class="item">
-           <div>
-        	<span>中科点击中科点击中科点</span>
-        	 </div>
-        </li><li class="item">
-           <div>
-        	<span>中科点击中科点击中科点</span>
-        	 </div>
-        </li><li class="item">
-           <div>
-        	<span>中科点击中科点击中科点</span>
-        	 </div>
-        </li><li class="item">
-           <div>
-        	<span>中科点击中科点击中科点</span>
-        	 </div>
         </li>
        
     </ul>
      <div class="info-panel">
      	 <div class="info-box">
-     	 	 <div class="title">贵州九次方</div>
+     	 	 <div class="title">{{details.company}}</div>
      	 	 <table>
      	 	 	<tr>
      	 	 		<td>法定代表人：</td>
-     	 	 		<td>加乐坛</td>
+     	 	 		<td>{{details.boss}}</td>
      	 	 	</tr>
      	 	 	<tr>
      	 	 		<td>注册资本：</td>
-     	 	 		<td>15855万人民币</td>
+     	 	 		<td>{{details.registerCapital}}</td>
      	 	 	</tr>
      	 	 	<tr>
      	 	 		<td>成立日期：</td>
-     	 	 		<td>1999.01.02</td>
+     	 	 		<td>{{details.createTime}}</td>
      	 	 	</tr>
-     	 	 	<tr>
-     	 	 		<td>征信等级：</td>
-     	 	 		<td>A</td>
-     	 	 	</tr>
+     	 	 	
      	 	 	<tr>
      	 	 		<td>行业领域：</td>
-     	 	 		<td>新闻</td>
+     	 	 		<td>{{details.industryType}}</td>
      	 	 	</tr>
      	 	 	<tr>
      	 	 		<td>企业地址：</td>
-     	 	 		<td>北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区北京市朝阳区</td>
+     	 	 		<td>{{details.registerAddress}}</td>
      	 	 	</tr>
      	 	 </table>
      	 	 <div class="text-center">
+             <a href="https://std.tianyancha.com/#/company/24416401/icinfo" target="_blank">
      	 	 <button class="btn">
      	 	 	查看详情
      	 	 </button>
+             </a>
      	 	 </div>
      	 	 
      	 </div>
@@ -67,24 +50,28 @@
     export default{
     	data(){
     		return{
-    			companys:[]
+    			companys:[],
+                details:{}
     		}
     	},
         methods:{
-            getCompanys(){
-                  this.$ajax.get('/apis/indus/getCompanyInfoByIndustry.json',{params:{industry:'大数据'}}).then(res => {
-                    
+            getCompanys(data){
+                  this.$ajax.post('/apis/indus/getCompanyInfoByIndustry.json',{industry:data}).then(res => {
+                     this.companys=res.data.data;
                   }).catch(err => console.log(err))
             },
-            getInfo(){
-                 this.$ajax.post('/apis/indus/findInfo.json',{company:'中科点击（北京）科技有限公司'}).then(res => {
-
+            getInfo(data){
+                 this.$ajax.post('/apis/comp/getCompanyInfoByCompany.json',{company:data}).then(res => {
+                            this.details=res.data.data;       
                   }).catch(err => console.log(err))
+            },
+            select(item){    
+                  this.getInfo(item.company);
             },
         },
         mounted(){
-             this.getCompanys();
-             this.getInfo();
+             this.getCompanys(this.$route.query.query);
+            
         },
 
     }

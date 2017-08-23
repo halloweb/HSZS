@@ -18,6 +18,7 @@ a.blue:hover,
 a.blue:focus {
   color: #00a5ff;
 }
+#map label{max-width:none;}
 p {
   margin-bottom: 0;
 }

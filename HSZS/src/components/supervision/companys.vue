@@ -57,7 +57,7 @@
                 <div class="main-body">
                     <img :src="item.logo" height="100" width="162" alt="">
                     <div class="company-info">
-                        <router-link to="/supervision/parkCompanys/companyDetail/" class="blue">{{item.companyName}}</router-link>
+                        <a href="https://std.tianyancha.com/#/company/24416401/icinfo" target="_blank" class="blue">{{item.companyName}}</a>
                         <div class="sub-list">
                             <span>
         				<img src="../../assets/images/person.png" height="15" width="13" alt="">
@@ -146,7 +146,8 @@ export default {
             this.getcompany();
         },
         getcompany() {
-            this.$ajax.post('/apis/supervise/searchCompanyFromGardenForPage.json', { industry: this.industry, regCapital: this.regCapital,pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
+            let data=this.group[this.activeIndex];
+            this.$ajax.post('/apis/supervise/searchCompanyFromGardenForPage.json', { industry: this.industry, regCapital: this.regCapital,groupname:data,pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
                  if(res.data.data!=null){
                      this.company = res.data.data[0].content;
                      this.total=res.data.data[0].totalElements;
@@ -251,8 +252,9 @@ export default {
         },
     },
     mounted() {
-        this.getcompany();
+       
         this.getGroup();
+         this.getcompany();
     },
 }
 </script>
@@ -280,6 +282,9 @@ export default {
             margin-top: -20px;
             margin-right: 20px;
         }
+    }
+    .head{
+        padding-top: 3px;
     }
 }
 
