@@ -132,7 +132,7 @@ export default {
                      this.open("账号或密码不能为空");
                      return;
                  } 
-                  // this.$router.push('/intelligence');   
+                     
                  this.$ajax.get('/apis/security/generateKey.do').then(res => {
                  	  console.log(res.data.success);
                       if(res.data.success==true){
@@ -159,7 +159,12 @@ export default {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
               }}).then(res => {
-                       
+                       if(res.data.data=="登录成功"){
+                      
+                         this.$router.push('/intelligence');
+                         
+                       }
+
                }).catch(err => console.log(err))
             },
 
