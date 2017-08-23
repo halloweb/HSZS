@@ -118,7 +118,7 @@
 	.info-panel{
 		 
 		width:40%;
-		float:left;
+		float:right;
 
 
 
