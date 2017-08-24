@@ -87,8 +87,8 @@ export default {
             })
         });
         this.info.name = this.$route.query.query;
-        this.info.id = this.$route.query.id;
-         console.log(this.$route.query.query);
+        
+        
         this.getList(this.$route.query.query);
 
 

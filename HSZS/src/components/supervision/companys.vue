@@ -28,9 +28,9 @@
                 <el-dialog :visible.sync="addVisible" size="tiny" class="text-center" title="添加企业分组">
                     <el-input v-model="addGroup" placeholder="请输入组名"></el-input>
                     <span slot="footer" class="dialog-footer">
-							    <el-button @click="addVisible = false">取 消</el-button>
-							    <el-button type="primary" @click="addlist(item)">确 定</el-button>
-					</span>
+                                <el-button @click="addVisible = false">取 消</el-button>
+                                <el-button type="primary" @click="addlist(item)">确 定</el-button>
+                    </span>
                 </el-dialog>
                 <el-dialog :visible.sync="removeVisible" size="tiny" class="text-center" title="删除企业分组">
                     <el-select v-model="removes" multiple placeholder="请选择">
@@ -38,20 +38,20 @@
                         </el-option>
                     </el-select>
                     <span slot="footer" class="dialog-footer">
-							    <el-button @click="removeVisible=false">取 消</el-button>
-							    <el-button type="primary" @click="removelist()">确 定</el-button>
-					</span>
+                                <el-button @click="removeVisible=false">取 消</el-button>
+                                <el-button type="primary" @click="removelist()">确 定</el-button>
+                    </span>
                 </el-dialog>
             </li>
         </ul>
         <!-- <div class="top-tool">
-			<el-input
-					icon="search"
-					v-model="keyWord"
-					:on-icon-click="search">
-			</el-input>
-			
-		</div> -->
+            <el-input
+                    icon="search"
+                    v-model="keyWord"
+                    :on-icon-click="search">
+            </el-input>
+            
+        </div> -->
         <ul>
             <li class="content-box" v-for="(item,index) in company">
                 <div class="main-body">
@@ -60,21 +60,21 @@
                         <a href="https://std.tianyancha.com/#/company/24416401/icinfo" target="_blank" class="blue">{{item.companyName}}</a>
                         <div class="sub-list">
                             <span>
-        				<img src="../../assets/images/person.png" height="15" width="13" alt="">
-        				法定代表人：{{item.businessLegal}}
-        				</span>
+                        <img src="../../assets/images/person.png" height="15" width="13" alt="">
+                        法定代表人：{{item.businessLegal}}
+                        </span>
                             <span>
-        				<img src="../../assets/images/money.png" height="15" width="13" alt="">
-        				注册资本：{{item.registerCapital}}万
-        				</span>
+                        <img src="../../assets/images/money.png" height="15" width="13" alt="">
+                        注册资本：{{item.registerCapital}}万
+                        </span>
                             <span>
-        				<img src="../../assets/images/time-h.png" height="15" width="13" alt="">
-        				注册时间：{{item.registerDate}}
-        				</span>
+                        <img src="../../assets/images/time-h.png" height="15" width="13" alt="">
+                        注册时间：{{item.registerDate}}
+                        </span>
                             <span>
-        				<img src="../../assets/images/location-h.png" height="15" width="13" alt="">
-        				位置：{{item.area}}
-        				</span>
+                        <img src="../../assets/images/location-h.png" height="15" width="13" alt="">
+                        位置：{{item.area}}
+                        </span>
                         </div>
                     </div>
                 </div>
@@ -86,9 +86,9 @@
                     </el-option>
                 </el-select>
                 <span slot="footer" class="dialog-footer">
-							    <el-button @click="selectVisible=false">取 消</el-button>
-							    <el-button type="primary" @click="confirmCollect">确 定</el-button>
-					</span>
+                                <el-button @click="selectVisible=false">取 消</el-button>
+                                <el-button type="primary" @click="confirmCollect">确 定</el-button>
+                    </span>
             </el-dialog>
         </ul>
         <div class="text-center" v-if="total!=0">
@@ -116,7 +116,7 @@ export default {
             ],
             industry: "互联网",
             option2: [
-                 { value: '全部' },
+                { value: '全部' },
                 { value: '0-100万' },
                 { value: '100-200万' },
                 { value: '200-500万' },
@@ -136,8 +136,8 @@ export default {
             selectGroup: '',
             activeIndex: 0,
             activeGroup: '',
-            collectID:'',
-            total:0
+            collectID: '',
+            total: 0
 
         }
     },
@@ -146,13 +146,13 @@ export default {
             this.getcompany();
         },
         getcompany() {
-            let data=this.group[this.activeIndex];
-            this.$ajax.post('/apis/supervise/searchCompanyFromGardenForPage.json', { industry: this.industry, regCapital: this.regCapital,groupname:data,pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
-                 if(res.data.data!=null){
-                     this.company = res.data.data[0].content;
-                     this.total=res.data.data[0].totalElements;
-                 }
-               
+            let data = this.group[this.activeIndex];
+            this.$ajax.post('/apis/supervise/searchCompanyFromGardenForPage.json', { industry: this.industry, regCapital: this.regCapital, groupname: data, pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
+                if (res.data.data != null) {
+                    this.company = res.data.data[0].content;
+                    this.total = res.data.data[0].totalElements;
+                }
+
             }).catch(err => console.log(err))
         },
         select() {
@@ -225,26 +225,26 @@ export default {
         },
         collect(item) {
             this.selectVisible = true;
-            this.collectID= item.cid;
+            this.collectID = item.cid;
         },
         confirmCollect() {
-           if(this.selectGroup==''){
-             this.$message.error('请选择组名');
-             return;
-           };
-            this.$ajax.post('/apis/supervise/saveCompanyByGroupId.json', {companyId:this.collectID,groupname:this.selectGroup}).then(res => {
-                if(res.data.data==true){
+            if (this.selectGroup == '') {
+                this.$message.error('请选择组名');
+                return;
+            };
+            this.$ajax.post('/apis/supervise/saveCompanyByGroupId.json', { companyId: this.collectID, groupname: this.selectGroup }).then(res => {
+                if (res.data.data == true) {
                     this.$message({
                         message: '分组成功',
                         type: 'success'
                     });
-                    this.selectVisible=false;
-                }else{
+                    this.selectVisible = false;
+                } else {
                     alert("操作失败")
                 }
-                  
+
             }).catch(err => console.log(err))
-               
+
         },
         change(val) {
             this.pageNumber = val;
@@ -252,9 +252,9 @@ export default {
         },
     },
     mounted() {
-       
+
         this.getGroup();
-         this.getcompany();
+        this.getcompany();
     },
 }
 </script>
@@ -283,7 +283,7 @@ export default {
             margin-right: 20px;
         }
     }
-    .head{
+    .head {
         padding-top: 3px;
     }
 }

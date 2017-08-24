@@ -73,6 +73,10 @@
                         </div>
                     </li>
                 </ul>
+                <div class="text-center" v-if="total!=0">
+                  <el-pagination @current-change="change" layout="prev, pager, next" :total="total">
+                  </el-pagination>
+              </div>
             </div>
         </div>
     </div>
@@ -89,15 +93,17 @@ import 'echarts/map/js/china.js';
 export default {
     data() {
         return {
-            dynamic: [
-
-            ],
+           pageNumber: 1,
+            pageSize: 8,
+            total:0,
+            dynamic: [],
             list: [],
             area: ["不限", "北京", "上海", "广州", "深圳", "杭州", "苏州", "南京", "天津", "青岛", "大连"],
             industryType: ["不限", "互联网", "高科技", "文化创意", "精英配套", "滨海旅游", "港口物流"],
             areaCode: 0,
             typeCode: 0,
             input2: ''
+
 
 
 
@@ -118,10 +124,17 @@ export default {
                 })
             }).catch(err => console.log(err))
         },
+        change(val){
+             this.pageNumber = val;
+             this.getList();
+        },
         getList(data) {
 
-            this.$ajax.post('/apis/area/findGardensList.json', { 'msg': data }).then(res => {
-                this.list = res.data.data[0].content;
+            this.$ajax.post('/apis/area/findGardensList.json', { 'msg': data,pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
+               if (res.data.data != null) {
+                    this.company = res.data.data[0].content;
+                    this.total = res.data.data[0].totalElements;
+                }
             }).catch(err => console.log(err))
         },
         select(index) {
