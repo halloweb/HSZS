@@ -117,7 +117,7 @@ export default {
             }).catch(err => console.log(err))
         },
         getDynamic() {
-            this.$ajax.post('/apis/area/findGardensCondition.json', {}).then(res => {
+            this.$ajax.post('/apis/area/findGardensCondition.json', {pageNumber:1}).then(res => {
                 this.dynamic = res.data.data.slice(0, 3)
                 this.dynamic.forEach(val => {
                     val.content = val.content.slice(0, 40) + "..."

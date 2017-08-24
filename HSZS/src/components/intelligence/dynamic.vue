@@ -38,27 +38,27 @@ export default {
     data() {
         return {
             article: [],
-             pageNumber: 1,
+            pageNumber: 1,
             pageSize: 8,
-            total:0
+            total: 0
         }
     },
     methods: {
-        getList(){
-           this.$ajax.post('/apis/area/findGardensCondition.json', {pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
-          if (res.data.data != null) {
+        getList() {
+            this.$ajax.post('/apis/area/findGardensCondition.json', { pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
+                if (res.data.data != null) {
                     this.article = res.data.data[0].content;
                     this.total = res.data.data[0].totalElements;
                 }
-        }).catch(err => console.log(err))
+            }).catch(err => console.log(err))
         },
         change(val) {
-           this.pageNumber = val;
-           this.getList();
+            this.pageNumber = val;
+            this.getList();
         },
     },
     mounted() {
-         this.getList();
+        this.getList();
     }
 }
 </script>

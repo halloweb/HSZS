@@ -113,9 +113,10 @@ export default {
             }).catch(err => console.log(err))
         },
         mediaList(data) {
-
+            
             this.$ajax.post('/apis/Headlines/getArticleByVectorList.json', { 'msg': data }).then(res => {
                 this.media = res.data.data.content;
+                 console.log(this.mediaParams);
             }).catch(err => console.log(err))
         },
         getKey(data) {
@@ -123,16 +124,20 @@ export default {
             this.$ajax.post('/apis/Headlines/getWordClond.json', { 'msg':  params }).then(res => {
 
                 this.wordData = res.data.data[0];
-
                 this.keyCloud(this.wordData);
                 this.activeWord = this.wordData[0].name;
-
+                console.log(this.activeWord)
                  params.push(this.activeWord);
 
                  
                 this.WordParams =  params;
-                 console.log(this.mediaParams);
+                 
                 this.keyList(this.WordParams);
+            }).catch(err => console.log(err))
+        },
+        keyList(data) {
+            this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: data }).then(res => {
+                this.keyInfo = res.data.data.content;
             }).catch(err => console.log(err))
         },
         mediaFocus(data) {
@@ -189,6 +194,7 @@ export default {
             };
             option.series[0].data = data;
             vm.mediapie.setOption(option);
+             console.log(vm.mediaParams);
            
         },
         keyCloud(data) {
@@ -224,13 +230,9 @@ export default {
             };
             option.series[0].data = data;
             vm.yun.setOption(option);
-            
+             
         },
-        keyList(data) {
-            this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: data }).then(res => {
-                this.keyInfo = res.data.data.content;
-            }).catch(err => console.log(err))
-        },
+        
 
     },
     mounted() {
@@ -240,9 +242,9 @@ export default {
         this.mediapie.on('click', function(params) {
                 
                 vm.activeMedia = params.name;
-                console.log(vm.activeMedia);
+              
                 vm.mediaParams.splice(3, 1, vm.activeMedia);
-                console.log(vm.mediaParams);
+               
                 vm.mediaList(vm.mediaParams);
             });
          //词云
