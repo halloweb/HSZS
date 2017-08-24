@@ -106,7 +106,7 @@ export default {
         },
         change(val){
              this.pageNumber = val;
-             this.getList();
+            this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
         parkList(data) {
             this.$ajax.get('/apis/area/findGardensByArea.json', { params: { area: data } }).then(res => {

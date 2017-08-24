@@ -126,7 +126,7 @@ export default {
         },
         change(val){
              this.pageNumber = val;
-             this.getList();
+             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
         getList(data) {
 
