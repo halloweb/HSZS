@@ -47,7 +47,7 @@ export default {
         getList(){
            this.$ajax.post('/apis/area/findGardensCondition.json', {pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
           if (res.data.data != null) {
-                    this.company = res.data.data[0].content;
+                    this.article = res.data.data[0].content;
                     this.total = res.data.data[0].totalElements;
                 }
         }).catch(err => console.log(err))

@@ -132,7 +132,7 @@ export default {
 
             this.$ajax.post('/apis/area/findGardensList.json', { 'msg': data,pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
                if (res.data.data != null) {
-                    this.company = res.data.data[0].content;
+                    this.list = res.data.data[0].content;
                     this.total = res.data.data[0].totalElements;
                 }
             }).catch(err => console.log(err))
