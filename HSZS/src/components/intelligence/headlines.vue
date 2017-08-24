@@ -76,18 +76,14 @@ export default {
     },
     data() {
         return {
-            mediaData: [{ value: 310, name: '论坛' },
-                { value: 335, name: '微信' },
-                { value: 335, name: '贴吧' },
-                { value: 150, name: '微博' },
-
-            ],
+            mediaData: [],
             activeMedia: '',
             wordData: [],
             media: [],
             keyInfo: [],
             activeWord: '',
             mediaParams: [],
+            WordParams:[],
             mediapie: '',
             yun: ''
         }
@@ -101,32 +97,41 @@ export default {
         },
         getMedia(data) {
             this.$ajax.post('/apis/Headlines/getClondChartList.json', { 'msg': data }).then(res => {
+                if(res.data.data!=[]){
                 this.mediaData = res.data.data;
 
                 this.mediaFocus(this.mediaData);
                 this.activeMedia = this.mediaData[0].name;
 
                 data.push(this.activeMedia);
+
                 this.mediaParams = data;
+               
 
                 this.mediaList(this.mediaParams);
+                }
             }).catch(err => console.log(err))
         },
         mediaList(data) {
+
             this.$ajax.post('/apis/Headlines/getArticleByVectorList.json', { 'msg': data }).then(res => {
                 this.media = res.data.data.content;
             }).catch(err => console.log(err))
         },
         getKey(data) {
-            this.$ajax.post('/apis/Headlines/getWordClond.json', { 'msg': data }).then(res => {
+            let params=data;
+            this.$ajax.post('/apis/Headlines/getWordClond.json', { 'msg':  params }).then(res => {
+
                 this.wordData = res.data.data[0];
 
                 this.keyCloud(this.wordData);
                 this.activeWord = this.wordData[0].name;
 
-                data.push(this.activeWord);
-                this.WordParams = data;
+                 params.push(this.activeWord);
 
+                 
+                this.WordParams =  params;
+                 console.log(this.mediaParams);
                 this.keyList(this.WordParams);
             }).catch(err => console.log(err))
         },
@@ -184,13 +189,7 @@ export default {
             };
             option.series[0].data = data;
             vm.mediapie.setOption(option);
-            vm.mediapie.on('click', function(params) {
-
-                vm.activeMedia = params.name;
-                vm.mediaParams.splice(3, 1, vm.activeMedia);
-                vm.mediaList(vm.mediaParams);
-            });
-
+           
         },
         keyCloud(data) {
             let vm = this;
@@ -225,11 +224,7 @@ export default {
             };
             option.series[0].data = data;
             vm.yun.setOption(option);
-            vm.yun.on('click', function(params) {
-                 vm.activeWord = params.name;
-                vm.WordParams.splice(3, 1, vm.activeMedia);
-                vm.keyList(vm.WordParams);
-            });
+            
         },
         keyList(data) {
             this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: data }).then(res => {
@@ -239,11 +234,26 @@ export default {
 
     },
     mounted() {
-
+           let vm=this;
+           //媒体
         this.mediapie = echarts.init(document.getElementById('media-pie'));
+        this.mediapie.on('click', function(params) {
+                
+                vm.activeMedia = params.name;
+                console.log(vm.activeMedia);
+                vm.mediaParams.splice(3, 1, vm.activeMedia);
+                console.log(vm.mediaParams);
+                vm.mediaList(vm.mediaParams);
+            });
+         //词云
         let dom = this.$refs.mychart;
         this.yun = echarts.init(dom);
-
+        this.yun.on('click', function(params) {
+                vm.activeWord = params.name;
+                vm.WordParams.splice(3, 1, vm.activeWord);
+                vm.keyList(vm.WordParams);
+            });
+       
 
     },
 }
