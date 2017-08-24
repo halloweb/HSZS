@@ -14,7 +14,7 @@
              </span>
             <span>
              <img src="../../assets/images/time.png" alt="">
-              发布时间：{{article.publishDateTime}}
+              发布时间：{{article.publishTime}}
              </span>
         </div>
         <div v-html="article.content"></div>

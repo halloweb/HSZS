@@ -2,7 +2,7 @@ const resolve = require('path').resolve
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const url = require('url')
-const publicPath = ''
+const publicPath = '/'
 
 module.exports = (options = {}) => ({
     entry: {
@@ -12,7 +12,7 @@ module.exports = (options = {}) => ({
     output: {
         path: resolve(__dirname, 'dist'),
         filename: options.dev ? '[name].js' : '[name].js?[chunkhash]',
-        chunkFilename: '[id].js?[chunkhash]',
+        chunkFilename: '[id].js?[chunkhash]', 
         publicPath: options.dev ? '/assets/' : publicPath
     },
     module: {
@@ -34,7 +34,8 @@ module.exports = (options = {}) => ({
             use: [{
                 loader: 'url-loader',
                 options: {
-                    limit: 10000
+                    limit: 10000,
+                    name:'assets/images/[name].[hash:7].[ext]'
                 }
             }]
         }]

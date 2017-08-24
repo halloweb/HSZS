@@ -270,6 +270,11 @@ footer {
 }
 .tody-headlines {
   border: 1px solid #e8ebf2;
+
+}
+.tody-headlines ul{
+    max-height:400px;
+  overflow-y: auto;
 }
 .list-title {
   height: 60px;
