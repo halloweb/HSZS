@@ -65,9 +65,9 @@ export default {
     data() {
         return {
             experts: [],
-
+            pageNumber:1,
             lunT: [{
-                pageNumber:1,
+                
                 title: '创新峰会大数据与分析',
                 time: '2017-02-02',
                 content: '创新峰会大数据与分析',
@@ -86,11 +86,11 @@ export default {
         },
         getExpert() {
           
-            this.$ajax.get('/apis/expert/getSpecialist.json',{params:this.pageNumber}).then(res => {
+            this.$ajax.get('/apis/expert/getSpecialist.json',{params:{pageNumber:this.pageNumber}}).then(res => {
                 res.data.data.forEach(val =>{
                     this.experts.push(val);
                 })
-                
+             
             }).catch(err => console.log(err))
         },
 
