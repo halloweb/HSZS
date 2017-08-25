@@ -54,6 +54,7 @@
 </template>
 <style scoped>
 @import '../../common/js/swiper/swiper-3.4.2.min.css'
+
 </style>
 <script>
 import '../../common/js/swiper/swiper.js'
@@ -65,15 +66,15 @@ export default {
     data() {
         return {
             experts: [],
-            pageNumber:1,
+            pageNumber: 1,
             lunT: [{
-                
+
                 title: '创新峰会大数据与分析',
                 time: '2017-02-02',
                 content: '创新峰会大数据与分析',
                 author: '张三',
                 id: 1,
-                mySwiper:''
+                mySwiper: ''
             }]
 
         }
@@ -85,12 +86,12 @@ export default {
 
         },
         getExpert() {
-          
-            this.$ajax.get('/apis/expert/getSpecialist.json',{params:{pageNumber:this.pageNumber}}).then(res => {
-                res.data.data.forEach(val =>{
+
+            this.$ajax.get('/apis/expert/getSpecialist.json', { params: { pageNumber: this.pageNumber } }).then(res => {
+                res.data.data.forEach(val => {
                     this.experts.push(val);
                 })
-             
+
             }).catch(err => console.log(err))
         },
 
@@ -112,17 +113,18 @@ export default {
     mounted() {
         this.getExpert();
         this.getArticle(['互联网', '不限']);
+        this.$nextTick(() => {
+                this.mySwiper = new Swiper('.swiper-container', {
+                    initialSlide: 0,
+                    slidesPerView: '4',
+                    // spaceBetween : 58,
+                    observer: true, //修改swiper自己或子元素时，自动初始化swiper
+                    observeParents: true, //修改swiper的父元素时，自动初始化swiper
+                    prevButton: '.swiper-button-prev',
+                    nextButton: '.swiper-button-next',
+                });
+            });
 
-        this.mySwiper = new Swiper('.swiper-container', {
-            initialSlide :0,
-            slidesPerView: 'auto',
-            // spaceBetween : 58,
-            observer: true, //修改swiper自己或子元素时，自动初始化swiper
-            observeParents: true, //修改swiper的父元素时，自动初始化swiper
-            prevButton: '.swiper-button-prev',
-            nextButton: '.swiper-button-next',
-        })
-
-    },
-}
+        }
+    }
 </script>

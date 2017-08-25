@@ -35,7 +35,7 @@
      	 	 	</tr>
      	 	 </table>
      	 	 <div class="text-center">
-             <a href="https://std.tianyancha.com/#/company/24416401/icinfo" target="_blank">
+             <a :href="details.companyUrl" target="_blank">
      	 	 <button class="btn">
      	 	 	查看详情
      	 	 </button>

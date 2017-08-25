@@ -18,7 +18,7 @@
                             <input type="password" v-model="pWord" placeholder="请输入密码">
                             <img src="../assets/images/pw-b.png" height="26" width="24" alt="">
                         </div>
-                        <button class="btn btn-zs btn-block" @click="getkey">
+                        <button class="btn btn-zs btn-block" @click="getkey" >
                             立即登录
                         </button>
                     </div>
@@ -134,7 +134,7 @@ export default {
             }
 
             this.$ajax.get('/apis/security/generateKey.do').then(res => {
-              
+
                 if (res.data.success == true) {
 
                     let exponent = res.data.data.publicKeyExponent;
@@ -168,7 +168,7 @@ export default {
 
                     this.$router.push('/intelligence');
 
-                }else{
+                } else {
                     this.open(res.data.message);
                 }
 
@@ -182,6 +182,19 @@ export default {
                 duration: 2000
             });
         },
+    },
+    mounted(){
+        let vm=this;
+        this.$nextTick(() => {
+                document.querySelector(".login").onkeydown=keyListener;
+            function keyListener(e){
+                
+                if(e.keyCode == 13){
+                 vm.getkey();
+                }
+             }
+         });
+    
     },
 
 }

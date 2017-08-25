@@ -47,17 +47,23 @@ export default {
             info: {
                 name: '天津中新生态城'
             },
+            pageNumber:1,
+            pageSize:8,
             list: [],
             park: []
         }
     },
     methods: {
         more() {
+            this.pageNumber++;
+            this.getList();
 
         },
         getList() {
-            this.$ajax.post('/apis/business/getParkBehaviours.json', { 'msg': [this.info.name] }).then(res => {
-                this.list = res.data.data.page;
+            this.$ajax.post('/apis/business/getParkBehaviours.json', { 'msg': [this.info.name],pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
+                res.data.data.page.forEach(val =>{
+                    this.list.push(val);
+                });
             }).catch(err => console.log(err))
         },
         getInfo() {
