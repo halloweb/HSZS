@@ -51,9 +51,9 @@
                 </el-checkbox-group>
             </div>
             <span slot="footer" class="dialog-footer">
-					    <el-button @click="dialogVisible = false">取 消</el-button>
-					    <el-button type="primary" @click="upDate">确 定</el-button>
-					  </span>
+                        <el-button @click="dialogVisible = false">取 消</el-button>
+                        <el-button type="primary" @click="upDate">确 定</el-button>
+                      </span>
         </el-dialog>
     </div>
 </template>
@@ -121,21 +121,21 @@ export default {
                 this.typeTwo = [];
                 let type = res.data.data;
                 for (let key in type) {
-                    if(type[key]!=[]){
-                    this.typeOne.push(key);
-                    if (key == "互联网") {
-                        this.checkList1 = type[key].slice(0);
-                    } else if (key == "高科技") {
-                        this.checkList2 = type[key].slice(0);
-                    } else if (key == "文化创意") {
-                        this.checkList3 = type[key].slice(0);
-                    } else if (key == "精英配套") {
-                        this.checkList4 = type[key].slice(0);
-                    }
-                
-                    this.typeTwo.push(type[key])
-                };
-              }
+                    if (type[key] != []) {
+                        this.typeOne.push(key);
+                        if (key == "互联网") {
+                            this.checkList1 = type[key].slice(0);
+                        } else if (key == "高科技") {
+                            this.checkList2 = type[key].slice(0);
+                        } else if (key == "文化创意") {
+                            this.checkList3 = type[key].slice(0);
+                        } else if (key == "精英配套") {
+                            this.checkList4 = type[key].slice(0);
+                        }
+
+                        this.typeTwo.push(type[key])
+                    };
+                }
                 this.typeTwo.forEach(val => {
                     val.unshift('不限');
                 });
@@ -145,7 +145,7 @@ export default {
         },
 
         upDate() {
-             console.log(this.checkList1,this.checkList3)
+            console.log(this.checkList1, this.checkList3)
 
             let parameter = { "互联网": this.checkList1, "高科技": this.checkList2, "文化创意": this.checkList3, "精英配套": this.checkList4 };
             this.typeOne = [];

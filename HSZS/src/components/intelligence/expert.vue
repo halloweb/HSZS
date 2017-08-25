@@ -67,12 +67,13 @@ export default {
             experts: [],
 
             lunT: [{
-
+                pageNumber:1,
                 title: '创新峰会大数据与分析',
                 time: '2017-02-02',
                 content: '创新峰会大数据与分析',
                 author: '张三',
-                id: 1
+                id: 1,
+                mySwiper:''
             }]
 
         }
@@ -84,10 +85,12 @@ export default {
 
         },
         getExpert() {
-            let vm = this;
-            vm.$ajax.get('/apis/expert/getSpecialist.json').then(res => {
-                vm.experts = res.data.data;
-
+          
+            this.$ajax.get('/apis/expert/getSpecialist.json',{params:this.pageNumber}).then(res => {
+                res.data.data.forEach(val =>{
+                    this.experts.push(val);
+                })
+                
             }).catch(err => console.log(err))
         },
 
@@ -101,15 +104,17 @@ export default {
             this.$router.push({ path: '/intelligence/expertView/expertList', query: { query: item } });
         },
         loadMore() {
+            this.pageNumber++;
             this.getExpert();
         },
 
     },
-    created() {
+    mounted() {
         this.getExpert();
         this.getArticle(['互联网', '不限']);
 
-        let mySwiper = new Swiper('.swiper-container', {
+        this.mySwiper = new Swiper('.swiper-container', {
+            initialSlide :0,
             slidesPerView: 'auto',
             // spaceBetween : 58,
             observer: true, //修改swiper自己或子元素时，自动初始化swiper
