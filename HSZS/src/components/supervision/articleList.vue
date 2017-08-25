@@ -1,12 +1,17 @@
 <template>
     <div class="outflowDetails">
         <a href="#" @click="back()" class="back">返回</a>
-        <div class="title"><span class="blue">[{{article.articleType}}] </span>{{article.title}}</div>
+        <div class="title"><span class="blue"></span>{{article.title}}</div>
         <div class="sub-info">
+             <span>
+             <img src="../../assets/images/company.png" alt="">
+             涉及公司：{{article.business}}
+             </span>
             <span>
              <img src="../../assets/images/time.png" alt="">
-              发布时间：{{article.publishDateTime}}
+              发布时间：{{article.publishTime}}
              </span>
+
         </div>
         <p class="content">
             {{article.content}}
@@ -20,10 +25,7 @@
              <img src="../../assets/images/internet.png" alt="">
               情报原址：{{article.sourceLink}}
              </span>
-            <span>
-             <img src="../../assets/images/company.png" alt="">
-             涉及公司：{{article.business}}
-             </span>
+           
         </div>
     </div>
 </template>

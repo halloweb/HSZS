@@ -23,7 +23,7 @@
         </ul>
          <router-link class="user" to="/">
                 <i class="icon-user"></i>个人中心
-            </router-link>
+         </router-link>
   </header>
 </template>
 <script>

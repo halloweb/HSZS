@@ -23,7 +23,7 @@
                                 <div class="sub-info">
                                     <span>
                                                 <img src="../../assets/images/company.png" alt="">
-                                                涉及公司：中科点击
+                                                涉及公司：<a href="">{{media.business}}</a>
                                              </span>
                                 </div>
                             </li>

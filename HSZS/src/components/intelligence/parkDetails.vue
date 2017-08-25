@@ -1,8 +1,9 @@
 <template>
     <div class="content-block">
-        <h4 class="text-center">{{info.name}}
+        <h4 class="text-center">
+         {{info.name}}
          <button class="pull-right btn btn-zs" v-if="!active" @click="focus">关注</button>
-         <button class="pull-right btn btn-zs" v-else  @click="focus">取消关注</button>
+         <button class="pull-right btn btn-zs" v-if="active"  @click="focus">取消关注</button>
          </h4>
         <bd-map :park-info="info"></bd-map>
         <div class="company-sort">
@@ -21,17 +22,17 @@
             </div>
             <div class="tab-pane fade clearfix" id="parkPolicy">
                 <div class=" col-xs-6" v-for="(item,index) in  parkPolicy">
-                    {{item.title}}
-                    <router-link :to="{ path:'/intelligence/article/'+item.id}" class="pull-right blue">
-                        详情
+                   
+                    <router-link :to="{ path:'/intelligence/article/'+item.id}">
+                         {{item.title}}
                     </router-link>
                 </div>
             </div>
             <div class="tab-pane fade clearfix" id="parkDynamics">
                 <div class=" col-xs-6" v-for="(item,index) in parkDynamics">
-                    {{item.title}}
-                    <router-link :to="{ path:'/intelligence/article/'+item.id}" class="pull-right blue">
-                        详情
+                   
+                    <router-link :to="{ path:'/intelligence/article/'+item.id}">
+                        {{item.title}}
                     </router-link>
                 </div>
             </div>
@@ -62,7 +63,9 @@ export default {
             this.$ajax.get('/apis/area/getGardenTableData.json', { params: { 'gardenName': data } }).then(res => {
 
                 if (res.data.data.isAttention == "no") {
+                    
                     this.active = false;
+                   
 
                 } else {
                     this.active = true;

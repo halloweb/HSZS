@@ -726,10 +726,13 @@ button.btn-zs:focus {
     color: #ffffff;
 }
 
-#leadCompany .col-xs-6 {
+#leadCompany .col-xs-6,#parkPolicy .col-xs-6,#parkDynamics .col-xs-6{
     border: 1px solid #e8ebf2;
     height: 30px;
     line-height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 
