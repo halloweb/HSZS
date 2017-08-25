@@ -39,7 +39,7 @@
                             <span class="article-time">{{item.publishDate}}</span>
                         </div>
                         <p class="article-content">
-                            {{item.content}}
+                            {{item.summary}}
                         </p>
                         <div class="sub-info">
                             <span>

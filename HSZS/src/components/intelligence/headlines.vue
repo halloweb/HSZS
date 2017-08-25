@@ -18,7 +18,7 @@
                                           <span class="article-time">{{item.time}}</span>
                                           </h4>
                                 <p class="article-content">
-                                    {{item.content}}
+                                    {{item.summary}}
                                 </p>
                                 <div class="sub-info">
                                     <span>
@@ -49,7 +49,7 @@
                                           <span class="article-time">{{item.time}}</span>
                                           </h4>
                                 <p class="article-content">
-                                    {{item.content}}
+                                    {{item.summary}}
                                 </p>
                                 <div class="sub-info">
                                     <span>
@@ -103,16 +103,16 @@ export default {
 
                     this.mediaFocus(this.mediaData);
                     this.activedMedia = res.data.data[0].name;
-                    this.mediasParams =[];
+                    this.mediasParams = [];
                     val.forEach(value => {
                         this.mediasParams.push(value)
                     })
-                   
+
 
                     this.mediasParams.push(this.activedMedia);
-                    
 
-                    
+
+
                     this.mediaList(this.mediasParams);
                 } else {
 
@@ -127,29 +127,29 @@ export default {
             }).catch(err => console.log(err))
         },
         getKey(vals) {
-           
+
             this.$ajax.post('/apis/Headlines/getWordClond.json', { 'msg': vals }).then(res => {
 
                 this.wordData = res.data.data[0];
                 this.keyCloud(this.wordData);
                 this.activeWord = this.wordData[0].name;
-                this.WordParams =[];
+                this.WordParams = [];
 
 
-                 vals.forEach(value => {
-                        this.WordParams.push(value)
-                    })
-                   
+                vals.forEach(value => {
+                    this.WordParams.push(value)
+                })
 
-                    this.WordParams.push(this.activeWord);
-                      
 
-                
+                this.WordParams.push(this.activeWord);
+
+
+
                 this.keyList(this.WordParams);
             }).catch(err => console.log(err))
         },
         keyList(vals) {
-            this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: vals}).then(res => {
+            this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: vals }).then(res => {
                 this.keyInfo = res.data.data.content;
             }).catch(err => console.log(err))
         },
@@ -253,7 +253,7 @@ export default {
         //媒体
         this.mediapie = echarts.init(document.getElementById('media-pie'));
         this.mediapie.on('click', function(params) {
-          
+
             vm.activedMedia = params.name;
 
             vm.mediasParams.splice(3, 1, vm.activedMedia);
@@ -264,7 +264,7 @@ export default {
         let dom = this.$refs.mychart;
         this.yun = echarts.init(dom);
         this.yun.on('click', function(params) {
-            
+
             vm.activeWord = params.name;
             vm.WordParams.splice(3, 1, vm.activeWord);
             vm.keyList(vm.WordParams);
