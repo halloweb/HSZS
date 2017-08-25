@@ -23,7 +23,7 @@
             </li>
         </ul>
         <div class="text-center" v-if="total!=0">
-            <el-pagination @current-change="change" layout="prev, pager, next" :total="50">
+            <el-pagination @current-change="change" :page-size="pageSize" layout="prev, pager, next" :total="total">
             </el-pagination>
         </div>
     </div>

@@ -63,7 +63,7 @@ export default {
 
                 if (res.data.data.isAttention == "no") {
                     this.active = false;
-                   
+
                 } else {
                     this.active = true;
                 }
@@ -87,7 +87,7 @@ export default {
             })
         });
         this.info.name = this.$route.query.query;
-        this.info.id= this.$route.query.id;
+        this.info.id = this.$route.query.id;
 
         this.getList(this.$route.query.query);
 

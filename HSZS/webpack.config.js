@@ -12,7 +12,7 @@ module.exports = (options = {}) => ({
     output: {
         path: resolve(__dirname, 'dist'),
         filename: options.dev ? '[name].js' : '[name].js?[chunkhash]',
-        chunkFilename: '[id].js?[chunkhash]', 
+        chunkFilename: '[id].js?[chunkhash]',
         publicPath: options.dev ? '/assets/' : publicPath
     },
     module: {
@@ -35,7 +35,7 @@ module.exports = (options = {}) => ({
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name:'assets/images/[name].[hash:7].[ext]'
+                    name: 'assets/images/[name].[hash:7].[ext]'
                 }
             }]
         }]
@@ -57,17 +57,17 @@ module.exports = (options = {}) => ({
     devServer: {
         disableHostCheck: true,
         compress: true,
-        host: '127.0.0.1',
+        host: '0.0.0.0',
         port: 8000,
         proxy: {
             '/apis': {
                 target: 'http://localhost:8092',
                 secure: false,
                 changeOrigin: true
-               
+
             }
         },
-    
+
         historyApiFallback: {
             index: url.parse(options.dev ? '/assets/' : publicPath).pathname
         }

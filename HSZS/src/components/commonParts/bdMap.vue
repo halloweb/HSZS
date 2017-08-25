@@ -9,10 +9,16 @@ export default {
     data() {
         return {
 
+            BMap: '',
+            myGeo: {},
+            isview: false,
+            map: ''
+
         }
     },
     methods: {
         init(BMap) {
+           let vm=this;
             var map = new BMap.Map("map", { enableMapClick: false }); // 创建Map实例
             // var point = new BMap.Point(116.404, 39.915); // 创建点坐标
             // map.centerAndZoom(point,12);
@@ -40,20 +46,24 @@ export default {
                     if (point) {
                         map.centerAndZoom(point, 11);
                         map.addOverlay(new BMap.Marker(point));
+                        vm.isview=true;
                     } else {
                         alert("地址解析失败!");
                     }
                 });
-                setTimeout(this.view(BMap, myGeo, map), 5000);
+
 
             };
-
+            this.BMap = BMap;
+            this.myGeo = new BMap.Geocoder();
+            this.map = map;
 
         },
         view(BMap, myGeo, map) {
             //解析并标注园区
+            let vm =this;
             var adds = this.cityInfo.park;
-            console.log(adds);
+           
             var index = 0;
             geocodeSearch();
 
@@ -72,7 +82,7 @@ export default {
                 if (index < adds.length) {
                     setTimeout(bdGEO(), 100);
                 }
-                myGeo.getPoint(add, function(point) {
+                vm.myGeo.getPoint(add, function(point) {
                     if (point) {
                         var label = new BMap.Label(name, { offset: new BMap.Size(20, -10) })
                         label.setStyle({ borderColor: "#fff" })
@@ -89,6 +99,23 @@ export default {
             }
 
             //结束
+        }
+    },
+    watch: {
+        'cityInfo.park': function(val){
+           
+              
+            if (val!= [] && this.isview==true) {
+              
+                 this.view(this.BMap,this.myGeo,this.map)
+            }
+        },
+        'isview': function(val){
+              
+            if (val!= [] && this.isview==true) {
+              
+                 this.view(this.BMap,this.myGeo,this.map)
+            }
         }
     },
     mounted() {

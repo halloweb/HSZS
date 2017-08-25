@@ -10,7 +10,7 @@
                 </div>
                 <div class="col-xs-6">
                     <div class="tody-headlines">
-                        <div class="list-title">{{activeMedia}}</div>
+                        <div class="list-title">{{activedMedia}}</div>
                         <ul class="list-box" id="tody-headlines">
                             <li v-for="(item,index) in media">
                                 <h4>
@@ -77,13 +77,13 @@ export default {
     data() {
         return {
             mediaData: [],
-            activeMedia: '',
             wordData: [],
             media: [],
             keyInfo: [],
+            activedMedia: '',
             activeWord: '',
-            mediaParams: [],
-            WordParams:[],
+            mediasParams: [],
+            WordParams: [],
             mediapie: '',
             yun: ''
         }
@@ -92,51 +92,64 @@ export default {
         labelInfo(data) {
 
             this.getMedia(data);
+
             this.getKey(data);
 
         },
-        getMedia(data) {
-            this.$ajax.post('/apis/Headlines/getClondChartList.json', { 'msg': data }).then(res => {
-                if(res.data.data!=[]){
-                this.mediaData = res.data.data;
+        getMedia(val) {
+            this.$ajax.post('/apis/Headlines/getClondChartList.json', { 'msg': val }).then(res => {
+                if (res.data.data != []) {
+                    this.mediaData = res.data.data;
 
-                this.mediaFocus(this.mediaData);
-                this.activeMedia = this.mediaData[0].name;
+                    this.mediaFocus(this.mediaData);
+                    this.activedMedia = res.data.data[0].name;
+                    this.mediasParams =[];
+                    val.forEach(value => {
+                        this.mediasParams.push(value)
+                    })
+                   
 
-                data.push(this.activeMedia);
+                    this.mediasParams.push(this.activedMedia);
+                    
 
-                this.mediaParams = data;
-               
+                    
+                    this.mediaList(this.mediasParams);
+                } else {
 
-                this.mediaList(this.mediaParams);
                 }
             }).catch(err => console.log(err))
         },
-        mediaList(data) {
-            
-            this.$ajax.post('/apis/Headlines/getArticleByVectorList.json', { 'msg': data }).then(res => {
+        mediaList(val) {
+
+            this.$ajax.post('/apis/Headlines/getArticleByVectorList.json', { 'msg': val }).then(res => {
                 this.media = res.data.data.content;
-                 console.log(this.mediaParams);
+
             }).catch(err => console.log(err))
         },
-        getKey(data) {
-            let params=data;
-            this.$ajax.post('/apis/Headlines/getWordClond.json', { 'msg':  params }).then(res => {
+        getKey(vals) {
+           
+            this.$ajax.post('/apis/Headlines/getWordClond.json', { 'msg': vals }).then(res => {
 
                 this.wordData = res.data.data[0];
                 this.keyCloud(this.wordData);
                 this.activeWord = this.wordData[0].name;
-                console.log(this.activeWord)
-                 params.push(this.activeWord);
+                this.WordParams =[];
 
-                 
-                this.WordParams =  params;
-                 
+
+                 vals.forEach(value => {
+                        this.WordParams.push(value)
+                    })
+                   
+
+                    this.WordParams.push(this.activeWord);
+                      
+
+                
                 this.keyList(this.WordParams);
             }).catch(err => console.log(err))
         },
-        keyList(data) {
-            this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: data }).then(res => {
+        keyList(vals) {
+            this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: vals}).then(res => {
                 this.keyInfo = res.data.data.content;
             }).catch(err => console.log(err))
         },
@@ -194,10 +207,10 @@ export default {
             };
             option.series[0].data = data;
             vm.mediapie.setOption(option);
-             console.log(vm.mediaParams);
-           
+
+
         },
-        keyCloud(data) {
+        keyCloud(datas) {
             let vm = this;
             let option = {
                 title: {
@@ -228,34 +241,35 @@ export default {
                     data: []
                 }]
             };
-            option.series[0].data = data;
+            option.series[0].data = datas;
             vm.yun.setOption(option);
-             
+
         },
-        
+
 
     },
     mounted() {
-           let vm=this;
-           //媒体
+        let vm = this;
+        //媒体
         this.mediapie = echarts.init(document.getElementById('media-pie'));
         this.mediapie.on('click', function(params) {
-                
-                vm.activeMedia = params.name;
-              
-                vm.mediaParams.splice(3, 1, vm.activeMedia);
-               
-                vm.mediaList(vm.mediaParams);
-            });
-         //词云
+          
+            vm.activedMedia = params.name;
+
+            vm.mediasParams.splice(3, 1, vm.activedMedia);
+
+            vm.mediaList(vm.mediasParams);
+        });
+        //词云
         let dom = this.$refs.mychart;
         this.yun = echarts.init(dom);
         this.yun.on('click', function(params) {
-                vm.activeWord = params.name;
-                vm.WordParams.splice(3, 1, vm.activeWord);
-                vm.keyList(vm.WordParams);
-            });
-       
+            
+            vm.activeWord = params.name;
+            vm.WordParams.splice(3, 1, vm.activeWord);
+            vm.keyList(vm.WordParams);
+        });
+
 
     },
 }

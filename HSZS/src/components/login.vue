@@ -26,7 +26,7 @@
             </el-row>
         </div>
         <div class="footer">
-        	Copyright©2007-2016 中科点击（北京）科技有限公司-版权所有 京ICP备11012241-3号
+            Copyright©2007-2016 中科点击（北京）科技有限公司-版权所有 京ICP备11012241-3号
         </div>
     </div>
 </template>
@@ -36,7 +36,7 @@
     min-height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
-    display: flex;  
+    display: flex;
     flex-direction: column;
     padding-top: 35px;
     background: -webkit-linear-gradient(#1276f8, #7f6cfe);
@@ -51,7 +51,6 @@
         width: 90%;
 
         margin: 0 auto;
-
     }
 }
 
@@ -107,75 +106,83 @@
         top: 10px;
     }
 }
-.footer{
-	height:100px;
-	line-height:100px;
-	text-align: center;
-	color:#cec7ff;
+
+.footer {
+    height: 100px;
+    line-height: 100px;
+    text-align: center;
+    color: #cec7ff;
 }
 </style>
 <script>
 import '../common/js/security.js'
 export default {
-	
+
     data() {
-    	return{
-    	      uName:'',
-              pWord:'',
+        return {
+            uName: '',
+            pWord: '',
 
-    	}
-         
+        }
+
     },
-    methods:{
-         getkey(){
-              if(this.uName==''||this.pWord==''){
-                     this.open("账号或密码不能为空");
-                     return;
-                 } 
-                     
-                 this.$ajax.get('/apis/security/generateKey.do').then(res => {
-                 	  console.log(res.data.success);
-                      if(res.data.success==true){
-                      	   
-                            let exponent = res.data.data.publicKeyExponent;
-		                    let modulus = res.data.data.publicKeyModulus;
-		                    RSAUtils.setMaxDigits(200);
-		                    let key = new RSAUtils.getKeyPair(exponent, "", modulus);
-                            let encrypedPwd = RSAUtils.encryptedString(key, this.pWord);
-                            this.login(encrypedPwd);
+    methods: {
+        getkey() {
+            if (this.uName == '' || this.pWord == '') {
+                this.open("账号或密码不能为空");
+                return;
+            }
 
-                      }   
-                 }).catch(err => console.log(err))
-              },
-            login(data){
-               this.$ajax({url:'/apis/login.do',method:'post',data:{username:this.uName,password:data,type: 'user'},transformRequest: [function (data) {
-               
-                let ret = ''
-                for (let it in data) {
-                  ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+            this.$ajax.get('/apis/security/generateKey.do').then(res => {
+              
+                if (res.data.success == true) {
+
+                    let exponent = res.data.data.publicKeyExponent;
+                    let modulus = res.data.data.publicKeyModulus;
+                    RSAUtils.setMaxDigits(200);
+                    let key = new RSAUtils.getKeyPair(exponent, "", modulus);
+                    let encrypedPwd = RSAUtils.encryptedString(key, this.pWord);
+                    this.login(encrypedPwd);
+
                 }
-                return ret
-              }],
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-              }}).then(res => {
-                       if(res.data.data=="登录成功"){
-                      
-                         this.$router.push('/intelligence');
-                         
-                       }
+            }).catch(err => console.log(err))
+        },
+        login(data) {
+            this.$ajax({
+                url: '/apis/login.do',
+                method: 'post',
+                data: { username: this.uName, password: data, type: 'user' },
+                transformRequest: [function(data) {
 
-               }).catch(err => console.log(err))
-            },
+                    let ret = ''
+                    for (let it in data) {
+                        ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+                    }
+                    return ret
+                }],
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(res => {
+                if (res.data.message == "登录成功") {
 
-           open(message){
-	              this.$notify.error({
-		          title: "登录出错",
-		          message: message,
-		          duration:2000
-		          });
-           },
-         },
-  
+                    this.$router.push('/intelligence');
+
+                }else{
+                    this.open(res.data.message);
+                }
+
+            }).catch(err => console.log(err))
+        },
+
+        open(message) {
+            this.$notify.error({
+                title: "登录出错",
+                message: message,
+                duration: 2000
+            });
+        },
+    },
+
 }
 </script>

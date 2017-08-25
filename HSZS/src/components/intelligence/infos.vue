@@ -74,9 +74,9 @@
                     </li>
                 </ul>
                 <div class="text-center" v-if="total!=0">
-                  <el-pagination @current-change="change" layout="prev, pager, next" :total="total">
-                  </el-pagination>
-              </div>
+                    <el-pagination @current-change="change" :page-size="pageSize" layout="prev, pager, next" :total="total">
+                    </el-pagination>
+                </div>
             </div>
         </div>
     </div>
@@ -93,9 +93,9 @@ import 'echarts/map/js/china.js';
 export default {
     data() {
         return {
-           pageNumber: 1,
+            pageNumber: 1,
             pageSize: 8,
-            total:0,
+            total: 0,
             dynamic: [],
             list: [],
             area: ["不限", "北京", "上海", "广州", "深圳", "杭州", "苏州", "南京", "天津", "青岛", "大连"],
@@ -117,21 +117,21 @@ export default {
             }).catch(err => console.log(err))
         },
         getDynamic() {
-            this.$ajax.post('/apis/area/findGardensCondition.json', {pageNumber:1}).then(res => {
-                this.dynamic = res.data.data.slice(0, 3)
+            this.$ajax.post('/apis/area/findGardensCondition.json', { pageNumber: 1 }).then(res => {
+                this.dynamic = res.data.data[0].content.slice(0, 3)
                 this.dynamic.forEach(val => {
                     val.content = val.content.slice(0, 40) + "..."
                 })
             }).catch(err => console.log(err))
         },
-        change(val){
-             this.pageNumber = val;
-             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
+        change(val) {
+            this.pageNumber = val;
+            this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
         getList(data) {
 
-            this.$ajax.post('/apis/area/findGardensList.json', { 'msg': data,pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
-               if (res.data.data != null) {
+            this.$ajax.post('/apis/area/findGardensList.json', { 'msg': data, pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
+                if (res.data.data != null) {
                     this.list = res.data.data[0].content;
                     this.total = res.data.data[0].totalElements;
                 }
@@ -555,7 +555,7 @@ export default {
             $(this).addClass("fc").siblings().removeClass("fc");
 
         });
-        this.parkMap([{ name: "武汉", value: 0 }], [{ name: "南京", value: 2 }], [{ name: "北京", value: 3 }], [{ name: "上海", value: 4 }], [{ name: "广州", value: 5 }], [{ name: "深圳", value: 6 }]);
+        this.parkMap([{ name: "武汉", value: 0 }], [{ name: "南京", value: 2 }], [{ name: "北京", value: 3 }], [{ name: "上海", value: 4 }], [{ name: "广州", value: 5 }], [{ name: "深圳", value: 6 },{ name: "天津", value: 6 }]);
         this.getDynamic();
         this.select(0);
 
