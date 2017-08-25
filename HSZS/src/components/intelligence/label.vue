@@ -115,13 +115,14 @@ export default {
             this.$emit('labelInfo', [this.typeOne[this.oneCode], this.typeTwo[this.oneCode][this.twoCode], this.time[this.timeCode]]);
         },
         getLabel() {
+
             this.$ajax.get('/apis/param/getParamById.json').then((res) => {
                 this.typeOne = [];
                 this.typeTwo = [];
                 let type = res.data.data;
                 for (let key in type) {
                     this.typeOne.push(key);
-                    console.log(key);
+                    console.log(type[key]);
                     
                     if (key == "互联网") {
                         this.checkList1 = type[key]
@@ -135,14 +136,23 @@ export default {
                    
                     this.typeTwo.push(type[key])
                 };
+                
                 this.typeTwo.forEach(val => {
                       val.unshift('不限');
                 });
+                 
                 this.selectOne(this.oneCode);
             }).catch(err => console.log(err))
         },
 
         upDate() {
+        	console.warn(this.checkList1);
+        	
+            this.checkList1=this.checkList1.slice(1);
+            this.checkList2.shift();
+            this.checkList3.shift();
+            this.checkList4.shift();
+
             let parameter = { "互联网": this.checkList1, "高科技": this.checkList2, "文化创意": this.checkList3, "精英配套": this.checkList4 };
             this.typeOne = [];
             this.typeTwo = [];
