@@ -112,6 +112,8 @@ export default {
         },
         selectTime(index) {
             this.timeCode = index;
+            sessionStorage.setItem("timeCode", index);
+            sessionStorage.setItem("time", this.time[this.timeCode]);
             this.$emit('labelInfo', [this.typeOne[this.oneCode], this.typeTwo[this.oneCode][this.twoCode], this.time[this.timeCode]]);
         },
         getLabel() {
@@ -157,7 +159,7 @@ export default {
                     delete parameter[key];
                 }
             }
-            var p = JSON.stringify(parameter);
+            let p = JSON.stringify(parameter);
             this.$ajax.post('/apis/param/getInsertParam.json', { 'msg': p }).then((res) => {
                 this.dialogVisible = false;
                 this.getLabel();
@@ -168,22 +170,31 @@ export default {
     },
     mounted() {
 
+       
         if (this.timeList != undefined) {
             this.time = this.timeList;
-        };
-
-        this.getLabel();
+           
+        }; 
+         this.getLabel();
         if (sessionStorage.getItem("oneCode")) {
 
             this.oneCode = sessionStorage.getItem("oneCode") - 0;
-
         };
         if (sessionStorage.getItem("twoCode")) {
             this.twoCode = sessionStorage.getItem("twoCode") - 0;
         };
+        if (sessionStorage.getItem("timeCode")) {
+            let index=sessionStorage.getItem("timeCode") - 0;
+            if(this.time[index]==sessionStorage.getItem("time")){
+                this.timeCode = index;
+            }else{
+                this.timeCode =0;
+            }
+            
+        };
 
 
-
+       
     }
 
 }

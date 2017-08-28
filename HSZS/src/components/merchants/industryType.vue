@@ -83,8 +83,14 @@
         	let vm=this;
                $(".industryType li").on("click",function(){
                	  vm.activeType=$(this).find("p").text();
+               	  if(vm.activeType!=="更多"){
                	  vm.$router.push({path:'/merchants/intelligent/recommendCompanys',query:{query:vm.activeType}});
+               	  };
+               	  if(vm.activeType=="更多"){
+                      alert("暂无更多,敬请期待")
+               	  }
                })
+
 
         },
 	}

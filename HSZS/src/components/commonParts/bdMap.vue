@@ -33,7 +33,9 @@ export default {
                 myGeo.getPoint(this.parkInfo.name, function(point) {
                     if (point) {
                         map.centerAndZoom(point, 17);
-                        map.addOverlay(new BMap.Marker(point));
+                        var marker=new BMap.Marker(point);
+                        map.addOverlay(marker);
+                        marker.setAnimation(BMAP_ANIMATION_BOUNCE);
                     } else {
                         alert("地址解析失败!");
                     }

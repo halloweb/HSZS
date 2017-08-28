@@ -1,6 +1,6 @@
 <template>
     <div class="content-block">
-        <h4 class="text-center">{{info.name}}<button class="pull-right btn btn-red">辖区预警</button></h4>
+        <h4 class="text-center">{{info.name}}<router-link to="/supervision/companyOut" class="pull-right btn btn-red">辖区预警</router-link></h4>
         <bd-map :park-info="info"></bd-map>
         <div class="company-sort">
             <a href="javascript:void(0);">企业动态</a>
@@ -18,7 +18,7 @@
     </div>
 </template>
 <style lang="less" scoped>
-button.btn-red {
+a.btn-red {
     background-color: #f84242;
     color: #fff;
     border-radius: 15px;

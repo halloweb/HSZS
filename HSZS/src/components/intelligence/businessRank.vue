@@ -13,7 +13,7 @@
                         </router-link>
                     </div>
                     <p class="article-content">
-                        {{item.content}}
+                        {{item.summary}}
                     </p>
                     <div class="sub-info">
                         <span>

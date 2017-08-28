@@ -2,14 +2,14 @@
     <div>
         <label-list @labelInfo='labelInfo' :time-show='true'></label-list>
         <div class="content-block">
-            <div class="row">
+            <div class="row" >
                 <div class="col-xs-6">
                     <p class="title"><img src="../../assets/images/media.png" alt="">媒体聚焦</p>
-                    <div id="media-pie">
+                    <div id="media-pie" v-show="showMedia">
                     </div>
                 </div>
-                <div class="col-xs-6">
-                    <div class="tody-headlines">
+                <div class="col-xs-6" >
+                    <div class="tody-headlines" v-if="showMedia"> 
                         <div class="list-title">{{activedMedia}}</div>
                         <ul class="list-box" id="tody-headlines">
                             <li v-for="(item,index) in media">
@@ -33,14 +33,14 @@
             </div>
         </div>
         <div class="content-block">
-            <div class="row">
+            <div class="row" >
                 <div class="col-xs-6">
                     <p class="title"><img src="../../assets/images/key.png" alt="">关键词云</p>
-                    <div id="key-yun" ref="mychart">
+                    <div id="key-yun" ref="mychart" v-if="showKey">
                     </div>
                 </div>
                 <div class="col-xs-6">
-                    <div class="tody-headlines">
+                    <div class="tody-headlines" v-if="showKey">
                         <div class="list-title">{{activeWord}}</div>
                         <ul class="list-box" id="key-info">
                             <li v-for="(item,index) in keyInfo">
@@ -85,7 +85,9 @@ export default {
             mediasParams: [],
             WordParams: [],
             mediapie: '',
-            yun: ''
+            yun: '',
+            showMedia: true,
+            showKey: true,
         }
     },
     methods: {
@@ -98,7 +100,9 @@ export default {
         },
         getMedia(val) {
             this.$ajax.post('/apis/Headlines/getClondChartList.json', { 'msg': val }).then(res => {
-                if (res.data.data != []) {
+                if (res.data.data.length!=0) {
+                    
+                    this.showMedia=true;
                     this.mediaData = res.data.data;
 
                     this.mediaFocus(this.mediaData);
@@ -114,8 +118,9 @@ export default {
 
 
                     this.mediaList(this.mediasParams);
-                } else {
 
+                } else {
+                        this.showMedia=false;
                 }
             }).catch(err => console.log(err))
         },
@@ -129,7 +134,8 @@ export default {
         getKey(vals) {
 
             this.$ajax.post('/apis/Headlines/getWordClond.json', { 'msg': vals }).then(res => {
-
+            if (res.data.data.length!=0) {
+                this.showKey= true;
                 this.wordData = res.data.data[0];
                 this.keyCloud(this.wordData);
                 this.activeWord = this.wordData[0].name;
@@ -146,6 +152,9 @@ export default {
 
 
                 this.keyList(this.WordParams);
+            }else{
+                this.showKey= false;
+              }
             }).catch(err => console.log(err))
         },
         keyList(vals) {

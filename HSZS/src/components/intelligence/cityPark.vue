@@ -108,8 +108,8 @@ export default {
             this.pageNumber = val;
             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
-        parkList(data) {
-            this.$ajax.get('/apis/area/findGardensByArea.json', { params: { area: data } }).then(res => {
+        parkList(data,it) {
+            this.$ajax.get('/apis/area/findGardensByArea.json', { params: { area: data,industry:it } }).then(res => {
                 this.city.park = res.data.data;
 
             }).catch(err => console.log(err))
@@ -138,7 +138,8 @@ export default {
 
 
         this.city.name = this.$route.query.query;
-        this.parkList(this.$route.query.query);
+        console.log(this.$route.query);
+        this.parkList(this.$route.query.query,this.$route.query.industry);
 
         let index = this.area.indexOf(this.city.name)
         this.select(index);

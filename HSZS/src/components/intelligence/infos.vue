@@ -111,8 +111,8 @@ export default {
     },
     methods: {
         mapData() {
-            this.$ajax.get('/apis/area/findGardensAll.json').then(res => {
-
+            this.$ajax.get('/apis/area/findIndustryCountByArea.json').then(res => {
+                this.parkMap(res.data.data[0],res.data.data[1],res.data.data[2],res.data.data[3],res.data.data[4],res.data.data[5]);
 
             }).catch(err => console.log(err))
         },
@@ -352,7 +352,9 @@ export default {
                     if (geoCoord) {
                         res.push({
                             name: data[i].name,
-                            value: geoCoord.concat(data[i].value)
+                            value: geoCoord.concat(data[i].value),
+                            count:data[i].count,
+                            industry:data[i].industry
                         });
                     }
                 }
@@ -375,7 +377,8 @@ export default {
                 tooltip: {
                     trigger: 'item',
                     formatter: function(params) {
-                        return params.name + ' : ' + params.value[2];
+
+                        return params.name + ' : ' + params.data.count;
                     }
                 },
                 legend: {
@@ -545,7 +548,8 @@ export default {
 
             park.setOption(option);
             park.on('click', function(params) {
-                vm.$router.push({ path: '/intelligence/parkInfo/cityPark', query: { query: params.name } });
+
+                vm.$router.push({ path: '/intelligence/parkInfo/cityPark', query: { query: params.name,industry:params.data.industry} });
             });
 
         },
@@ -555,8 +559,11 @@ export default {
             $(this).addClass("fc").siblings().removeClass("fc");
 
         });
-        this.parkMap([{ name: "武汉", value: 0 }], [{ name: "南京", value: 2 }], [{ name: "北京", value: 3 }], [{ name: "上海", value: 4 }], [{ name: "广州", value: 5 }], [{ name: "深圳", value: 6 },{ name: "天津", value: 6 }]);
+
+        // this.parkMap([{ name: "武汉", value: 0 }], [{ name: "南京", value: 2 }], [], [{ name: "上海", value: 4 }], [{ name: "广州", value: 5 }], [{ name: "深圳", value: 6 },{ name: "天津", value: 6 }]);
+        this.mapData();
         this.getDynamic();
+         
         this.select(0);
 
 

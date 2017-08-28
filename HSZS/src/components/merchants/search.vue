@@ -1,11 +1,22 @@
 <template>
-	<div>
+
 		<div class="content-block search">
+                <a href="javascript:void(0);" class="a1">百度</a>
+                <a href="javascript:void(0);" class="a2">小米</a>
+                <a href="javascript:void(0);" class="a3">中科点击</a>
+                <a href="javascript:void(0);" class="a4">中科点击</a>
+                <a href="javascript:void(0);" class="a5">中科点击</a>
+                <a href="javascript:void(0);" class="a6">中科点击</a>
+                <a href="javascript:void(0);" class="a7">中科点击</a>
+                <a href="javascript:void(0);" class="a8">中科点击</a>
+                <a href="javascript:void(0);" class="a9">中科点击</a>
+                <a href="javascript:void(0);" class="a10">中科点击</a>
 			<div class="search-btn">
-				<input type="text" placeholder="请输入公司名称"/>
+				<!-- <input type="text" placeholder="请输入公司名称"/> -->
                 <a href="https://std.tianyancha.com/#/main" target="_blank">
                     <button class="btn">搜索</button>
                 </a>
+
 			</div>
 		</div>
 <!-- 		<div class="search-box">
@@ -37,21 +48,37 @@
                 </div>
             </div>
 		</div> -->
-	</div>
+	
 </template>
 <style lang="less" scoped>
     .search{
-    	height:300px;
+    	height:409px;
     	background:url(../../assets/images/search-bg.png) center center no-repeat;
     	background-size:cover;
+        position:relative;
+        &>a{
+            position:absolute;
+           
+        }
     	.search-btn{
     		
     		text-align:center;
-    		margin-top:105px;
+    		margin-top:155px;
     		input{border-radius:3px 0 0 3px;padding-left:20px;width:582px;height:50px;line-height:50px;border:1px solid #ffffff;color:#999999;}
-            button{border-radius:0 3px 3px 0;margin-left:-15px;vertical-align:top;width:100px; height:50px;background-color:#00a5ff;color:#fff;font-size:16px;}
+            // button{border-radius:0 3px 3px 0;margin-left:-15px;vertical-align:top;width:100px; height:50px;background-color:#00a5ff;color:#fff;font-size:16px;}
+            button{border-radius:4px;vertical-align:top;width:300px; height:50px;background-color:#00a5ff;color:#fff;font-size:16px;}
     	}
     }
+    .a1{left:34%;top:115px; color:#999;}
+    .a2{left:45%;top:130px; color:#fff;font-size:16px;}
+    .a3{left:69%;top:140px; color:#999;}
+    .a4{left:60%;top:100px; color:#fff;font-size:16px;}
+    .a5{left:36%;top:257px; color:#999;}
+    .a6{left:67%;top:192px; color:#999;}
+    .a7{right:66%;top:194px;color:#fff;font-size:16px;}
+    .a8{left:50%;top:280px; color:#999;}
+    .a9{left:55%;top:240px;color:#fff;font-size:16px;}
+    .a10{left:26%;top:283px; color:#999;}
     .search-box{
         margin-top:15px;
         background-color:#ffffff;
