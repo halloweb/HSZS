@@ -67,6 +67,7 @@
 <style lang="less" scoped>
     .search{
     	height:409px;
+      background-color:rgba(0,0,0,0.8);
     	background:url(../../assets/images/search-bg.png) center center no-repeat;
     	background-size:cover;
         position:relative;

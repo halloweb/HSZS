@@ -620,6 +620,7 @@ button.btn-zs:focus {
 
 #park-map #park-map-box {
     height: 500px;
+    background-color:#404a59;
 }
 
 .park-movement {

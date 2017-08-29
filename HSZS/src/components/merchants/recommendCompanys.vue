@@ -1,13 +1,19 @@
 <template>
     <div class="recommend clearfix">
-      <ul class="list-wrapper">
-        <li class="item" v-for="(item,index) in companys" @click="select(item)">
-         <div>
-        	<span>{{item.companyName}}</span>
-        </div>
-        </li>
-       
-    </ul>
+     <div class="left-box">
+          <ul class="list-wrapper">
+            <div class="bg">
+              <div class="rotate"></div> 
+            </div>
+            <div class="center">
+                {{industry}}
+            </div>
+            <li v-for="(item,index) in companys" :class="['item'+index,{active:activeCode==index}]"   @click="select(item,index)">
+            	{{item.companyName}}
+            </li>
+           
+        </ul>
+     </div> 
      <div class="info-panel">
      	 <div class="info-box">
      	 	 <div class="title">{{details.company}}</div>
@@ -51,13 +57,16 @@
     	data(){
     		return{
     			companys:[],
-                details:{}
+                details:{},
+                industry:'',
+                activeCode:0
     		}
     	},
         methods:{
             getCompanys(data){
                   this.$ajax.post('/apis/indus/getCompanyInfoByIndustry.json',{industry:data}).then(res => {
                      this.companys=res.data.data;
+                      this.getInfo(this.companys[0].company);
                   }).catch(err => console.log(err))
             },
             getInfo(data){
@@ -65,11 +74,13 @@
                             this.details=res.data.data;       
                   }).catch(err => console.log(err))
             },
-            select(item){    
+            select(item,index){   
+                  this.activeCode=index;
                   this.getInfo(item.company);
             },
         },
         mounted(){
+            this.industry=this.$route.query.query;
              this.getCompanys(this.$route.query.query);
             
         },
@@ -83,49 +94,93 @@
 		padding:20px;
 		border:1px solid #e8ebf2;
 	}
+    .left-box{
+        width:70%;
+         float:left;
+    }
 	ul{
-		width:60%;
-        font-size:0;
-        float:left;
-		.item{
-		width:25%;
-		padding:0 10px;
-		margin-bottom:15px;
-		display:inline-block;
-		vertical-align: top;
-		div{	
-		width:100%;
-		height:50px;
-		padding:5px;
-		text-align:center;
-		font-size:16px;
-		background-color:rgba(0,145,244,0.98);
-        transition:all .2s;
-		color:#ffffff;
-		cursor:pointer;
-         &:hover{
-         	background-color:rgba(0,160,255,0.98);
-         }
-         span{
-         	display:inline-block;
-         	margin-top:20px;
-         	transform:translateY(-50%);
+        width:540px;
+        height:540px;
+        margin:0 auto;
+        position:relative;
+		li{
 
-         }
-		}
+            position:absolute;
+		    width:80px;
+            height:80px;
+            background-color:#00a5ff;
+            line-height:80px;
+            text-align: center;
+            border-radius:50%;
+            color:#fff;
+            cursor:pointer;
+            &.active{
+              background-color:#ff4f4f;  
+            }
+            
+	    }
+        .bg{
+            width:100%;
+            height:100%;
+            
+            .rotate{
+                width:100%;
+                height:100%;
+
+                background:url(../../assets/images/rotate.png) center center no-repeat;
+                background-size:cover;
+                animation:rt 20s linear infinite;
+            }
+        }
+        .center{
+            
+            width:100px;
+            height:100px;
+            background-color:#00cced;
+            line-height:100px;
+            text-align: center;
+            border-radius:50%;
+            color:#fff;
+            font-size:16px;
+            position:absolute;
+            left:50%;
+            top:50%;
+            margin-left:-50px;
+            margin-top:-50px;
+        }
 	}
-	}
+    @keyframes rt{
+        from{
+               transform:rotate(0);
+            }
+        to{
+                transform:rotate(360deg);
+            }
+    }
+    .item0{left:77px;top:10px;}
+    .item1{left:382px;top:10px;}
+    .item2{left:-30px;top:155px;}
+    .item3{left:203px;top:57px;}
+    .item4{left:400px;top:210px;}
+    .item5{left:85px;top:322px;}
+    .item6{left:32px;top:410px;}
+    .item7{left:477px;top:297px;}
+    .item8{left:278px;top:391px;}
+    .item9{left:395px;top:441px;}
+    
+    
 	.info-panel{
 		 
-		width:40%;
+		width:30%;
 		float:right;
 
 
 
 	}
      .info-box{
-     	width:80%;
+     	width:100%;
      	margin:0 auto;
+        margin-top:100px;
      	border:1px solid #e8ebf2;
      	min-height:300px;
      	padding:0 10px;
