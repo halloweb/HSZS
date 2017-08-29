@@ -60,7 +60,7 @@ export default {
 
         },
         getList() {
-            this.$ajax.post('/apis/business/getParkBehaviours.json', { 'msg': [this.info.name],pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
+            this.$ajax.post('/apis/business/getParkBehaviours.json', {pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
                 res.data.data.page.forEach(val =>{
                     this.list.push(val);
                 });
