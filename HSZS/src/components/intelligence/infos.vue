@@ -138,12 +138,13 @@ export default {
             }).catch(err => console.log(err))
         },
         select(index) {
-
+            this.pageNumber=1;
             this.areaCode = index;
 
             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
         select2(index) {
+            this.pageNumber=1;
             this.typeCode = index;
             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },

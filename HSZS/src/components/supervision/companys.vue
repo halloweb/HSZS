@@ -156,12 +156,15 @@ export default {
             }).catch(err => console.log(err))
         },
         select() {
+            this.pageNumber=1;
             this.getcompany();
         },
         select1() {
+            this.pageNumber=1;
             this.getcompany();
         },
         select2(item, index) {
+            this.pageNumber=1;
             this.activeIndex = index;
             this.activeGroup = item;
             this.getcompany();
