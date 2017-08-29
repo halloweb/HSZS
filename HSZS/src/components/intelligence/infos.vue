@@ -62,7 +62,7 @@
                                 </router-link>
                             </div>
                             <p class="article-content">
-                                {{item.description}}
+                                {{item.gardenIntroduce}}
                             </p>
                             <div class="sub-info">
                                 <span>

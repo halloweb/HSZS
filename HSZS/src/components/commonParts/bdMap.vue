@@ -10,7 +10,7 @@ export default {
         return {
 
             BMap: '',
-            myGeo: {},
+            myGeo: '',
             isview: false,
             map: ''
 
@@ -27,20 +27,8 @@ export default {
             map.addControl(new BMap.ScaleControl());
             // 创建地址解析器实例
             var myGeo = new BMap.Geocoder();
-            if (this.parkInfo != undefined) {
 
-                // 将地址解析结果显示在地图上,并调整地图视野
-                myGeo.getPoint(this.parkInfo.name, function(point) {
-                    if (point) {
-                        map.centerAndZoom(point, 17);
-                        var marker=new BMap.Marker(point);
-                        map.addOverlay(marker);
-                        marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-                    } else {
-                        alert("地址解析失败!");
-                    }
-                });
-            };
+
             if (this.cityInfo != undefined) {
 
                 // 将地址解析结果显示在地图上,并调整地图视野
@@ -62,7 +50,7 @@ export default {
 
         },
         view(BMap, myGeo, map) {
-            //解析并标注园区
+            //解析并标注所在城市园区
             let vm =this;
             var adds = this.cityInfo.park;
            
@@ -101,7 +89,28 @@ export default {
             }
 
             //结束
-        }
+        },
+        park(){
+            //点位园区
+             
+              let vm=this;
+
+                // 将地址解析结果显示在地图上,并调整地图视野
+                this.myGeo.getPoint(this.parkInfo.name, function(point) {
+
+                    if (point) {
+
+                        vm.map.centerAndZoom(point, 17);
+                        var marker=new vm.BMap.Marker(point);
+                        vm.map.addOverlay(marker);
+                        
+                    } else {
+                        alert("地址解析失败!");
+                    }
+                });
+            
+
+        },
     },
     watch: {
         'cityInfo.park': function(val){
@@ -118,16 +127,26 @@ export default {
               
                  this.view(this.BMap,this.myGeo,this.map)
             }
-        }
+        },
+        'parkInfo.name':function(val){
+            if(val!=''&&this.myGeo!=''){
+               this.park();
+            }
+        },
+        'myGeo':function(val){
+               if(val!=''&&this.myGeo!=''){
+                 this.park();
+            }
+        },
     },
     mounted() {
 
-        console.log(this.cityInfo);
+        console.log(this.parkInfo);
         this.$nextTick(function() {
 
             var vm = this;
             MP().then(BMap => {
-
+                
                 vm.init(BMap)
 
             });

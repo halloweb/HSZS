@@ -61,7 +61,7 @@
                         <div class="sub-list">
                             <span>
                         <img src="../../assets/images/person.png" height="15" width="13" alt="">
-                        法定代表人：{{item.businessLegal}}
+                        法定代表人：{{item.boss}}
                         </span>
                             <span>
                         <img src="../../assets/images/money.png" height="15" width="13" alt="">
@@ -103,7 +103,7 @@ export default {
         return {
             pageNumber: 1,
             pageSize: 8,
-
+            total: 0,
             group: ["全部"],
 
             option1: [
@@ -136,8 +136,8 @@ export default {
             selectGroup: '',
             activeIndex: 0,
             activeGroup: '',
-            collectID: '',
-            total: 0
+            collectID: ''
+
 
         }
     },
@@ -270,8 +270,9 @@ export default {
 }
 
 .type-box {
-    margin: -24px -24px;
+    margin: 0 -24px;
     border: none;
+    border-bottom: 1px solid #e8ebf2;
     li {
         margin-bottom: 25px;
     }

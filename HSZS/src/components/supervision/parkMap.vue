@@ -45,7 +45,7 @@ export default {
     data() {
         return {
             info: {
-                name: '天津中新生态城'
+                name: ''
             },
             pageNumber:1,
             pageSize:8,
@@ -73,7 +73,7 @@ export default {
             }).catch(err => console.log(err))
         },
     },
-    mounted() {
+    created() {
         this.getInfo();
         this.getList();
 

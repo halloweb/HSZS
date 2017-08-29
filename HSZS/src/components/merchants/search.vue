@@ -1,16 +1,8 @@
 <template>
 
 		<div class="content-block search">
-                <a href="javascript:void(0);" class="a1">百度</a>
-                <a href="javascript:void(0);" class="a2">小米</a>
-                <a href="javascript:void(0);" class="a3">中科点击</a>
-                <a href="javascript:void(0);" class="a4">中科点击</a>
-                <a href="javascript:void(0);" class="a5">中科点击</a>
-                <a href="javascript:void(0);" class="a6">中科点击</a>
-                <a href="javascript:void(0);" class="a7">中科点击</a>
-                <a href="javascript:void(0);" class="a8">中科点击</a>
-                <a href="javascript:void(0);" class="a9">中科点击</a>
-                <a href="javascript:void(0);" class="a10">中科点击</a>
+                <a v-for="(item,index) in companys" href="javascript:void(0);" :class="'a'+(index+1)">{{item.companyName}}</a>
+
 			<div class="search-btn">
 				<!-- <input type="text" placeholder="请输入公司名称"/> -->
                 <a href="https://std.tianyancha.com/#/main" target="_blank">
@@ -50,6 +42,28 @@
 		</div> -->
 	
 </template>
+<script>
+    export default{
+        data(){
+            return{
+                 area:[{title:"北京",data:["北京"]},{title:"天津",data:["天津"]}],
+                 industry:[{title:"北京",data:["北京"]},{title:"天津",data:["天津"]}],
+                 companys:[]
+            }
+        },
+        methods:{
+               getCompanys(){
+                this.$ajax.get('/apis/business/getSearchBusinessList.json').then(res => {
+                       this.companys=res.data.data.content;
+                }).catch(err => console.log(err))
+               }
+        },
+        mounted(){
+                 this.getCompanys();
+
+        },
+    }
+</script>
 <style lang="less" scoped>
     .search{
     	height:409px;
@@ -69,16 +83,16 @@
             button{border-radius:4px;vertical-align:top;width:300px; height:50px;background-color:#00a5ff;color:#fff;font-size:16px;}
     	}
     }
-    .a1{left:34%;top:115px; color:#999;}
-    .a2{left:45%;top:130px; color:#fff;font-size:16px;}
-    .a3{left:69%;top:140px; color:#999;}
-    .a4{left:60%;top:100px; color:#fff;font-size:16px;}
-    .a5{left:36%;top:257px; color:#999;}
+    .a2{left:24%;top:115px; color:#999;}
+    .a1{left:45%;top:130px; color:#fff;font-size:16px;}
+    .a4{left:34%;top:86px; color:#999;}
+    .a3{left:60%;top:100px; color:#999;}
+    .a5{left:22%;top:257px; color:#999;}
     .a6{left:67%;top:192px; color:#999;}
     .a7{right:66%;top:194px;color:#fff;font-size:16px;}
-    .a8{left:50%;top:280px; color:#999;}
+    .a8{left:46%;top:280px; color:#999;}
     .a9{left:55%;top:240px;color:#fff;font-size:16px;}
-    .a10{left:26%;top:283px; color:#999;}
+    .a10{left:35%;top:300px; color:#fff;font-size:16px;}
     .search-box{
         margin-top:15px;
         background-color:#ffffff;
@@ -135,21 +149,3 @@
            height:1000px;
        }
 </style>
-<script>
-    export default{
-        data(){
-            return{
-                 area:[{title:"北京",data:["北京"]},{title:"天津",data:["天津"]}],
-                 industry:[{title:"北京",data:["北京"]},{title:"天津",data:["天津"]}]
-            }
-        },
-        methods:{
-
-        },
-        mounted(){
-                 $(".search-type a").on("click",function(){
-                    $(this).addClass("fc").siblings().removeClass("fc");
-                 })
-        },
-    }
-</script>

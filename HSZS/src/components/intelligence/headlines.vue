@@ -2,14 +2,14 @@
     <div>
         <label-list @labelInfo='labelInfo' :time-show='true'></label-list>
         <div class="content-block">
-            <div class="row" >
+            <p class="title"><img src="../../assets/images/media.png" alt="">媒体聚焦</p>
+            <div class="row" v-show="showMedia">
                 <div class="col-xs-6">
-                    <p class="title"><img src="../../assets/images/media.png" alt="">媒体聚焦</p>
-                    <div id="media-pie" v-show="showMedia">
+                    <div id="media-pie">
                     </div>
                 </div>
-                <div class="col-xs-6" >
-                    <div class="tody-headlines" v-if="showMedia"> 
+                <div class="col-xs-6">
+                    <div class="tody-headlines">
                         <div class="list-title">{{activedMedia}}</div>
                         <ul class="list-box" id="tody-headlines">
                             <li v-for="(item,index) in media">
@@ -22,7 +22,7 @@
                                 </p>
                                 <div class="sub-info">
                                     <span>
-                                                <img src="../../assets/images/company.png" alt="">
+                                        <img src="../../assets/images/company.png" alt="">
                                                 涉及公司：<a href="">{{media.business}}</a>
                                              </span>
                                 </div>
@@ -33,37 +33,36 @@
             </div>
         </div>
         <div class="content-block">
-            <div class="row" >
+            <p class="title"><img src="../../assets/images/key.png" alt="">关键词云</p>
+            <div class="row" v-show="showKey">
                 <div class="col-xs-6">
-                    <p class="title"><img src="../../assets/images/key.png" alt="">关键词云</p>
-                    <div id="key-yun" ref="mychart" v-if="showKey">
+                    <div id="key-yun" ref="mychart"></div>
                     </div>
-                </div>
-                <div class="col-xs-6">
-                    <div class="tody-headlines" v-if="showKey">
-                        <div class="list-title">{{activeWord}}</div>
-                        <ul class="list-box" id="key-info">
-                            <li v-for="(item,index) in keyInfo">
-                                <h4>
+                    <div class="col-xs-6">
+                        <div class="tody-headlines">
+                            <div class="list-title">{{activeWord}}</div>
+                            <ul class="list-box" id="key-info">
+                                <li v-for="(item,index) in keyInfo">
+                                    <h4>
                                           <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
                                           <span class="article-time">{{item.time}}</span>
                                           </h4>
-                                <p class="article-content">
-                                    {{item.summary}}
-                                </p>
-                                <div class="sub-info">
-                                    <span>
+                                    <p class="article-content">
+                                        {{item.summary}}
+                                    </p>
+                                    <div class="sub-info">
+                                        <span>
                                                 <img src="../../assets/images/company.png" alt="">
                                                 涉及公司：中科点击
                                              </span>
-                                </div>
-                            </li>
-                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 </template>
 <script>
 import echarts from 'echarts'
@@ -100,9 +99,9 @@ export default {
         },
         getMedia(val) {
             this.$ajax.post('/apis/Headlines/getClondChartList.json', { 'msg': val }).then(res => {
-                if (res.data.data.length!=0) {
-                    
-                    this.showMedia=true;
+                if (res.data.data.length != 0) {
+
+                    this.showMedia = true;
                     this.mediaData = res.data.data;
 
                     this.mediaFocus(this.mediaData);
@@ -120,7 +119,7 @@ export default {
                     this.mediaList(this.mediasParams);
 
                 } else {
-                        this.showMedia=false;
+                    this.showMedia = false;
                 }
             }).catch(err => console.log(err))
         },
@@ -134,27 +133,27 @@ export default {
         getKey(vals) {
 
             this.$ajax.post('/apis/Headlines/getWordClond.json', { 'msg': vals }).then(res => {
-            if (res.data.data.length!=0) {
-                this.showKey= true;
-                this.wordData = res.data.data[0];
-                this.keyCloud(this.wordData);
-                this.activeWord = this.wordData[0].name;
-                this.WordParams = [];
+                if (res.data.data.length != 0) {
+                    this.showKey = true;
+                    this.wordData = res.data.data[0];
+                    this.keyCloud(this.wordData);
+                    this.activeWord = this.wordData[0].name;
+                    this.WordParams = [];
 
 
-                vals.forEach(value => {
-                    this.WordParams.push(value)
-                })
+                    vals.forEach(value => {
+                        this.WordParams.push(value)
+                    })
 
 
-                this.WordParams.push(this.activeWord);
+                    this.WordParams.push(this.activeWord);
 
 
 
-                this.keyList(this.WordParams);
-            }else{
-                this.showKey= false;
-              }
+                    this.keyList(this.WordParams);
+                } else {
+                    this.showKey = false;
+                }
             }).catch(err => console.log(err))
         },
         keyList(vals) {

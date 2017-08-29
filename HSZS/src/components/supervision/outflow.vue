@@ -24,7 +24,7 @@
         		</tr>
         		</tbody>
         </table>	
-        <p class="loadMore text-center"><a href="javascript:void(0);" class="blue" @click="loadMore">加载更多</a></p>
+        <p class="loadMore text-center"><a href="javascript:void(0);" class="blue" @click="loadMore">{{state}}</a></p>
         </div>
         
 
@@ -50,22 +50,30 @@
 			return{
                  pageNumber:1,
                  pageSize:8,
-                 list:[]
+                 totalPage:0,
+                 list:[],
+                 state:'加载更多'
 			}
 		},
 		methods:{
             getList(){
               this.$ajax.post('/apis/warning/getBusinessOutflowList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
-                 
+                   this.totalPage=res.data.data.totalPage;
                    res.data.data.list.forEach(val => {
                     val.content=val.content.slice(0,70)+'...';
-                    this.list.push(val);
+                    
                    });
-                   
+
+                   this.list=res.data.data.list;
               }).catch(err => console.log(err))
             },
 			loadMore(){
+        
             this.pageNumber++;
+            if(this.pageNumber>this.totalPage){
+              this.state="已无更多数据";
+              return;
+            }
             this.getList();
 			},
 		},

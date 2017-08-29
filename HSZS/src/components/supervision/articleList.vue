@@ -13,8 +13,8 @@
              </span>
 
         </div>
-        <p class="content">
-            {{article.content}}
+        <p class="content" v-html="article.content">
+            
         </p>
         <div class="sub-info">
             <span>
