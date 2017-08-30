@@ -67,15 +67,10 @@ export default {
         return {
             experts: [],
             pageNumber: 1,
-            lunT: [{
+            pageSize: 3,
+            totalPages:0,
 
-                title: '创新峰会大数据与分析',
-                time: '2017-02-02',
-                content: '创新峰会大数据与分析',
-                author: '张三',
-                id: 1,
-                mySwiper: ''
-            }]
+            lunT: []
 
         }
     },
@@ -87,8 +82,9 @@ export default {
         },
         getExpert() {
 
-            this.$ajax.get('/apis/expert/getSpecialist.json', { params: { pageNumber: this.pageNumber } }).then(res => {
-                res.data.data.forEach(val => {
+            this.$ajax.post('/apis/expert/getSpecialist.json', {pageNumber: this.pageNumber,pageSize: this.pageSize }).then(res => {
+                this.totalPages=res.data.data.totalPages;
+                res.data.data.content.forEach(val => {
                     this.experts.push(val);
                 })
            
@@ -106,6 +102,10 @@ export default {
         },
         loadMore() {
             this.pageNumber++;
+            if(this.pageNumber>this.totalPages){
+                this.$message('没有更多数据了！');
+                return;
+            }
             this.getExpert();
         },
 

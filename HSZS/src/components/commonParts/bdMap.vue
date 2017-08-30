@@ -129,13 +129,18 @@ export default {
             }
         },
         'parkInfo.name':function(val){
-            if(val!=''&&this.myGeo!=''){
+            if(this.parkInfo!=undefined){
+                 if(val!=''&&this.myGeo!=''){
                this.park();
             }
+            }
+           
         },
         'myGeo':function(val){
-               if(val!=''&&this.myGeo!=''){
-                 this.park();
+                       if(this.parkInfo!=undefined){
+                 if(val!=''&&this.myGeo!=''){
+               this.park();
+            }
             }
         },
     },

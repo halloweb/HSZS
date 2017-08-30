@@ -549,6 +549,7 @@ export default {
 
             park.setOption(option);
             park.on('click', function(params) {
+                console.log(params.data.industry);
 
                 vm.$router.push({ path: '/intelligence/parkInfo/cityPark', query: { query: params.name,industry:params.data.industry} });
             });

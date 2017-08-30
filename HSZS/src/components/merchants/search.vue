@@ -73,6 +73,10 @@
         position:relative;
         &>a{
             position:absolute;
+
+            &:hover{
+                  color:#00a5ff;
+            }
            
         }
     	.search-btn{
@@ -81,7 +85,7 @@
     		margin-top:155px;
     		input{border-radius:3px 0 0 3px;padding-left:20px;width:582px;height:50px;line-height:50px;border:1px solid #ffffff;color:#999999;}
             // button{border-radius:0 3px 3px 0;margin-left:-15px;vertical-align:top;width:100px; height:50px;background-color:#00a5ff;color:#fff;font-size:16px;}
-            button{border-radius:4px;vertical-align:top;width:300px; height:50px;background-color:#00a5ff;color:#fff;font-size:16px;}
+            button{border-radius:4px;vertical-align:top;width:200px; height:50px;background-color:#00a5ff;color:#fff;font-size:16px;}
     	}
     }
     .a2{left:24%;top:115px; color:#999;}

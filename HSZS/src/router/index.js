@@ -61,6 +61,7 @@ export default [
     {
         path: '/intelligence',
         component: intelligence,
+         meta: { requiresAuth: true },
         children: [
             { path: '', name: 'headlines', component: headlines },
             { path: 'policy', name: 'policy', component: policy },
@@ -99,6 +100,7 @@ export default [
         path: '/merchants',
 
         component: merchants,
+        meta: { requiresAuth: true },
         children: [{
                 path: '',
                 component: companySearch,
@@ -134,6 +136,7 @@ export default [
     }, {
         path: '/supervision',
         component: supervision,
+        meta: { requiresAuth: true },
         children: [
             { path: '', name: 'parkMap', component: parkMap },
             {

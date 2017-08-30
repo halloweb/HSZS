@@ -35,6 +35,7 @@
         <div class="content-block">
             <p class="title"><img src="../../assets/images/key.png" alt="">关键词云</p>
             <div class="row" v-show="showKey">
+                
                 <div class="col-xs-6">
                     <div id="key-yun" ref="mychart"></div>
                     </div>

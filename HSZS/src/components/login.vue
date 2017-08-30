@@ -165,9 +165,9 @@ export default {
                 }
             }).then(res => {
                 if (res.data.message == "登录成功") {
-
+                    sessionStorage.setItem('dl',"yes");
                     this.$router.push('/intelligence');
-
+                    
                 } else {
                     this.open(res.data.message);
                 }
