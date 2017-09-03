@@ -6,14 +6,14 @@ const publicPath = '/'
 
 module.exports = (options = {}) => ({
     entry: {
-        vendor: './src/vendor',
+        // vendor: './src/vendor',
         index: ["babel-polyfill", "./src/main.js"]
     },
     output: {
         path: resolve(__dirname, 'dist'),
-        filename: options.dev ? '[name].js' : '[name].js?[chunkhash]',
-        chunkFilename: '[id].js?[chunkhash]',
-        publicPath: options.dev ? '/assets/' : publicPath
+        filename:options.dev ?'[name].js':'[name].[chunkhash].js',
+        chunkFilename: options.dev ?'[name].js':'[name].[chunkhash].js',
+        publicPath:publicPath
     },
     module: {
         rules: [{
@@ -35,17 +35,18 @@ module.exports = (options = {}) => ({
                 loader: 'url-loader',
                 options: {
                     limit: 10000,
-                    name: 'assets/images/[name].[hash:7].[ext]'
+                    name: 'assets/images/[name].[ext]'
                 }
             }]
         }]
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor', 'manifest']
-        }),
+        // new webpack.optimize.CommonsChunkPlugin({
+        //     names: ['vendor', 'manifest']
+        // }),
         new HtmlWebpackPlugin({
             template: 'src/index.html'
+           
         })
     ],
     resolve: {
@@ -69,7 +70,7 @@ module.exports = (options = {}) => ({
         },
 
         historyApiFallback: {
-            index: url.parse(options.dev ? '/assets/' : publicPath).pathname
+            index: url.parse(options.dev ? publicPath : publicPath).pathname
         }
     },
     devtool: options.dev ? '#eval-source-map' : '#source-map'

@@ -103,7 +103,7 @@ export default {
                         vm.map.centerAndZoom(point, 17);
                         var marker=new vm.BMap.Marker(point);
                         vm.map.addOverlay(marker);
-                        
+                        marker.setAnimation(BMAP_ANIMATION_BOUNCE);
                     } else {
                         alert("地址解析失败!");
                     }

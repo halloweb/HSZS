@@ -13,9 +13,9 @@
              </span>
 
         </div>
-        <p class="content" v-html="article.content">
+        <div v-html="article.content" class="article-block">
             
-        </p>
+        </div>
         <div class="sub-info">
             <span>
              <img src="../../assets/images/pencil.png" alt="">

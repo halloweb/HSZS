@@ -1,6 +1,8 @@
 <template>
     <div class="content-block">
-        <h4 class="text-center">{{info.name}}<router-link to="/supervision/companyOut" class="pull-right btn btn-red">辖区预警</router-link></h4>
+        <h4 class="text-center">{{info.name}}
+        <router-link to="/supervision/companyOut" class="pull-right btn btn-red">辖区预警({{warningCount}})</router-link>
+        </h4>
         <bd-map :park-info="info"></bd-map>
         <div class="company-sort">
             <a href="javascript:void(0);">企业动态</a>
@@ -27,8 +29,8 @@ a.btn-red {
 
 .dt .col-xs-6 {
     border: 1px solid #e8ebf2;
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
 }
 
 button.btn-zs {
@@ -50,7 +52,8 @@ export default {
             pageNumber:1,
             pageSize:8,
             list: [],
-            park: []
+            park: [],
+            warningCount:0
         }
     },
     methods: {
@@ -72,10 +75,16 @@ export default {
                 this.park = res.data.data;
             }).catch(err => console.log(err))
         },
+        warning(){
+            this.$ajax.get('/apis/warning/getGardenWarningCout.json').then(res=>{
+                  this.warningCount=res.data.data.count;
+            }).catch(err => console.log(err))
+        }
     },
     created() {
         this.getInfo();
         this.getList();
+        this.warning();
 
 
     },

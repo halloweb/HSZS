@@ -18,7 +18,7 @@
                             <input type="password" v-model="pWord" placeholder="请输入密码">
                             <img src="../assets/images/pw-b.png" height="26" width="24" alt="">
                         </div>
-                        <button class="btn btn-zs btn-block" @click="getkey" >
+                        <button class="btn btn-zs btn-block" @click="getkey" :disabled="isdisabled">
                             立即登录
                         </button>
                     </div>
@@ -122,6 +122,7 @@ export default {
         return {
             uName: '',
             pWord: '',
+            isdisabled:false
 
         }
 
@@ -129,10 +130,10 @@ export default {
     methods: {
         getkey() {
             if (this.uName == '' || this.pWord == '') {
-                this.open("账号或密码不能为空");
+                this.open("用户名或密码不能为空");
                 return;
             }
-
+            this.isdisabled=true;
             this.$ajax.get('/apis/security/generateKey.do').then(res => {
 
                 if (res.data.success == true) {
@@ -165,11 +166,12 @@ export default {
                 }
             }).then(res => {
                 if (res.data.message == "登录成功") {
-                    sessionStorage.setItem('dl',"yes");
+                    localStorage.setItem('dl',"yes");
                     this.$router.push('/intelligence');
                     
                 } else {
                     this.open(res.data.message);
+                    this.isdisabled=false;
                 }
 
             }).catch(err => console.log(err))

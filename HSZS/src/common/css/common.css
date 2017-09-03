@@ -387,7 +387,9 @@ footer {
 .article-author {
     margin-top: 10px;
 }
-
+.article-block{
+    line-height:24px;
+}
 #media-pie,
 #key-yun {
     width: 400px;
@@ -732,8 +734,8 @@ button.btn-zs:focus {
 
 #leadCompany .col-xs-6,#parkPolicy .col-xs-6,#parkDynamics .col-xs-6{
     border: 1px solid #e8ebf2;
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

@@ -17,7 +17,7 @@
               发布时间：{{article.publishTime}}
              </span>
         </div>
-        <div v-html="article.content"></div>
+        <div v-html="article.content" class="article-block"></div>
         <div class="sub-info">
             <span>
              <img src="../../assets/images/pencil.png" alt="">

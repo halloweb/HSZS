@@ -15,6 +15,7 @@
         </ul>
      </div> 
      <div class="info-panel">
+         <a href="javascript:void(0);" class="blue pull-right" @click="$router.go(-1);">返回</a>
      	 <div class="info-box">
      	 	 <div class="title">{{details.company}}</div>
      	 	 <table>
@@ -114,8 +115,10 @@
             border-radius:50%;
             color:#fff;
             cursor:pointer;
+            transition:transform 0.5s;
             &.active{
-              background-color:#ff4f4f;  
+              background-color:#ff4f4f;
+              transform:scale(1.1);  
             }
             
 	    }
@@ -129,7 +132,7 @@
 
                 background:url(../../assets/images/rotate.png) center center no-repeat;
                 background-size:cover;
-                animation:rt 20s linear infinite;
+                animation:rt 60s linear infinite;
             }
         }
         .center{

@@ -16,7 +16,7 @@
                             </div>
                             <div class="article-box">
                                 <router-link class="title" :to="{ path:'/intelligence/article/'+item.articleId}">{{item.title}}</router-link>
-                                <p class="content">{{item.summary}}</p>
+                                <p class="content">{{item.content}}</p>
                             </div>
                         </div>
                     </div>

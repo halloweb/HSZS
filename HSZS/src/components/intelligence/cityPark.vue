@@ -130,11 +130,14 @@ export default {
         },
 
     },
-    created() {
-        $(".policy-title a").on("click", function() {
+    mounted(){
+      $(".policy-title a").on("click", function() {
             $(this).addClass("fc").siblings().removeClass("fc");
 
         });
+    },
+    created() {
+       
 
 
 
@@ -143,10 +146,7 @@ export default {
         this.parkList(this.$route.query.query,this.$route.query.industry);
 
         let index = this.area.indexOf(this.city.name)
-        this.select(index);
-
-
-
+        this.select(index)
     },
 }
 </script>

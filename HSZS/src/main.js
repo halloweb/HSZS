@@ -31,29 +31,36 @@ const router = new VueRouter({
     routes: routerConfig
 })
 router.beforeEach((to, from, next) => {
+    if(to.path=="/"){
+        axios.get('/apis/islogin.do').then(res => {
+            if (res.data.message=="已经登录") {
+                next({
+                    path: '/intelligence'
 
+                })
+                
+            } else {
+                next()
+            }
+    });
+  };
     if (to.matched.some(record => record.meta.requiresAuth)) {
+        axios.get('/apis/islogin.do').then(res => {
+            if (res.data.message=="已经登录") {
+                next()
+            } else {
+                next({
+                    path: '/'
 
-        if (!sessionStorage.dl) {
-            next({
-                path: '/'
+                })
 
-            })
-        } else {
-            next()
-        }
+            }
+        });
     } else {
         next()
     };
 
-    if (sessionStorage.dl=='yes'&&to.path =="/") {
-        next({
-            path: '/intelligence'
 
-        })
-    } else {
-        next()
-    };
 })
 new Vue({
     router,
