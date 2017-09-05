@@ -155,8 +155,14 @@ header .user {
     height: 80px;
     line-height: 80px;
     font-size: 16px;
-    color: #ffffff;
+    
+
 }
+header .user a{
+    color: #ffffff;
+    margin-left:20px;
+}
+
 
 header i {
     display: inline-block;
@@ -433,6 +439,7 @@ footer {
     margin-right: 20px;
     color: #000000;
     height: 40px;
+    padding: 0 5px;
 }
 
 .policy-title a:hover {
@@ -774,7 +781,9 @@ button.btn-zs:focus {
 .left-nav ol li a:hover {
     background-color: #35b8ff;
 }
-
+.table-box{
+        margin:30px -24px 0 -24px ;
+    }
 .table-zs {
     width: 100%;
 }

@@ -5,7 +5,7 @@
             <div class="left-bar">
                 <ul class="left-nav">
                     <li>
-                        <router-link to="/merchants" :class="{active:isActive}">
+                        <router-link to="/merchants/companySearch" active-class="active">
                             <img src="../assets/images/n1.png" height="20" width="17" alt=""> 企业搜索
                         </router-link>
                     </li>
@@ -51,7 +51,7 @@ export default {
     },
     data() {
         return {
-            isActive: false
+            
         }
     },
     mounted() {
@@ -63,18 +63,8 @@ export default {
                 $(".main-content").css({ "min-height": min_height });
             });
         });
-        if (this.$route.path == "/merchants" || this.$route.path == "/merchants/result" || this.$route.path == "/merchants/merchantsDetail") {
-            this.isActive = true;
-        }
+
     },
-    watch: {
-        '$route' (to, from) {
-            if (to.path !== "/merchants" && to.path !== "/merchants/result" && to.path !== "/merchants/merchantsDetail") {
-                this.isActive = false;
-            } else {
-                this.isActive = true;
-            }
-        }
-    }
+
 }
 </script>

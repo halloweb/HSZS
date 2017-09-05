@@ -235,10 +235,7 @@ export default {
                     textStyle: {
                         normal: {
                             color: function() {
-                                return 'rgb(' + [
-                                    Math.round(Math.random() * 160),
-                                    Math.round(Math.random() * 160),
-                                    Math.round(Math.random() * 160)
+                                return 'rgba(' + [239,7,7,Math.random().toString().slice(0,4)
                                 ].join(',') + ')';
                             }
                         },

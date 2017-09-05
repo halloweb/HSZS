@@ -1,7 +1,7 @@
 <template>
 	 <header>
          <div class="logo">
-                    <router-link to="/" class="icon-logo"></router-link>
+                    <router-link to="/intelligence" class="icon-logo"></router-link>
          </div>
         <ul class="top-bar">
             <li >
@@ -21,9 +21,12 @@
             </li>
            
         </ul>
-         <router-link class="user" to="/">
+        <span class="user">
+         <router-link  to="/user" >
                 <i class="icon-user"></i>个人中心
          </router-link>
+         <a href="javascript:void(0);" @click="loginOut">退出</a>
+        </span>
   </header>
 </template>
 <script>
@@ -34,7 +37,11 @@
 			}
 		},
         methods:{
-         
+         loginOut(){
+            this.$ajax.get('/apis/logOut.do').then(res=>{
+                this.$router.push('/')
+            }).catch(err => console.log(err))
+         },
         },
 		mounted(){
                  

@@ -2,7 +2,7 @@
     <div class="outflowDetails">
         <a href="#" @click="back()" class="back">返回</a>
         <div class="title"><span class="blue"></span>{{article.title}}</div>
-        <div class="sub-info">
+        <div class="sub-info" v-if="article.length>0">
              <span>
              <img src="../../assets/images/company.png" alt="">
              涉及公司：{{article.business}}
@@ -16,7 +16,7 @@
         <div v-html="article.content" class="article-block">
             
         </div>
-        <div class="sub-info">
+        <div class="sub-info" v-if="article.length>0">
             <span>
              <img src="../../assets/images/pencil.png" alt="">
               情报采集：{{article.source}}

@@ -7,7 +7,7 @@
         <button class="pull-right btn btn-zs"  v-if="!isCollect" @click="cancel">取消收藏</button>
         </span>
         </h4>
-        <div class="sub-info">
+        <div class="sub-info" v-if="article.length>0">
             <span>
              <img src="../../assets/images/company.png" alt="">
               涉及公司：{{article.business}}
@@ -18,7 +18,7 @@
              </span>
         </div>
         <div v-html="article.content" class="article-block"></div>
-        <div class="sub-info">
+        <div class="sub-info" v-if="article.length>0">
             <span>
              <img src="../../assets/images/pencil.png" alt="">
               情报采集：{{article.source}}

@@ -23,11 +23,12 @@ import search from '../components/merchants/search.vue'
 import companySearch from '../components/merchants/companySearch.vue'
 import result from '../components/merchants/result.vue'
 import merchantsDetail from '../components/merchants/merchantsDetail.vue'
-import intelligent from '../components/merchants/intelligent.vue'
-import industryType from '../components/merchants/industryType.vue'
 import focusCompany from '../components/merchants/focusCompany.vue'
 import semantic from '../components/merchants/semantic.vue'
-import recommendCompanys from '../components/merchants/recommendCompanys.vue'
+//智能企业
+import intelligent from '../components/merchants/intelligent.vue'
+import industryType from '../components/merchants/intelligent/industryType.vue'
+import recommendCompanys from '../components/merchants/intelligent/recommendCompanys.vue'
 //模拟tab页的子路由跳转引入
 import merchBasic from '../components/merchants/tabRouter/merchBasic.vue'
 import merchBusiness from '../components/merchants/tabRouter/merchBusiness.vue'
@@ -55,15 +56,22 @@ import companyBusiness from '../components/supervision/tabRouter/companyBusiness
 import companyInformation from '../components/supervision/tabRouter/companyInformation.vue'
 import companyFloor from '../components/supervision/tabRouter/companyFloor.vue'
 import companyRelation from '../components/supervision/tabRouter/companyRelation.vue'
-
+//个人中心
+import user from '../components/user.vue'
+import userCenter from '../components/user/userCenter.vue'
+import modify from '../components/user/modifyPWord.vue'
+import down from '../components/user/down.vue'
+import collect from '../components/user/collect.vue'
+import collectArticle from '../components/user/collectArticle.vue'
 export default [
     { path: '/', name: 'login', component: login },
     {
         path: '/intelligence',
         component: intelligence,
-         meta: { requiresAuth: true },
+        meta: { requiresAuth: true },
         children: [
-            { path: '', name: 'headlines', component: headlines },
+            { path: '/', redirect: '/intelligence/headlines' },
+            { path: 'headlines', name: 'headlines', component: headlines },
             { path: 'policy', name: 'policy', component: policy },
             {
                 path: 'expertView',
@@ -101,8 +109,10 @@ export default [
 
         component: merchants,
         meta: { requiresAuth: true },
-        children: [{
-                path: '',
+        children: [
+            { path: '/', redirect: '/merchants/companySearch' },
+            {
+                path: 'companySearch',
                 component: companySearch,
                 children: [
                     { path: '', component: search },
@@ -178,5 +188,19 @@ export default [
             },
 
         ]
-    }
+    }, {
+        path: '/user',
+        component: user,
+        children: [
+            { path: '/', redirect: 'userCenter' },
+            { path: 'userCenter', name: 'userCenter', component: userCenter },
+            { path: 'modify', name: 'modify', component: modify },
+            { path: 'down', component:down,children: [
+              {path: '', redirect: 'collect' },
+              { path: 'collect', name: 'collect', component: collect },
+              { path: 'collectArticle/:id', name: 'collectArticle', component: collectArticle },
+            ]},
+            
+        ]
+    },
 ]
