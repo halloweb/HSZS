@@ -87,7 +87,7 @@ export default {
         selectOne(index) {
             this.oneCode = index;
             this.twoCode = 0;
-            sessionStorage.setItem("oneCode", index);
+            localStorage.setItem("oneCode", index);
             if (this.timeShow == true) {
 
                 this.$emit('labelInfo', [this.typeOne[this.oneCode], this.typeTwo[this.oneCode][this.twoCode], this.time[this.timeCode]]);
@@ -102,7 +102,7 @@ export default {
         },
         selectTwo(index) {
             this.twoCode = index;
-            sessionStorage.setItem("twoCode", index);
+            localStorage.setItem("twoCode", index);
             if (this.showTime == true) {
                 this.$emit('labelInfo', [this.typeOne[this.oneCode], this.typeTwo[this.oneCode][this.twoCode], this.time[this.timeCode]]);
             } else if (this.showTime == false) {
@@ -112,8 +112,8 @@ export default {
         },
         selectTime(index) {
             this.timeCode = index;
-            sessionStorage.setItem("timeCode", index);
-            sessionStorage.setItem("time", this.time[this.timeCode]);
+            localStorage.setItem("timeCode", index);
+            localStorage.setItem("time", this.time[this.timeCode]);
             this.$emit('labelInfo', [this.typeOne[this.oneCode], this.typeTwo[this.oneCode][this.twoCode], this.time[this.timeCode]]);
         },
         getLabel() {
@@ -176,16 +176,16 @@ export default {
            
         }; 
          this.getLabel();
-        if (sessionStorage.getItem("oneCode")) {
+        if (localStorage.getItem("oneCode")) {
 
-            this.oneCode = sessionStorage.getItem("oneCode") - 0;
+            this.oneCode = localStorage.getItem("oneCode") - 0;
         };
-        if (sessionStorage.getItem("twoCode")) {
-            this.twoCode = sessionStorage.getItem("twoCode") - 0;
+        if (localStorage.getItem("twoCode")) {
+            this.twoCode = localStorage.getItem("twoCode") - 0;
         };
-        if (sessionStorage.getItem("timeCode")) {
-            let index=sessionStorage.getItem("timeCode") - 0;
-            if(this.time[index]==sessionStorage.getItem("time")){
+        if (localStorage.getItem("timeCode")) {
+            let index=localStorage.getItem("timeCode") - 0;
+            if(this.time[index]==localStorage.getItem("time")){
                 this.timeCode = index;
             }else{
                 this.timeCode =0;

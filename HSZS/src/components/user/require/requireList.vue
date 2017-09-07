@@ -121,6 +121,8 @@ export default {
     margin: 0 -24px;
     background-color: #fafafa;
     padding-bottom:10px;
+    border:none; 
+    border-bottom:1px solid #e8ebf2;
 }
 	.search{
 		padding:10px 0;

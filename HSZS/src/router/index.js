@@ -169,6 +169,7 @@ export default [
     }, {
         path: '/user',
         component: user,
+         meta: { requiresAuth: true },
         children: [
             { path: '/', redirect: 'userCenter' },
             { path: 'userCenter', name: 'userCenter', component: userCenter },

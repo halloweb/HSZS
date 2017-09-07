@@ -3,7 +3,7 @@
         <div class="title policy-title">
             <img src="../../assets/images/love.png" alt="">关注园区
         </div>
-        <ul class="type-box">
+        <ul class="type-box type-box-g">
             <li>
                 <div class="head">
                     区域

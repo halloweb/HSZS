@@ -2,7 +2,7 @@
     <div class="recommend clearfix">
      <div class="left-box">
           <ul class="list-wrapper">
-            <div class="bg">
+            <div class="bg" v-show="companys!=0">
               <div class="rotate"></div> 
             </div>
             <div class="center">

@@ -143,6 +143,7 @@ export default {
                     RSAUtils.setMaxDigits(200);
                     let key = new RSAUtils.getKeyPair(exponent, "", modulus);
                     let encrypedPwd = RSAUtils.encryptedString(key, this.pWord);
+                    this.pWord=encrypedPwd;
                     this.login(encrypedPwd);
 
                 }
@@ -170,6 +171,7 @@ export default {
                     this.$router.push('/intelligence');
                     
                 } else {
+                    this.pWord="";
                     this.open(res.data.message);
                     this.isdisabled=false;
                 }

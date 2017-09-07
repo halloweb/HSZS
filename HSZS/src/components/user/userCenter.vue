@@ -5,7 +5,7 @@
                 <img src="../../assets/images/peopleCenter.png" height="24" width="18" alt="">个人中心
             </div>
             <div class="userCenter">
-                <img src="" height="100" width="100" alt="头像">
+                <img :src="link" height="100" width="100" alt="头像">
                 <span>账号：{{user.userAccount}}</span>
                 <span>注册时间：{{user.createTime}}</span>
             </div>
@@ -33,8 +33,9 @@ export default {
     data() {
         return {
             user: {},
-            email: '710',
-            isModify: true
+            email: '',
+            isModify: true,
+            link:''
         }
     },
     methods: {
@@ -42,6 +43,7 @@ export default {
             this.$ajax.get('/apis/user/findMyInformation.json').then(res => {
                    this.user=res.data.data;
                    this.email=res.data.data.userEmail;
+                   this.link='http://localhost:8092'+this.user.imageUrl;
             }).catch(err => console.log(err))
         },
         modify() {
@@ -91,9 +93,9 @@ export default {
     padding-bottom: 10px;
     img {
         border-radius: 50%;
-        transition:transform 2s;
+        transition:transform 1s;
         &:hover{
-            transform:rotateY(360deg);
+            transform:rotateY(180deg);
         }
     }
     span {

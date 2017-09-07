@@ -4,11 +4,13 @@
         <div class="content-block">
             <p class="title"><img src="../../assets/images/media.png" alt="">媒体聚焦</p>
             <div class="row" v-show="showMedia">
-                <div class="col-xs-6">
+               
+                <div class="col-xs-6" >
+                    
                     <div id="media-pie">
                     </div>
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-6" >
                     <div class="tody-headlines">
                         <div class="list-title">{{activedMedia}}</div>
                         <ul class="list-box" id="tody-headlines">
@@ -87,7 +89,8 @@ export default {
             mediapie: '',
             yun: '',
             showMedia: true,
-            showKey: true,
+            showKey: true
+           
         }
     },
     methods: {
@@ -99,12 +102,13 @@ export default {
 
         },
         getMedia(val) {
+            
             this.$ajax.post('/apis/Headlines/getClondChartList.json', { 'msg': val }).then(res => {
                 if (res.data.data.length != 0) {
-
+                    
                     this.showMedia = true;
                     this.mediaData = res.data.data;
-
+                    
                     this.mediaFocus(this.mediaData);
                     this.activedMedia = res.data.data[0].name;
                     this.mediasParams = [];
@@ -207,7 +211,7 @@ export default {
                             length2: 20
                         }
                     },
-                    color: ['#55bdff', '#f8427f', '#5584ff', '#22b3ca'],
+                    color: ['#55bdff', '#f8427f', '#5584ff', '#22b3ca','#5d71f1'],
                     data: [
 
 

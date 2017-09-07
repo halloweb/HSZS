@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="park-list">
-                <ul class="type-box">
+                <ul class="type-box type-box-g">
                     <li>
                         <div class="head">
                             区域
@@ -85,6 +85,7 @@
 .article-title {
     width: 100%;
 }
+
 </style>
 <script>
 import echarts from 'echarts/lib/echarts';

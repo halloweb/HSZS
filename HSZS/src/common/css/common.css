@@ -12,7 +12,9 @@ a:focus {
     outline: none;
     text-decoration: none;
 }
-
+.el-icon-loading{
+    font-size: 20px;
+}
 .blue {
     color: #00a5ff;
 }
@@ -250,10 +252,15 @@ footer {
 
 .type-box {
     padding: 24px;
+    padding-bottom:10px;
     background-color: #ffffff;
     border: 1px solid #e8ebf2;
 }
+.type-box-g{
 
+      border:none; 
+    border-bottom:1px solid #e8ebf2;
+}
 .type-box .head {
     width: 90px;
     display: inline-block;
@@ -398,7 +405,7 @@ footer {
 }
 #media-pie,
 #key-yun {
-    width: 400px;
+    width: 450px;
     height: 400px;
     margin: 0 auto;
 }

@@ -1,5 +1,6 @@
 <template>
 	<div class="content-block">
+	 <a href="javascript:void(0);" class="blue" @click="$router.go(-1)">返回</a>
 		<div class="require">
 			<table class="table-zs">
 				<tbody>

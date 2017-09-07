@@ -1,6 +1,6 @@
 <template>
     <div class="content-block">
-        <ul class="type-box">
+        <ul class="type-box ">
             <li>
                 <div class="head">
                     产业描述
@@ -107,6 +107,7 @@ export default {
             group: ["全部"],
 
             option1: [
+                { value: '全部' },
                 { value: '互联网' },
                 { value: '高科技' },
                 { value: '文化创意' },
@@ -114,7 +115,7 @@ export default {
                 { value: '滨海旅游' },
                 { value: '港口物流' },
             ],
-            industry: "互联网",
+            industry: "全部",
             option2: [
                 { value: '全部' },
                 { value: '0-100万' },

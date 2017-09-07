@@ -20,7 +20,7 @@ Vue.use(Vuex)
 Vue.use(utils)
 
 Vue.prototype.$ajax = axios
-
+Vue.prototype.warn={show:false,content:''};
 
 
 
@@ -36,7 +36,7 @@ router.beforeEach((to, from, next) => {
             if (res.data.message=="已经登录") {
                 next({
                     path: '/intelligence'
-
+                    
                 })
                 
             } else {
@@ -48,6 +48,10 @@ router.beforeEach((to, from, next) => {
         axios.get('/apis/islogin.do').then(res => {
             if (res.data.message=="已经登录") {
                 next()
+                if(res.data.data.iswarn){
+                    Vue.prototype.warn.show=true;
+                    Vue.prototype.warn.content=res.data.data.iswarn;
+                }
             } else {
                 next({
                     path: '/'

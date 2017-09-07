@@ -39,7 +39,9 @@
         methods:{
          loginOut(){
             this.$ajax.get('/apis/logOut.do').then(res=>{
-                this.$router.push('/')
+                this.$router.push('/');
+                localStorage.clear();
+
             }).catch(err => console.log(err))
          },
         },
