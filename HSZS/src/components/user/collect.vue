@@ -21,16 +21,16 @@
               	 <tbody>
               	 	<tr v-if="head.length==7" v-for="(item,index) in list">
               	 		<td>{{index+1}}</td>
-              	 		<td><router-link :to="{path:'/user/down/collectArticle'+item.id}">{{item.title}}</router-link></td>
+              	 		<td><router-link :to="{path:'/user/down/collectArticle/'+item.articleId}">{{item.title}}</router-link></td>
               	 		<td>{{item.industry}}</td>
               	 		<td>{{item.author}}</td>
               	 		<td>{{item.publishTime}}</td>
                     <td>{{item.lanmu}}</td>
-                    <td><a href="javascript:void(0);" class="blue" @click="remove(item.id)">删除</a></td>
+                    <td><a href="javascript:void(0);" class="blue" @click="remove(item.articleId)">删除</a></td>
               	 	</tr>
                   <tr v-if="head.length!=7">
                     <td>1</td>
-                    <td><router-link to="/user/down/collectArticle">aa</router-link></td>
+                    <td><router-link to="/user/down/collectArticle/">aa</router-link></td>
                     <td>1</td>
                     <td>1</td>
                     <td>1</td>
@@ -94,7 +94,7 @@
 			},
       remove(data){
           this.$ajax.get('/apis/expert/cancelCollectExpertOpinion.json', { params: {id:data}}).then(res => {
-
+                  this.getList(); 
             }).catch(err => console.log(err))
       },
 

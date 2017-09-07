@@ -1,0 +1,74 @@
+<template>
+	<div class="content-block">
+		<div class="require">
+			<table class="table-zs">
+				<tbody>
+					<tr>
+						<td>企业名</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>所属企业</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>企业标签</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>企业关系</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>企业关系备注</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>企业状态</td>
+						<td></td>
+					</tr>
+
+					<tr>
+						<td>负责人</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>招商状态</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>招商备注</td>
+						<td>aa</td>
+					</tr>
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</template>
+<script>
+	export default{
+		data(){
+             return{
+                  company:{}
+             }
+		},
+        
+	}
+</script>
+<style scoped>
+	.require{
+		width:740px;
+		margin:0 auto;
+		margin-top:20px;
+		border:1px solid #e8ebf2;
+	}
+.require tr td{
+		width:50%;
+		text-align:left;
+		
+	}
+.require tr td:first-child{
+	padding-left:150px;
+}
+</style>

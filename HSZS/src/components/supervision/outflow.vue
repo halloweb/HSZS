@@ -17,7 +17,7 @@
         	<tbody>
         		<tr v-for="(item,index) in list">
         			<td>{{item.business}}</td>
-        			<td>{{item.content}}</td>
+        			<td>{{item.title}}</td>
         		
         			<td>2017-01-02</td>
         			<td><router-link class="blue" :to="{path:'/supervision/articleList/'+item.id}">查看详情</router-link></td>

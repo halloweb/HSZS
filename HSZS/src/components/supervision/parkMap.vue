@@ -58,9 +58,9 @@ export default {
     },
     methods: {
         more() {
-            this.pageNumber++;
-            this.getList();
-
+            // this.pageNumber++;
+            // this.getList 
+            this.$router.push("/supervision/goodNews");
         },
         getList() {
             this.$ajax.post('/apis/business/getParkBehaviours.json', {pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {

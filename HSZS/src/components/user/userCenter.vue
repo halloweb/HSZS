@@ -62,8 +62,20 @@ export default {
                     });
                  return;
             };
-            this.ajax.post('', {}).then(res => {
-
+            this.$ajax.get('/apis/user/modifyEmail.json', {params:{email:this.email}}).then(res => {
+                  if(res.data.message=="邮箱修改成功"){
+                        this.$message({
+                      showClose: true,
+                      message: '邮箱修改成功',
+                      type: 'success'
+                    });
+                  }else{
+                     this.$message({
+                      showClose: true,
+                      message: res.data.message,
+                      type: 'error'
+                    });
+                  }
             }).catch(err => console.log(err))
         },
     },

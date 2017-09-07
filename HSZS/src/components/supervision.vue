@@ -15,12 +15,12 @@
                          <ol>
                          	<li>
                          	<router-link to="/supervision/goodNews" active-class="active" > 
-                         	<img src="../assets/images/good-w.png" height="18" width="18" alt="">
+                         	<img src="../assets/images/good-w.png" height="16" width="18"  alt="">
 		                    企业捷报</router-link>
 		                    </li>
 		                    <li>
                          	<router-link to="/supervision/badNews" active-class="active" > 
-                         	<img src="../assets/images/bad-w.png" height="18" width="18" alt="">
+                         	<img src="../assets/images/bad-w.png" height="14" width="15"  alt="">
 		                    企业负面</router-link>
 		                    </li>
                          </ol>
@@ -31,13 +31,13 @@
 		                <img src="../assets/images/n7.png" height="19" width="18" alt="">园区预警</a>
 		                 <ol>
                          	<li>
-                         	<router-link to="/supervision/companyOut" active-class="active" > 
-                         	<img src="../assets/images/outflow.png" height="18" width="18" alt="">
+                         	<router-link to="/supervision/outflow" active-class="active" > 
+                         	<img src="../assets/images/outflow.png" height="15" width="15"  alt="">
 		                    企业疑似外流</router-link>
 		                    </li>
 		                    <li>
                          	<router-link to="/supervision/infoWarning" active-class="active" > 
-                         	<img src="../assets/images/change.png" height="18" width="18" alt="">
+                         	<img src="../assets/images/change.png" height="18" width="17"alt="">
 		                    信息变更预警</router-link>
 		                    </li>
                          </ol>

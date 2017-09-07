@@ -25,7 +25,7 @@
         			<td>企业</td>
         			<td>董事</td>
         			<td>2017-01-02</td>
-        			<td><router-link class="blue" to="/supervision/infoWarning/warningDetai">查看详情</router-link></td>
+        			<td><router-link class="blue" to="/supervision/infoWarning/warningDetails">查看详情</router-link></td>
         		</tr>
         		<tr>
         			<td>爱心人寿保险股份有限公司</td>

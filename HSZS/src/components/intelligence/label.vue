@@ -27,7 +27,7 @@
         </ul>
         <el-dialog :visible.sync="dialogVisible" size="large">
             <div class="label-box">
-                <p class="label-title">互联网:</p>
+                <p class="label-title">互联网+:</p>
                 <el-checkbox-group v-model="checkList1">
                     <el-checkbox v-for="label in label1" :label="label" :key="label"></el-checkbox>
                 </el-checkbox-group>

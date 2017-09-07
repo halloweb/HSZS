@@ -22,13 +22,7 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/user/order" active-class="active">
-                            <img src="../assets/images/order.png" style="margin-right:10px;"  alt=""> 
-                            订单管理
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/user/require" active-class="active">
+                        <router-link to="/user/requires" active-class="active">
                             <img src="../assets/images/text.png"  alt="">
                             招商需求池
                         </router-link>

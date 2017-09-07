@@ -192,7 +192,7 @@ header i {
 
 .top-bar li a.active {
     color: #5584ff;
-    border-bottom: 2px solid #00a5ff;
+    border-bottom: 2px solid #5584ff;
 }
 
 .top-bar li .i1 {
@@ -595,19 +595,26 @@ h4 .btn-zs {
     margin-top: -8px;
 }
 
-button.btn-zs {
+button.btn-zs,a.btn-zs {
     background-color: #00a5ff;
     color: #ffffff;
 }
 
-button.btn-zs:hover {
+button.btn-zs:hover,a.btn-zs:hover {
     color: #ffffff;
 }
 
-button.btn-zs:focus {
+button.btn-zs:focus,a.btn-zs:focus {
     color: #ffffff;
 }
-
+button.btn-zs-o,a.btn-zs-o{
+    border:1px solid #00a5ff;
+    color:#00a5ff;
+    background-color:#fff;
+}
+.btn-zs-o:hover,.btn-zs-o:focus{
+    color:#00a5ff;
+}
 .sub-info {
     margin: 15px 0;
     color: #999999;
