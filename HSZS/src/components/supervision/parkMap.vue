@@ -1,7 +1,7 @@
 <template>
     <div class="content-block">
         <h4 class="text-center">{{info.name}}
-        <router-link to="/supervision/companyOut" class="pull-right btn btn-red">辖区预警({{warningCount}})</router-link>
+        <router-link to="/supervision/outflow" class="pull-right btn btn-red">辖区预警({{warningCount}})</router-link>
         </h4>
         <bd-map :park-info="info"></bd-map>
         <div class="company-sort">

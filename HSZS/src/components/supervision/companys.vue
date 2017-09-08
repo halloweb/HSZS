@@ -29,17 +29,17 @@
                     <el-input v-model="addGroup" placeholder="请输入组名"></el-input>
                     <span slot="footer" class="dialog-footer">
                                 <el-button @click="addVisible = false">取 消</el-button>
-                                <el-button type="primary" @click="addlist(item)">确 定</el-button>
+                                <el-button type="primary" @click="addlist">确 定</el-button>
                     </span>
                 </el-dialog>
                 <el-dialog :visible.sync="removeVisible" size="tiny" class="text-center" title="删除企业分组">
-                    <el-select v-model="removes" multiple placeholder="请选择">
+                    <el-select v-model="removes" multiple placeholder="请选择组">
                         <el-option v-for="item in removeGroup" :key="item.value" :value="item.value">
                         </el-option>
                     </el-select>
                     <span slot="footer" class="dialog-footer">
                                 <el-button @click="removeVisible=false">取 消</el-button>
-                                <el-button type="primary" @click="removelist()">确 定</el-button>
+                                <el-button type="primary" @click="removelist">确 定</el-button>
                     </span>
                 </el-dialog>
             </li>
@@ -81,7 +81,7 @@
                 <el-button @click="collect(item)">收藏企业</el-button>
             </li>
             <el-dialog :visible.sync="selectVisible" size="tiny" class="text-center" title="选择组名">
-                <el-select v-model="selectGroup" placeholder="请选择">
+                <el-select v-model="selectGroup" placeholder="请选择组">
                     <el-option v-for="item in removeGroup" :key="item.value" :value="item.value">
                     </el-option>
                 </el-select>
@@ -183,21 +183,28 @@ export default {
 
             }).catch(err => console.log(err))
         },
+        msg(data,type){
+           this.$message({
+                        message: data,
+                        type: type
+                    });
+        },
         addlist() {
-
+            let rex=/(^[\u4E00-\u9FA5a-zA-Z0-9_]+$)/;
+            if(!rex.test(this.addGroup)){
+                this.msg('组名由中英文数字下划线组成并不能为空','warning');
+                return;
+            }else if(this.addGroup.length>10){
+                this.msg('组名不能超过十个字符','warning');
+                return;
+            };
             this.$ajax.get('/apis/supervise/addCompanyGroup.json', { params: { groupName: this.addGroup } }).then(res => {
                 if (res.data.data.state == "success") {
                     this.addVisible = false;
                     this.getGroup();
-                    this.$message({
-                        message: '添加分组成功',
-                        type: 'success'
-                    });
+                    this.msg('添加分组成功','success');
                 } else if (res.data.data.state == "分组已经存在") {
-                    this.$message({
-                        message: '组名已存在',
-                        type: 'warning'
-                    });
+                    this.msg('组名已存在','warning')
                 } else {
                     this.$message.error('添加分组失败');
                 }
@@ -208,13 +215,16 @@ export default {
 
         },
         removelist() {
+            
+            if(this.removes.length==0){
+                this.msg('请选择要删除组名','warning');
+                return;
+            }
             let p = this.removes.join();
             this.$ajax.get('/apis/supervise/dropCompanyGroup.json', { params: { groupNames: this.removes } }).then(res => {
                 if (res.data.data == true) {
-                    this.$message({
-                        message: '删除分组成功',
-                        type: 'success'
-                    });
+                   
+                    this.msg('删除分组成功','success');
                     this.removeVisible = false;
                     this.getGroup();
 
@@ -238,10 +248,7 @@ export default {
             };
             this.$ajax.post('/apis/supervise/saveCompanyByGroupId.json', { companyId: this.collectID, groupname: this.selectGroup }).then(res => {
                 if (res.data.data == true) {
-                    this.$message({
-                        message: '分组成功',
-                        type: 'success'
-                    });
+                    this.msg('分组成功','success');
                     this.selectVisible = false;
                 } else {
                     alert("操作失败")
@@ -254,6 +261,7 @@ export default {
             this.pageNumber = val;
             this.getcompany();
         },
+
     },
     mounted() {
 

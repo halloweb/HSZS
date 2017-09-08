@@ -75,7 +75,7 @@
 				this.type=e.currentTarget.innerText;
 				if(e.currentTarget.innerText==="政策"){
                      this.code=1;
-                     this.head=['编号','文章标题',"产业","作者","发表时间","栏目",,"操作"];
+                     this.head=['编号','文章标题',"产业","作者","发表时间","栏目","操作"];
 				}else if(e.currentTarget.innerText==="企业报告"){
 					this.code=2;
 					this.head=['编号','企业名称',"产业","发表时间","企业类型","操作"];
@@ -83,7 +83,7 @@
 					this.code=0;
 					this.head=['编号','文章标题',"产业","作者","发表时间","栏目","操作"];
 				};
-                
+         this.getList();       
 			},
 			getList(){
                  this.$ajax.post('/apis/background/getPersonCollection.json',{query:this.type,pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
