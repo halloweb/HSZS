@@ -1,7 +1,7 @@
 <template>
     <div class="content-block">
         <h4 class="text-center">{{info.name}}
-        <router-link to="/supervision/outflow" class="pull-right btn btn-red">辖区预警({{warningCount}})</router-link>
+        <router-link to="/supervision/outflow" class="pull-right btn btn-red">园区预警({{warningCount}})</router-link>
         </h4>
         <bd-map :park-info="info"></bd-map>
         <div class="company-sort">
@@ -47,7 +47,8 @@ export default {
     data() {
         return {
             info: {
-                name: ''
+                name: '',
+                address:''
             },
             pageNumber:1,
             pageSize:8,
@@ -72,6 +73,7 @@ export default {
         getInfo() {
             this.$ajax.get('/apis/supervise/getGardenInfo.json').then(res => {
                 this.info.name = res.data.data.park;
+                this.info.address=res.data.data.address;
                 this.park = res.data.data;
             }).catch(err => console.log(err))
         },

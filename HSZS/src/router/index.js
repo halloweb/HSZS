@@ -23,10 +23,11 @@ import companySearch from '../components/merchants/companySearch.vue'
 import result from '../components/merchants/result.vue'
 import merchantsDetail from '../components/merchants/merchantsDetail.vue'
 import focusCompany from '../components/merchants/focusCompany.vue'
-
 //智能企业
 import industryType from '../components/merchants/intelligent/industryType.vue'
 import recommendCompanys from '../components/merchants/intelligent/recommendCompanys.vue'
+//产业智图
+import wisdomMap from '../components/merchants/wisdomMap.vue'
 //模拟tab页的子路由跳转引入
 import merchBasic from '../components/merchants/tabRouter/merchBasic.vue'
 import merchBusiness from '../components/merchants/tabRouter/merchBusiness.vue'
@@ -127,6 +128,7 @@ export default [
             {path: 'intelligent',redirect:'intelligent/industryType'},     
             { path: 'intelligent/industryType', name: 'industryType', component: industryType },
             { path: 'intelligent/recommendCompanys', name: 'recommendCompanys', component: recommendCompanys },
+            { path: 'wisdomMap', name: 'wisdomMap', component: wisdomMap },
             { path: 'focusCompany', name: 'focusCompany', component: focusCompany }
 
         ]
@@ -136,7 +138,8 @@ export default [
         component: supervision,
         meta: { requiresAuth: true },
         children: [
-            { path: '', name: 'parkMap', component: parkMap },
+            { path:'',redirect:'parkMap'},
+            { path: 'parkMap', name: 'parkMap', component: parkMap },
             {
                 path: 'parkCompanys',
                 component: parkCompanys,

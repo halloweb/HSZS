@@ -20,54 +20,26 @@ Vue.use(Vuex)
 Vue.use(utils)
 
 Vue.prototype.$ajax = axios
-window.warnModal={show:false,content:''};
-
-
-
-
 
 const router = new VueRouter({
     mode: 'history',
     routes: routerConfig
 })
-router.beforeEach((to, from, next) => {
-    if(to.path=="/"){
-        axios.get('/apis/islogin.do').then(res => {
-            if (res.data.message=="已经登录") {
-                next({
-                    path: '/intelligence'
-                    
-                })
-                
-            } else {
-                next()
-            }
-    });
-  };
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        axios.get('/apis/islogin.do').then(res => {
-            if (res.data.message=="已经登录") {
-               
-              
-                    warnModal.show=true;
-                    warnModal.content=res.data.data.iswarn;
 
-             
-               next()
-            } else {
-                next({
-                    path: '/'
+//添加响应拦截器
+axios.interceptors.response.use(function(response){
+     //对响应数据做些事
+      
+      if(response.data.code=='1002'){
+         router.replace('/')
+      };
+      
+      return response;
+   },function(error){
+     //请求错误时做些事
 
-                })
-
-            }
-        });
-    } else {
-        next()
-    };
-
-
-})
+     return Promise.reject(error);
+   });
 new Vue({
     router,
     store,

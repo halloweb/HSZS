@@ -1,7 +1,7 @@
 <template>
     <div class="content-block">
         <div class="title policy-title">
-            <img src="../../assets/images/good.png" alt="">企业捷报
+            <img src="../../assets/images/good-b.png" alt="">企业捷报
         </div>
         <ul class="list-box">
             <li v-for="(item,index) in article">

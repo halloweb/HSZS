@@ -1,7 +1,7 @@
 <template>
 	<div class="content-block">
 		<div class="title policy-title">
-           <img src="../../assets/images/yanz.png" alt="">信息变更预警
+           <img src="../../assets/images/change-b.png" alt="">信息变更预警
         </div>
         <div class="change-search">
          <el-input placeholder="变更搜索" v-model="searchVal">

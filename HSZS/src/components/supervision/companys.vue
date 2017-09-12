@@ -3,7 +3,7 @@
         <ul class="type-box ">
             <li>
                 <div class="head">
-                    产业描述
+                    企业描述
                 </div>
                 <p class="type-list">
                     <el-select v-model="industry" size="small" @change="select">
@@ -18,7 +18,7 @@
             </li>
             <li>
                 <div class="head">
-                    产业分组
+                    企业分组
                 </div>
                 <p class="type-list">
                     <span v-for="(item,index) in group" @click="select2(item,index)" :class="{active:activeIndex==index}">{{item}}</span>
@@ -53,6 +53,9 @@
             
         </div> -->
         <ul>
+           <div class="text-center no-data" v-if="company.length==0" >
+                   <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+           </div>
             <li class="content-box" v-for="(item,index) in company">
                 <div class="main-body">
                     <img :src="item.logo" height="100" width="162" alt="">
@@ -78,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-                <el-button @click="collect(item)">收藏企业</el-button>
+                <el-button @click="collect(item)">添加到</el-button>
             </li>
             <el-dialog :visible.sync="selectVisible" size="tiny" class="text-center" title="选择组名">
                 <el-select v-model="selectGroup" placeholder="请选择组">
@@ -194,7 +197,8 @@ export default {
             if(!rex.test(this.addGroup)){
                 this.msg('组名由中英文数字下划线组成并不能为空','warning');
                 return;
-            }else if(this.addGroup.length>10){
+            };
+            if(this.addGroup.length>10){
                 this.msg('组名不能超过十个字符','warning');
                 return;
             };
@@ -203,6 +207,7 @@ export default {
                     this.addVisible = false;
                     this.getGroup();
                     this.msg('添加分组成功','success');
+                    this.addGroup='';
                 } else if (res.data.data.state == "分组已经存在") {
                     this.msg('组名已存在','warning')
                 } else {
@@ -227,7 +232,8 @@ export default {
                     this.msg('删除分组成功','success');
                     this.removeVisible = false;
                     this.getGroup();
-
+                    this.select2('全部', 0);
+                    this.removes=[];
                 } else {
                     this.$message.error('删除分组失败');
                 }
@@ -238,6 +244,10 @@ export default {
             })
         },
         collect(item) {
+            if(this.removeGroup.length==0){
+                this.msg('请先添加企业分组','warning');
+                return;
+            };
             this.selectVisible = true;
             this.collectID = item.cid;
         },
@@ -247,11 +257,11 @@ export default {
                 return;
             };
             this.$ajax.post('/apis/supervise/saveCompanyByGroupId.json', { companyId: this.collectID, groupname: this.selectGroup }).then(res => {
-                if (res.data.data == true) {
+                if (res.data.data == 0) {
                     this.msg('分组成功','success');
                     this.selectVisible = false;
-                } else {
-                    alert("操作失败")
+                } else{
+                    this.msg('该组中已存在此企业','warning');
                 }
 
             }).catch(err => console.log(err))

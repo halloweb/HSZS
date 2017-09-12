@@ -14,7 +14,7 @@
         <div class="tab-content">
             <div class="tab-pane fade in active clearfix" id="leadCompany">
                 <div class=" col-xs-6" v-for="(item,index) in leadCompany">
-                    {{item.business}}
+                    <span>{{item.business}}</span>
                     <router-link :to="{path:'/merchants/merchantsDetail',query:{query:item.business}}" class="pull-right blue">
                         详情
                     </router-link>
@@ -22,23 +22,32 @@
             </div>
             <div class="tab-pane fade clearfix" id="parkPolicy">
                 <div class=" col-xs-6" v-for="(item,index) in  parkPolicy">
-                   
-                    <router-link :to="{ path:'/intelligence/article/'+item.id}">
-                         {{item.title}}
+                     <span>{{item.title}}</span>
+                    <router-link :to="{ path:'/intelligence/article/'+item.id}" class="pull-right blue">
+                        详情
                     </router-link>
                 </div>
             </div>
             <div class="tab-pane fade clearfix" id="parkDynamics">
-                <div class=" col-xs-6" v-for="(item,index) in parkDynamics">
-                   
-                    <router-link :to="{ path:'/intelligence/article/'+item.id}">
-                        {{item.title}}
+                <div class=" col-xs-6" v-for="(item,index) in  parkPolicy">
+                   <span>{{item.title}}</span>
+                    <router-link :to="{ path:'/intelligence/article/'+item.id}" class="pull-right blue">
+                        详情
                     </router-link>
                 </div>
             </div>
         </div>
     </div>
 </template>
+<style scoped>
+    .col-xs-6 span{
+        display:inline-block;
+        width:80%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    }
+</style>
 <script>
 import bdMap from '../commonParts/bdMap.vue'
 export default {
@@ -49,7 +58,8 @@ export default {
         return {
             info: {
                 name: '中关村软件园',
-                id: ''
+                id: '',
+                address:''
             },
             leadCompany: [],
             parkPolicy: [],
@@ -90,6 +100,7 @@ export default {
             })
         });
         this.info.name = this.$route.query.query;
+        this.info.address=this.$route.query.address;
         this.info.id = this.$route.query.id;
 
         this.getList(this.$route.query.query);

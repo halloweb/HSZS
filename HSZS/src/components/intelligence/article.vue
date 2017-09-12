@@ -1,10 +1,10 @@
 <template>
     <div class="article-details">
         <a href="javascript:void(0);" class="blue" @click="back">返回</a>
-        <h4 class="text-center" v-if="article.title">{{article.title}}
+        <h4 class="text-center" v-if="article.title" >{{article.title}}
         <span v-if="isShow">
-        <button class="pull-right btn btn-zs" @click="collect" v-if="isCollect">收藏</button>
-        <button class="pull-right btn btn-zs"  v-if="!isCollect" @click="cancel">取消收藏</button>
+        <button class=" btn btn-zs" @click="collect" v-if="isCollect">收藏</button>
+        <button class=" btn btn-zs"  v-if="!isCollect" @click="cancel">取消收藏</button>
         </span>
         </h4>
         <div class="sub-info" v-if="article.title">
@@ -30,6 +30,10 @@
         </div>
     </div>
 </template>
+<style scoped>
+    h4{position:relative;padding:0 90px;}
+    h4 span{position:absolute;right:0;top:0;}
+</style>
 <script>
 export default {
     data() {

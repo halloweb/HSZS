@@ -36,7 +36,7 @@
                             <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
                                 <span class="blue m-left">【{{item.area}}】</span> {{item.title}}
                             </router-link>
-                            <span class="article-time">{{item.publishDate}}</span>
+                            <span class="article-time">{{item.publishTime}}</span>
                         </div>
                         <p class="article-content">
                             {{item.summary}}
@@ -55,7 +55,7 @@
                             <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
                                 <span class="blue m-left">【{{item.area}}】</span> {{item.title}}
                             </router-link>
-                            <span class="article-time">{{item.publishDate}}</span>
+                            <span class="article-time">{{item.publishTime}}</span>
                         </div>
                         <p class="article-content">
                             {{item.content}}
@@ -85,23 +85,11 @@ export default {
             explanation: [
                 { content: '22222222222' }
             ],
-            lunT: [{
-                location: '北京',
-                title: '创新峰会大数据与分析',
-                time: '2017-02-02',
-                content: '创新峰会大数据与分析',
-                id: 3
-            }],
-            keY: [{
-                location: '北京',
-                title: '创新峰会大数据与分析',
-                time: '2017-02-02',
-                content: '创新峰会大数据与分析',
-                id: 4
-            }],
+            lunT: [],
+            keY: [],
             params: [],
-            options: [{ value: '北京' }, { value: '上海' }, { value: '广州' }, { value: '深圳' }, { value: '杭州' }, { value: '苏州' }, { value: '南京' }, { value: '天津' }, { value: '青岛' }, { value: '大连' }],
-            area: '北京'
+            options: [{ value: '全国' },{ value: '北京' }, { value: '上海' }, { value: '广州' }, { value: '深圳' }, { value: '杭州' }, { value: '苏州' }, { value: '南京' }, { value: '天津' }, { value: '青岛' }, { value: '大连' }],
+            area: '全国'
 
         }
     },

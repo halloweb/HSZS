@@ -20,9 +20,9 @@
                        <img src="../../assets/images/laiyuan.png" alt="">
                         {{item.vector}}
                        </span>
-                        <span v-if="item.publishDate">
+                        <span v-if="item.publishTime">
                        <img src="../../assets/images/time.png" alt="">
-                        {{item.publishDate}}
+                        {{item.publishTime}}
                        </span>
                     </div>
                 </li>

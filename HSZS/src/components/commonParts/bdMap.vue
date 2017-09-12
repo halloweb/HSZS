@@ -53,7 +53,7 @@ export default {
             //解析并标注所在城市园区
             let vm =this;
             var adds = this.cityInfo.park;
-           
+            map.clearOverlays();
             var index = 0;
             geocodeSearch();
 
@@ -96,7 +96,7 @@ export default {
               let vm=this;
 
                 // 将地址解析结果显示在地图上,并调整地图视野
-                this.myGeo.getPoint(this.parkInfo.name, function(point) {
+                this.myGeo.getPoint(this.parkInfo.address, function(point) {
 
                     if (point) {
 
@@ -128,7 +128,7 @@ export default {
                  this.view(this.BMap,this.myGeo,this.map)
             }
         },
-        'parkInfo.name':function(val){
+        'parkInfo.address':function(val){
             if(this.parkInfo!=undefined){
                  if(val!=''&&this.myGeo!=''){
                this.park();
@@ -143,10 +143,11 @@ export default {
             }
             }
         },
+
     },
     mounted() {
 
-        console.log(this.parkInfo);
+        
         this.$nextTick(function() {
 
             var vm = this;

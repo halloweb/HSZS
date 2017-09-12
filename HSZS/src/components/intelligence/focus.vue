@@ -22,12 +22,15 @@
             </li>
         </ul>
         <ul class="park-l-menu">
+            <div class="text-center no-data" v-if="list.length==0" >
+                <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+            </div>
             <li v-for="(item,index) in list">
                 <img :src="item.gardenPicture" alt="" class="park-picture" width="145" height="115">
                 <div class="right-content">
                     <div>
-                        <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails',query:{query:item.gardenName,id:item.id}}">
-                            {{item.gardenName}}
+                       <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails',query:{query:item.gardenName,id:item.id,address:item.address}}">
+                                    {{item.gardenName}}
                         </router-link>
                     </div>
                     <p class="article-content">
@@ -42,23 +45,33 @@
                 </div>
             </li>
         </ul>
+         <div class="text-center" v-if="total!=0">
+                    <el-pagination @current-change="change" :page-size="pageSize" layout="prev, pager, next" :total="total">
+                    </el-pagination>
+         </div>
     </div>
 </template>
 <script>
 export default {
     data() {
         return {
+            pageNumber:1,
+            pageSize:10,
+            total:0,
             list: [],
             area: ["不限", "北京", "上海", "广州", "深圳", "杭州", "苏州", "南京", "天津", "青岛", "大连"],
             industryType: ["不限", "互联网", "高科技", "文化创意", "精英配套", "滨海旅游", "港口物流"],
             areaCode: 0,
             typeCode: 0
+
         }
     },
     methods: {
         getList(data) {
-            this.$ajax.post('/apis/area/getAttentionGardenList.json', { 'msg': data }).then(res => {
-                this.list = res.data.data.content;
+            this.$ajax.post('/apis/area/getAttentionGardenList.json', { 'msg': data,pageNumber:this.pageNumber,pageSize:this.pageSize }).then(res => {
+                
+                    this.list = res.data.data.content;
+                    this.total = res.data.data.totalElements;
             }).catch(err => console.log(err))
         },
         select(index) {
@@ -71,6 +84,10 @@ export default {
             this.typeCode = index;
             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
 
+        },
+        change(val){
+            this.pageNumber=val;
+            this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
     },
     mounted() {

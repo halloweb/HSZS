@@ -3,6 +3,9 @@
         <label-list @labelInfo='labelInfo' :time-show='true'></label-list>
         <div class="content-block">
             <p class="title"><img src="../../assets/images/media.png" alt="">媒体聚焦</p>
+            <div class="row text-center" v-show="!showMedia" >
+                <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+            </div>
             <div class="row" v-show="showMedia">
                
                 <div class="col-xs-6" >
@@ -17,7 +20,7 @@
                             <li v-for="(item,index) in media">
                                 <h4>
                                           <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
-                                          <span class="article-time">{{item.time}}</span>
+                                          <span class="article-time">{{item.publishTime}}</span>
                                           </h4>
                                 <p class="article-content">
                                     {{item.summary}}
@@ -36,6 +39,9 @@
         </div>
         <div class="content-block">
             <p class="title"><img src="../../assets/images/key.png" alt="">关键词云</p>
+             <div class="row text-center" v-show="!showKey" >
+                <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+            </div>
             <div class="row" v-show="showKey">
                 
                 <div class="col-xs-6">
@@ -48,7 +54,7 @@
                                 <li v-for="(item,index) in keyInfo">
                                     <h4>
                                           <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
-                                          <span class="article-time">{{item.time}}</span>
+                                          <span class="article-time">{{item.publishTime}}</span>
                                           </h4>
                                     <p class="article-content">
                                         {{item.summary}}

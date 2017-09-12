@@ -69,7 +69,9 @@ button.btn:focus {
 .btn-default:focus {
     background-color: #fff !important;
 }
-
+.no-data{
+    padding:80px 0;
+}
 .wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -324,7 +326,7 @@ footer {
 
 .content-block .title img {
     margin-right: 12px;
-    margin-top: -4px;
+    margin-top: -3px;
 }
 
 .content-block .area {

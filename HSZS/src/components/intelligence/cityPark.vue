@@ -10,6 +10,14 @@
         </div>
         <div class="tab-content">
             <div class="tab-pane fade in active" id="park-map">
+            <div class="radio-box">
+                 <el-radio class="radio" v-model="industry" label="互联网">互联网</el-radio>
+                 <el-radio class="radio" v-model="industry" label="高科技" >高科技</el-radio>
+                  <el-radio class="radio" v-model="industry" label="文化创意">文化创意</el-radio>
+                   <el-radio class="radio" v-model="industry" label="精英配套" >精英配套</el-radio>
+                    <el-radio class="radio" v-model="industry" label="滨海旅游" >滨海旅游</el-radio>
+                     <el-radio class="radio" v-model="industry" label="港口物流" >港口物流</el-radio>
+               </div>      
                 <bd-map :city-info="city"></bd-map>
             </div>
             <div class="tab-pane fade" id="park-list">
@@ -40,11 +48,14 @@
                      </li>      -->
                 </ul>
                 <ul class="park-l-menu">
+                  <div class="text-center no-data" v-if="list.length==0" >
+                   <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+                   </div>
                     <li v-for="(item,index) in list">
                         <img src="../../assets/images/park-picture.png" alt="" class="park-picture">
                         <div class="right-content">
                             <div>
-                                <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails/',query:{query:item.name,id:item.id}}">
+                                <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails',query:{query:item.gardenName,id:item.id,address:item.address}}">
                                     {{item.gardenName}}
                                 </router-link>
                             </div>
@@ -68,6 +79,17 @@
         </div>
     </div>
 </template>
+<style scoped>
+    .radio-box{
+        margin-top:12px;
+    }
+    .radio{
+        display:inline-block;
+
+        margin-left:24px;
+        font-weight:normal;
+    }
+</style>
 <script>
 import bdMap from '../commonParts/bdMap.vue'
 export default {
@@ -88,8 +110,8 @@ export default {
             city: {
                 name: '',
                 park: []
-            }
-
+            },
+            industry:'互联网'
 
 
         }
@@ -108,10 +130,13 @@ export default {
             this.pageNumber = val;
             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
-        parkList(data,it) {
-            this.$ajax.get('/apis/area/findGardensByArea.json', { params: { area: data,industry:it } }).then(res => {
-                this.city.park = res.data.data;
+        parkList(data) {
+            this.$ajax.get('/apis/area/findGardensByArea.json', { params: { area: data,industry:this.industry } }).then(res => {
 
+                this.city.park = res.data.data;
+                if(res.data.data.length==0){
+                    this.$message('此产业类型暂无数据');
+                }
             }).catch(err => console.log(err))
         },
         select(index) {
@@ -125,10 +150,15 @@ export default {
             this.typeCode = index;
             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
-        search() {
+ 
+            
+ 
 
-        },
-
+    },
+    watch:{
+         industry:function(){
+            this.parkList(this.$route.query.query);
+         }
     },
     mounted(){
       $(".policy-title a").on("click", function() {
@@ -142,8 +172,8 @@ export default {
 
 
         this.city.name = this.$route.query.query;
-        console.log(this.$route.query);
-        this.parkList(this.$route.query.query,this.$route.query.industry);
+        
+        this.parkList(this.$route.query.query);
 
         let index = this.area.indexOf(this.city.name)
         this.select(index)

@@ -9,14 +9,14 @@
                             <img src="../assets/images/n1.png" height="20" width="17" alt=""> 企业搜索
                         </router-link>
                     </li>
-                    <!-- <li>
-                        <router-link to="/merchants/semantic" active-class="active">
-                            <img src="../assets/images/n2.png" height="18" width="18" alt=""> 关系挖掘
-                        </router-link>
-                    </li> -->
                     <li>
                         <router-link to="/merchants/intelligent" active-class="active">
                             <img src="../assets/images/n3.png" height="18" width="18" alt=""> 智能企业
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/merchants/wisdomMap" active-class="active">
+                            <img src="../assets/images/wisdom.png" height="19" width="18" alt=""> 产业智图
                         </router-link>
                     </li>
                     <li>

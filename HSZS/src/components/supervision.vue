@@ -4,14 +4,19 @@
 	    <div class="wrapper">
            <div class="left-bar">
 		         <ul class="left-nav">
+		            <li>
+		                <router-link to="/supervision/parkMap" active-class="active" >
+		                <img src="../assets/images/supervision.png" alt="">
+		                园区监管</router-link>
+		            </li>  
 			     	<li>
 		                <router-link to="/supervision/parkCompanys" active-class="active" >
-		                <img src="../assets/images/n5.png" height="18" width="18" alt="">
+		                <img src="../assets/images/n5.png"  alt="">
 		                园区企业</router-link>
 		            </li>  
 		            <li>
-		               <a href="javascript:void(0);"  >
-		                 <img src="../assets/images/n6.png" height="16" width="18" alt="">企业动态</a>
+		               <router-link to="/supervision/goodNews" > 
+		                 <img src="../assets/images/n6.png" height="16" width="18" alt="">企业动态</router-link>
                          <ol>
                          	<li>
                          	<router-link to="/supervision/goodNews" active-class="active" > 
@@ -27,8 +32,8 @@
 		                  
 		            </li>   
 		            <li>
-		                <a href="javascript:void(0);">  
-		                <img src="../assets/images/n7.png" height="19" width="18" alt="">园区预警</a>
+		                <router-link to="/supervision/outflow" >  
+		                <img src="../assets/images/n7.png" height="19" width="18" alt="">园区预警</router-link>
 		                 <ol>
                          	<li>
                          	<router-link to="/supervision/outflow" active-class="active" > 

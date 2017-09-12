@@ -1,7 +1,7 @@
 <template>
     <div>
         <label-list @labelInfo='labelInfo' :time-show='false'></label-list>
-        <div class="content-block">
+        <div class="content-block" style="position:relative;">
             <div class="title policy-title">
                 <img src="../../assets/images/zj.png" alt="">专家说
             </div>
@@ -16,7 +16,7 @@
                             </div>
                             <div class="article-box">
                                 <router-link class="title" :to="{ path:'/intelligence/article/'+item.articleId}">{{item.title}}</router-link>
-                                <p class="content">{{item.content}}</p>
+                                <p class="content">{{item.summary}}</p>
                             </div>
                         </div>
                     </div>
@@ -29,9 +29,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
+               
             </div>
+             <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
         </div>
         <div class="content-block">
             <div class="title policy-title">
@@ -67,7 +68,7 @@ export default {
         return {
             experts: [],
             pageNumber: 1,
-            pageSize: 3,
+            pageSize: 7,
             totalPages:0,
 
             lunT: []
@@ -86,8 +87,17 @@ export default {
                 this.totalPages=res.data.data.totalPages;
                 res.data.data.content.forEach(val => {
                     this.experts.push(val);
-                })
-           
+                });
+                if(this.pageNumber==1){
+                	setTimeout(()=>{
+                		document.querySelector('.swiper-wrapper').style.transform="translate3d(0px,0px,0px)";
+                		
+                	},50);
+                
+                };
+                setTimeout(()=>{
+                	this.mySwiper.slideTo((this.pageNumber-1)*7);
+                },50)
             }).catch(err => console.log(err))
         },
 

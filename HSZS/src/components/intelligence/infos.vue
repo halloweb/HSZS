@@ -17,7 +17,7 @@
                     <ul class="p-content">
                         <li v-for="(item,index) in dynamic">
                             <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link>
-                            <p class="p-c-content">{{item.content}}</p>
+                            <p class="p-c-content">{{item.summary}}</p>
                         </li>
                     </ul>
                     <div class="text-center loadMore">
@@ -53,11 +53,14 @@
                      </li>      -->
                 </ul>
                 <ul class="park-l-menu">
+                     <div class="text-center no-data" v-if="list.length==0" >
+                         <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+                    </div>
                     <li v-for="(item,index) in list">
                         <img :src="item.gardenPicture" alt="" width="145" heigt="115" class="park-picture">
                         <div class="right-content">
                             <div>
-                                <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails',query:{query:item.gardenName,id:item.id}}">
+                                <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails',query:{query:item.gardenName,id:item.id,address:item.address}}">
                                     {{item.gardenName}}
                                 </router-link>
                             </div>
@@ -380,7 +383,7 @@ export default {
                     trigger: 'item',
                     formatter: function(params) {
 
-                        return params.name + ' : ' + params.data.count;
+                        return params.name;
                     }
                 },
                 legend: {
@@ -390,6 +393,15 @@ export default {
                     data: ['互联网', "高科技", '文化创意', '精英配套', '滨海旅游', '港口物流'],
                     textStyle: {
                         color: '#fff'
+                    },
+                    selected:{
+                        '互联网':true,
+                        '高科技':false,
+                        '文化创意':false,
+                        '精英配套':false,
+                        '滨海旅游':false,
+                        '港口物流':false,
+
                     }
                 },
                 visualMap: {
@@ -543,17 +555,53 @@ export default {
                                 borderWidth: 1
                             }
                         }
+                    },{
+                    name: '主要城市',
+                    type: 'effectScatter',
+                    coordinateSystem: 'geo',
+                    data:convertData([{name: "北京", value: 2},{name: "上海", value: 2},{name: "上海", value: 2},{name: "广州", value: 2},{name: "深圳", value: 2},{name: "杭州", value: 2},{name: "苏州", value: 2},{name: "南京", value: 2},{name: "天津", value: 2},{name: "青岛", value: 2},{name: "大连", value: 2}]),
+                    symbolSize: 25,
+                
+                    showEffectOn: 'emphasis',
+                    rippleEffect: {
+                        brushType: 'stroke'
                     },
+                    hoverAnimation: true,
+                    label: {
+                        normal: {
+                            formatter: '{b}',
+                            position: 'right',
+                            show: true
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: '#f4e925',
+                            shadowBlur: 10,
+                            shadowColor: '#333'
+                        }
+                    },
+                    zlevel: 8
+                }
 
                 ]
             }
 
             park.setOption(option);
             park.on('click', function(params) {
-                console.log(params.data.industry);
-
-                vm.$router.push({ path: '/intelligence/parkInfo/cityPark', query: { query: params.name,industry:params.data.industry} });
+                
+                if(vm.area.indexOf(params.name)!=-1){
+                vm.$router.push({ path: '/intelligence/parkInfo/cityPark', query: { query: params.name} });
+                }
             });
+            park.on('legendselectchanged', function (params) {
+                   let pro=Object.keys(option.legend.selected);
+                   pro.forEach((val)=>{
+                     option.legend.selected[val]=false;
+                   });
+                   option.legend.selected[params.name]=true;
+                    park.setOption(option);
+               });
 
         },
     },

@@ -1,7 +1,7 @@
 <template>
 	<div class="content-block">
 		<div class="title policy-title">
-           <img src="../../assets/images/qywl.png" alt="">企业疑似外流
+           <img src="../../assets/images/outflow-b.png" alt="">企业疑似外流
         </div>
         <div class="table-box">
         	<table class="table-zs">
@@ -11,7 +11,7 @@
         			<th>相关情报</th>
         			
         			<th>预警时间</th>
-        			<th></th>
+        			<th>操作</th>
         		</tr>
         	</thead>
         	<tbody>
@@ -24,7 +24,10 @@
         		</tr>
         		</tbody>
         </table>	
-        <p class="loadMore text-center"><a href="javascript:void(0);" class="blue" @click="loadMore">{{state}}</a></p>
+         <div class="text-center" v-if="total!=0">
+            <el-pagination @current-change="change" :page-size="pageSize" layout="prev, pager, next" :total="total">
+            </el-pagination>
+        </div>
         </div>
         
 
@@ -43,6 +46,11 @@
      td a:visited{
        color:#999;
     }
+    .el-pagination {
+    display: inline-block;
+
+    margin-top: 60px
+}
 </style>
 <script> 
 	export default{
@@ -50,15 +58,15 @@
 			return{
                  pageNumber:1,
                  pageSize:8,
-                 totalPage:0,
+                 total:0,
                  list:[],
-                 state:'加载更多'
+                 
 			}
 		},
 		methods:{
             getList(){
               this.$ajax.post('/apis/warning/getBusinessOutflowList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
-                   this.totalPage=res.data.data.totalPage;
+                   this.total=res.data.data.totalPage;
                    res.data.data.list.forEach(val => {
                     val.content=val.content.slice(0,70)+'...';
                     
@@ -67,15 +75,10 @@
                    this.list=res.data.data.list;
               }).catch(err => console.log(err))
             },
-			loadMore(){
-        
-            this.pageNumber++;
-            if(this.pageNumber>this.totalPage){
-              this.state="已无更多数据";
-              return;
-            }
-            this.getList();
-			},
+			change(val){
+             this.pageNumber=val;   
+             this.getList();
+         }
 		},
         created(){
             this.getList();

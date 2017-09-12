@@ -5,7 +5,7 @@
 
 			<div class="search-btn">
 				<!-- <input type="text" placeholder="请输入公司名称"/> -->
-                <a href="https://std.tianyancha.com/#/main" target="_blank">
+                <a href="http://localhost:8092/oauth2/loginOpenEye.json" target="_blank">
                     <button class="btn">搜索</button>
                 </a>
 
