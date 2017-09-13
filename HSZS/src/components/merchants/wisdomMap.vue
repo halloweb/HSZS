@@ -1,32 +1,37 @@
 <template>
-    <div>
-        <div class="tree well">
-            <ul>
-                <li>
-                    <span class="title">节能环保和新能源企业</span> 
-                    <ul>
-                        <li v-for="(item,index) in list">
-                            <span><i ></i>{{item.name}}</span> 
-                            <ul v-if="item.child" >
-                                <li v-for="(item2,index2) in item.child">
-                                    <span><i ></i> {{item2.name}}</span> 
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-                
-            </ul>
-        </div>
-        <div>
-            <div class="company-list">
-                <div class="title"></div>
-                <ul >
-                <li></li>
+    <div class="wisdomMap">
+          <el-row>
+           <el-col :span="16">
+            <div class="tree ">
+                <ul>
+                    <li>
+                        <span class="title">节能环保和新能源企业</span> 
+                        <ul>
+                            <li v-for="(item,index) in list">
+                                <span><i ></i>{{item.name}}</span> 
+                                <ul v-if="item.child" >
+                                    <li v-for="(item2,index2) in item.child">
+                                        <span><i ></i> {{item2.name}}</span> 
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    
                 </ul>
             </div>
-        </div>
-        
+            
+            </el-col>
+            <el-col :span="8">
+                <div class="company-list">
+                    <div class="title"></div>
+                    <ul >
+                    <li></li>
+                    </ul>
+               </div>
+             
+             </el-col>
+       </el-row>
     </div>
 </template>
 <script>
@@ -79,14 +84,16 @@ export default {
 }
 </script>
 <style scoped>
-
+.wisdomMap{
+    background-color:#fff;
+    border: 1px solid #e8ebf2;  
+}
 .tree {
    
     min-height: 20px;
     padding: 19px;
     margin-bottom: 20px;
     background-color:#fff;
-    border: 1px solid #e8ebf2;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
@@ -164,8 +171,9 @@ export default {
    color:#00a5ff;
 }
 .company-list{
-    width:80%;
- 
+    width:300px;
+    margin:0 auto;
+    margin-top:100px;
     background-color:#fff;
 }
 .company-list .title{

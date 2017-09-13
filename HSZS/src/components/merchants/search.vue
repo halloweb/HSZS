@@ -53,7 +53,7 @@
         },
         methods:{
                getCompanys(){
-                this.$ajax.get('/apis/business/getSearchBusinessList.json').then(res => {
+                this.$ajax.get('/apis/oauth/getSearchTrack.json').then(res => {
                        this.companys=res.data.data.content;
                 }).catch(err => console.log(err))
                },

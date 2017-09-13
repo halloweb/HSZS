@@ -43,7 +43,7 @@ export default {
             this.$ajax.get('/apis/user/findMyInformation.json').then(res => {
                    this.user=res.data.data;
                    this.email=res.data.data.userEmail;
-                   this.link='http://localhost:8092'+this.user.imageUrl;
+                   this.link=this.user.imageUrl;
             }).catch(err => console.log(err))
         },
         modify() {
