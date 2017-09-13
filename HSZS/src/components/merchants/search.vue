@@ -1,13 +1,13 @@
 <template>
 
 		<div class="content-block search">
-                <a v-for="(item,index) in companys" href="javascript:void(0);" :class="'a'+(index+1)" @click="go(item.companyName)">{{item.companyName}}</a>
+                <a v-for="(item,index) in companys" href="javascript:void(0);" :class="'a'+(index+1)" >{{item.companyName}}</a>
 
 			<div class="search-btn">
 				<!-- <input type="text" placeholder="请输入公司名称"/> -->
-                <a href="http://localhost:8092/apis/oauth/loginOpenEye.json" target="_blank">
-                    <button class="btn">搜索</button>
-                </a>
+                 <a href="../apis/oauth/loginOpenEye.json" target="_blank">
+                    <button class="btn" >搜索</button>
+                 </a>
 
 			</div>
 		</div>
@@ -57,11 +57,11 @@
                        this.companys=res.data.data.content;
                 }).catch(err => console.log(err))
                },
-                go(name){
-                   this.$ajax.get('/apis/loginOpenEye.json',{params:{}}).then(res => {
+                go(){
+                   this.$ajax.get('').then(res => {
                        
                 }).catch(err => console.log(err))
-               }
+               },
         },
 
         mounted(){

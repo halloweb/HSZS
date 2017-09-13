@@ -18,13 +18,14 @@
                 
             </ul>
         </div>
-        <div class="company-list">
-            <div class="title"></div>
-            <ul >
-            <li></li>
-            </ul>
+        <div>
+            <div class="company-list">
+                <div class="title"></div>
+                <ul >
+                <li></li>
+                </ul>
+            </div>
         </div>
-        
         
     </div>
 </template>
@@ -80,8 +81,7 @@ export default {
 <style scoped>
 
 .tree {
-    width:60%;
-    display:inline-block;
+   
     min-height: 20px;
     padding: 19px;
     margin-bottom: 20px;
@@ -163,6 +163,16 @@ export default {
  {
    color:#00a5ff;
 }
-
+.company-list{
+    width:80%;
+ 
+    background-color:#fff;
+}
+.company-list .title{
+    height:40px;
+    padding:0 10px;
+    line-height:40px;
+    background-color:#e7f7ff;
+}
 
 </style>

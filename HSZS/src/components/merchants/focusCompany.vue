@@ -21,7 +21,7 @@
                     企业分组
                 </div>
                 <p class="type-list">
-                    <span v-for="(item,index) in group" @click="select2(item,index)" :class="{active:activeIndex==index}">{{item.tag}}</span>
+                    <span v-for="(item,index) in group" @click="select2(item,index)" :class="{active:activeIndex===index}">{{item.tag}}</span>
                 </p>    
                     <!-- <span class="type-item" @click="addVisible = true">添加企业分组</span>
                     <span class="type-item" @click="removeVisible = true">删除企业分组</span>
@@ -80,7 +80,7 @@
                    <img src="../../assets/images/noData.png" height="166" width="157" alt="">
                  </div>
 				<li class="content-box" v-for="(item,index) in company">
-					<el-checkbox  :checked="item.isChecked"></el-checkbox>
+					<el-checkbox  v-model="item.isChecked"></el-checkbox>
 					<div class="main-body">
 						<img :src="item.logo" height="100" width="162" alt="">
 						<div class="company-info">
@@ -138,7 +138,7 @@ export default {
             pageSize: 8,
             total: 0,
             timeCode:0,
-            time:['七天'],
+            time:['三天','七天','三十天','半年'],
             group: [],
            
             option1: [
@@ -171,7 +171,7 @@ export default {
 
             company: [],
             selectGroup: '',
-            activeIndex: 0,
+            activeIndex: '',
             activeGroup: '',
             collectID: '',
             checkedAll:false
@@ -184,16 +184,11 @@ export default {
             this.getcompany();
         },
         getcompany() {
-            let data = this.group[this.activeIndex];
-            this.$ajax.get('localhost:8092/apis/oauth/getCompanyByGroup', {params:{ tags: this.activeGroup, pageNumber: this.pageNumber, pageSize: this.pageSize }}).then(res => {
-                if (res.data.data != null) {
-                    this.company = res.data.data[0].content;
-                    this.total = res.data.data[0].totalElements;
-                    this.company.forEach(val=>{
-                        val.isChecked=false;
-                    })
-                }
-             
+             console.log(this.activeGroup);
+            
+            this.$ajax.get('/apis/oauth/getCompanyByGroup.json', {params:{ tags: this.activeGroup}}).then(res => {
+                
+                     this.company=res.data.data.list;
 
             }).catch(err => console.log(err))
         },
@@ -219,6 +214,8 @@ export default {
                
                 // this.removeGroup = [];
                 this.group = res.data.data;
+                this.activeGroup = this.group[0].id;
+
                 // groups.forEach(val => {
                 //     this.group.push(val.tag);
                 //     this.removeGroup.push({ value: val.tag });
@@ -332,8 +329,8 @@ export default {
     },
     mounted() {
 
-        // this.getGroup();
-        // this.getcompany();
+        this.getGroup();
+       
     },
 }
 </script>

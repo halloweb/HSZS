@@ -29,7 +29,7 @@
                                     <span>
                                         <img src="../../assets/images/company.png" alt="">
                                                 涉及公司：<a href="">{{media.business}}</a>
-                                             </span>
+                                    </span>
                                 </div>
                             </li>
                         </ul>
