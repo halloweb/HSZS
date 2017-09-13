@@ -1,7 +1,7 @@
 <template>
 	<div class="content-block">
 		<ul class="type-box">
-                    <li>
+                  <!--   <li>
                 <div class="head">
                     企业描述
                 </div>
@@ -15,16 +15,17 @@
                         </el-option>
                     </el-select>
                 </p>
-            </li>
+            </li> -->
             <li>
                 <div class="head">
                     企业分组
                 </div>
                 <p class="type-list">
-                    <span v-for="(item,index) in group" @click="select2(item,index)" :class="{active:activeIndex==index}">{{item}}</span>
-                    <span class="type-item" @click="addVisible = true">添加企业分组</span>
+                    <span v-for="(item,index) in group" @click="select2(item,index)" :class="{active:activeIndex==index}">{{item.tag}}</span>
+                </p>    
+                    <!-- <span class="type-item" @click="addVisible = true">添加企业分组</span>
                     <span class="type-item" @click="removeVisible = true">删除企业分组</span>
-                </p>
+                
                 <el-dialog :visible.sync="addVisible" size="tiny" class="text-center" title="添加企业分组">
                     <el-input v-model="addGroup" placeholder="请输入组名"></el-input>
                     <span slot="footer" class="dialog-footer">
@@ -41,7 +42,7 @@
                                 <el-button @click="removeVisible=false">取 消</el-button>
                                 <el-button type="primary" @click="removelist">确 定</el-button>
                     </span>
-                </el-dialog>
+                </el-dialog> -->
             </li>
 			        <li>
                         <div class="head">
@@ -53,7 +54,7 @@
                     </li>     
         </ul>
         <div class="top-tool">
-        	<el-checkbox v-model="checkedAll">全选</el-checkbox> 
+        	<el-checkbox v-model="checkedAll" @change="check">全选</el-checkbox> 
         	 <el-input 
                   icon="search"
 
@@ -79,9 +80,9 @@
                    <img src="../../assets/images/noData.png" height="166" width="157" alt="">
                  </div>
 				<li class="content-box" v-for="(item,index) in company">
-					<el-checkbox v-model="item.isChecked"></el-checkbox>
+					<el-checkbox  :checked="item.isChecked"></el-checkbox>
 					<div class="main-body">
-						<img src="../../assets/images/gstp.png" height="100" width="162" alt="">
+						<img :src="item.logo" height="100" width="162" alt="">
 						<div class="company-info">
 							<router-link to="/merchants/merchantsDetail" class="blue">{{item.companyName}}</router-link>
 							<div class="sub-list">
@@ -138,7 +139,7 @@ export default {
             total: 0,
             timeCode:0,
             time:['七天'],
-            group: ["全部"],
+            group: [],
            
             option1: [
                 { value: '全部' },
@@ -184,11 +185,15 @@ export default {
         },
         getcompany() {
             let data = this.group[this.activeIndex];
-            this.$ajax.post('/apis/supervise/searchCompanyFromGardenForPage.json', { industry: this.industry, regCapital: this.regCapital, groupname: data, pageNumber: this.pageNumber, pageSize: this.pageSize }).then(res => {
+            this.$ajax.get('localhost:8092/apis/oauth/getCompanyByGroup', {params:{ tags: this.activeGroup, pageNumber: this.pageNumber, pageSize: this.pageSize }}).then(res => {
                 if (res.data.data != null) {
                     this.company = res.data.data[0].content;
                     this.total = res.data.data[0].totalElements;
+                    this.company.forEach(val=>{
+                        val.isChecked=false;
+                    })
                 }
+             
 
             }).catch(err => console.log(err))
         },
@@ -203,21 +208,21 @@ export default {
         select2(item, index) {
             this.pageNumber=1;
             this.activeIndex = index;
-            this.activeGroup = item;
+            this.activeGroup = item.id;
             this.getcompany();
         },
         selectTime(){
 
         },
         getGroup() {
-            this.$ajax.get('/apis/supervise/selectCompanyGroup.json').then(res => {
-                this.group = ['全部'];
-                this.removeGroup = [];
-                let groups = res.data.data;
-                groups.forEach(val => {
-                    this.group.push(val.groupName);
-                    this.removeGroup.push({ value: val.groupName });
-                })
+            this.$ajax.get('/apis/oauth/getAttentionGroup.json').then(res => {
+               
+                // this.removeGroup = [];
+                this.group = res.data.data;
+                // groups.forEach(val => {
+                //     this.group.push(val.tag);
+                //     this.removeGroup.push({ value: val.tag });
+                // })
 
 
             }).catch(err => console.log(err))
@@ -308,17 +313,27 @@ export default {
             this.pageNumber = val;
             this.getcompany();
         },
+        check(){
 
-    },
-    watch:{
-       checkedAll:function(val){
-       	 console.log(val);
-       }
+            if(this.checkedAll==true){
+              
+             this.company.forEach(vals=>{
+                vals.isChecked=true;
+               })
+             console.log(this.company)
+            }else{
+              this.company.forEach(vals=>{
+                vals.isChecked=false;
+               })
+            }
+           
+        }
+
     },
     mounted() {
 
-        this.getGroup();
-        this.getcompany();
+        // this.getGroup();
+        // this.getcompany();
     },
 }
 </script>
@@ -348,9 +363,7 @@ export default {
             margin-right: 20px;
         }
     }
-    .head {
-        padding-top: 3px;
-    }
+    
 }
 
 .top-tool {

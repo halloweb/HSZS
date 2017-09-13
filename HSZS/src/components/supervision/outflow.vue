@@ -67,12 +67,10 @@
             getList(){
               this.$ajax.post('/apis/warning/getBusinessOutflowList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
                    this.total=res.data.data.totalElements;
-                   res.data.data.content.forEach(val => {
-                    val.content=val.content.slice(0,70)+'...';
-                    
-                   });
+                  
+                   this.list=res.data.data.content;
 
-                   this.list=res.data.data.list;
+                   
               }).catch(err => console.log(err))
             },
 			change(val){
