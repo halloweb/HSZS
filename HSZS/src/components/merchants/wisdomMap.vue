@@ -18,6 +18,13 @@
                 
             </ul>
         </div>
+        <div class="company-list">
+            <div class="title"></div>
+            <ul >
+            <li></li>
+            </ul>
+        </div>
+        
         
     </div>
 </template>
@@ -71,8 +78,10 @@ export default {
 }
 </script>
 <style scoped>
-ul{padding-left:80px;}
+
 .tree {
+    width:60%;
+    display:inline-block;
     min-height: 20px;
     padding: 19px;
     margin-bottom: 20px;
@@ -85,7 +94,7 @@ ul{padding-left:80px;}
     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05)
 }
-
+ .tree  ul{padding-left:80px;}
 .tree li {
     list-style-type: none;
     margin: 0;
@@ -154,4 +163,6 @@ ul{padding-left:80px;}
  {
    color:#00a5ff;
 }
+
+
 </style>

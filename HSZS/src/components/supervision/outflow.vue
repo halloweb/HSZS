@@ -66,8 +66,8 @@
 		methods:{
             getList(){
               this.$ajax.post('/apis/warning/getBusinessOutflowList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
-                   this.total=res.data.data.totalPage;
-                   res.data.data.list.forEach(val => {
+                   this.total=res.data.data.totalElements;
+                   res.data.data.content.forEach(val => {
                     val.content=val.content.slice(0,70)+'...';
                     
                    });
