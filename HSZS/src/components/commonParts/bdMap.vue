@@ -86,7 +86,20 @@ export default {
                 var marker = new BMap.Marker(point);
                 map.addOverlay(marker);
                 marker.setLabel(label);
+                marker.addEventListener("click",attribute);
             }
+            //marker点击事件
+            function attribute(e){
+                 var p = e.target;
+                 adds.forEach(val=>{
+                    if(val.name==p.zc.innerText){
+                        console.log(val);
+                        vm.$router.push({path:'/intelligence/focusPark/parkDetails',query:{query:val.name,id:val.id,address:val.address}})
+                        
+                    }
+                 })
+                   
+             }   
 
             //结束
         },
