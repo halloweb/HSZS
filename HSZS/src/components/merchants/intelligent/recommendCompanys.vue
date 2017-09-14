@@ -42,7 +42,7 @@
      	 	 	</tr>
      	 	 </table>
      	 	 <div class="text-center">
-             <a :href="'/apis/oauth/getCompanyDetail.json?'+details.company" target="_blank">
+             <a :href="'/apis/oauth/getCompanyDetail.json?name='+details.company" target="_blank">
      	 	 <button class="btn">
      	 	 	查看详情
      	 	 </button>

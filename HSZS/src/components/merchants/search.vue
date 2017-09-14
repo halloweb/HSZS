@@ -1,7 +1,7 @@
 <template>
 
 		<div class="content-block search">
-                <a v-for="(item,index) in companys" :href="'/apis/oauth/getCompanyDetail.json?'+item.companyName" :class="'a'+(index+1)" >{{item.companyName}}</a>
+                <a v-for="(item,index) in companys" :href="'/apis/oauth/getCompanyDetail.json?name='+item.companyName" :class="'a'+(index+1)" >{{item.companyName}}</a>
 
 			<div class="search-btn">
 				<!-- <input type="text" placeholder="请输入公司名称"/> -->
