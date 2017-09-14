@@ -2,16 +2,21 @@
     <div class="wisdomMap">
           <el-row>
            <el-col :span="16">
-            <div class="tree ">
+            <div class="tree">
                 <ul>
-                    <li>
-                        <span class="title">节能环保和新能源企业</span> 
-                        <ul>
-                            <li v-for="(item,index) in list">
-                                <span><i ></i>{{item.name}}</span> 
-                                <ul v-if="item.child" >
-                                    <li v-for="(item2,index2) in item.child">
+                    <li v-for="(item,index) in list">
+                        <span class="title">{{item.name}}</span> 
+                        <ul >
+                            <li v-for="(item1,index1) in item.children">
+                                <span><i ></i>{{item1.name}}</span> 
+                                <ul  >
+                                    <li v-for="(item2,index2) in item1.children">
                                         <span><i ></i> {{item2.name}}</span> 
+                                        <ul>
+                                            <li v-for="(item3,index3) in item2.children">
+                                                <span><i ></i> {{item3.name}}</span> 
+                                            </li>
+                                        </ul>
                                     </li>
                                 </ul>
                             </li>
@@ -38,32 +43,48 @@
 export default {
     data() {
         return {
-             list:[{name:2,child:[{name:3,child:[]},{name:3,child:[]}]},
-             {name:2}
-             ],
-             activeLabel:''
+             list:[],
+             activeLabel:'',
+             param:[]
         }
     },
+    methods:{
+        getTree(){
+             this.$ajax.post('/apis/getIndicator.json').then(res=>{
+                 this.list=res.data.data;
+             }).catch(err=> console.log(err))
+        },
+        getList(){
+             this.$ajax.post('/apis/getBusinessByIndicator.json',{msg:this.param}).then(res=>{
+               
+             }).catch(err=> console.log(err))
+         },
+    },
+    created(){
+       this.getTree();
+    },
     mounted() {
+        
         let vm=this;
-
+      this.$nextTick(()=>{
+        setTimeout(()=>{
         $(function() {
 
             $('.tree li:has(ul)').addClass('parent_li').find(' > span i').addClass('glyphicon glyphicon-minus-sign')
 
             $('.tree li.parent_li > span').on('click', function(e) {
 
-                var children = $(this).parent('li.parent_li').find(' > ul > li');
+                var childrenren = $(this).parent('li.parent_li').find(' > ul > li');
 
-                if (children.is(":visible")) {
+                if (childrenren.is(":visible")) {
 
-                    children.hide('fast');
+                    childrenren.hide('fast');
 
                     $(this).find(' > i').addClass('glyphicon glyphicon-plus-sign').removeClass('glyphicon glyphicon-minus-sign');
 
                 } else {
 
-                    children.show('fast');
+                    childrenren.show('fast');
 
                     $(this).find(' > i').addClass('glyphicon glyphicon-minus-sign').removeClass('glyphicon glyphicon-plus-sign');
 
@@ -73,13 +94,23 @@ export default {
 
             });
 
-            $('.tree span').on('click',function(e){
+            $('.tree').on('click','span',function(e){
             	if(!$(this).parent('li').hasClass("parent_li")){
                      vm.activeLabel=$(this).text();
+                     let threeLabel=$(this).parent('li').parent("ul").prev().text();
+                     let secondLabel=$(this).parent('li').parent("ul").parent('li').parent("ul").prev().text();
+                     let firstLabel=$(".tree .title").text();
+                     vm.param=[firstLabel,secondLabel,threeLabel,vm.activeLabel];
+                     vm.getList();
             	}
-            })
+            });
+             $('.tree>ul>li>ul>li>span').click();
+
+           
 
         });
+    },500)
+       })
     },
 }
 </script>
@@ -87,6 +118,7 @@ export default {
 .wisdomMap{
     background-color:#fff;
     border: 1px solid #e8ebf2;  
+    min-height:400px;
 }
 .tree {
    
@@ -138,8 +170,8 @@ export default {
     border: 1px solid #00a5ff;
     border-radius: 5px;
     display: inline-block;
-    padding: 3px 18px;
-    width:140px;
+    padding: 3px 24px;
+    width:180px;
     text-align: center;
     text-decoration: none;
     cursor: pointer;
@@ -162,7 +194,7 @@ export default {
     border: 0
 }
 
-.tree li:last-child::before {
+.tree li:last-children::before {
     height: 30px
 }
 
@@ -174,13 +206,18 @@ export default {
     width:300px;
     margin:0 auto;
     margin-top:100px;
-    background-color:#fff;
+   
+    border: 1px solid #e8ebf2;  
 }
 .company-list .title{
     height:40px;
     padding:0 10px;
     line-height:40px;
     background-color:#e7f7ff;
+}
+.company-list ul li{
+    border-top:1px solid #e8ebf2;
+    padding:10px;
 }
 
 </style>

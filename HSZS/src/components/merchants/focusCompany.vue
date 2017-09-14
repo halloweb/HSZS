@@ -184,7 +184,7 @@ export default {
             this.getcompany();
         },
         getcompany() {
-             console.log(this.activeGroup);
+            
             
             this.$ajax.get('/apis/oauth/getCompanyByGroup.json', {params:{ tags: this.activeGroup}}).then(res => {
                 

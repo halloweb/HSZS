@@ -167,7 +167,7 @@ export default {
                 }
             }).then(res => {
                 if (res.data.message == "登录成功") {
-                    localStorage.setItem('dl',"yes");
+                   
                     this.$router.push('/intelligence');
                     
                 } else {
@@ -176,7 +176,10 @@ export default {
                     this.isdisabled=false;
                 }
 
-            }).catch(err => console.log(err))
+            }).catch(err => {
+                this.isdisabled=false;
+                console.log(err)
+            })
         },
 
         open(message) {

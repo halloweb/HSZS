@@ -72,7 +72,7 @@ export default {
         },
         getInfo() {
             this.$ajax.get('/apis/supervise/getGardenInfo.json').then(res => {
-                this.info.name = res.data.data.park;
+                this.info.name = res.data.data.gardenName;
                 this.info.address=res.data.data.address;
                 this.park = res.data.data;
             }).catch(err => console.log(err))
