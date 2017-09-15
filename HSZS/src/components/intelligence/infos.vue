@@ -60,7 +60,7 @@
                         <img :src="item.gardenPicture" alt="" width="145" heigt="115" class="park-picture">
                         <div class="right-content">
                             <div>
-                                <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails',query:{query:item.gardenName,id:item.gardenId,address:item.address}}">
+                                <router-link class="article-title" :to="{path:'/intelligence/focusPark/parkDetails',query:{query:item.gardenName,id:item.id,address:item.address}}">
                                     {{item.gardenName}}
                                 </router-link>
                             </div>
