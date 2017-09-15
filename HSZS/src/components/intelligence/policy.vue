@@ -43,9 +43,11 @@
                         </p>
                         <div class="sub-info">
                             <span>
-                                                <img src="../../assets/images/company.png" alt="">
-                                                涉及公司：中科点击
-                                             </span>
+                                <img src="../../assets/images/company.png" alt="">
+                                涉及公司： 
+                                <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+                                </a>
+                            </span>
                         </div>
                     </li>
                 </ul>
@@ -62,9 +64,11 @@
                         </p>
                         <div class="sub-info">
                             <span>
-                                                <img src="../../assets/images/company.png" alt="">
-                                                涉及公司：中科点击
-                                             </span>
+                               <img src="../../assets/images/company.png" alt="">
+                               涉及公司：
+                                  <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+                                   </a>
+                            </span>
                         </div>
                     </li>
                 </ul>
@@ -88,26 +92,35 @@ export default {
             lunT: [],
             keY: [],
             params: [],
-            options: [{ value: '全国' },{ value: '北京' }, { value: '上海' }, { value: '广州' }, { value: '深圳' }, { value: '杭州' }, { value: '苏州' }, { value: '南京' }, { value: '天津' }, { value: '青岛' }, { value: '大连' }],
+            options: [{ value: '全国' }, { value: '北京' }, { value: '上海' }, { value: '广州' }, { value: '深圳' }, { value: '杭州' }, { value: '苏州' }, { value: '南京' }, { value: '天津' }, { value: '青岛' }, { value: '大连' }],
             area: '全国'
 
         }
     },
     methods: {
         labelInfo(data) {
-
-            this.params = data;
+            this.getList(data);
+            this.params = data.slice(0);
             this.params.push(this.area);
             this.getPolicy(this.params);
 
         },
         getPolicy(data) {
+            this.$ajax.post('/apis/industry/getIndustrialList.json', {
+                "msg": data
+            }).then(res => {
+
+                this.explanation = res.data.data[0].policy.content;
+
+            }).catch(err => console.log(err))
+        },
+        getList(data) {
             this.$ajax.post('/apis/industry/getIndustrialPolicyList.json', {
                 "msg": data
             }).then(res => {
                 this.lunT = res.data.data[0].forum.content;
                 this.keY = res.data.data[0].research.content;
-                this.explanation = res.data.data[0].policy.content;
+
 
             }).catch(err => console.log(err))
         },

@@ -15,9 +15,9 @@
             <div class="tab-pane fade in active clearfix" id="leadCompany">
                 <div class=" col-xs-6" v-for="(item,index) in leadCompany">
                     <span>{{item.business}}</span>
-                    <router-link :to="{path:'/merchants/merchantsDetail',query:{query:item.business}}" class="pull-right blue">
+                    <a :href="'/apis/oauth/getCompanyDetail.json?name='+item.business" target="_blank" class="pull-right blue">
                         详情
-                    </router-link>
+                    </a>
                 </div>
             </div>
             <div class="tab-pane fade clearfix" id="parkPolicy">

@@ -53,8 +53,11 @@
         },
         methods:{
                getCompanys(){
-                this.$ajax.get('/apis/oauth/getSearchTrack.json',{params:{pageSize:10}}).then(res => {
-                       this.companys=res.data.data.items;
+                this.$ajax.get('/apis/oauth/getSearchTrack.json',{params:{pageSize:10,pageNumber:1}}).then(res => {
+                       if(res.data.data.items!=null){
+                          this.companys=res.data.data.items;
+                       }
+                     
                 }).catch(err => console.log(err))
                },
                 go(){

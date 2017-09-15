@@ -60,7 +60,7 @@
                 <div class="main-body">
                     <img :src="item.logo" height="100" width="162" alt="">
                     <div class="company-info">
-                        <a href="https://std.tianyancha.com/#/company/24416401/icinfo" target="_blank" class="blue">{{item.companyName}}</a>
+                        <a :href="'/apis/oauth/getCompanyDetail.json?name='+item.companyName" target="_blank" class="blue">{{item.companyName}}</a>
                         <div class="sub-list">
                             <span>
                         <img src="../../assets/images/person.png" height="15" width="13" alt="">

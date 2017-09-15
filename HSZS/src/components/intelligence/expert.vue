@@ -70,20 +70,22 @@ export default {
             pageNumber: 1,
             pageSize: 7,
             totalPages:0,
-
+            params:[],
             lunT: []
 
         }
     },
     methods: {
         labelInfo(data) {
+            this.params=data;
+            this.getExpert(data);
 
             this.getArticle(data);
 
         },
-        getExpert() {
+        getExpert(data) {
 
-            this.$ajax.post('/apis/expert/getSpecialist.json', {pageNumber: this.pageNumber,pageSize: this.pageSize }).then(res => {
+            this.$ajax.post('/apis/expert/getSpecialist.json', {pageNumber: this.pageNumber,pageSize: this.pageSize,industry:data[0],industrylabel:data[1] }).then(res => {
                 this.totalPages=res.data.data.totalPages;
                 res.data.data.content.forEach(val => {
                     this.experts.push(val);
@@ -116,13 +118,13 @@ export default {
                 this.$message('没有更多数据了！');
                 return;
             }
-            this.getExpert();
+            this.getExpert(this.params);
         },
 
     },
     mounted() {
-        this.getExpert();
-        this.getArticle(['互联网', '不限']);
+       
+        
         this.$nextTick(() => {
                 this.mySwiper = new Swiper('.swiper-container', {
                     initialSlide: 0,

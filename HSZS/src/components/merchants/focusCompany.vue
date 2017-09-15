@@ -1,5 +1,5 @@
 <template>
-	<div class="content-block">
+	<div class="content-block" id="focusCompany">
 		<ul class="type-box">
                   <!--   <li>
                 <div class="head">
@@ -53,8 +53,8 @@
                           </p>
                     </li>     
         </ul>
-        <div class="top-tool">
-        	<el-checkbox v-model="checkedAll" @change="check">全选</el-checkbox> 
+        <!-- <div class="top-tool">
+        	<el-checkbox v-model="checkedAll" @change="selectAll">全选</el-checkbox> 
         	 <el-input 
                   icon="search"
 
@@ -74,18 +74,19 @@
 			    <el-button type="primary" >确 定</el-button>
 			  </span>
 			</el-dialog>
-        </div>
+        </div> -->
         <ul>
                  <div class="text-center no-data" v-if="company.length==0" >
                    <img src="../../assets/images/noData.png" height="166" width="157" alt="">
                  </div>
+                 <el-checkbox-group v-model="checked" @change="checkedChange">
 				<li class="content-box" v-for="(item,index) in company">
-					<el-checkbox  v-model="item.isChecked"></el-checkbox>
+					<!-- <el-checkbox :label="item.id"></el-checkbox> -->
 					<div class="main-body">
-						<img :src="item.logo" height="100" width="162" alt="">
+						<!-- <img :src="item.logo" height="100" width="162" alt=""> -->
 						<div class="company-info">
-							<router-link to="/merchants/merchantsDetail" class="blue">{{item.companyName}}</router-link>
-							<div class="sub-list">
+							<router-link to="/merchants/merchantsDetail" class="blue">{{item.name}}</router-link>
+<!-- 						<div class="sub-list">
         				<span>
         				<img src="../../assets/images/person.png" height="15" width="13" alt="">
         				法定代表人：{{item.boss}}
@@ -102,17 +103,18 @@
         				<img src="../../assets/images/location-h.png" height="15" width="13" alt="">
         				位置：{{item.area}}
         				</span>
-							</div>
+					</div> -->
 
 						</div>
 					</div>
 					
-					<div class="rate blue">
+					<!-- <div class="rate blue">
 						<span class="circle"></span>
 						评分：100
 					</div>
-                    <el-button @click="collect(item)">添加到</el-button>
+                    <el-button @click="collect(item)">添加到</el-button> -->
 				</li>
+                 </el-checkbox-group>
                 <el-dialog :visible.sync="selectVisible" size="tiny" class="text-center" title="选择组名">
                 <el-select v-model="selectGroup" placeholder="请选择组">
                     <el-option v-for="item in removeGroup" :key="item.value" :value="item.value">
@@ -135,7 +137,7 @@ export default {
     data() {
         return {
             pageNumber: 1,
-            pageSize: 8,
+            pageSize: 10,
             total: 0,
             timeCode:0,
             time:['三天','七天','三十天','半年'],
@@ -174,7 +176,8 @@ export default {
             activeIndex: '',
             activeGroup: '',
             collectID: '',
-            checkedAll:false
+            checkedAll:false,
+            checked:[]
 
 
         }
@@ -186,10 +189,10 @@ export default {
         getcompany() {
             
             
-            this.$ajax.get('/apis/oauth/getCompanyByGroup.json', {params:{ tags: this.activeGroup}}).then(res => {
-                
+            this.$ajax.get('/apis/oauth/getCompanyByGroup.json', {params:{ tags: this.activeGroup,pageNumber:this.pageNumber,pageSize:this.pageSize}}).then(res => {
+                     this.total=res.data.data.count;
                      this.company=res.data.data.list;
-
+                    
             }).catch(err => console.log(err))
         },
         select() {
@@ -310,21 +313,15 @@ export default {
             this.pageNumber = val;
             this.getcompany();
         },
-        check(){
+        selectAll(){
 
-            if(this.checkedAll==true){
-              
-             this.company.forEach(vals=>{
-                vals.isChecked=true;
-               })
-             console.log(this.company)
-            }else{
-              this.company.forEach(vals=>{
-                vals.isChecked=false;
-               })
-            }
+           this.checked = event.target.checked ? this.company.map(v=>{return v.id}) : [];
            
-        }
+        },
+        checkedChange(val){
+          let checkedCount = val.length;
+          this.checkedAll = checkedCount === this.company.length;
+        },
 
     },
     mounted() {
@@ -443,4 +440,5 @@ export default {
 
     margin-top: 60px
 }
+
 </style>

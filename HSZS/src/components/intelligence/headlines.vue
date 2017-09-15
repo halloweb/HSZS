@@ -28,7 +28,9 @@
                                 <div class="sub-info">
                                     <span>
                                         <img src="../../assets/images/company.png" alt="">
-                                                涉及公司：<a href="">{{media.business}}</a>
+                                                涉及公司：
+                                                <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+                                                </a>
                                     </span>
                                 </div>
                             </li>
@@ -62,7 +64,9 @@
                                     <div class="sub-info">
                                         <span>
                                                 <img src="../../assets/images/company.png" alt="">
-                                                涉及公司：中科点击
+                                                涉及公司：
+                                                <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+                                                </a>
                                              </span>
                                     </div>
                                 </li>
@@ -191,7 +195,7 @@ export default {
                     name: '媒体聚焦',
                     type: 'pie',
                     center: ['50%', '50%'],
-                    radius: ['50%', '70%'],
+                    radius: ['45%', '60%'],
                     avoidLabelOverlap: false,
                     label: {
                         normal: {
@@ -213,7 +217,7 @@ export default {
                                 color: "#5d71f1"
                             },
                             smooth: 0.2,
-                            length: 10,
+                            length: 5,
                             length2: 20
                         }
                     },

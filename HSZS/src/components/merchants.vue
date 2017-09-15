@@ -21,7 +21,7 @@
                     </li>
                     <li>
                         <router-link to="/merchants/focusCompany" active-class="active">
-                            <img src="../assets/images/n4.png" height="21" width="22" alt=""> 关注企业
+                            <img src="../assets/images/n4.png" height="21" width="22" style="margin-right:10px;" alt=""> 关注企业
                         </router-link>
                     </li>
                 </ul>

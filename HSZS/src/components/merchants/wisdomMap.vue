@@ -4,9 +4,9 @@
            <el-col :span="16">
             <div class="tree">
                 <ul>
-                    <li v-for="(item,index) in list">
+                    <li  v-for="(item,index) in list">
                         <span class="title">{{item.name}}</span> 
-                        <ul >
+                        <ul class="branch">
                             <li v-for="(item1,index1) in item.children">
                                 <span><i ></i>{{item1.name}}</span> 
                                 <ul  >
@@ -28,10 +28,13 @@
             
             </el-col>
             <el-col :span="8">
-                <div class="company-list">
-                    <div class="title"></div>
+                <div class="company-list" v-if="company.length!=0">
+                    <div class="title">{{activeLabel}}</div>
                     <ul >
-                    <li></li>
+                       <li v-for="(item,index) in company">
+                            <a  :href="'/apis/oauth/getCompanyDetail.json?name='+item.business" target="_blank" >{{item.business}}</a>
+
+                       </li>
                     </ul>
                </div>
              
@@ -45,7 +48,8 @@ export default {
         return {
              list:[],
              activeLabel:'',
-             param:[]
+             param:[],
+             company:[]
         }
     },
     methods:{
@@ -56,7 +60,7 @@ export default {
         },
         getList(){
              this.$ajax.post('/apis/getBusinessByIndicator.json',{msg:this.param}).then(res=>{
-               
+                 this.company=res.data.data;
              }).catch(err=> console.log(err))
          },
     },
@@ -95,21 +99,21 @@ export default {
             });
 
             $('.tree').on('click','span',function(e){
-            	if(!$(this).parent('li').hasClass("parent_li")){
-                     vm.activeLabel=$(this).text();
-                     let threeLabel=$(this).parent('li').parent("ul").prev().text();
-                     let secondLabel=$(this).parent('li').parent("ul").parent('li').parent("ul").prev().text();
-                     let firstLabel=$(".tree .title").text();
+                if(!$(this).parent('li').hasClass("parent_li")){
+                     vm.activeLabel=$(this).text().trim();
+                     let threeLabel=$(this).parent('li').parent("ul").prev().text().trim();
+                     let secondLabel=$(this).parent('li').parent("ul").parent('li').parent("ul").prev().text().trim();
+                     let firstLabel=$(this).parents('.branch').prev().text().trim();
                      vm.param=[firstLabel,secondLabel,threeLabel,vm.activeLabel];
                      vm.getList();
-            	}
+                }
             });
-             $('.tree>ul>li>ul>li>span').click();
+             $('.tree>ul>li>span').click();
 
            
 
         });
-    },500)
+    },2500)
        })
     },
 }
@@ -178,11 +182,11 @@ export default {
     position: relative;
 }
 .tree i{
-	color:#00a5ff;
-	position:absolute;
-	left:10px;
-	top:5px;
-	font-style:normal;
+    color:#00a5ff;
+    position:absolute;
+    left:10px;
+    top:5px;
+    font-style:normal;
 }
 .tree .title {
     
@@ -210,10 +214,15 @@ export default {
     border: 1px solid #e8ebf2;  
 }
 .company-list .title{
+    font-size: 16px;
     height:40px;
     padding:0 10px;
     line-height:40px;
     background-color:#e7f7ff;
+}
+.company-list ul{
+    max-height:400px;
+    overflow-y: auto;
 }
 .company-list ul li{
     border-top:1px solid #e8ebf2;

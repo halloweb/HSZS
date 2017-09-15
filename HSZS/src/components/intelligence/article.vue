@@ -8,9 +8,11 @@
         </span>
         </h4>
         <div class="sub-info" v-if="article.title">
-            <span>
+            <span v-if="article.bus">
              <img src="../../assets/images/company.png" alt="">
-              涉及公司：{{article.business}}
+              涉及公司： 
+              <a v-for="business in article.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+              </a>
              </span>
             <span>
              <img src="../../assets/images/time.png" alt="">

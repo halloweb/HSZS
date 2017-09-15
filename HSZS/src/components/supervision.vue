@@ -6,12 +6,12 @@
 		         <ul class="left-nav">
 		            <li>
 		                <router-link to="/supervision/parkMap" active-class="active" >
-		                <img src="../assets/images/supervision.png" alt="">
+		                <img src="../assets/images/supervision.png" style="margin-right:6px;" alt="">
 		                园区监管</router-link>
 		            </li>  
 			     	<li>
 		                <router-link to="/supervision/parkCompanys" active-class="active" >
-		                <img src="../assets/images/n5.png"  alt="">
+		                <img src="../assets/images/n5.png" style="margin-right:9px;" alt="">
 		                园区企业</router-link>
 		            </li>  
 		            <li>
@@ -33,7 +33,7 @@
 		            </li>   
 		            <li>
 		                <router-link to="/supervision/outflow" >  
-		                <img src="../assets/images/n7.png" height="19" width="18" alt="">园区预警</router-link>
+		                <img src="../assets/images/n7.png" height="19" width="18" style="margin-right:12px;" alt="">园区预警</router-link>
 		                 <ol>
                          	<li>
                          	<router-link to="/supervision/outflow" active-class="active" > 

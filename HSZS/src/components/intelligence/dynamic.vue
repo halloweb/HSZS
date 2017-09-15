@@ -17,7 +17,9 @@
                 <div class="sub-info">
                     <span>
                         <img src="../../assets/images/company.png" alt="">
-                        涉及公司：中科点击
+                        涉及公司：
+                         <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+                        </a>
                      </span>
                 </div>
             </li>

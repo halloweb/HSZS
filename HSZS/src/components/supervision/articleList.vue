@@ -3,9 +3,11 @@
         <a href="#" @click="back()" class="back">返回</a>
         <div class="title text-center" v-if="article.title"><span class="blue"></span>{{article.title}}</div>
         <div class="sub-info" v-if="article.title">
-             <span>
+             <span if="article.bus">
              <img src="../../assets/images/company.png" alt="">
-             涉及公司：{{article.business}}
+             涉及公司：
+              <a v-for="business in article.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+              </a>
              </span>
             <span>
              <img src="../../assets/images/time.png" alt="">

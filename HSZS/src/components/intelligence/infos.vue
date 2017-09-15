@@ -12,7 +12,7 @@
             <div class="tab-pane fade in active" id="park-map">
                 <div id="park-map-box">
                 </div>
-                <div class="park-movement">
+                <div class="park-movement" v-if="dynamic.length!=0">
                     <div class="p-title">关注园区动态</div>
                     <ul class="p-content">
                         <li v-for="(item,index) in dynamic">

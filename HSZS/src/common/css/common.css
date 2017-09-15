@@ -843,3 +843,5 @@ button.btn-zs-o,a.btn-zs-o{
 
     margin-top: 60px
 }
+
+#focusCompany .el-checkbox__label{display:none;}
