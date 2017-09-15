@@ -9,41 +9,42 @@
 	        	  <tbody>
 	        		 <tr>
 	        		 	<td>名称</td>
-	        		 	<td>中科点击科技有限公司</td>
+	        		 	<td>{{info.company}}</td>
 	        		 </tr>
 	        		 <tr>
 	        		 	<td>类型标签</td>
-	        		 	<td>企业</td>
+	        		 	<td>{{info.tag}}</td>
 	        		 	
 	        		 </tr>
 	        		 <tr>
 	        		 	<td>所属单位</td>
-	        		 	<td>中科点击</td>
+	        		 	<td>{{info.park}}</td>
 	        		 </tr>
 	        		 <tr>
 	        		 	<td>更新属性</td>
-	        		 	<td>董事</td>
+	        		 	<td>{{info.changeItem}}</td>
 	        		 </tr>
 	        		 <tr>
 	        		 	<td>更新前</td>
-	        		 	<td>张伟</td>
+	        		 	<td>{{info.contentBefore}}</td>
 	        		 </tr>
 	        		 <tr>
 	        		 	<td>更新后</td>
-	        		 	<td>张伟</td>
+	        		 	<td>{{info.contentAfter}}</td>
 	        		 </tr>
 	        		 <tr>
 	        		 	<td>更新时间</td>
-	        		 	<td>2017-02-02</td>
+	        		 	<td>{{info.changeTime}}</td>
 	        		 </tr>
-	        		 <tr>
-	        		 	<td>更新来源</td>
-	        		 	<td>新浪微博</td>
-	        		 </tr>
+	        		
 	        		</tbody> 
 	        	</table>
         </div>
-          <div class="details-btn"><el-button type="primary">查看企业详情</el-button></div>
+          <div class="details-btn">
+          <a :href="'/apis/oauth/getCompanyDetail.json?name='+info.company" target="_blank">
+          <el-button type="primary">查看企业详情</el-button>
+          </a>
+          </div>
 	</div>
 </template>
 <style lang="less" scoped>
@@ -60,6 +61,24 @@
 </style>
 <script> 
 	export default{
-		
+		data(){
+			return{
+              info:{
+              	company:'',
+              	tag:'',
+              	park:'',
+              	changeItem:'',
+              	changeBefore:'',
+              	changeAfter:'',
+              	changeTime:''
+              }
+           }   
+		},
+		mounted(){
+
+			 this.$ajax.get('/apis/warning/getInformationChangeById.json',{params:{id:this.$route.params.id}}).then(res=>{
+                        this.info=res.data.data;
+                    }).catch(err=>{console.log(err)})
+		}
 	}
 </script>

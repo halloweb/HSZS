@@ -56,22 +56,8 @@ export default {
         getTree(){
              this.$ajax.post('/apis/getIndicator.json').then(res=>{
                  this.list=res.data.data;
-             }).catch(err=> console.log(err))
-        },
-        getList(){
-             this.$ajax.post('/apis/getBusinessByIndicator.json',{msg:this.param}).then(res=>{
-                 this.company=res.data.data;
-             }).catch(err=> console.log(err))
-         },
-    },
-    created(){
-       this.getTree();
-    },
-    mounted() {
+       this.$nextTick(()=>{
         
-        let vm=this;
-      this.$nextTick(()=>{
-        setTimeout(()=>{
         $(function() {
 
             $('.tree li:has(ul)').addClass('parent_li').find(' > span i').addClass('glyphicon glyphicon-minus-sign')
@@ -113,8 +99,23 @@ export default {
            
 
         });
-    },2500)
-       })
+
+       });
+             }).catch(err=> console.log(err))
+        },
+        getList(){
+             this.$ajax.post('/apis/getBusinessByIndicator.json',{msg:this.param}).then(res=>{
+                 this.company=res.data.data;
+             }).catch(err=> console.log(err))
+         },
+    },
+    created(){
+       this.getTree();
+    },
+    mounted() {
+        
+        let vm=this;
+
     },
 }
 </script>

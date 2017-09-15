@@ -164,7 +164,7 @@ export default [
             { path: 'articleList/:id', name: 'articleList', component: articleList },
             {path: 'infoWarning',redirect: "infoWarning/infoChange"},
             { path: 'infoWarning/infoChange', name: 'infoChange', component: infoChange },
-            { path: 'infoWarning/warningDetails', name: 'warningDetails', component: warningDetails },
+            { path: 'infoWarning/warningDetails/:id', name: 'warningDetails', component: warningDetails },
 
           
 

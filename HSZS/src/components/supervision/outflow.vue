@@ -3,7 +3,7 @@
 		<div class="title policy-title">
            <img src="../../assets/images/outflow-b.png" alt="">企业疑似外流
         </div>
-        <div class="table-box">
+        <div class="table-box" v-if="list.length!=0">
         	<table class="table-zs">
         	<thead>
         		<tr>
@@ -20,7 +20,7 @@
         			<td>{{item.title}}</td>
         		
         			<td>2017-01-02</td>
-        			<td><router-link class="blue" :to="{path:'/supervision/articleList/'+item.id}">查看详情</router-link></td>
+        			<td><a class="blue" href="javascript:void(0);" @click="view(item.id)">查看详情</a></td>
         		</tr>
         		</tbody>
         </table>	
@@ -29,14 +29,20 @@
             </el-pagination>
         </div>
         </div>
-        
+        <div class="text-center no-data" v-if="list.length==0" >
+                   <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+           </div>
 
 	</div>
 </template>
 <style scoped>
 	.table-box{
-		margin:30px -24px 0 -24px ;
+		margin:0 -24px 0 -24px ;
+
 	}
+    tr td:first-child{
+        text-align:left;
+    }
 	 .load-more{
     	margin-top:60px;
     }
@@ -59,7 +65,7 @@
                  pageNumber:1,
                  pageSize:8,
                  total:0,
-                 list:[],
+                 list:[]
                  
 			}
 		},
@@ -73,10 +79,17 @@
                    
               }).catch(err => console.log(err))
             },
+            view(Id){
+                this.$ajax.get('/apis/deleteWarning.json',{params:{id:Id}}).then(res=>{
+                    
+                    this.$router.push({path:'/supervision/articleList/'+Id});
+                })
+                   
+            },
 			change(val){
              this.pageNumber=val;   
              this.getList();
-         }
+         },
 		},
         created(){
             this.getList();

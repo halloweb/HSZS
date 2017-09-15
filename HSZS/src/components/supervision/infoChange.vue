@@ -2,12 +2,12 @@
 	<div class="content-block">
 		<div class="title policy-title">
            <img src="../../assets/images/change-b.png" alt="">信息变更预警
-        </div>
-        <div class="change-search">
+     </div>
+     <!-- <div class="change-search">
          <el-input placeholder="变更搜索" v-model="searchVal">
 		    <el-button slot="append" icon="search" @click="search"></el-button>
 		  </el-input>
-		 </div>
+		 </div> -->
 	  <div class="table-box"> 
         <table class="table-zs">
         	<thead>
@@ -20,26 +20,25 @@
         		</tr>
         	</thead>
         	<tbody>
-        		<tr>
-        			<td>爱心人寿保险股份有限公司</td>
-        			<td>企业</td>
-        			<td>董事</td>
-        			<td>2017-01-02</td>
-        			<td><router-link class="blue" to="/supervision/infoWarning/warningDetails">查看详情</router-link></td>
-        		</tr>
-        		<tr>
-        			<td>爱心人寿保险股份有限公司</td>
-        			<td>企业</td>
-        			<td>董事</td>
-        			<td>2017-01-02</td>
-        			<td><router-link class="blue" to="/supervision/infoWarning/warningDetails">查看详情</router-link></td>
-        		</tr>
-        	</tbody>
-        </table>
-        <p class="loadMore text-center"><a href="javascript:void(0);" class="blue" @click="loadMore">加载更多</a></p>	
-      </div>  
+            <tr v-for="(item,index) in list">
+              <td>{{item.company}}</td>
+              <td>{{item.tag}}</td>
+              <td>{{item.changeItem}}</td>
+              <td>{{item.changeTime}}</td>
+              <td><a class="blue" href="javascript:void(0);" @click="view(item.id)">查看详情</a></td>
+            </tr>
+            </tbody>
+        </table>  
+         <div class="text-center" v-if="total!=0">
+            <el-pagination @current-change="change" :page-size="pageSize" layout="prev, pager, next" :total="total">
+            </el-pagination>
+        </div>
+        </div>
+        <div class="text-center no-data" v-if="list.length==0" >
+                   <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+           </div>
 
-	</div>
+  </div>
 </template>
 <style lang="less" scoped>
 	.change-search{
@@ -62,21 +61,32 @@
 	export default{
 		data(){
 			return{
-				searchVal:''
+         pageNumber:1,
+         pageSize:8,
+         total:0,
+				 list:[]
 			}
 		},
 		methods:{
              getList(){
-              this.$ajax.post('/apis/warning/getBusinessOutflowList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
-                   
+              this.$ajax.post('/apis/warning/getInformationChangeList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
+                   this.total=res.data.data.totalElements;
+                   this.list=res.data.data.content;
               }).catch(err => console.log(err))
             },
-			search(){
-
-			},
-			loadMore(){
-
-			}
+             view(Id){
+                this.$ajax.get('/apis/warning/deleteWarning.json',{params:{id:Id}}).then(res=>{
+                    
+                    this.$router.push({path:'/supervision/infoWarning/warningDetails/'+Id});
+                })
+                   
+            },
+           change(val){
+             this.pageNumber=val;   
+             this.getList();
+         },
+		    
+			
 		},
         created(){
             this.getList();

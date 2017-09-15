@@ -77,6 +77,7 @@ export default {
     },
     methods: {
         labelInfo(data) {
+            this.pageNumber=1;
             this.params=data;
             this.getExpert(data);
 

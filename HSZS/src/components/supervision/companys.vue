@@ -95,7 +95,7 @@
             </el-dialog>
         </ul>
         <div class="text-center" v-if="total!=0">
-            <el-pagination @current-change="change" :page-size="pageSize" layout="prev, pager, next" :total="total">
+            <el-pagination @current-change="change" :current-page="pageNumber" :page-size="pageSize" layout="prev, pager, next" :total="total">
             </el-pagination>
         </div>
     </div>
@@ -111,7 +111,7 @@ export default {
 
             option1: [
                 { value: '全部' },
-                { value: '互联网' },
+                { value: '互联网+' },
                 { value: '高科技' },
                 { value: '文化创意' },
                 { value: '精英配套' },
