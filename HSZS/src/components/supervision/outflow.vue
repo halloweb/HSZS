@@ -40,9 +40,7 @@
 		margin:0 -24px 0 -24px ;
 
 	}
-    tr td:first-child{
-        text-align:left;
-    }
+   
 	 .load-more{
     	margin-top:60px;
     }

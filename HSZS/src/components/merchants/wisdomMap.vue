@@ -54,6 +54,7 @@ export default {
     },
     methods:{
         getTree(){
+            let vm=this;
              this.$ajax.post('/apis/getIndicator.json').then(res=>{
                  this.list=res.data.data;
        this.$nextTick(()=>{
@@ -114,7 +115,7 @@ export default {
     },
     mounted() {
         
-        let vm=this;
+        
 
     },
 }
