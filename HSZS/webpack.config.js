@@ -59,7 +59,7 @@ module.exports = (options = {}) => ({
         disableHostCheck: true,
         compress: true,
         host: '127.0.0.1',
-        port: 8000,
+        port: 8001,
         proxy: {
             '/apis': {
                 target: 'http://localhost:8092',

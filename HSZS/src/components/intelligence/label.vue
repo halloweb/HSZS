@@ -52,7 +52,7 @@
                 </el-checkbox-group>
             </div>
             <div class="label-box">
-                <p class="label-title">滨海旅游:</p>
+                <p class="label-title">其他:</p>
                 <el-checkbox-group v-model="checkList5">
                     <el-checkbox v-for="label in label5" :label="label" :key="label"></el-checkbox>
                 </el-checkbox-group>
@@ -154,7 +154,7 @@ export default {
                             this.checkList3 = type[key].slice(0);
                         } else if (key == "精英配套") {
                             this.checkList4 = type[key].slice(0);
-                        } else if (key == "滨海旅游") {
+                        } else if (key == "其他") {
                             this.checkList5 = type[key].slice(0);
                         } else if (key == "港口物流") {
                             this.checkList6 = type[key].slice(0);    
@@ -179,7 +179,7 @@ export default {
                 return;
             };
 
-            let parameter = { "互联网+": this.checkList1, "高科技": this.checkList2, "文化创意": this.checkList3, "精英配套": this.checkList4,"滨海旅游":this.checkList5,"港口物流":this.checkList6 };
+            let parameter = { "互联网+": this.checkList1, "高科技": this.checkList2, "文化创意": this.checkList3, "精英配套": this.checkList4,"其他":this.checkList5,"港口物流":this.checkList6 };
             this.typeOne = [];
             this.typeTwo = [];
 

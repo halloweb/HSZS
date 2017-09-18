@@ -1,7 +1,7 @@
 <template>
 	 <header>
-         <div class="logo">
-                    <router-link to="/intelligence" class="icon-logo"></router-link>
+         <div class="logo" style="font-size:20px;color:#fff;">
+                    招商态势
          </div>
         <ul class="top-bar">
             <li >

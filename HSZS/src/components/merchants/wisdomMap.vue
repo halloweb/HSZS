@@ -5,16 +5,16 @@
             <div class="tree">
                 <ul>
                     <li  v-for="(item,index) in list">
-                        <span class="title">{{item.name}}</span> 
+                        <span data="1" class="title">{{item.name}}</span> 
                         <ul class="branch">
                             <li v-for="(item1,index1) in item.children">
-                                <span><i ></i>{{item1.name}}</span> 
+                                <span data="2"><i ></i>{{item1.name}}</span> 
                                 <ul  >
                                     <li v-for="(item2,index2) in item1.children">
-                                        <span><i ></i> {{item2.name}}</span> 
+                                        <span data="3"><i ></i> {{item2.name}}</span> 
                                         <ul>
                                             <li v-for="(item3,index3) in item2.children">
-                                                <span><i ></i> {{item3.name}}</span> 
+                                                <span data="4"><i ></i> {{item3.name}}</span> 
                                             </li>
                                         </ul>
                                     </li>
@@ -85,15 +85,38 @@ export default {
 
             });
 
-            $('.tree').on('click','span',function(e){
-                if(!$(this).parent('li').hasClass("parent_li")){
-                     vm.activeLabel=$(this).text().trim();
-                     let threeLabel=$(this).parent('li').parent("ul").prev().text().trim();
-                     let secondLabel=$(this).parent('li').parent("ul").parent('li').parent("ul").prev().text().trim();
-                     let firstLabel=$(this).parents('.branch').prev().text().trim();
-                     vm.param=[firstLabel,secondLabel,threeLabel,vm.activeLabel];
-                     vm.getList();
-                }
+            $('.tree span').on('click',function(e){
+
+				 vm.activeLabel=$(this).text().trim();
+				 let firstLabel=$(this).parents('.branch').prev().text().trim();
+				 let n=$(this).attr("data");
+				 console.log(n);
+				 console.log("aa");
+				 switch(n)
+						{
+						case '1':
+						vm.param=[vm.activeLabel];
+						vm.getList();
+						  break;
+						case '2':
+						
+						 vm.param=[firstLabel,vm.activeLabel];
+						 vm.getList();
+						  break;
+						 case '3':
+						var cs2=$(this).parent('li').parent("ul").prev().text().trim();
+						 vm.param=[firstLabel,cs2,vm.activeLabel];
+						 vm.getList();
+						  break; 
+						
+						 case '4':
+						var cs2=$(this).parent('li').parent("ul").prev().text().trim();
+						var  label2=$(this).parent('li').parent("ul").parent('li').parent("ul").prev().text().trim();
+						 vm.param=[firstLabel,label2,cs2,vm.activeLabel];
+						 vm.getList();
+						  break; 
+						}
+				
             });
              $('.tree>ul>li>span').click();
 

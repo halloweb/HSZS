@@ -11,11 +11,11 @@
         <div class="tab-content">
             <div class="tab-pane fade in active" id="park-map">
             <div class="radio-box">
-                 <el-radio class="radio" v-model="industry" label="互联网">互联网</el-radio>
+                 <el-radio class="radio" v-model="industry" label="互联网+">互联网+</el-radio>
                  <el-radio class="radio" v-model="industry" label="高科技" >高科技</el-radio>
                   <el-radio class="radio" v-model="industry" label="文化创意">文化创意</el-radio>
                    <el-radio class="radio" v-model="industry" label="精英配套" >精英配套</el-radio>
-                    <el-radio class="radio" v-model="industry" label="滨海旅游" >滨海旅游</el-radio>
+                    <el-radio class="radio" v-model="industry" label="其他" >其他</el-radio>
                      <el-radio class="radio" v-model="industry" label="港口物流" >港口物流</el-radio>
                </div>      
                 <bd-map :city-info="city"></bd-map>
@@ -103,7 +103,7 @@ export default {
             total: 0,
             list: [],
             area: ["不限", "北京", "上海", "广州", "深圳", "杭州", "苏州", "南京", "天津", "青岛", "大连"],
-            industryType: ["不限", "互联网+", "高科技", "文化创意", "精英配套", "滨海旅游", "港口物流"],
+            industryType: ["不限", "互联网+", "高科技", "文化创意", "精英配套", "其他", "港口物流"],
             areaCode: 0,
             typeCode: 1,
             input2: '',

@@ -115,7 +115,7 @@ export default {
                 { value: '高科技' },
                 { value: '文化创意' },
                 { value: '精英配套' },
-                { value: '滨海旅游' },
+                { value: '其他' },
                 { value: '港口物流' },
             ],
             industry: "全部",

@@ -78,7 +78,7 @@
               }).catch(err => console.log(err))
             },
             view(Id){
-                this.$ajax.get('/apis/deleteWarning.json',{params:{id:Id}}).then(res=>{
+                this.$ajax.get('/apis/warning/deleteWarning.json',{params:{id:Id}}).then(res=>{
                     
                     this.$router.push({path:'/supervision/articleList/'+Id});
                 })

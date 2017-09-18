@@ -58,6 +58,7 @@
 		margin-top:60px;
 		text-align:center;
 	}
+	tr td{width:50%;}
 </style>
 <script> 
 	export default{
