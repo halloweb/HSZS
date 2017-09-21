@@ -14,7 +14,7 @@
                 <p class="article-content">
                     {{item.content}}
                 </p>
-                <div class="sub-info">
+                <div class="sub-info" v-show="item.bus.isShow">
                     <span>
                         <img src="../../assets/images/company.png" alt="">
                         涉及公司：
@@ -51,6 +51,14 @@ export default {
                 if (res.data.data != null) {
                     this.article = res.data.data[0].content;
                     this.total = res.data.data[0].totalElements;
+                    for(var i=0;i<this.article.length;i++){
+                        if(this.article[i].bus[0] == '暂无'){
+                            //判断文章列表是否呈现涉及公司，但暂无时，不显示
+                            this.article[i].bus.isShow = false;
+                        }else{
+                            this.article[i].bus.isShow = true;
+                        }
+                    }
                 }
             }).catch(err => console.log(err))
         },

@@ -111,7 +111,7 @@ export default {
                 name: '',
                 park: []
             },
-            industry:'互联网'
+            industry:'互联网+'
 
 
         }
@@ -142,7 +142,6 @@ export default {
         select(index) {
             this.pageNumber=1;
             this.areaCode = index;
-
             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
         select2(index) {
@@ -170,16 +169,11 @@ export default {
         });
     },
     created() {
-       
-
-
-
         this.city.name = this.$route.query.query;
-        
         this.parkList(this.$route.query.query);
-
         let index = this.area.indexOf(this.city.name)
         this.select(index)
+        this.industry = this.$route.query.typeName
     },
 }
 </script>

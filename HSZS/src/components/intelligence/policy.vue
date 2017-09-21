@@ -41,12 +41,11 @@
                         <p class="article-content">
                             {{item.summary}}
                         </p>
-                        <div class="sub-info">
-                            <span>
-                                <img src="../../assets/images/company.png" alt="">
-                                涉及公司： 
-                                <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
-                                </a>
+                        <div class="sub-info" v-show="item.bus.isShow">
+                            <img src="../../assets/images/company.png" alt="">
+                            涉及公司：
+                            <span  v-for="business in item.bus"  >
+                                <a  :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}</a>
                             </span>
                         </div>
                     </li>
@@ -60,14 +59,13 @@
                             <span class="article-time">{{item.publishTime}}</span>
                         </div>
                         <p class="article-content">
-                            {{item.content}}
+                            {{item.summary}}
                         </p>
-                        <div class="sub-info">
-                            <span>
-                               <img src="../../assets/images/company.png" alt="">
-                               涉及公司：
-                                  <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
-                                   </a>
+                        <div class="sub-info" v-show="item.bus.isShow">
+                            <img src="../../assets/images/company.png" alt="">
+                            涉及公司：
+                            <span  v-for="business in item.bus"  >
+                                  <a :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}</a>
                             </span>
                         </div>
                     </li>
@@ -120,7 +118,14 @@ export default {
             }).then(res => {
                 this.lunT = res.data.data[0].forum.content;
                 this.keY = res.data.data[0].research.content;
-
+                for(var i=0;i<this.keY.length;i++){
+                    if(this.keY[i].bus[0] == '暂无'){
+                        //判断文章列表是否呈现涉及公司，但暂无时，不显示
+                        this.keY[i].bus.isShow = false;
+                    }else{
+                        this.keY[i].bus.isShow = true;
+                    }
+                }
 
             }).catch(err => console.log(err))
         },

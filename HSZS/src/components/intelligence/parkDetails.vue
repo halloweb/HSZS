@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="tab-pane fade clearfix" id="parkDynamics">
-                <div class=" col-xs-6" v-for="(item,index) in  parkPolicy">
+                <div class=" col-xs-6" v-for="(item,index) in  parkDynamics">
                    <span>{{item.title}}</span>
                     <router-link :to="{ path:'/intelligence/article/'+item.id}" class="pull-right blue">
                         详情
@@ -82,6 +82,7 @@ export default {
                 }
                 this.leadCompany = res.data.data.leadCompany;
                 this.parkPolicy = res.data.data.parkPolicy;
+                console.log(res.data.data.parkPolicy)
                 this.parkDynamics = res.data.data.parkDynamics;
             }).catch(err => console.log(err))
         },

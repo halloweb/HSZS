@@ -25,7 +25,7 @@
               <td>{{item.tag}}</td>
               <td>{{item.changeItem}}</td>
               <td>{{item.changeTime}}</td>
-              <td><a class="blue" href="javascript:void(0);" @click="view(item.id)">查看详情</a></td>
+              <td><a v-bind:class="{'blue':!item.dr,'huise':item.dr}" href="javascript:void(0);" @click="view(item.id)">查看详情</a></td>
             </tr>
             </tbody>
         </table>  
@@ -36,7 +36,7 @@
         </div>
         <div class="text-center no-data" v-if="list.length==0" >
                    <img src="../../assets/images/noData.png" height="166" width="157" alt="">
-           </div>
+        </div>
 
   </div>
 </template>
@@ -61,10 +61,10 @@
 	export default{
 		data(){
 			return{
-         pageNumber:1,
-         pageSize:8,
-         total:0,
-				 list:[]
+             pageNumber:1,
+             pageSize:8,
+             total:0,
+             list:[],
 			}
 		},
 		methods:{
@@ -76,13 +76,12 @@
             },
              view(Id){
                 this.$ajax.get('/apis/warning/deleteWarning.json',{params:{id:Id}}).then(res=>{
-                    
                     this.$router.push({path:'/supervision/infoWarning/warningDetails/'+Id});
                 })
                    
             },
            change(val){
-             this.pageNumber=val;   
+             this.pageNumber=val;
              this.getList();
          },
 		    

@@ -28,7 +28,7 @@
                 <el-dialog :visible.sync="addVisible" size="tiny" class="text-center" title="添加企业分组">
                     <el-input v-model="addGroup" placeholder="请输入组名"></el-input>
                     <span slot="footer" class="dialog-footer">
-                                <el-button @click="addVisible = false">取 消</el-button>
+                                <el-button @click="addOff">取 消</el-button>
                                 <el-button type="primary" @click="addlist">确 定</el-button>
                     </span>
                 </el-dialog>
@@ -38,7 +38,7 @@
                         </el-option>
                     </el-select>
                     <span slot="footer" class="dialog-footer">
-                                <el-button @click="removeVisible=false">取 消</el-button>
+                                <el-button @click="removeOff">取 消</el-button>
                                 <el-button type="primary" @click="removelist">确 定</el-button>
                     </span>
                 </el-dialog>
@@ -52,6 +52,9 @@
             </el-input>
             
         </div> -->
+
+
+
         <ul>
            <div class="text-center no-data" v-if="company.length==0" >
                    <img src="../../assets/images/noData.png" height="166" width="157" alt="">
@@ -89,7 +92,7 @@
                     </el-option>
                 </el-select>
                 <span slot="footer" class="dialog-footer">
-                                <el-button @click="selectVisible=false">取 消</el-button>
+                                <el-button @click="confirmOff">取 消</el-button>
                                 <el-button type="primary" @click="confirmCollect">确 定</el-button>
                     </span>
             </el-dialog>
@@ -213,11 +216,11 @@ export default {
                 } else {
                     this.$message.error('添加分组失败');
                 }
-
-
-
             }).catch(err => console.log(err))
-
+        },
+        addOff(){
+            this.addVisible = false;
+            this.addGroup='';
         },
         removelist() {
             
@@ -243,6 +246,10 @@ export default {
                 this.$message.error('删除分组失败');
             })
         },
+        removeOff(){
+            this.removeVisible = false;
+            this.removes=[];
+        },
         collect(item) {
             if(this.removeGroup.length==0){
                 this.msg('请先添加企业分组','warning');
@@ -266,6 +273,10 @@ export default {
 
             }).catch(err => console.log(err))
 
+        },
+        confirmOff(){
+            this.selectVisible = false;
+            this.selectGroup = ''
         },
         change(val) {
             this.pageNumber = val;

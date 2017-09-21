@@ -18,7 +18,9 @@ a:focus {
 .blue {
     color: #00a5ff;
 }
-
+.huise{
+    color: #999;
+}
 a.blue:hover,
 a.blue:focus {
     color: #00a5ff;

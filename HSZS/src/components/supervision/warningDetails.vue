@@ -2,6 +2,7 @@
 	<div class="content-block">
 		<div class="title policy-title">
            <img src="../../assets/images/yanz.png" alt="">预警详情
+			<a href="#" @click="back()" class="back">返回</a>
         </div>
          
         <div class="details">
@@ -59,6 +60,16 @@
 		text-align:center;
 	}
 	tr td{width:50%;}
+	.back {
+		display: block;
+		margin-top: 10px;
+		color: #00a5ff;
+		font-size: 16px;
+		float: right;
+	}
+	.back:hover{
+		color: #00a5ff;
+	}
 </style>
 <script> 
 	export default{
@@ -74,6 +85,11 @@
               	changeTime:''
               }
            }   
+		},
+		methods:{
+            back() {
+                this.$router.go(-1)
+            },
 		},
 		mounted(){
 

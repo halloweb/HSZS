@@ -20,7 +20,7 @@
         			<td>{{item.title}}</td>
         		
         			<td>2017-01-02</td>
-        			<td><a class="blue" href="javascript:void(0);" @click="view(item.id)">查看详情</a></td>
+        			<td><a v-bind:class="{'blue':item.hasWarn,'huise':!item.hasWarn}" href="javascript:void(0);" @click="view(item.id)">查看详情</a></td>
         		</tr>
         		</tbody>
         </table>	
@@ -71,15 +71,12 @@
             getList(){
               this.$ajax.post('/apis/warning/getBusinessOutflowList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
                    this.total=res.data.data.totalElements;
-                  
                    this.list=res.data.data.content;
-
-                   
+                   console.log(res.data.data.content)
               }).catch(err => console.log(err))
             },
             view(Id){
                 this.$ajax.get('/apis/warning/deleteWarning.json',{params:{id:Id}}).then(res=>{
-                    
                     this.$router.push({path:'/supervision/articleList/'+Id});
                 })
                    

@@ -12,7 +12,7 @@
                     <span class="article-time">{{item.publishTime}}</span>
                 </div>
                 <p class="article-content">
-                    {{item.content}}
+                    {{item.summary}}
                 </p>
             </li>
         </ul>
@@ -47,7 +47,7 @@ export default {
         return {
             article: [],
             pageNumber: 0,
-            pageSize: 8,
+            pageSize: 10,
             total: 0
         }
     },

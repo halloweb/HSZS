@@ -47,14 +47,16 @@
                     <p class="article-content">
                         {{item.summary}}
                     </p>
-                    <div class="blue article-author"><span class="glyphicon glyphicon-user"></span> {{item.author}}</div>
+                    <div class="blue article-author">
+                        <span class="glyphicon glyphicon-user"></span>{{item.author}}
+                    </div>
                 </li>
             </ul>
         </div>
     </div>
 </template>
 <style scoped>
-@import '../../common/js/swiper/swiper-3.4.2.min.css'
+@import '../../common/js/swiper/swiper-3.4.2.min.css';
 
 </style>
 <script>

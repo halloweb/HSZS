@@ -107,10 +107,6 @@ export default {
             areaCode: 0,
             typeCode: 0,
             input2: ''
-
-
-
-
         }
     },
     methods: {
@@ -144,7 +140,6 @@ export default {
         select(index) {
             this.pageNumber=1;
             this.areaCode = index;
-
             this.getList([this.area[this.areaCode], this.industryType[this.typeCode]]);
         },
         select2(index) {
@@ -586,16 +581,17 @@ export default {
 
                 ]
             }
-
+            var typeName = '互联网+';
             park.setOption(option);
             park.on('click', function(params) {
-                
                 if(vm.area.indexOf(params.name)!=-1){
-                vm.$router.push({ path: '/intelligence/parkInfo/cityPark', query: { query: params.name} });
+                vm.$router.push({ path: '/intelligence/parkInfo/cityPark', query: { query: params.name,typeName:typeName} });
                 }
             });
             park.on('legendselectchanged', function (params) {
-                   let pro=Object.keys(option.legend.selected);
+                typeName = params.name
+
+                let pro=Object.keys(option.legend.selected);
                    pro.forEach((val)=>{
                      option.legend.selected[val]=false;
                    });
@@ -616,8 +612,6 @@ export default {
         this.getDynamic();
          
         this.select(0);
-
-
     },
 }
 </script>

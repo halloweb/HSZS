@@ -19,18 +19,17 @@
                         <ul class="list-box" id="tody-headlines">
                             <li v-for="(item,index) in media">
                                 <h4>
-                                          <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link> 
-                                          <span class="article-time">{{item.publishTime}}</span>
-                                          </h4>
+                                   <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link>
+                                   <span class="article-time">{{item.publishTime}}</span>
+                               </h4>
                                 <p class="article-content">
                                     {{item.summary}}
                                 </p>
-                                <div class="sub-info">
-                                    <span>
-                                        <img src="../../assets/images/company.png" alt="">
-                                                涉及公司：
-                                                <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
-                                                </a>
+                                <div class="sub-info" v-show="item.bus.isShow" >
+                                    <img src="../../assets/images/company.png" alt="">
+                                    涉及公司：
+                                    <span v-for="business in item.bus" >
+                                        <a :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}</a>
                                     </span>
                                 </div>
                             </li>
@@ -61,13 +60,12 @@
                                     <p class="article-content">
                                         {{item.summary}}
                                     </p>
-                                    <div class="sub-info">
-                                        <span>
-                                                <img src="../../assets/images/company.png" alt="">
-                                                涉及公司：
-                                                <a v-for="business in item.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
-                                                </a>
-                                             </span>
+                                    <div class="sub-info" v-show="item.bus.isShow">
+                                        <img src="../../assets/images/company.png" alt="">
+                                        涉及公司：
+                                        <span v-for="business in item.bus">
+                                            <a :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}</a>
+                                        </span>
                                     </div>
                                 </li>
                             </ul>
@@ -99,11 +97,13 @@ export default {
             mediapie: '',
             yun: '',
             showMedia: true,
-            showKey: true
-           
+            showKey: true,
         }
     },
     methods: {
+
+
+
         labelInfo(data) {
 
             this.getMedia(data);
@@ -172,25 +172,28 @@ export default {
             }).catch(err => console.log(err))
         },
         keyList(vals) {
+            let vm = this;
             this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: vals }).then(res => {
+
                 this.keyInfo = res.data.data.content;
+                for(var i=0;i<this.keyInfo.length;i++){
+                    if(this.keyInfo[i].bus[0] == '暂无'){
+                        //判断文章列表是否呈现涉及公司，但暂无时，不显示
+                        this.keyInfo[i].bus.isShow = false;
+                    }else{
+                        this.keyInfo[i].bus.isShow = true;
+                    }
+                }
+
             }).catch(err => console.log(err))
         },
         mediaFocus(data) {
-
             let vm = this;
-
-
-
             let option = {
                 tooltip: {
-
-
                 },
                 legend: {
-
                 },
-
                 series: [{
                     name: '媒体聚焦',
                     type: 'pie',
@@ -206,7 +209,6 @@ export default {
                             show: false,
                             textStyle: {
                                 fontSize: 14
-
                             }
                         }
                     },
@@ -214,30 +216,26 @@ export default {
                         normal: {
                             show: true,
                             lineStyle: {
-                                color: "#5d71f1"
+                                color: "#55bdff"
                             },
-                            smooth: 0.2,
-                            length: 5,
-                            length2: 20
+                            smooth:0.2,
+                            length: 40,
+                            length2: 30
                         }
                     },
                     color: ['#55bdff', '#f8427f', '#5584ff', '#22b3ca','#5d71f1'],
                     data: [
-
 
                     ]
                 }]
             };
             option.series[0].data = data;
             vm.mediapie.setOption(option);
-
-
         },
         keyCloud(datas) {
             let vm = this;
             let option = {
                 title: {
-
                 },
                 tooltip: {},
                 series: [{
@@ -265,8 +263,6 @@ export default {
             vm.yun.setOption(option);
 
         },
-
-
     },
     mounted() {
         let vm = this;
