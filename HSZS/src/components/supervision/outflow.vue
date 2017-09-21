@@ -72,11 +72,12 @@
               this.$ajax.post('/apis/warning/getBusinessOutflowList.json',{pageNumber:this.pageNumber,pageSize:this.pageSize}).then(res => {
                    this.total=res.data.data.totalElements;
                    this.list=res.data.data.content;
-                   console.log(res.data.data.content)
+                   console.log(this.list)
               }).catch(err => console.log(err))
             },
             view(Id){
                 this.$ajax.get('/apis/warning/deleteWarning.json',{params:{id:Id}}).then(res=>{
+                    console.log(res)
                     this.$router.push({path:'/supervision/articleList/'+Id});
                 })
                    
