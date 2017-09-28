@@ -13,9 +13,9 @@
                     <li>
                         <router-link to="/intelligence/expertView" active-class="active"> <i class="icon-left4"></i>专家观点</router-link>
                     </li>
-                   <!-- <li>
+                    <li>
                         <router-link to="/intelligence/businessRank" active-class="active"> <i class="icon-left5"></i>企业排行</router-link>
-                    </li> -->
+                    </li>
                 </ol>
             </li>
             <li> <router-link to="/intelligence/parkInfo" style="padding-left:20px;"> 

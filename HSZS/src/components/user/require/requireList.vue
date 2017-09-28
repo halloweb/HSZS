@@ -25,14 +25,13 @@
         </ul>
          <div class="search">
                          <el-input
-                              
                               icon="search"
                               v-model="keyWord"
                               :on-icon-click="search">
                         </el-input>
          </div> 
          <div class="table-box">
-         <table class="table-zs">
+         <table class="table-zs" v-show="list.length">
          	<thead>
          		<tr>
          			<th>企业名</th>
@@ -60,28 +59,12 @@
          			<td>北京</td>
          			<td>北京</td>
          		</tr>
-
          	</tbody>
-         	<tbody>
-         		<tr>
-         			<td :rowspan="count" class="first">中国石油化工股份有限公司</td>
-         			<td>中国石油齐鲁股份有限公司</td>
-         			<td>大数据、人工智能、区块链</td>
-         			<td>北京</td>
-         			<td>北京</td>
-         			<td>北京</td>
-         		</tr>
-         		 <tr>
-         			<td :rowspan="count" v-if="1==0">中国石油化工股份有限公司</td>
-         			<td>中国石油齐鲁股份有限公司</td>
-         			<td>大数据、人工智能、区块链</td>
-         			<td>北京</td>
-         			<td>北京</td>
-         			<td>北京</td>
-         		</tr>
 
-         	</tbody>
-         </table>  
+         </table>
+         <div v-show="!list.length" class="noMsg">
+             暂无数据
+         </div>
          </div>  
     </div>
 </template>
@@ -96,24 +79,36 @@ export default {
             stateCode:0,
             timeCode:0,
             keyWord:'',
-            count:2
-
+            count:2,
+            list:[],
        	 }
        },
        methods:{
-       	 select1(){
-
+       	 select1(index){
+			 this.labelCode = index
+             this.update()
        	 },
-       	  select2(){
-
+       	  select2(index){
+              this.stateCode = index
+              this.update()
        	 },
-       	  select3(){
-
+       	  select3(index){
+              this.timeCode = index
+              this.update()
        	 },
        	 search(){
 
        	 },
-       }
+	     update(){
+       	     var msg = [this.label[this.labelCode],this.state[this.stateCode],this.time[this.timeCode]]
+             this.$ajax.post('/apis/pool/getMyCompanyList.json', {msg}).then((res) => {
+                 this.list = res.data.data.list
+             }).catch(err => console.log(err))
+		 }
+       },
+		mounted(){
+			  this.update()
+		}
 }
 </script>
 <style lang="less" scoped>
@@ -138,4 +133,9 @@ export default {
 
 	}
 	.first{border-right:1px solid #e8ebf2;}
+
+    .noMsg{
+        padding: 100px;
+        text-align: center;
+    }
 </style>
