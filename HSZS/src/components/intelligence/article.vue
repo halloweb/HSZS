@@ -8,7 +8,7 @@
         </span>
         </h4>
         <div class="sub-info" v-if="article.title">
-            <span v-if="article.bus">
+            <span v-show="article.bus[0] != '暂无'">
              <img src="../../assets/images/company.png" alt="">
               涉及公司： 
               <a v-for="business in article.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}

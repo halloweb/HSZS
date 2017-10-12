@@ -25,7 +25,7 @@
                                 <p class="article-content">
                                     {{item.summary}}
                                 </p>
-                                <div class="sub-info" v-show="item.bus.isShow" >
+                                <div class="sub-info"  v-show="item.bus[0] != '暂无'">
                                     <img src="../../assets/images/company.png" alt="">
                                     涉及公司：
                                     <span v-for="business in item.bus" >
@@ -60,7 +60,7 @@
                                     <p class="article-content">
                                         {{item.summary}}
                                     </p>
-                                    <div class="sub-info" v-show="item.bus.isShow">
+                                    <div class="sub-info" v-show="item.bus[0] != '暂无'">
                                         <img src="../../assets/images/company.png" alt="">
                                         涉及公司：
                                         <span v-for="business in item.bus">
@@ -176,14 +176,14 @@ export default {
             this.$ajax.post('/apis/Headlines/getArticleByKeyWordList.json', { msg: vals }).then(res => {
 
                 this.keyInfo = res.data.data.content;
-                for(var i=0;i<this.keyInfo.length;i++){
-                    if(this.keyInfo[i].bus[0] == '暂无'){
-                        //判断文章列表是否呈现涉及公司，但暂无时，不显示
-                        this.keyInfo[i].bus.isShow = false;
-                    }else{
-                        this.keyInfo[i].bus.isShow = true;
-                    }
-                }
+                // for(var i=0;i<this.keyInfo.length;i++){
+                //     if(this.keyInfo[i].bus[0] == '暂无'){
+                //         //判断文章列表是否呈现涉及公司，但暂无时，不显示
+                //         this.keyInfo[i].bus.isShow = false;
+                //     }else{
+                //         this.keyInfo[i].bus.isShow = true;
+                //     }
+                // }
 
             }).catch(err => console.log(err))
         },
@@ -219,8 +219,8 @@ export default {
                                 color: "#55bdff"
                             },
                             smooth:0.2,
-                            length: 40,
-                            length2: 30
+                            length: 5
+                            
                         }
                     },
                     color: ['#55bdff', '#f8427f', '#5584ff', '#22b3ca','#5d71f1'],

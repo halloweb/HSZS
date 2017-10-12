@@ -40,7 +40,7 @@ export default {
     data() {
         return {
             article: [],
-            time: ["2017", "2015", "2016", "2014"],
+            time: ["2017", "2016", "2015", "2014"],
             labels: [],
         }
     },

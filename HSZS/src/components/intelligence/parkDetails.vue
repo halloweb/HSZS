@@ -13,6 +13,7 @@
         </div>
         <div class="tab-content">
             <div class="tab-pane fade in active clearfix" id="leadCompany">
+               <p class="text-center" v-show="leadCompany.length==0" >暂无数据</p>
                 <div class=" col-xs-6" v-for="(item,index) in leadCompany">
                     <span>{{item.business}}</span>
                     <a :href="'/apis/oauth/getCompanyDetail.json?name='+item.business" target="_blank" class="pull-right blue">
@@ -21,6 +22,7 @@
                 </div>
             </div>
             <div class="tab-pane fade clearfix" id="parkPolicy">
+                <p class="text-center" v-show="parkPolicy.length==0" >暂无数据</p>
                 <div class=" col-xs-6" v-for="(item,index) in  parkPolicy">
                      <span>{{item.title}}</span>
                     <router-link :to="{ path:'/intelligence/article/'+item.id}" class="pull-right blue">
@@ -29,6 +31,7 @@
                 </div>
             </div>
             <div class="tab-pane fade clearfix" id="parkDynamics">
+                <p class="text-center" v-show="parkPolicy.length==0" >暂无数据</p>
                 <div class=" col-xs-6" v-for="(item,index) in  parkDynamics">
                    <span>{{item.title}}</span>
                     <router-link :to="{ path:'/intelligence/article/'+item.id}" class="pull-right blue">

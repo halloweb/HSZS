@@ -12,7 +12,11 @@
                     </el-select>
                 </div>
             </div>
-            <ul class="area-policy clearfix">
+            <div class="row text-center" v-show="explanation.length==0" >
+                <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+               </div>
+            <ul class="area-policy clearfix" v-show="explanation.length!=0">
+               
                 <li class="col-xs-6" v-for="(item,index) in explanation">
                     <div>
                         <router-link :to="{ path:'/intelligence/article/'+item.id}">{{item.title}}</router-link>
@@ -41,7 +45,7 @@
                         <p class="article-content">
                             {{item.summary}}
                         </p>
-                        <div class="sub-info" v-show="item.bus.isShow">
+                        <div class="sub-info" v-show="item.bus[0] != '暂无'">
                             <img src="../../assets/images/company.png" alt="">
                             涉及公司：
                             <span  v-for="business in item.bus"  >
@@ -61,7 +65,7 @@
                         <p class="article-content">
                             {{item.summary}}
                         </p>
-                        <div class="sub-info" v-show="item.bus.isShow">
+                        <div class="sub-info" v-show="item.bus[0] != '暂无'">
                             <img src="../../assets/images/company.png" alt="">
                             涉及公司：
                             <span  v-for="business in item.bus"  >
@@ -118,20 +122,15 @@ export default {
             }).then(res => {
                 this.lunT = res.data.data[0].forum.content;
                 this.keY = res.data.data[0].research.content;
-                for(var i=0;i<this.keY.length;i++){
-                    if(this.keY[i].bus[0] == '暂无'){
-                        //判断文章列表是否呈现涉及公司，但暂无时，不显示
-                        this.keY[i].bus.isShow = false;
-                    }else{
-                        this.keY[i].bus.isShow = true;
-                    }
-                }
+
 
             }).catch(err => console.log(err))
         },
         areaChange() {
             this.params.splice(2, 1, this.area);
+            localStorage.setItem("area", this.area);
             this.getPolicy(this.params);
+
         },
 
     },
@@ -139,6 +138,9 @@ export default {
         $(".policy-title a").on("click", function() {
             $(this).addClass("fc").siblings().removeClass("fc");
         });
+        if(localStorage.getItem("area")){
+            this.area=localStorage.getItem("area");
+        }
     },
 }
 </script>
