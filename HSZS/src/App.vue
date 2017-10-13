@@ -8,7 +8,7 @@
        size="tiny"
        >
   
-       <span>{{warnInfo.message}}</span>
+       <span>您的账号将于{{warnInfo.message}}过期</span>
       <span slot="footer" class="dialog-footer">
       <el-button type="primary" @click="apply">申请转为正式</el-button>
      </span>
@@ -31,6 +31,10 @@ export default {
         apply(){
          this.$ajax.get('/apis/user/applyFormal.json?userId=').then(res=>{
              
+                 this.$message(res.data.message);
+                 this.$store.commit('CANCLE_WARN');
+            
+            
          }).catch(err=>console.log(err))
         }
     }
