@@ -25,7 +25,7 @@ const router = new VueRouter({
     mode: 'history',
     routes: routerConfig
 })
-
+   
 //添加响应拦截器
 axios.interceptors.response.use(function(response){
      //对响应数据做些事
@@ -33,6 +33,9 @@ axios.interceptors.response.use(function(response){
       if(response.data.code=='1002'){
          router.replace('/')
       };
+      if(response.data.time&&response.data.time!=null){
+        store.commit('WARN_INFO',response.data.time)
+      }
       
       return response;
    },function(error){

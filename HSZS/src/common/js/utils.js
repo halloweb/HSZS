@@ -5,9 +5,10 @@ export default {
          function slice(target,number){
          	target.slice(0,number)+'...';
          };
-
-      Vue.prototype.Util = {
+        
+        Vue.prototype.Util = {
           slice:slice
+          
 
       }
     }

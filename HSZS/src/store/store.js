@@ -6,7 +6,10 @@ Vue.use(Vuex);
 
 
 const state = {
-   
+   warnInfo:{
+   	  isWarn:false,
+   	  message:'aa'
+   }
 
 };
 
