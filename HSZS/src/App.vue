@@ -29,12 +29,10 @@ export default {
     }),
     methods:{
         apply(){
-         this.$ajax.get('/apis/user/applyFormal.json?userId=').then(res=>{
+         this.$ajax.get('/apis/user/applyFormal.json').then(res=>{
              
                  this.$message(res.data.message);
                  this.$store.commit('CANCLE_WARN');
-            
-            
          }).catch(err=>console.log(err))
         }
     }
