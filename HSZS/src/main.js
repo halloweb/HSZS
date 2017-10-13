@@ -33,8 +33,8 @@ axios.interceptors.response.use(function(response){
       if(response.data.code=='1002'){
          router.replace('/')
       };
-      if(response.data.time&&response.data.time!=null){
-        store.commit('WARN_INFO',response.data.time)
+      if(response.data.user&&response.data.user.time!=null){
+        store.commit('WARN_INFO',response.data.user)
       }
       
       return response;

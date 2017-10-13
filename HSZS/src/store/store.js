@@ -8,7 +8,8 @@ Vue.use(Vuex);
 const state = {
    warnInfo:{
    	  isWarn:false,
-   	  message:''
+   	  message:'',
+   	  level:0
    }
 
 };
