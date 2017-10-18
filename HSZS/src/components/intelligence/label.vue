@@ -25,7 +25,7 @@
                 </p>
             </li>
         </ul>
-        <el-dialog :visible.sync="dialogVisible" size="large" :show-close="showClose">
+        <el-dialog :visible.sync="dialogVisible" size="large" :show-close="showClose" :close-on-click-modal="showClose" :close-on-press-escape="showClose">
            <h5 class="text-center" slot="title">请选择您想关注的产业情报</h5>
             <div class="label-box">
                 <p class="label-title">互联网+:</p>
@@ -182,7 +182,7 @@ export default {
             let parameter = { "互联网+": this.checkList1, "高科技": this.checkList2, "文化创意": this.checkList3, "精英配套": this.checkList4,"其他":this.checkList5,"港口物流":this.checkList6 };
             this.typeOne = [];
             this.typeTwo = [];
-
+            
             for (let key in parameter) {
 
                 if (parameter[key].length == 0) {
@@ -202,8 +202,6 @@ export default {
 
     },
     mounted() {
-
-       
         if (this.timeList != undefined) {
             this.time = this.timeList;
            
@@ -226,8 +224,6 @@ export default {
             }
             
         };
-
-
        
     }
 

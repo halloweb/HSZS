@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ul class="type-box">
+        <ul class="type-box" >
             <li>
                 <div class="head"><img src="../../../assets/images/bq.png" height="15" width="15" alt="">企业标签</div>
                 <p class="type-list">
@@ -23,7 +23,7 @@
             </li>
            
         </ul>
-         <div class="search">
+         <div class="search" >
                          <el-input
                               icon="search"
                               v-model="keyWord"
@@ -62,17 +62,18 @@
          	</tbody>
 
          </table>
-         <div v-show="!list.length" class="noMsg">
-             暂无数据
-         </div>
+         
          </div>  
+         <div v-show="!list.length" class="text-center">
+              <img src="../../../assets/images/noData.png" height="166" width="157" alt="">
+         </div>
     </div>
 </template>
 <script>
 export default {
        data(){
        	 return{
-       	 	label:["世界500强","中国500强"],
+       	 	label:[],
        	 	state:['全部',"已入住","未入住"],
        	 	time:['全部', '近一周','近三个月', '近六个月', '近一年'],
             labelCode:0,
@@ -85,7 +86,7 @@ export default {
        },
        methods:{
        	 select1(index){
-			 this.labelCode = index
+			     this.labelCode = index
              this.update()
        	 },
        	  select2(index){
@@ -97,17 +98,26 @@ export default {
               this.update()
        	 },
        	 search(){
-
+            this.update();
        	 },
+       getLabel(){
+           this.$ajax.get('/apis/label/getLabel.json').then(res => {
+              this.label=['全部'];
+              res.data.data.forEach(val=>{
+                this.label.push(val.label)
+              })
+           })
+       },
 	     update(){
-       	     var msg = [this.label[this.labelCode],this.state[this.stateCode],this.time[this.timeCode]]
-             this.$ajax.post('/apis/pool/getMyCompanyList.json', {msg}).then((res) => {
+       	     var msgs = [this.label[this.labelCode],this.state[this.stateCode],this.time[this.timeCode]]
+             this.$ajax.post('/apis/pool/getCompanyList.json', {msg:msgs,search:this.keyWord}).then((res) => {
                  this.list = res.data.data.list
              }).catch(err => console.log(err))
-		 }
+		     }
        },
 		mounted(){
-			  this.update()
+        this.getLabel();
+			  this.update();
 		}
 }
 </script>

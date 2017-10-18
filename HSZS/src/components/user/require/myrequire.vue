@@ -6,18 +6,18 @@
                 <p class="type-list">
                     <span v-for="(item,index) in label" :class="{active:index==labelCode}" @click="select1(index)">{{item}}</span>
                     <span class="type-item" @click="addVisible = true">+ 添加企业标签</span>
-                    <span class="type-item" @click="removeVisible = true">删除企业分组</span>
+                    <span class="type-item" @click="removeVisible = true">删除企业标签</span>
                 </p>
-                <el-dialog :visible.sync="addVisible" size="tiny" class="text-center" title="添加企业分组">
-                    <el-input v-model="addGroup" placeholder="请输入组名"></el-input>
+                <el-dialog :visible.sync="addVisible" size="tiny" class="text-center" title="添加企业标签">
+                    <el-input v-model="addLabel" placeholder="请输入标签名"></el-input>
                     <span slot="footer" class="dialog-footer">
                                 <el-button @click="addOff">取 消</el-button>
-                                <el-button type="primary" @click="addlist">确 定</el-button>
+                                <el-button type="primary" @click="addLabels">确 定</el-button>
                     </span>
                 </el-dialog>
-                <el-dialog :visible.sync="removeVisible" size="tiny" class="text-center" title="删除企业分组">
-                    <el-select v-model="removes" multiple placeholder="请选择组">
-                        <el-option v-for="item in removeGroup" :key="item.value" :value="item.value">
+                <el-dialog :visible.sync="removeVisible" size="tiny" class="text-center" title="删除企业分标签">
+                    <el-select v-model="removes" multiple placeholder="请选择标签名">
+                        <el-option v-for="item in removeLabel" :key="item.value" :value="item.value">
                         </el-option>
                     </el-select>
                     <span slot="footer" class="dialog-footer">
@@ -79,7 +79,7 @@
                 </el-form-item>
             </el-form>
             <div class="footer">
-                <el-button type="primary">保存</el-button>
+                <el-button type="primary" @click="addRequire">保存</el-button>
             </div>
         </el-dialog>
         <div class="table-box">
@@ -99,7 +99,7 @@
                     <tr>
                         <td :rowspan="count" class="first">中国石油化工股份有限公司</td>
                         <td>
-                            <router-link to='/user/requires/requireDetails'>中国石油齐鲁股份有限公司</router-link>
+                            <router-link to='/user/requires/requireDetails/a'>中国石油齐鲁股份有限公司</router-link>
                         </td>
                         <td>大数据、人工智能、区块链</td>
                         <td>北京</td>
@@ -145,7 +145,7 @@
 export default {
     data() {
         return {
-            label: ["世界500强", "中国500强"],
+            label: [],
             state: ['全部', "已入住", "未入住"],
             time: ['全部', '近一周', '近三个月', '近六个月', '近一年'],
             labelCode: 0,
@@ -154,10 +154,10 @@ export default {
             keyWord: '',
             count: 2,
             addVisible: false,
-            addGroup: '',
+            addLabel: '',
             removeVisible: false,
             removes: [],
-            removeGroup: [],
+            removeLabel: [],
             formVisible: false,
             infos: {
                 companyName: '',
@@ -190,51 +190,48 @@ export default {
         search(){
 
         },
-        getGroup() {
-            this.$ajax.get('/apis/supervise/selectCompanyGroup.json').then(res => {
-                this.group = ['全部'];
-                this.removeGroup = [];
-                let groups = res.data.data;
-                groups.forEach(val => {
-                    this.label.push(val.groupName);
-                    this.removeGroup.push({ value: val.groupName });
-                })
-
-
-            }).catch(err => console.log(err))
-        },
+         getLabel(){
+           this.$ajax.get('/apis/label/getMyLabel.json').then(res => {
+            this.label=['全部'];
+            this.removeLabel = [];
+              res.data.data.forEach(val=>{
+                this.label.push(val.label)
+                this.removeLabel.push({ value: val.label });
+              })
+           })
+       },
         msg(data,type){
             this.$message({
                 message: data,
                 type: type
             });
         },
-        addlist() {
+        addLabels() {
             let rex=/(^[\u4E00-\u9FA5a-zA-Z0-9_]+$)/;
-            if(!rex.test(this.addGroup)){
+            if(!rex.test(this.addLabel)){
                 this.msg('组名由中英文数字下划线组成并不能为空','warning');
                 return;
             };
-            if(this.addGroup.length>10){
+            if(this.addLabel.length>10){
                 this.msg('组名不能超过十个字符','warning');
                 return;
             };
-            this.$ajax.get('/apis/supervise/addCompanyGroup.json', { params: { groupName: this.addGroup } }).then(res => {
-                if (res.data.data.state == "success") {
+            this.$ajax.get('/apis/label/addMyLabel.json', { params: { name: this.addLabel } }).then(res => {
+                if (res.data.success == true) {
                     this.addVisible = false;
-                    this.getGroup();
-                    this.msg('添加分组成功','success');
-                    this.addGroup='';
-                } else if (res.data.data.state == "分组已经存在") {
-                    this.msg('组名已存在','warning')
+                    this.getLabel();
+                    this.msg('添加标签成功','success');
+                    this.addLabel='';
+                } else if (res.data.message == "标签已经存在") {
+                    this.msg('标签已存在','warning')
                 } else {
-                    this.$message.error('添加分组失败');
+                    this.$message.error('添加标签失败');
                 }
             }).catch(err => console.log(err))
         },
         addOff(){
             this.addVisible = false;
-            this.addGroup='';
+            this.addLabel='';
         },
         removelist() {
             if(this.removes.length==0){
@@ -242,21 +239,21 @@ export default {
                 return;
             }
             let p = this.removes.join();
-            this.$ajax.get('/apis/supervise/dropCompanyGroup.json', { params: { groupNames: this.removes } }).then(res => {
+            this.$ajax.post('/apis/label/dropMyLabel.json', {msg: this.removes}).then(res => {
                 if (res.data.data == true) {
 
-                    this.msg('删除分组成功','success');
+                    this.msg('删除标签成功','success');
                     this.removeVisible = false;
-                    this.getGroup();
-                    this.select2('全部', 0);
+                    this.getLabels();
+                    this.labelCode=0;
                     this.removes=[];
                 } else {
-                    this.$message.error('删除分组失败');
+                    this.$message.error('删除标签失败');
                 }
 
             }).catch(err => {
                 console.log(err);
-                this.$message.error('删除分组失败');
+                this.$message.error('删除标签失败');
             })
         },
         removeOff(){
@@ -268,11 +265,18 @@ export default {
             this.$ajax.post('/apis/pool/getMyCompanyList.json', {msg}).then((res) => {
                 this.list = res.data.data.list
             }).catch(err => console.log(err))
+        },
+        addRequire(){
+            this.$ajax.post('/apis/pool/addPoolCompany.json',{poolCompany:this.infos}).then(res =>{
+                if(res.data.success){
+                    this.formVisible=false;
+                }
+            }).catch(err=>{this.formVisible=false;})
         }
     },
     mounted(){
         this.update()
-        this.getGroup();
+        this.getLabel();
 
     }
 }

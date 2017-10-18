@@ -54,6 +54,11 @@
                   company:{}
              }
 		},
+		mounted(){
+			this.$ajax.get('/apis/pool/findPoolCompanyById.json',{params:{id:this.$route.params.id}}).then(res=>{
+
+			})
+		}
         
 	}
 </script>

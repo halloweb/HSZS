@@ -11,8 +11,11 @@
            <img src="../../assets/images/good.png" alt="">企业报告
            </a>
         </div>
-                      <div class="table-box">
-              <table class="table-zs">
+            <div class="table-box">
+             <div class="text-center" v-show="!list.length!=0" >
+                <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+            </div>
+              <table class="table-zs" v-show="list.length!=0">
               	 <thead>
               	 	<tr>
               	 		<th v-for="item in head">{{item}}</th>
@@ -28,13 +31,13 @@
                     <td>{{item.lanmu}}</td>
                     <td><a href="javascript:void(0);" class="blue" @click="remove(item.articleId)">删除</a></td>
               	 	</tr>
-                  <tr v-if="head.length!=7">
-                    <td>1</td>
-                    <td><router-link to="/user/down/collectArticle/">aa</router-link></td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td>1</td>
-                    <td><a href="javascript:void(0);" class="blue" @click="remove">删除</a></td>
+                  <tr v-if="head.length!=7&&list.length!=0" v-for="(item,index) in list">
+                    <td></td>
+                    <td><router-link to="/user/down/collectArticle/"></router-link></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="javascript:void(0);" class="blue" @click="remove"></a></td>
                   </tr>
               	 </tbody>
               </table>

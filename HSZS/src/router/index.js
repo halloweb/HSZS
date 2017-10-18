@@ -187,7 +187,7 @@ export default [
 
                    
             ]},
-            { path: 'requires/requireDetails', name: 'requireDetails', component: requireDetails },
+            { path: 'requires/requireDetails/:id', name: 'requireDetails', component: requireDetails },
           
 
         ]
