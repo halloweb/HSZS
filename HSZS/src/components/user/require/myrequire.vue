@@ -44,17 +44,17 @@
         <div class="addRequire">
             <a href="javascript:void(0);" @click="formVisible = true"><img src="../../../assets/images/add-small.png" height="21" width="21" alt="">添加需求</a>
         </div>
-        <el-dialog title="添加需求" :visible.sync="formVisible">
+                <el-dialog :visible.sync="formVisible">
             <el-form :model="infos">
                 <el-form-item label="企业名" label-width="120px">
-                    <el-input v-model="infos.companyName" placeholder="请输入企业名"></el-input>
+                    <el-input v-model="infos.name" placeholder="请输入企业名"></el-input>
                 </el-form-item>
                 <el-form-item label="所属企业" label-width="120px">
-                    <el-input v-model="infos.parentCompany" placeholder="请输入总部企业名"></el-input>
+                    <el-input v-model="infos.fatherName" placeholder="请输入总部企业名"></el-input>
                 </el-form-item>
                 <el-form-item label="企业标签" label-width="120px">
                     <el-select v-model="infos.label" placeholder="请选择企业标签">
-                        <el-option label="世界500强" value="1"></el-option>
+                        <el-option  v-for="item in removeLabel" :key="item.value" :value="item.value">{{item.value}}</el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="企业关系" label-width="120px">
@@ -64,25 +64,23 @@
                     <el-input v-model="infos.relationRemark"></el-input>
                 </el-form-item>
                 <el-form-item label="企业状态" label-width="120px">
-                    <el-input v-model="infos.companyState" placeholder="请输入营业状态"></el-input>
+                    <el-input v-model="infos.companyStatus" placeholder="请输入企业状态"></el-input>
                 </el-form-item>
                 <el-form-item label="负责人" label-width="120px">
-                    <el-input v-model="infos.principal" placeholder="请输入负责人姓名"></el-input>
+                    <el-input v-model="infos.responsiblePerson" placeholder="请输入负责人姓名"></el-input>
                 </el-form-item>
-                <el-form-item label="招商状态" label-width="120px">
-                    <el-select v-model="infos.state" placeholder="请选择招商状态">
-                        <el-option label="目标企业" value="1"></el-option>
-                    </el-select>
+                <el-form-item label="招商状态" label-width="120px" >
+                    <el-input  v-model="infos.investmentRemark"></el-input>
                 </el-form-item>
                 <el-form-item label="招商备注" label-width="120px">
-                    <el-input type="textarea" v-model="infos.remark"></el-input>
+                    <el-input type="textarea" v-model="infos.investmentStatus"></el-input>
                 </el-form-item>
             </el-form>
             <div class="footer">
                 <el-button type="primary" @click="addRequire">保存</el-button>
             </div>
         </el-dialog>
-        <div class="table-box">
+        <div class="table-box" v-show="list.length">
             <table class="table-zs">
                 <thead>
                     <tr>
@@ -95,50 +93,39 @@
                         <th>操作</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td :rowspan="count" class="first">中国石油化工股份有限公司</td>
+                <tbody v-for="(item,index) in list">
+                    <tr v-for="(item1,index1) in item.children">
+                        <td :rowspan="item.children.length" class="first" v-if="0==index1">{{item.name}}</td>
                         <td>
-                            <router-link to='/user/requires/requireDetails/a'>中国石油齐鲁股份有限公司</router-link>
+                            <router-link :to="'/user/requires/requireDetails/'+item1.id">{{item1.name}}</router-link>
                         </td>
-                        <td>大数据、人工智能、区块链</td>
-                        <td>北京</td>
-                        <td>北京</td>
-                        <td>北京</td>
-                        <td><a href="javascript:void(0);" class="blue">编辑</a></td>
+                        <td>{{item1.label}}</td>
+                        <td>{{item1.area}}</td>
+                        <td>{{item1.responsiblePerson}}</td>
+                        <td>{{item1.investmentStatus}}</td>
+                        <td><a href="javascript:void(0);" class="blue" @click="edit(item1.id)">编辑</a></td>
                     </tr>
-                    <tr>
-                        <td :rowspan="count" v-if="1==0">中国石油化工股份有限公司</td>
-                        <td>中国石油齐鲁股份有限公司</td>
-                        <td>大数据、人工智能、区块链</td>
-                        <td>北京</td>
-                        <td>北京</td>
-                        <td>北京</td>
-                        <td><a href="javascript:void(0);" class="blue">编辑</a></td>
-                    </tr>
+                   
                 </tbody>
-                <tbody>
-                    <tr>
-                        <td :rowspan="count" class="first">中国石油化工股份有限公司</td>
-                        <td>中国石油齐鲁股份有限公司</td>
-                        <td>大数据、人工智能、区块链</td>
-                        <td>北京</td>
-                        <td>北京</td>
-                        <td>北京</td>
-                        <td><a href="javascript:void(0);" class="blue">编辑</a></td>
-                    </tr>
-                    <tr>
-                        <td :rowspan="count" v-if="1==0">中国石油化工股份有限公司</td>
-                        <td>中国石油齐鲁股份有限公司</td>
-                        <td>大数据、人工智能、区块链</td>
-                        <td>北京</td>
-                        <td>北京</td>
-                        <td>北京</td>
-                        <td><a href="javascript:void(0);" class="blue">编辑</a></td>
-                    </tr>
-                </tbody>
+                
             </table>
         </div>
+         <div v-show="!list.length" class="text-center">
+              <img src="../../../assets/images/noData.png" height="166" width="157" alt="">
+         </div>
+          <el-dialog :visible.sync="editVisible">
+            <el-form :model="company">
+                <el-form-item label="招商状态" label-width="120px" >
+                    <el-input  v-model="company.investmentRemark"></el-input>
+                </el-form-item>
+                <el-form-item label="招商备注" label-width="120px">
+                    <el-input type="textarea" v-model="company.investmentStatus"></el-input>
+                </el-form-item>
+            </el-form>
+            <div class="footer">
+                <el-button type="primary" @click="saveEdit">保存修改</el-button>
+            </div>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -160,16 +147,24 @@ export default {
             removeLabel: [],
             formVisible: false,
             infos: {
-                companyName: '',
-                parentCompany: '',
+                name: '',
+                fatherName: '',
                 label: '',
                 relation: '',
                 relationRemark: '',
-                companyState: '',
-                principal: '',
-                state: '',
-                remark: ''
-            }
+                companyStatus: '',
+                responsiblePerson: '',
+                investmentRemark: '',
+                investmentStatus: ''
+            },
+            company:{
+                investmentRemark: '',
+                investmentStatus: ''
+            },
+            editVisible:false,
+            editId:0,
+            list:[]
+
 
 
         }
@@ -197,7 +192,8 @@ export default {
               res.data.data.forEach(val=>{
                 this.label.push(val.label)
                 this.removeLabel.push({ value: val.label });
-              })
+              });
+              this.update();
            })
        },
         msg(data,type){
@@ -235,16 +231,17 @@ export default {
         },
         removelist() {
             if(this.removes.length==0){
-                this.msg('请选择要删除组名','warning');
+                this.msg('请选择要删除标签','warning');
                 return;
             }
             let p = this.removes.join();
             this.$ajax.post('/apis/label/dropMyLabel.json', {msg: this.removes}).then(res => {
-                if (res.data.data == true) {
+                
+                if (res.data.success==true) {
 
                     this.msg('删除标签成功','success');
                     this.removeVisible = false;
-                    this.getLabels();
+                    this.getLabel();
                     this.labelCode=0;
                     this.removes=[];
                 } else {
@@ -263,20 +260,42 @@ export default {
         update(){
             var msg = [this.label[this.labelCode],this.state[this.stateCode],this.time[this.timeCode]]
             this.$ajax.post('/apis/pool/getMyCompanyList.json', {msg}).then((res) => {
-                this.list = res.data.data.list
+                this.list=res.data.data.list;
             }).catch(err => console.log(err))
         },
         addRequire(){
-            this.$ajax.post('/apis/pool/addPoolCompany.json',{poolCompany:this.infos}).then(res =>{
+            this.$ajax.post('/apis/pool/addPoolCompany.json',this.infos).then(res =>{
                 if(res.data.success){
-                    this.formVisible=false;
+                     this.update();
+                     this.formVisible=false;
                 }
+               
             }).catch(err=>{this.formVisible=false;})
+        },
+        edit(ID){
+            this.editId=ID;
+            this.$ajax.get('/apis/pool/findPoolCompanyById.json',{params:{id:ID}}).then(res=>{
+                this.company.investmentRemark=res.data.data.investmentRemark;
+                 this.company.investmentStatus=res.data.data.investmentStatus;
+                 this.editVisible=true;
+            })
+        },
+        saveEdit(){
+            this.$ajax.post('/apis/pool/editPoolCompany.json',{id:this.editId,investmentRemark:this.company.investmentRemark,investmentStatus:this.company.investmentStatus}).then(res=>{
+                if(res.data.success){
+                    this.editVisible=false;
+                    this.msg('修改成功','success');
+                    this.update();
+                }else{
+                    this.$message.error('修改失败');
+                }
+            })
         }
     },
     mounted(){
-        this.update()
         this.getLabel();
+        
+        
 
     }
 }

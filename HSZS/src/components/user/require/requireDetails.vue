@@ -6,40 +6,40 @@
 				<tbody>
 					<tr>
 						<td>企业名</td>
-						<td></td>
+						<td>{{company.name}}</td>
 					</tr>
 					<tr>
 						<td>所属企业</td>
-						<td></td>
+						<td>{{company.fatherName}}</td>
 					</tr>
 					<tr>
 						<td>企业标签</td>
-						<td></td>
+						<td>{{company.label}}</td>
 					</tr>
 					<tr>
 						<td>企业关系</td>
-						<td></td>
+						<td>{{company.relation}}</td>
 					</tr>
 					<tr>
 						<td>企业关系备注</td>
-						<td></td>
+						<td>{{company.relationRemark}}</td>
 					</tr>
 					<tr>
 						<td>企业状态</td>
-						<td></td>
+						<td>{{company.companyStatus}}</td>
 					</tr>
 
 					<tr>
 						<td>负责人</td>
-						<td></td>
+						<td>{{company.responsiblePerson}}</td>
 					</tr>
 					<tr>
 						<td>招商状态</td>
-						<td></td>
+						<td>{{company.investmentStatus}}</td>
 					</tr>
 					<tr>
 						<td>招商备注</td>
-						<td>aa</td>
+						<td>{{company.investmentRemark}}</td>
 					</tr>
 
 				</tbody>
@@ -56,7 +56,7 @@
 		},
 		mounted(){
 			this.$ajax.get('/apis/pool/findPoolCompanyById.json',{params:{id:this.$route.params.id}}).then(res=>{
-
+                    this.company=res.data.data;
 			})
 		}
         

@@ -5,6 +5,9 @@
             <div class="title policy-title">
                 <img src="../../assets/images/rank.png" alt="">企业排行
             </div>
+            <div class="row text-center" v-show="!article.length" >
+                <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+            </div>
             <ul class="list-box balance" id="rank">
                 <li v-for="(item,index) in article">
                     <div>

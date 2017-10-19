@@ -38,6 +38,9 @@
             <div class="title policy-title">
                 <img src="../../assets/images/bj.png" alt="">百家论
             </div>
+            <div class="row text-center" v-show="!lunT.length" >
+                <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+            </div>
             <ul class="list-box balance" id="lunT">
                 <li v-for="(item,index) in lunT">
                     <div>

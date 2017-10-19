@@ -405,7 +405,12 @@ footer {
     margin-top: 10px;
 }
 .article-block{
+    text-indent:30px; 
     line-height:24px;
+}
+.article-block img{
+    display:block;
+    margin:0 auto;
 }
 #media-pie,
 #key-yun {

@@ -42,24 +42,19 @@
          			<th>状态</th>
          		</tr>
          	</thead>
-         	<tbody>
-         		<tr>
-         			<td :rowspan="count" class="first">中国石油化工股份有限公司</td>
-         			<td><router-link to='/user/requires/requireDetails'>中国石油齐鲁股份有限公司</router-link></td>
-         			<td>大数据、人工智能、区块链</td>
-         			<td>北京</td>
-         			<td>北京</td>
-         			<td>北京</td>
-         		</tr>
-         		 <tr>
-         			<td :rowspan="count" v-if="1==0">中国石油化工股份有限公司</td>
-         			<td>中国石油齐鲁股份有限公司</td>
-         			<td>大数据、人工智能、区块链</td>
-         			<td>北京</td>
-         			<td>北京</td>
-         			<td>北京</td>
-         		</tr>
-         	</tbody>
+           <tbody v-for="(item,index) in list">
+                    <tr v-for="(item1,index1) in item.children">
+                        <td :rowspan="item.children.length" class="first" v-if="0==index1">{{item.name}}</td>
+                        <td>
+                            <router-link :to="'/user/requires/requireDetails/'+item1.id">{{item1.name}}</router-link>
+                        </td>
+                        <td>{{item1.label}}</td>
+                        <td>{{item1.area}}</td>
+                        <td>{{item1.responsiblePerson}}</td>
+                        <td>{{item1.investmentStatus}}</td>
+                    </tr>
+                   
+                </tbody>
 
          </table>
          
@@ -105,19 +100,20 @@ export default {
               this.label=['全部'];
               res.data.data.forEach(val=>{
                 this.label.push(val.label)
-              })
+              });
+              this.update();
            })
        },
 	     update(){
        	     var msgs = [this.label[this.labelCode],this.state[this.stateCode],this.time[this.timeCode]]
              this.$ajax.post('/apis/pool/getCompanyList.json', {msg:msgs,search:this.keyWord}).then((res) => {
-                 this.list = res.data.data.list
+                 this.list=res.data.data.list;
              }).catch(err => console.log(err))
 		     }
        },
 		mounted(){
         this.getLabel();
-			  this.update();
+			  
 		}
 }
 </script>

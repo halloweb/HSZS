@@ -18,7 +18,7 @@
                 <div><span class="label">姓名</span>{{user.realName}}</div>
                 <div><span class="label">所在园区</span>{{user.userPark}}</div>
                 <div><span class="label">所在部门</span>{{user.userDepartment}}</div>
-                <div><span class="label">职位</span>{{user.permissions}}</div>
+                <div><span class="label">职位</span>{{user.userJob}}</div>
                 <div><span class="label">邮箱</span>
                     <input type="text" v-model='email' class="enter">
                     <button class="blue" v-if="isModify" @click="modify">修改</button>

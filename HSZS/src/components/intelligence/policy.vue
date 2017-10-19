@@ -35,6 +35,9 @@
             </div>
             <div class="tab-content">
                 <ul class="tab-pane fade in active list-box balance" id="lunT">
+                    <div class="row text-center" v-show="!lunT.length" >
+                        <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+                    </div>
                     <li v-for="(item,index) in lunT">
                         <div>
                             <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
@@ -55,6 +58,9 @@
                     </li>
                 </ul>
                 <ul class="tab-pane fade list-box balance" id="keY">
+                     <div class="row text-center" v-show="!keY.length" >
+                        <img src="../../assets/images/noData.png" height="166" width="157" alt="">
+                    </div>
                     <li v-for="(item,index) in keY">
                         <div>
                             <router-link class="article-title" :to="{ path:'/intelligence/article/'+item.id}">
