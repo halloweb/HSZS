@@ -120,7 +120,7 @@ export default {
             this.$ajax.post('/apis/area/findGardensCondition.json', { pageNumber: 1 }).then(res => {
                 this.dynamic = res.data.data[0].content.slice(0, 3)
                 this.dynamic.forEach(val => {
-                    val.content = val.content.slice(0, 40) + "..."
+                    val.summary = val.summary.slice(0, 40) + "..."
                 })
             }).catch(err => console.log(err))
         },

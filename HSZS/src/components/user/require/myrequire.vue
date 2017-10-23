@@ -44,7 +44,7 @@
         <div class="addRequire">
             <a href="javascript:void(0);" @click="formVisible = true"><img src="../../../assets/images/add-small.png" height="21" width="21" alt="">添加需求</a>
         </div>
-                <el-dialog :visible.sync="formVisible">
+                <el-dialog :visible.sync="formVisible" @close="cancleAdd">
             <el-form :model="infos">
                 <el-form-item label="企业名" label-width="120px">
                     <el-input v-model="infos.name" placeholder="请输入企业名"></el-input>
@@ -56,6 +56,9 @@
                     <el-select v-model="infos.label" placeholder="请选择企业标签">
                         <el-option  v-for="item in removeLabel" :key="item.value" :value="item.value">{{item.value}}</el-option>
                     </el-select>
+                </el-form-item>
+                <el-form-item label="所属地区" label-width="120px">
+                    <el-input v-model="infos.area" placeholder="请输入所在区域"></el-input>
                 </el-form-item>
                 <el-form-item label="企业关系" label-width="120px">
                     <el-input v-model="infos.relation" placeholder="子,父企业,投资企业"></el-input>
@@ -70,10 +73,12 @@
                     <el-input v-model="infos.responsiblePerson" placeholder="请输入负责人姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="招商状态" label-width="120px" >
-                    <el-input  v-model="infos.investmentRemark"></el-input>
+                    <el-select v-model="infos.investmentStatus" placeholder="请选择企业标签">
+                        <el-option  v-for="item in investmentStatus" :key="item.value" :value="item.value">{{item.value}}</el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="招商备注" label-width="120px">
-                    <el-input type="textarea" v-model="infos.investmentStatus"></el-input>
+                    <el-input type="textarea" v-model="infos.investmentRemark"></el-input>
                 </el-form-item>
             </el-form>
             <div class="footer">
@@ -116,10 +121,12 @@
           <el-dialog :visible.sync="editVisible">
             <el-form :model="company">
                 <el-form-item label="招商状态" label-width="120px" >
-                    <el-input  v-model="company.investmentRemark"></el-input>
+                    <el-select v-model="company.investmentStatus" placeholder="请选择企业标签">
+                        <el-option  v-for="item in investmentStatus" :key="item.value" :value="item.value">{{item.value}}</el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="招商备注" label-width="120px">
-                    <el-input type="textarea" v-model="company.investmentStatus"></el-input>
+                    <el-input type="textarea" v-model="company.investmentRemark"></el-input>
                 </el-form-item>
             </el-form>
             <div class="footer">
@@ -153,14 +160,22 @@ export default {
                 relation: '',
                 relationRemark: '',
                 companyStatus: '',
+                area:'',
                 responsiblePerson: '',
                 investmentRemark: '',
                 investmentStatus: ''
             },
+            investmentStatus:[
+             {value:'目标企业'},
+             {value:'洽谈中'},
+             {value:'部署中'},
+             {value:'成功入驻'},
+            ],
             company:{
                 investmentRemark: '',
                 investmentStatus: ''
             },
+
             editVisible:false,
             editId:0,
             list:[]
@@ -189,10 +204,13 @@ export default {
            this.$ajax.get('/apis/label/getMyLabel.json').then(res => {
             this.label=['全部'];
             this.removeLabel = [];
-              res.data.data.forEach(val=>{
+            if(res.data.data){
+                res.data.data.forEach(val=>{
                 this.label.push(val.label)
                 this.removeLabel.push({ value: val.label });
               });
+            }
+          
               this.update();
            })
        },
@@ -268,9 +286,17 @@ export default {
                 if(res.data.success){
                      this.update();
                      this.formVisible=false;
+                     Object.keys(this.infos).forEach(val=>{
+                         this.infos[val]='';
+                     });
                 }
                
             }).catch(err=>{this.formVisible=false;})
+        },
+        cancleAdd(){
+           Object.keys(this.infos).forEach(val=>{
+                         this.infos[val]='';
+                     });
         },
         edit(ID){
             this.editId=ID;

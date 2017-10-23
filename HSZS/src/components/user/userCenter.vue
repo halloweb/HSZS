@@ -66,6 +66,7 @@ export default {
             };
             this.$ajax.get('/apis/user/modifyEmail.json', {params:{email:this.email}}).then(res => {
                   if(res.data.message=="邮箱修改成功"){
+                        this.isModify=true;
                         this.$message({
                       showClose: true,
                       message: '邮箱修改成功',

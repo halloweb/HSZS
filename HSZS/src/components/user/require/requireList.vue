@@ -98,9 +98,12 @@ export default {
        getLabel(){
            this.$ajax.get('/apis/label/getLabel.json').then(res => {
               this.label=['全部'];
-              res.data.data.forEach(val=>{
+              if(res.data.data){
+                 res.data.data.forEach(val=>{
                 this.label.push(val.label)
               });
+              }
+             
               this.update();
            })
        },
