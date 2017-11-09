@@ -32,7 +32,7 @@
                     <div class="title">{{activeLabel}}</div>
                     <ul >
                        <li v-for="(item,index) in company">
-                            <a  :href="'/apis/oauth/getCompanyDetail.json?name='+item.business" target="_blank" >{{item.business}}</a>
+                            <a  :href="'/apis/oauth/getSearchList.json?name='+item.business" target="_blank" >{{item.business}}</a>
 
                        </li>
                     </ul>

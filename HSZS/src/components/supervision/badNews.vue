@@ -6,9 +6,10 @@
         <ul class="list-box">
             <li v-for="(item,index) in article">
                 <div>
-                    <router-link class="article-title" :to="{path:'/supervision/articleList/'+item.id}">
+                     <a :href="item.sourceLink" target="_blank"><span class="blue" >【{{item.business}}】</span>{{item.title}}</a>
+                   <!--  <router-link class="article-title" :to="{path:'/supervision/articleList/'+item.id}">
                         <span class="blue">【{{item.business}}】</span>{{item.title}}
-                    </router-link>
+                    </router-link> -->
                     <span class="article-time">{{item.publishTime}}</span>
                 </div>
                 <p class="article-content">

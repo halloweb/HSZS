@@ -19,8 +19,9 @@
         			<td>{{item.business}}</td>
         			<td>{{item.title}}</td>
         		
-        			<td>2017-01-02</td>
-        			<td><a v-bind:class="{'blue':item.hasWarn,'huise':!item.hasWarn}" href="javascript:void(0);" @click="view(item.id)">查看详情</a></td>
+        			<td>{{item.publishTime}}</td>
+        			<td><!-- <a v-bind:class="{'blue':item.hasWarn,'huise':!item.hasWarn}" href="javascript:void(0);" @click="view(item.id)">查看详情</a> --> 
+                        <a v-bind:class="{'blue':item.hasWarn,'huise':!item.hasWarn}" :href="item.sourceLink" target="_blank">查看详情</a></td>
         		</tr>
         		</tbody>
         </table>	

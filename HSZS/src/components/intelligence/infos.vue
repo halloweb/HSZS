@@ -103,7 +103,7 @@ export default {
             dynamic: [],
             list: [],
             area: ["不限", "北京", "上海", "广州", "深圳", "杭州", "苏州", "南京", "天津", "青岛", "大连"],
-            industryType: ["不限", "互联网+", "高科技", "文化创意", "精英配套", "其他", "港口物流"],
+            industryType: ["不限", "互联网+", "高科技"],
             areaCode: 0,
             typeCode: 0,
             input2: ''
@@ -385,7 +385,7 @@ export default {
                     orient: 'vertical',
                     y: 'center',
                     x: 'right',
-                    data: ['互联网+', "高科技", '文化创意', '精英配套', '其他', '港口物流'],
+                    data: ['互联网+', "高科技"],
                     textStyle: {
                         color: '#fff'
                     },
@@ -468,89 +468,91 @@ export default {
                                 borderWidth: 1
                             }
                         }
-                    }, {
-                        name: '文化创意',
-                        type: 'scatter',
-                        coordinateSystem: 'geo',
-                        data: convertData(data3),
-                        symbolSize: 12,
-                        label: {
-                            normal: {
-                                show: false
-                            },
-                            emphasis: {
-                                show: false
-                            }
-                        },
-                        itemStyle: {
-                            emphasis: {
-                                borderColor: '#fff',
-                                borderWidth: 1
-                            }
-                        }
-                    }, {
-                        name: '精英配套',
-                        type: 'scatter',
-                        coordinateSystem: 'geo',
-                        data: convertData(data4),
-                        symbolSize: 12,
-                        label: {
-                            normal: {
-                                show: false
-                            },
-                            emphasis: {
-                                show: false
-                            }
-                        },
-                        itemStyle: {
-                            emphasis: {
-                                borderColor: '#fff',
-                                borderWidth: 1
-                            }
-                        }
-                    },
+                     }, 
+                    //{
+                    //     name: '文化创意',
+                    //     type: 'scatter',
+                    //     coordinateSystem: 'geo',
+                    //     data: convertData(data3),
+                    //     symbolSize: 12,
+                    //     label: {
+                    //         normal: {
+                    //             show: false
+                    //         },
+                    //         emphasis: {
+                    //             show: false
+                    //         }
+                    //     },
+                    //     itemStyle: {
+                    //         emphasis: {
+                    //             borderColor: '#fff',
+                    //             borderWidth: 1
+                    //         }
+                    //     }
+                    // }, {
+                    //     name: '精英配套',
+                    //     type: 'scatter',
+                    //     coordinateSystem: 'geo',
+                    //     data: convertData(data4),
+                    //     symbolSize: 12,
+                    //     label: {
+                    //         normal: {
+                    //             show: false
+                    //         },
+                    //         emphasis: {
+                    //             show: false
+                    //         }
+                    //     },
+                    //     itemStyle: {
+                    //         emphasis: {
+                    //             borderColor: '#fff',
+                    //             borderWidth: 1
+                    //         }
+                    //     }
+                    // },
+                    // {
+                    //     name: '其他',
+                    //     type: 'scatter',
+                    //     coordinateSystem: 'geo',
+                    //     data: convertData(data5),
+                    //     symbolSize: 12,
+                    //     label: {
+                    //         normal: {
+                    //             show: false
+                    //         },
+                    //         emphasis: {
+                    //             show: false
+                    //         }
+                    //     },
+                    //     itemStyle: {
+                    //         emphasis: {
+                    //             borderColor: '#fff',
+                    //             borderWidth: 1
+                    //         }
+                    //     }
+                    // },
+                    // {
+                    //     name: '港口物流',
+                    //     type: 'scatter',
+                    //     coordinateSystem: 'geo',
+                    //     data: convertData(data6),
+                    //     symbolSize: 12,
+                    //     label: {
+                    //         normal: {
+                    //             show: false
+                    //         },
+                    //         emphasis: {
+                    //             show: false
+                    //         }
+                    //     },
+                    //     itemStyle: {
+                    //         emphasis: {
+                    //             borderColor: '#fff',
+                    //             borderWidth: 1
+                    //         }
+                    //     }
+                    // },
                     {
-                        name: '其他',
-                        type: 'scatter',
-                        coordinateSystem: 'geo',
-                        data: convertData(data5),
-                        symbolSize: 12,
-                        label: {
-                            normal: {
-                                show: false
-                            },
-                            emphasis: {
-                                show: false
-                            }
-                        },
-                        itemStyle: {
-                            emphasis: {
-                                borderColor: '#fff',
-                                borderWidth: 1
-                            }
-                        }
-                    },
-                    {
-                        name: '港口物流',
-                        type: 'scatter',
-                        coordinateSystem: 'geo',
-                        data: convertData(data6),
-                        symbolSize: 12,
-                        label: {
-                            normal: {
-                                show: false
-                            },
-                            emphasis: {
-                                show: false
-                            }
-                        },
-                        itemStyle: {
-                            emphasis: {
-                                borderColor: '#fff',
-                                borderWidth: 1
-                            }
-                        }
-                    },{
                     name: '主要城市',
                     type: 'effectScatter',
                     coordinateSystem: 'geo',

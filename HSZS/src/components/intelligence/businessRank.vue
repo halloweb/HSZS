@@ -43,7 +43,7 @@ export default {
     data() {
         return {
             article: [],
-            time: ["2017", "2016", "2015", "2014"],
+            time: [],
             labels: [],
         }
     },
@@ -59,8 +59,10 @@ export default {
 
         }
     },
-    mounted() {
-
+    created() {
+              let da= new Date();
+              let nowdata = da.getFullYear();
+              this.time=[nowdata,nowdata-1,nowdata-2,nowdata-3]   
     },
 }
 </script>

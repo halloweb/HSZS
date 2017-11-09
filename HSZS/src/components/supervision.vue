@@ -35,11 +35,11 @@
 		                <router-link to="/supervision/outflow" >  
 		                <img src="../assets/images/n7.png" height="19" width="18" style="margin-right:12px;" alt="">园区预警</router-link>
 		                 <ol>
-                         	<!--<li>
+                         	<li>
                          	<router-link to="/supervision/outflow" active-class="active" > 
                          	<img src="../assets/images/outflow.png" height="15" width="15"  alt="">
 		                    企业疑似外流</router-link>
-		                    </li>-->
+		                    </li>
 		                    <li>
                          	<router-link to="/supervision/infoWarning" active-class="active" > 
                          	<img src="../assets/images/change.png" height="18" width="17"alt="">

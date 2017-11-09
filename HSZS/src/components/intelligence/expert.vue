@@ -7,17 +7,20 @@
             </div>
             <div class="swiper-container expert-container">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide expert-slider" v-for="(item,index) in experts">
+                    <div class="swiper-slide expert-slider" v-for="(item,index) in report">
                         <div>
-                            <div class="expert-img" @click="select(item)">
+                            <a :href="item.url" target="_blank">
+                            <div class="expert-img">
                                 <img src="../../assets/images/people.png" alt="">
                                 <p class="name">{{item.name}}</p>
-                                <p class="Introduction">{{item.professionalTitle}}</p>
+                                <p class="Introduction">{{item.createTime}}</p>
+                                <p class="blue">{{item.label}}</p>
                             </div>
-                            <div class="article-box">
+                            </a>
+                           <!--  <div class="article-box">
                                 <router-link class="title" :to="{ path:'/intelligence/article/'+item.articleId}">{{item.title}}</router-link>
                                 <p class="content">{{item.summary}}</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                     <div class="swiper-slide expert-slider">
@@ -76,7 +79,8 @@ export default {
             pageSize: 7,
             totalPages:0,
             params:[],
-            lunT: []
+            lunT: [],
+            report:[]
 
         }
     },
@@ -84,10 +88,15 @@ export default {
         labelInfo(data) {
             this.pageNumber=1;
             this.params=data;
-            this.getExpert(data);
-
+            // this.getExpert(data);
+            
             this.getArticle(data);
 
+        },
+        getExpertReport(){
+                this.$ajax.get('/apis/expert/getExpertReport.json').then(res=>{
+                    this.report=res.data.data.content;
+                })
         },
         getExpert(data) {
 
@@ -130,7 +139,7 @@ export default {
     },
     mounted() {
        
-        
+        this.getExpertReport();
         this.$nextTick(() => {
                 this.mySwiper = new Swiper('.swiper-container', {
                     initialSlide: 0,

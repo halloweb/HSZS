@@ -1,7 +1,7 @@
 <template>
     <div class="content-block">
         <h4 class="text-center">{{info.name}}
-        <router-link to="/supervision/outflow" class="pull-right btn btn-red">园区预警({{warningCount}})</router-link>
+        <router-link to="/supervision/infoWarning" class="pull-right btn btn-red">园区预警({{warningCount}})</router-link>
         </h4>
         <bd-map :park-info="info"></bd-map>
         <div class="company-sort">
@@ -32,7 +32,12 @@ a.btn-red {
     height: 40px;
     line-height: 40px;
 }
-
+.dt .col-xs-6 a{
+   display:block;
+   overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 button.btn-zs {
     padding: 2px 10px;
     border-radius: 20px;
@@ -50,7 +55,7 @@ export default {
                 name: '',
                 address:''
             },
-            pageNumber:1,
+            pageNumber:0,
             pageSize:8,
             list: [],
             park: [],

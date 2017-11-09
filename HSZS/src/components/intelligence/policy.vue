@@ -52,7 +52,7 @@
                             <img src="../../assets/images/company.png" alt="">
                             涉及公司：
                             <span  v-for="business in item.bus"  >
-                                <a  :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}</a>
+                                <a  :href="'/apis/oauth/getSearchList.json?name='+business" target="_blank">{{business}}</a>
                             </span>
                         </div>
                     </li>
@@ -75,7 +75,7 @@
                             <img src="../../assets/images/company.png" alt="">
                             涉及公司：
                             <span  v-for="business in item.bus"  >
-                                  <a :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}</a>
+                                  <a :href="'/apis/oauth/getSearchList.json?name='+business" target="_blank">{{business}}</a>
                             </span>
                         </div>
                     </li>

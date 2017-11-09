@@ -6,7 +6,7 @@
                 <p class="type-list">
                     <span v-for="(item,index) in typeOne" :class="{active:index==oneCode}" @click="selectOne(index)">{{item}}</span>
                 </p>
-                <a href="javascript:void(0);" class="pull-right" @click="set"> <span class="glyphicon glyphicon-cog"></span> 设置</a>
+                <!-- <a href="javascript:void(0);" class="pull-right" @click="set"> <span class="glyphicon glyphicon-cog"></span> 设置</a> -->
             </li>
             <li>
                 <div class="head">

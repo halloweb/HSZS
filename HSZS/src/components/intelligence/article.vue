@@ -1,7 +1,7 @@
 <template>
     <div class="article-details">
         <a href="javascript:void(0);" class="blue" @click="back">返回</a>
-        <h4 class="text-center" v-if="article.title" >{{article.title}}
+        <h4 class="text-center" v-if="article.title" ><a :href="article.sourceLink" target="_blank">{{article.title}}</a>
         <span v-if="isShow">
         <button class=" btn btn-zs" @click="collect" v-if="isCollect">收藏</button>
         <button class=" btn btn-zs"  v-if="!isCollect" @click="cancel">取消收藏</button>
@@ -11,7 +11,7 @@
             <span v-show="article.bus[0] != '暂无'">
              <img src="../../assets/images/company.png" alt="">
               涉及公司： 
-              <a v-for="business in article.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+              <a v-for="business in article.bus" :href="'/apis/oauth/getSearchList.json?name='+business" target="_blank">{{business}}
               </a>
              </span>
             <span>
@@ -35,6 +35,7 @@
 <style scoped>
     h4{position:relative;padding:0 90px;}
     h4 span{position:absolute;right:0;top:0;}
+    h4 a:hover{text-decoration:underline;}
 </style>
 <script>
 export default {

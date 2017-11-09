@@ -179,7 +179,7 @@ header i {
 
 .top-bar {
     display: inline-block;
-    margin-left: 70px;
+    margin-left: 115px;
 }
 
 .top-bar li {
@@ -509,24 +509,28 @@ footer {
 }
 
 .expert-container .expert-slider>div .expert-img {
+    
     background-color: #fafafa;
     padding: 20px;
+    height:404px;
     border-bottom: 1px solid #e8ebf2;
 }
 
 .expert-container .expert-slider>div .expert-img .name {
-    font-size: 22px;
+    margin-top:40px;
+    font-size: 18px;
      overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.expert-container .expert-slider>div .expert-img .introduction {
+.expert-container .expert-slider>div .expert-img .Introduction {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     font-size: 16px;
-    color: #666666;
+    color: #999999;
+    margin:10px;
 }
 
 .expert-container .expert-slider>div .article-box {

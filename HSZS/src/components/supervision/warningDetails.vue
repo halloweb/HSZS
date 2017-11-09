@@ -42,7 +42,7 @@
 	        	</table>
         </div>
           <div class="details-btn">
-          <a :href="'/apis/oauth/getCompanyDetail.json?name='+info.company" target="_blank">
+          <a :href="'/apis/oauth/getSearchList.json?name='+info.company" target="_blank">
           <el-button type="primary">查看企业详情</el-button>
           </a>
           </div>

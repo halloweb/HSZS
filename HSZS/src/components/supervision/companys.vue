@@ -115,11 +115,8 @@ export default {
             option1: [
                 { value: '全部' },
                 { value: '互联网+' },
-                { value: '高科技' },
-                { value: '文化创意' },
-                { value: '精英配套' },
-                { value: '其他' },
-                { value: '港口物流' },
+                { value: '高科技' }
+
             ],
             industry: "全部",
             option2: [

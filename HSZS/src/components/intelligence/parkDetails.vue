@@ -16,7 +16,7 @@
                <p class="text-center" v-show="!leadCompany.length" >暂无数据</p>
                 <div class=" col-xs-6" v-for="(item,index) in leadCompany">
                     <span>{{item.business}}</span>
-                    <a :href="'/apis/oauth/getCompanyDetail.json?name='+item.business" target="_blank" class="pull-right blue">
+                    <a :href="'/apis/oauth/getSearchList.json?name='+item.business" target="_blank" class="pull-right blue">
                         详情
                     </a>
                 </div>

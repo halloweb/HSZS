@@ -1,12 +1,12 @@
 <template>
     <div class="outflowDetails">
         <a href="#" @click="back()" class="back">返回</a>
-        <div class="title text-center" v-if="article.title"><span class="blue"></span>{{article.title}}</div>
+        <div class="title text-center" v-if="article.title"><a :href="article.sourceLink" target="_blank"><span class="blue"></span>{{article.title}}</a></div>
         <div class="sub-info" v-if="article.title">
-             <span if="article.bus">
+             <span v-show="article.bus[0] != '暂无'">
              <img src="../../assets/images/company.png" alt="">
              涉及公司：
-              <a v-for="business in article.bus" :href="'/apis/oauth/getCompanyDetail.json?name='+business" target="_blank">{{business}}
+              <a v-for="business in article.bus" :href="'/apis/oauth/getSearchList.json?name='+business" target="_blank">{{business}}
               </a>
              </span>
             <span>
@@ -48,6 +48,7 @@
     font-size: 16px;
     float: right;
 }
+ .title a:hover{text-decoration:underline;}
 </style>
 <script>
 export default {

@@ -10,8 +10,8 @@
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/merchants/intelligent" active-class="active">
-                            <img src="../assets/images/n3.png" height="18" width="18" alt=""> 智能企业
+                        <router-link to="/merchants/intelligent/recommendCompanys" active-class="active">
+                            <img src="../assets/images/n3.png" height="18" width="18" alt=""> 智能推荐
                         </router-link>
                     </li>
                     <li>
